@@ -1,0 +1,15 @@
+---
+// src/components/Header.astro
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<header>
+  <nav>
+    <a href="/">繁</a>
+    <a href="/cn/">简</a>
+    <a href="/en/">EN</a>
+  </nav>
+  <!-- <p>{t('common.openingHours')}</p> -->
+</header>
