@@ -3,11 +3,12 @@ import { defineConfig } from 'astro/config';
 
 import vue from '@astrojs/vue';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [vue()],
-
+  site: 'https://smile.hkcmereye.com',
+  integrations: [vue(), sitemap()],
   vite: {
     plugins: [tailwindcss()]
   }
