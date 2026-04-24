@@ -1,0 +1,21 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { useTranslations, i18nPaths } from "@/i18n/utils";
+const lang = Astro.currentLocale || "zh-hk";
+const t = useTranslations(lang);
+export function getStaticPaths() {
+  return i18nPaths;
+}
+---
+
+<BaseLayout seo={t("tdk.home")}>
+  <section class="bg-bg-light h-[120vh]">
+    <div class="wrapper text-center">
+      <h1
+        set:html={t("home.title")}
+        class="text-primary text-xl lg:text-3xl font-black"
+      />
+      <p set:html={t("home.subtitle")} class="text-primary" />
+    </div>
+  </section>
+</BaseLayout>

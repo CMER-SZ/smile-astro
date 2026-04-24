@@ -14,6 +14,14 @@ const __dirname = path.dirname(__filename);
 // https://astro.build/config
 export default defineConfig({
   site: "https://smile.hkcmereye.com",
+  i18n: {
+    defaultLocale: "zh-hk",
+    locales: ["zh-hk", "en", "cn"],
+    routing: {
+      prefixDefaultLocale: false,
+      fallbackType: "redirect",
+    },
+  },
   integrations: [vue(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],

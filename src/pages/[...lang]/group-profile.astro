@@ -1,0 +1,15 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { useTranslations, i18nPaths } from "@/i18n/utils";
+const lang = Astro.currentLocale || "zh-hk";
+const t = useTranslations(lang);
+export function getStaticPaths() {
+  return i18nPaths;
+}
+---
+
+<BaseLayout seo={t("tdk.home")}>
+  <section>
+    <h1>集团简介</h1>
+  </section>
+</BaseLayout>

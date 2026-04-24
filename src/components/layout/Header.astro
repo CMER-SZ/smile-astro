@@ -4,19 +4,19 @@ import { Image } from "astro:assets";
 import logoImg from "@/assets/logo.svg";
 import { Icon } from "astro-icon/components";
 
-// 获取当前语言和当前路径
-const lang = getLangFromUrl(Astro.url);
+// 语言逻辑复用原有代码 [cite: 18]
+const { lang: langParam } = Astro.params;
 const currentPath = Astro.url.pathname;
 
 /**
- * 逻辑：
- * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁”
- * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简”
+ * 语言切换逻辑： [cite: 20]
+ * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
+ * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简” [cite: 21, 22]
  */
-const isCN = lang === "zh-cn";
+const isCN = langParam === 'cn';
 const toggleHref = isCN 
   ? (currentPath.replace(/^\/cn/, "") || "/") 
-  : `/cn${currentPath}`;
+  : `/cn${currentPath.replace(/\/$/, "")}`;
 const toggleLabel = isCN ? "繁" : "简";
 ---
 
@@ -31,14 +31,14 @@ const toggleLabel = isCN ? "繁" : "简";
         class="w-39.5 lg:w-82 h-auto"
       />
     </a>
-    
+
     <div class="flex items-center gap-3">
       <div class="text-desc text-sm">
         <a href={toggleHref} class="hover:text-primary transition-colors">
           {toggleLabel}
         </a>
       </div>
-      <button class="bg-[#4f6fb1] size-10">
+      <button>
         <Icon name="common/menu-normal" class="size-10 text-white" />
       </button>
     </div>

@@ -1,25 +1,25 @@
 import { ui } from "./ui";
-
-// 映射路由前缀到字典 Key
-const routePrefixMap = {
-  en: "en",
-  cn: "zh-cn",
-} as const;
-
-export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split("/");
-  // 如果前缀是 en 或 cn，返回对应 key，否则返回默认繁体
-  if (lang in routePrefixMap)
-    return routePrefixMap[lang as keyof typeof routePrefixMap];
-  return "zh-hk";
+const langMap: Record<string, string> = {
+  "cn": "zh-cn",
+  "en": "en",
+  "zh-hk": "zh-hk"
+};
+export function getLangFromUrl(url: URL, currentLocale?: string) {
+  // 优先使用 Astro 传入的 currentLocale，否则回退到路径解析
+  const lang = currentLocale || url.pathname.split("/")[1];
+  return langMap[lang] || "zh-hk";
 }
-
-export function useTranslations(lang: keyof typeof ui) {
+export function useTranslations(lang: string) {
+  const dictKey = langMap[lang] || lang; 
   return function t(key: string) {
-    // 简单的 key 获取逻辑，支持点语法（如 'home.title'）可以自行扩展
-    return key.split(".").reduce((o: any, i) => o?.[i], ui[lang]) || key;
+    return key.split(".").reduce((o: any, i) => o?.[i], ui[dictKey as keyof typeof ui]) || key;
   };
 }
+export const i18nPaths = [
+  { params: { lang: undefined } },
+  { params: { lang: "cn" } },
+  { params: { lang: "en" } },
+];
 export function getLocalizedHref(href: string, lang: string) {
   // 1. 如果是外部链接或特殊协议，直接返回
   if (href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:')) {
