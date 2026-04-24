@@ -1,0 +1,66 @@
+---
+import "@/styles/global.css";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import MobileBottom from "@/components/layout/MobileBottom.astro";
+import { ui } from "@/i18n/ui";
+import { getLangFromUrl } from "@/i18n/utils";
+interface Props {
+  seo?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+  };
+  lang?: string;
+}
+const { seo } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const dict = ui[lang];
+const defaultTitle = dict.tdk.home.title;
+const defaultDesc = dict.tdk.home.description;
+const defaultKeywords = dict.tdk.home.keywords;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{seo?.title || defaultTitle}</title>
+    <meta name="description" content={seo?.description || defaultDesc} />
+    <meta name="keywords" content={seo?.keywords || defaultKeywords} />
+    <!-- <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-XXXXXXX");
+    </script> -->
+  </head>
+  <body>
+    <Header />
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+    <main>
+      <slot />
+    </main>
+    <MobileBottom />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

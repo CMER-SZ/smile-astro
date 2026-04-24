@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  /* 扩展颜色 */
+  --color-primary: #4570b6;
+  --color-whatsapp: #67ad5b;
+  --color-desc: #6d6e71;
+  --color-bg-light: #f4fafc;
+  --color-bg-soft: #f6fafd;
+
+  /* 扩展间距 */
+  --spacing-15: 3.75rem; /* 60px */
+  --spacing-18: 4.5rem; /* 72px */
+}
+@layer components {
+  .wrapper {
+    @apply max-w-7xl mx-auto px-3 2xl:px-0;
+  }
+  /* .section-title {
+    @apply text-2xl lg:text-3xl font-bold text-primary leading-tight;
+  }
+  .section-subtitle {
+    @apply text-base text-desc mt-2 leading-relaxed;
+  } */
+}

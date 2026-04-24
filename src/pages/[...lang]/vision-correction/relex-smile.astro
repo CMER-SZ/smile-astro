@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ui } from "@/i18n/ui";
+import { useTranslations, i18nPaths, getLangFromUrl } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return [...i18nPaths];
+}
+// 1. 从 URL 或 Params 获取原始 lang 标签 (可能是 undefined, "cn", "en")
+const { lang: langParam } = Astro.params;
+// 2. 使用你已经写好的 getLangFromUrl 工具函数来标准化 lang key
+// 这样能确保 "cn" 映射到 "zh-cn"，undefined 映射到 "zh-hk"
+const lang = getLangFromUrl(Astro.url); 
+const t = useTranslations(lang);
+const dict = ui[lang as keyof typeof ui];
+// 容错处理：如果 dict 还是不存在，回退到默认语言防止构建崩溃
+const seoData = dict?.tdk?.home || ui["zh-hk"].tdk.home;
+---
+
+<BaseLayout seo={seoData}>
+  <section class="bg-bg-light h-[120vh]">
+    <div class="wrapper text-center">
+      <h1
+        set:html={t("home.title")}
+        class="text-primary text-xl lg:text-3xl font-black"
+      />
+      <p set:html={t("home.subtitle")} class="text-primary" />
+      <p>SMILE</p>
+    </div>
+  </section>
+</BaseLayout>
