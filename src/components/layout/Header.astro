@@ -1,15 +1,46 @@
 ---
-// src/components/Header.astro
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl } from "@/i18n/utils";
+import { Image } from "astro:assets";
+import logoImg from "@/assets/logo.svg";
+import { Icon } from "astro-icon/components";
 
+// 获取当前语言和当前路径
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+
+/**
+ * 逻辑：
+ * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁”
+ * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简”
+ */
+const isCN = lang === "zh-cn";
+const toggleHref = isCN 
+  ? (currentPath.replace(/^\/cn/, "") || "/") 
+  : `/cn${currentPath}`;
+const toggleLabel = isCN ? "繁" : "简";
 ---
-<header>
-  <nav>
-    <a href="/">繁</a>
-    <a href="/cn/">简</a>
-    <a href="/en/">EN</a>
-  </nav>
-  <!-- <p>{t('common.openingHours')}</p> -->
+
+<header class="sticky top-0 bg-white z-50">
+  <div class="flex wrapper py-4 justify-between items-center">
+    <a href={isCN ? "/cn" : "/"}>
+      <Image
+        src={logoImg}
+        alt="Clinic Logo"
+        width={329}
+        height={104}
+        class="w-39.5 lg:w-82 h-auto"
+      />
+    </a>
+    
+    <div class="flex items-center gap-3">
+      <div class="text-desc text-sm">
+        <a href={toggleHref} class="hover:text-primary transition-colors">
+          {toggleLabel}
+        </a>
+      </div>
+      <button class="bg-[#4f6fb1] size-10">
+        <Icon name="common/menu-normal" class="size-10 text-white" />
+      </button>
+    </div>
+  </div>
 </header>

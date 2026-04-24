@@ -1,0 +1,59 @@
+---
+import {
+  getLangFromUrl,
+  useTranslations,
+  getLocalizedHref,
+} from "@/i18n/utils";
+import { Icon } from "astro-icon/components";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const navList = [
+  {
+    icon: "common/phone",
+    label: "common.bottom.tel",
+    href: "tel:+85238925099",
+  },
+  {
+    icon: "common/chat",
+    label: "common.bottom.chat",
+    href: "https://mqj.zoosnet.net/LR/Chatpre.aspx?id=MQJ40126824&lng=big5&oname=CS_Katherine&r=&rf1=https%3A//smile.hkcmereye&rf2=.com/&p=https%3A//smile.hkcmereye.com/&cid=26ad3fcc05fa407b81167bda7abd1c92&sid=26ad3fcc05fa407b81167bda7abd1c92",
+  },
+  {
+    icon: "social/whatsapp-o",
+    label: "common.bottom.service",
+    href: "https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3(WM-BAW01)%E4%BA%86%E8%A7%A3%E5%B8%8C%E7%91%AA%E7%9F%AF%E8%A6%96%E6%9C%8D%E5%8B%99",
+  },
+  {
+    icon: "social/lecture",
+    label: "common.bottom.lecture",
+    href: "/ophthalmicInfo/AppointForm",
+  },
+];
+---
+
+<section class="fixed bottom-0 w-full bg-[#4f6fb1] text-[#d9eaed] flex lg:hidden">
+  {
+    navList.map((item) => (
+      <a
+        href={getLocalizedHref(item.href, lang)}
+        class="fixed-item w-1/4 flex justify-center items-center py-4"
+      >
+        <div class="fixed-link w-full flex flex-col justify-center items-center gap-4">
+          <Icon name={`${item.icon}`} class="size-7" />
+          <span class="text-[10px] tracking-widest whitespace-nowrap">
+            {t(item.label)}
+          </span>
+        </div>
+      </a>
+    ))
+  }
+</section>
+<style lang="scss" scoped>
+  .fixed-item {
+    &:not(:last-child) {
+      .fixed-link {
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+</style>

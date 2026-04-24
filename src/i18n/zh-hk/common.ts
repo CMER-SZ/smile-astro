@@ -43,6 +43,12 @@ export const common = {
     btnLecture: "講座",
     btnPreOperative: "術前檢查",
   },
+  bottom: {
+    tel: "致電查詢",
+    chat: "線上對話",
+    service: "預約服務",
+    lecture: "預約講座",
+  },
   copyright: "©2026 香港希瑪微笑矯視中心版權所有",
   businessHours: {
     title: "營業時間",

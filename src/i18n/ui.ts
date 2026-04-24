@@ -1,14 +1,14 @@
-import { zhHk } from './zh-hk';
+import { zhHK } from './zh-hk';
 import { en } from './en';
-import { zhCn } from './zh-cn';
+import { zhCN } from './zh-cn';
 
-export type Dictionary = typeof zhHk;
+export type Dictionary = typeof zhHK;
 
 export const ui = {
-  'zh-hk': zhHk,
+  'zh-hk': zhHK,
   'en': en as Dictionary,
-  'zh-cn': zhCn as Dictionary,
+  'zh-cn': zhCN as Dictionary,
 } as const;
 
 export type Lang = keyof typeof ui;
-export type Dict = typeof zhHk;
+export type Dict = typeof zhHK;

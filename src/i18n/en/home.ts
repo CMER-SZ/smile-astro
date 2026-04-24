@@ -1,4 +1,4 @@
 export const home = {
-  title: "希瑪微笑矯視中心",
-  subtitle: '您的視力 • 我們的使命'
+  title: "CMER SMILE Refractive Centre",
+  subtitle: 'Your Vision • Our Mission'
 } as const;

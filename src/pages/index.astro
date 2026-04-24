@@ -4,5 +4,10 @@ import { ui } from "@/i18n/ui";
 const t = ui['zh-hk'];
 ---
 <BaseLayout seo={t.tdk.home}>
-  <h1 set:html={t.home.title} />
+  <section class="bg-bg-light h-[120vh]">
+    <div class="wrapper text-center">
+      <h1 set:html={t.home.title} class="text-primary text-xl lg:text-3xl font-black" />
+      <p set:html={t.home.subtitle} class="text-primary" />
+    </div>
+  </section>
 </BaseLayout>

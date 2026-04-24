@@ -3,7 +3,7 @@ import { home } from "./home";
 import { service } from "./service";
 import { tdk } from "./tdk";
 
-export const zhHk = {
+export const zhHK = {
   common,
   home,
   service,

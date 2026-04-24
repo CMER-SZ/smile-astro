@@ -1,17 +1,19 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ui } from "@/i18n/ui";
-
 export function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "cn" } }];
 }
-
 const { lang } = Astro.params;
 const dictKey = lang === "cn" ? "zh-cn" : "en";
 const t = ui[dictKey];
 ---
 
 <BaseLayout seo={t.tdk.home}>
-  <h1 set:html={t.home.title} />
-  <p>你好？</p>
+  <section class="bg-bg-light">
+    <div class="wrapper text-center">
+      <h1 set:html={t.home.title} class="text-primary text-xl lg:text-3xl font-black" />
+      <p set:html={t.home.subtitle} class="text-primary" />
+    </div>
+  </section>
 </BaseLayout>
