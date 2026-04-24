@@ -7,13 +7,14 @@ import sitemap from "@astrojs/sitemap";
 // 导入 path 模块
 import path from "path";
 import { fileURLToPath } from "url";
+import icon from "astro-icon";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://smile.hkcmereye.com",
-  integrations: [vue(), sitemap()],
+  integrations: [vue(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
