@@ -13,11 +13,12 @@ const currentPath = Astro.url.pathname;
  * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
  * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简” [cite: 21, 22]
  */
-const isCN = langParam === 'cn';
-const toggleHref = isCN 
-  ? (currentPath.replace(/^\/cn/, "") || "/") 
+const isCN = langParam === "cn";
+const toggleHref = isCN
+  ? currentPath.replace(/^\/cn/, "") || "/"
   : `/cn${currentPath.replace(/\/$/, "")}`;
-const toggleLabel = isCN ? "繁" : "简";
+const toggleLabelMobile = isCN ? "繁" : "简";
+const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
 ---
 
 <header class="sticky top-0 bg-white z-50">
@@ -31,16 +32,30 @@ const toggleLabel = isCN ? "繁" : "简";
         class="w-39.5 lg:w-82 h-auto"
       />
     </a>
-
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 lg:hidden">
       <div class="text-desc text-sm">
         <a href={toggleHref} class="hover:text-primary transition-colors">
-          {toggleLabel}
+          {toggleLabelMobile}
         </a>
       </div>
       <button>
         <Icon name="common/menu-normal" class="size-10 text-white" />
       </button>
+    </div>
+    <div class="hidden lg:block">
+      <div class="flex">
+        <div></div>
+        <div class="text-desc text-sm flex items-center">
+          <Icon name="common/language" class="size-5 mr-2" />
+          <a
+            href={toggleHref}
+            class="hover:text-primary transition-colors mr-3"
+          >
+            {toggleLabelDesktop}
+          </a>
+          <Icon name="common/language-arrow" class="w-2.5" />
+        </div>
+      </div>
     </div>
   </div>
 </header>

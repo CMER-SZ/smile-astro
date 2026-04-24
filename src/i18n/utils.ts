@@ -1,34 +1,76 @@
-import { ui } from "./ui";
-const langMap: Record<string, string> = {
+import { ui, type Lang } from "./ui";
+
+/**
+ * 路由前缀与语言代码的映射表
+ */
+const langMap: Record<string, Lang> = {
   "cn": "zh-cn",
   "en": "en",
   "zh-hk": "zh-hk"
 };
-export function getLangFromUrl(url: URL, currentLocale?: string) {
-  // 优先使用 Astro 传入的 currentLocale，否则回退到路径解析
+
+/**
+ * 从 URL 中解析当前语言环境
+ * @param {URL} url - 当前页面的 URL 对象 (Astro.url)
+ * @param {string} [currentLocale] - Astro 6 原生提供的 currentLocale 变量
+ * @returns {Lang} 返回匹配的语言代码，默认为 'zh-hk'
+ */
+export function getLangFromUrl(url: URL, currentLocale?: string): Lang {
   const lang = currentLocale || url.pathname.split("/")[1];
   return langMap[lang] || "zh-hk";
 }
+
+/**
+ * 获取翻译工具函数 (t 函数)
+ * @param {string} lang - 语言代码 (如 'zh-cn', 'en')
+ * @returns {(key: string) => string} 返回一个根据键值获取翻译文字的函数
+ */
 export function useTranslations(lang: string) {
-  const dictKey = langMap[lang] || lang; 
-  return function t(key: string) {
-    return key.split(".").reduce((o: any, i) => o?.[i], ui[dictKey as keyof typeof ui]) || key;
+  const dictKey = langMap[lang] || lang;
+  const dictionary = ui[dictKey as keyof typeof ui] || ui["zh-hk"];
+  
+  /**
+   * @param {string} key - 字典中的键路径，支持点语法 (例如 'common.menu.about')
+   */
+  return function t(key: string): string {
+    const value = key.split(".").reduce((o: any, i) => o?.[i], dictionary);
+    return value || key; // 如果找不到，返回键名本身作为回退
   };
 }
+
+/**
+ * 静态路由生成配置，用于 [...lang] 目录下的页面
+ * 确保默认语言 (zh-hk) 路径为空，从而实现无前缀访问
+ */
 export const i18nPaths = [
-  { params: { lang: undefined } },
-  { params: { lang: "cn" } },
-  { params: { lang: "en" } },
+  { params: { lang: undefined } }, // 对应 /
+  { params: { lang: "cn" } },      // 对应 /cn
+  { params: { lang: "en" } },      // 对应 /en
 ];
-export function getLocalizedHref(href: string, lang: string) {
-  // 1. 如果是外部链接或特殊协议，直接返回
-  if (href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:')) {
+
+/**
+ * 获取适配当前语言环境的本地化链接
+ * @param {string} href - 原始目标路径 (例如 '/contact-us')
+ * @param {string} lang - 当前页面语言代码
+ * @returns {string} 带有语言前缀的格式化路径
+ */
+export function getLocalizedHref(href: string, lang: string): string {
+  // 1. 外部链接或协议链接直接返回
+  if (/^(http|https|tel:|mailto:)/.test(href)) {
     return href;
   }
-  // 2. 规范化路径：确保以 / 开头
-  const baseHref = href.startsWith('/') ? href : `/${href}`;
-  // 3. 繁体（默认语言）不加前缀
-  if (lang === 'zh-hk') return baseHref;
-  // 4. 其他语言加前缀，例如 /cn/appointment 或 /en/appointment
-  return `/${lang}${baseHref}`;
+
+  // 2. 规范化路径，确保以单斜杠开头
+  const cleanHref = href.startsWith('/') ? href : `/${href}`;
+  
+  // 3. 查找对应的路由前缀 (例如 zh-cn 对应 cn)
+  const prefix = Object.keys(langMap).find(key => langMap[key] === lang);
+
+  // 4. 如果是默认语言 (zh-hk) 或找不到前缀，直接返回原路径
+  if (!prefix || prefix === "zh-hk") {
+    return cleanHref;
+  }
+
+  // 5. 返回带前缀的路径，并过滤掉双斜杠 (防止出现 /cn//about)
+  return `/${prefix}${cleanHref}`.replace(/\/+/g, '/');
 }
