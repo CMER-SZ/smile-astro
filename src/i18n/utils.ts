@@ -1,3 +1,10 @@
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-24 18:42:52
+ * @LastEditTime: 2026-04-27 09:08:08
+ * @FilePath: /src/i18n/utils.ts
+ * @Description: 多语言公共函数
+ */
 import { ui, type Lang } from "./ui";
 
 /**
@@ -73,4 +80,10 @@ export function getLocalizedHref(href: string, lang: string): string {
 
   // 5. 返回带前缀的路径，并过滤掉双斜杠 (防止出现 /cn//about)
   return `/${prefix}${cleanHref}`.replace(/\/+/g, '/');
+}
+export function useI18n(url: URL) {
+  const lang = getLangFromUrl(url);
+  const t = useTranslations(lang);
+  const dict = ui[lang as keyof typeof ui] || ui["zh-hk"];
+  return { lang, t, dict };
 }

@@ -1,13 +1,12 @@
 ---
-import { getLangFromUrl } from "@/i18n/utils";
 import { Image } from "astro:assets";
 import logoImg from "@/assets/logo.svg";
 import { Icon } from "astro-icon/components";
-
 // 语言逻辑复用原有代码 [cite: 18]
+import { useI18n } from "@/i18n/utils";
 const { lang: langParam } = Astro.params;
 const currentPath = Astro.url.pathname;
-
+const { dict } = useI18n(Astro.url);
 /**
  * 语言切换逻辑： [cite: 20]
  * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
@@ -44,7 +43,16 @@ const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
     </div>
     <div class="hidden lg:block">
       <div class="flex">
-        <div></div>
+        <div class="flex items-center mr-5 gap-4 text-white text-base font-medium">
+          <a href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-G01)%20%E8%A1%93%E5%89%8D%E6%AA%A2%E6%9F%A5/%E7%9F%AF%E8%A6%96%E8%AC%9B%E5%BA%A7" class="bg-whatsapp flex items-center px-5 py-2 gap-1.5 rounded-full">
+            <Icon name="social/whatsapp" class="size-7" />
+            <span>{dict.common.button.btnWhatsapp}</span>
+          </a>
+          <a href="/ophthalmicInfo/AppointForm" class="bg-primary flex items-center px-5 py-2 gap-1.5 rounded-full">
+            <Icon name="social/lecture" class="size-7" />
+            <span>{dict.common.button.btnBook}</span>
+          </a>
+        </div>
         <div class="text-desc text-sm flex items-center">
           <Icon name="common/language" class="size-5 mr-2" />
           <a

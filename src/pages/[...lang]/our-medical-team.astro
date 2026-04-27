@@ -1,10 +1,10 @@
 ---
 /*
  * @Author: 谭洁莹
- * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-04-27 09:59:46
- * @FilePath: /src/pages/[...lang]/group-profile.astro
- * @Description: 集团及中心简介
+ * @Date: 2026-04-27 09:38:20
+ * @LastEditTime: 2026-04-27 09:57:17
+ * @FilePath: /src/pages/[...lang]/our-medical-team.astro
+ * @Description: 医生团队
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { i18nPaths, useI18n } from "@/i18n/utils";
@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const { dict } = useI18n(Astro.url);
 ---
 
-<BaseLayout tdkKey="about">
+<BaseLayout tdkKey="doctor">
   <section class="bg-bg-light h-[120vh]">
     <div class="wrapper text-center">
       <h1

@@ -3,22 +3,19 @@ import "@/styles/global.css";
 import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
 import MobileBottom from "@/components/layout/MobileBottom.astro";
+import { useI18n } from "@/i18n/utils";
 import { ui } from "@/i18n/ui";
-import { getLangFromUrl } from "@/i18n/utils";
+type TDKKeys = keyof (typeof ui)["zh-hk"]["tdk"];
 interface Props {
-  seo?: {
-    title?: string;
-    description?: string;
-    keywords?: string;
-  };
-  lang?: string;
+  tdkKey?: TDKKeys; // 接收如 "home" 或 "about"
+  seo?: any; // 兼容某些特殊页面手动传入完整的 SEO 对象
 }
-const { seo } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
-const dict = ui[lang];
-const defaultTitle = dict.tdk.home.title;
-const defaultDesc = dict.tdk.home.description;
-const defaultKeywords = dict.tdk.home.keywords;
+const { tdkKey, seo } = Astro.props;
+const { dict, lang } = useI18n(Astro.url);
+let finalSeo = seo || dict.tdk.home;
+if (tdkKey && dict.tdk[tdkKey]) {
+  finalSeo = dict.tdk[tdkKey];
+}
 ---
 
 <!doctype html>
@@ -29,9 +26,9 @@ const defaultKeywords = dict.tdk.home.keywords;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{seo?.title || defaultTitle}</title>
-    <meta name="description" content={seo?.description || defaultDesc} />
-    <meta name="keywords" content={seo?.keywords || defaultKeywords} />
+    <title>{finalSeo.title}</title>
+    <meta name="description" content={finalSeo.description} />
+    <meta name="keywords" content={finalSeo.keywords} />
     <!-- <script is:inline>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];

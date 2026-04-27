@@ -1,31 +1,27 @@
 ---
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-24 18:42:52
+ * @LastEditTime: 2026-04-27 09:59:18
+ * @FilePath: /src/pages/[...lang]/contact-us.astro
+ * @Description: 联络我们
+ */
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { ui } from "@/i18n/ui";
-import { useTranslations, i18nPaths, getLangFromUrl } from "@/i18n/utils";
-
+import { i18nPaths, useI18n } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
 }
-// 1. 从 URL 或 Params 获取原始 lang 标签 (可能是 undefined, "cn", "en")
-const { lang: langParam } = Astro.params;
-// 2. 使用你已经写好的 getLangFromUrl 工具函数来标准化 lang key
-// 这样能确保 "cn" 映射到 "zh-cn"，undefined 映射到 "zh-hk"
-const lang = getLangFromUrl(Astro.url); 
-const t = useTranslations(lang);
-const dict = ui[lang as keyof typeof ui];
-// 容错处理：如果 dict 还是不存在，回退到默认语言防止构建崩溃
-const seoData = dict?.tdk?.home || ui["zh-hk"].tdk.home;
+const { dict } = useI18n(Astro.url);
 ---
 
-<BaseLayout seo={seoData}>
+<BaseLayout tdkKey="home">
   <section class="bg-bg-light h-[120vh]">
     <div class="wrapper text-center">
       <h1
-        set:html={t("home.title")}
+        set:html={dict.home.title}
         class="text-primary text-xl lg:text-3xl font-black"
       />
-      <p set:html={t("home.subtitle")} class="text-primary" />
-      <p>关于我们</p>
+      <p set:html={dict.home.subtitle} class="text-primary" />
     </div>
   </section>
 </BaseLayout>
