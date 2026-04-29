@@ -49,7 +49,9 @@ export const common = {
     service: "預約服務",
     lecture: "預約講座",
   },
-  copyright: "©2026 香港希瑪微笑矯視中心版權所有",
+  footer: {
+    copyright: "©2026 香港希瑪微笑矯視中心版權所有",
+  },
   businessHours: {
     title: "營業時間",
     weekday: "星期一至五",

@@ -1,1 +1,65 @@
-<footer></footer>
+---
+import { Image } from "astro:assets";
+import logoImg from "@/assets/logo.svg";
+const { lang: langParam } = Astro.params;
+const isCN = langParam === "cn";
+import { useI18n } from "@/i18n/utils";
+const { dict } = useI18n(Astro.url);
+---
+
+<footer class="pt-8 lg:pt-18">
+  <div class="bg-bg-light">
+    <div
+      class="flex wrapper justify-between items-center flex-col lg:flex-row -translate-y-8 lg:-translate-y-18"
+    >
+      <div
+        class="bg-white border border-primary rounded-4xl p-8 pr-0 pb-7 lg:p-18 lg:pb-21 lg:pr-29 w-full lg:w-auto"
+      >
+        <a href={isCN ? "/cn" : "/"}>
+          <Image
+            src={logoImg}
+            alt="Clinic Logo"
+            width={329}
+            height={104}
+            class="w-4/5 lg:w-82 h-auto"
+          />
+        </a>
+        <div class="mt-9 lg:mt-16">
+          <p class="text-primary font-semibold mb-3 lg:mb-3">
+            {dict.common.businessHours.title}
+          </p>
+          <ul>
+            <li class="flex lg:gap-10">
+              <strong class="text-primary font-medium w-1/2 lg:w-2/5"
+                >{dict.common.businessHours.weekday}</strong
+              >
+              <span class="text-desc font-medium">9:00-19:00</span>
+            </li>
+            <li class="flex lg:gap-10">
+              <strong class="text-primary font-medium w-1/2 lg:w-2/5"
+                >{dict.common.businessHours.weekend}</strong
+              >
+              <span class="text-desc font-medium">9:00-18:00</span>
+            </li>
+            <li class="flex lg:gap-10">
+              <strong class="text-primary font-medium w-1/2 lg:w-2/5"
+                >{dict.common.businessHours.holiday}</strong
+              >
+              <span class="text-desc font-medium"
+                >{dict.common.businessHours.closed}</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="lg:pt-21 lg:pb-17">
+        <p class="text-desc text-[10px] lg:text-base">
+          {dict.common.footer.copyright}
+          <a href="/privacy">{dict.common.menu.privacy}</a> | <a
+            href="/disclaimer">{dict.common.menu.disclaimer}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
