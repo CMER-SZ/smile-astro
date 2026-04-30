@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "@fontsource/poppins";
+@import "@fontsource/noto-sans-hk";
+@import "@fontsource/noto-sans-sc";
 
 @theme {
   /* 扩展颜色 */
@@ -11,7 +14,25 @@
   /* 扩展间距 */
   --spacing-15: 3.75rem; /* 60px */
   --spacing-18: 4.5rem; /* 72px */
+
+  /* 字体映射 */
+  --font-en: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-hk: "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+  --font-sc: "Noto Sans SC", "Microsoft YaHei", sans-serif;
 }
+
+html[lang="en"] {
+  font-family: var(--font-en), var(--font-hk), sans-serif;
+}
+html[lang="zh-hk"],
+html[lang="zh-tw"] {
+  font-family: var(--font-hk), sans-serif;
+}
+html[lang="zh"],
+html[lang="zh-cn"] {
+  font-family: var(--font-sc), sans-serif;
+}
+
 @layer components {
   .wrapper {
     @apply max-w-7xl mx-auto px-3 2xl:px-0;
