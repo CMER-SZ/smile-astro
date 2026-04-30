@@ -7,6 +7,7 @@ export const common = {
       equipment: "中心設備",
     },
     service: {
+      title: "矯視服務",
       smilepro: "SMILE Pro微笑激光矯視",
       smile: "SMILE微笑激光矯視",
       icl: "ICL植入式隱形眼鏡",
@@ -51,6 +52,17 @@ export const common = {
   },
   footer: {
     copyright: "©2026 香港希瑪微笑矯視中心版權所有",
+  },
+  clinic: {
+    Central: {
+      title: "中環",
+      address: "畢打街1-3號中建大廈1512室<br/>(港鐵站G出口，置地廣場樓上)",
+    },
+    MongKok: {
+      title: "旺角",
+      address:
+        '彌敦道625及639號雅蘭中心<br class="block lg:hidden" />一期<br class="hidden lg:block" />1725B室 (港鐵站E1出口)',
+    },
   },
   businessHours: {
     title: "營業時間",
