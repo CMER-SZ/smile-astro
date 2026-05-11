@@ -8,8 +8,9 @@
   --color-primary: #4570b6;
   --color-whatsapp: #67ad5b;
   --color-desc: #6d6e71;
-  --color-bg-light: #f4fafc;
+  --color-bg-subtle: #f4fafc;
   --color-bg-soft: #f6fafd;
+  --color-bg-accent: #f2f7ff;
 
   /* 扩展间距 */
   --spacing-15: 3.75rem; /* 60px */
