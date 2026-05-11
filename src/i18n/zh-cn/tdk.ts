@@ -1,3 +1,10 @@
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-24 18:42:52
+ * @LastEditTime: 2026-04-27 09:36:51
+ * @FilePath: /src/i18n/zh-hk/tdk.ts
+ * @Description: TDK设置
+ */
 export const tdk = {
   home: {
     title: "主頁",

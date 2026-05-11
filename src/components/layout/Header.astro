@@ -5,18 +5,111 @@ import { Icon } from "astro-icon/components";
 import { useI18n } from "@/i18n/utils";
 const { lang: langParam } = Astro.params;
 const currentPath = Astro.url.pathname;
-const { dict } = useI18n(Astro.url);
+const { lang, dict } = useI18n(Astro.url);
+import { getLocalizedHref } from "@/i18n/utils";
 /**
  * 语言切换逻辑： [cite: 20]
  * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
  * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简” [cite: 21, 22]
  */
+const labelMap: Record<string, string> = {
+  "zh-hk": "繁體中文",
+  "zh-cn": "简体中文",
+  en: "English",
+};
+const langList = [
+  {
+    code: "zh-hk",
+    label: "繁體中文",
+    href: getLocalizedHref(currentPath.replace(/^\/(cn|en)/, ""), "zh-hk"),
+  },
+  {
+    code: "zh-cn",
+    label: "简体中文",
+    href: getLocalizedHref(currentPath.replace(/^\/(cn|en)/, ""), "zh-cn"),
+  },
+  {
+    code: "en",
+    label: "English",
+    href: getLocalizedHref(currentPath.replace(/^\/(cn|en)/, ""), "en"),
+  },
+];
+const currentLangLabel = labelMap[lang] || "繁體中文";
 const isCN = langParam === "cn";
 const toggleHref = isCN
   ? currentPath.replace(/^\/cn/, "") || "/"
   : `/cn${currentPath.replace(/\/$/, "")}`;
 const toggleLabelMobile = isCN ? "繁" : "简";
 const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
+interface navItem {
+  text: string;
+  href: string;
+}
+interface navGroup {
+  title: navItem;
+  links?: navItem[];
+}
+const getHasSubNav = (item: navGroup) => item.links && item.links.length > 0;
+const dotClass = "nav-dot-indicator";
+const navList = [
+  {
+    title: { text: dict.common.menu.about.title, href: "" },
+    links: [
+      { text: dict.common.menu.about.group, href: "/group-profile" },
+      { text: dict.common.menu.about.team, href: "/our-medical-team" },
+      { text: dict.common.menu.about.equipment, href: "/medical-equipment" },
+    ],
+  },
+  {
+    title: { text: dict.common.menu.service.title, href: "" },
+    links: [
+      { text: dict.common.menu.service.smilepro, href: "/smilePro" },
+      { text: dict.common.menu.service.icl, href: "/vision-correction-icl" },
+      {
+        text: dict.common.menu.service.smile,
+        href: "/vision-correction/relex-smile",
+      },
+      {
+        text: dict.common.menu.service.presbyopia,
+        href: "/vision-correction-presbyopia",
+      },
+      {
+        text: dict.common.menu.service.lasik,
+        href: "/vision-correction-lasik",
+      },
+    ],
+  },
+  {
+    title: { text: dict.common.menu.instructions.title, href: "/patient-info" },
+    links: [
+      {
+        text: dict.common.menu.instructions.pre,
+        href: "/patient-info#beforeJiaoShi",
+      },
+      {
+        text: dict.common.menu.instructions.process,
+        href: "/patient-info#inJiaoShi",
+      },
+      {
+        text: dict.common.menu.instructions.post,
+        href: "/patient-info#afterJiaoShi",
+      },
+    ],
+  },
+  { title: { text: dict.common.menu.fee, href: "/fee" }, links: [] },
+  {
+    title: { text: dict.common.menu.faq.title, href: "/FreQuestions" },
+    links: [],
+  },
+  {
+    title: { text: dict.common.menu.news.title, href: "" },
+    links: [
+      { text: dict.common.menu.news.case, href: "/video" },
+      { text: dict.common.menu.news.knowledge, href: "/blog" },
+    ],
+  },
+  { title: { text: dict.common.menu.contact, href: "/contact-us" }, links: [] },
+];
 ---
 
 <header class="sticky top-0 bg-white z-50">
@@ -30,6 +123,7 @@ const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
         class="w-39.5 lg:w-82 h-auto"
       />
     </a>
+    <!-- 移动端 -->
     <div class="flex items-center gap-3 lg:hidden">
       <div class="text-desc text-sm">
         <a href={toggleHref} class="hover:text-primary transition-colors">
@@ -40,29 +134,102 @@ const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
         <Icon name="common/menu-normal" class="size-10 text-white" />
       </button>
     </div>
+    <!-- PC端 -->
     <div class="hidden lg:block">
-      <div class="flex">
-        <div class="flex items-center mr-5 gap-4 text-white text-base font-medium">
-          <a href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-G01)%20%E8%A1%93%E5%89%8D%E6%AA%A2%E6%9F%A5/%E7%9F%AF%E8%A6%96%E8%AC%9B%E5%BA%A7" class="bg-whatsapp flex items-center px-5 py-2 gap-1.5 rounded-full">
+      <div class="flex mb-5 justify-end">
+        <div
+          class="flex items-center mr-5 gap-4 text-white text-base font-medium"
+        >
+          <a
+            href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-G01)%20%E8%A1%93%E5%89%8D%E6%AA%A2%E6%9F%A5/%E7%9F%AF%E8%A6%96%E8%AC%9B%E5%BA%A7"
+            class="bg-whatsapp flex items-center px-5 py-2 gap-1.5 rounded-full"
+          >
             <Icon name="social/whatsapp" class="size-7" />
             <span>{dict.common.button.btnWhatsapp}</span>
           </a>
-          <a href="/ophthalmicInfo/AppointForm" class="bg-primary flex items-center px-5 py-2 gap-1.5 rounded-full">
+          <a
+            href="/ophthalmicInfo/AppointForm"
+            class="bg-primary flex items-center px-5 py-2 gap-1.5 rounded-full"
+          >
             <Icon name="social/lecture" class="size-7" />
             <span>{dict.common.button.btnBook}</span>
           </a>
         </div>
-        <div class="text-desc text-sm flex items-center">
+        <div class="text-desc text-sm flex items-center relative group py-2">
           <Icon name="common/language" class="size-5 mr-2" />
-          <a
-            href={toggleHref}
-            class="hover:text-primary transition-colors mr-3"
+          <span class="cursor-pointer mr-1">{currentLangLabel}</span>
+          <Icon
+            name="common/language-arrow"
+            class="w-2.5 transition-transform group-hover:rotate-180"
+          />
+          <ul
+            class="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:block bg-white shadow-md border border-gray-100 z-60 min-w-30"
           >
-            {toggleLabelDesktop}
-          </a>
-          <Icon name="common/language-arrow" class="w-2.5" />
+            {
+              langList.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "block px-5 py-3 transition-colors whitespace-nowrap",
+                      "hover:bg-primary hover:text-white",
+                      item.code === lang
+                        ? "text-primary font-semibold"
+                        : "text-desc",
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
+      <nav aria-label="Main Navigation">
+        <ul class="flex gap-6 text-desc tracking-[0.15em]">
+          {
+            navList.map((item) => {
+              const hasSubNav = getHasSubNav(item);
+              return (
+                <li class="group pt-3 relative">
+                  {item.title.href ? (
+                    <a
+                      href={item.title.href}
+                      class:list={[
+                        "hover:text-primary transition-colors",
+                        { [dotClass]: hasSubNav },
+                      ]}
+                    >
+                      {item.title.text}
+                    </a>
+                  ) : (
+                    <span
+                      class:list={["cursor-pointer", { [dotClass]: hasSubNav }]}
+                    >
+                      {item.title.text}
+                    </span>
+                  )}
+                  {item.links.length > 0 && (
+                    <ul class="absolute hidden group-hover:block bg-white shadow-lg">
+                      {item.links.map((link) => (
+                        <li>
+                          <a
+                            href={link.href}
+                            class="block whitespace-nowrap p-5 hover:bg-primary hover:text-white"
+                          >
+                            {link.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
     </div>
   </div>
 </header>

@@ -18,8 +18,8 @@ export type Dictionary = typeof zhHK;
 // } as const;
 export const ui = {
   'zh-hk': zhHK,
-  // 'en': en,
-  // 'zh-cn': zhCN,
+  'en': en,
+  'zh-cn': zhCN,
 } as const;
 
 export type Lang = keyof typeof ui;
