@@ -88,20 +88,19 @@ const sideNav = [
   },
   { title: { text: dict.common.menu.contact, href: "/contact-us" }, links: [] },
 ];
-const homeHref = getLocalizedHref("/", lang);
 const businessClass =
   "font-medium text-sm lg:text-lg tracking-widest leading-[1.8]";
 ---
 
 <footer class="footer pt-8 lg:pt-18">
-  <div class="bg-bg-light">
+  <div class="bg-bg-subtle">
     <div
       class="flex wrapper justify-between items-center flex-col lg:flex-row lg:gap-5 xl:gap-12 2xl:gap-24"
     >
       <div
         class="footer-info flex-1 bg-white max-w-sm lg:max-w-2xl relative border border-primary rounded-4xl pt-8 pl-[clamp(8px,6.667vw,32px)] pr-0 pb-7 lg:p-18 lg:pb-21 lg:pr-29 w-full lg:w-auto -translate-y-8 lg:-translate-y-18"
       >
-        <a href={homeHref}>
+        <a href={getLocalizedHref("/", lang)}>
           <Image
             src={logoImg}
             alt="Clinic Logo"

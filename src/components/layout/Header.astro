@@ -7,11 +7,6 @@ import { useI18n } from "@/i18n/utils";
 const currentPath = Astro.url.pathname;
 const { lang, dict } = useI18n(Astro.url);
 import { getLocalizedHref } from "@/i18n/utils";
-/**
- * 语言切换逻辑： [cite: 20]
- * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
- * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简” [cite: 21, 22]
- */
 const labelMap: Record<string, string> = {
   "zh-hk": "繁體中文",
   "zh-cn": "简体中文",
@@ -20,22 +15,29 @@ const labelMap: Record<string, string> = {
 const langList = [
   {
     code: "zh-hk",
-    label: "繁體中文",
+    label: "繁體",
+    labelPC: "繁體中文",
     href: getLocalizedHref(currentPath, "zh-hk"),
   },
   {
     code: "zh-cn",
-    label: "简体中文",
+    label: "简体",
+    labelPC: "简体中文",
     href: getLocalizedHref(currentPath, "zh-cn"),
   },
-  // {
-  //   code: "en",
-  //   label: "English",
-  //   href: getLocalizedHref(currentPath, "en"),
-  // },
+  {
+    code: "en",
+    label: "Eng",
+    labelPC: "English",
+    href: getLocalizedHref(currentPath, "en"),
+  },
 ];
 const currentLangLabel = labelMap[lang] || "繁體中文";
-const homeHref = getLocalizedHref("/", lang);
+/**
+ * 语言切换逻辑： [cite: 20]
+ * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
+ * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简” [cite: 21, 22]
+ */
 // const isCN = langParam === "cn";
 // const toggleHref = isCN
 //   ? currentPath.replace(/^\/cn/, "") || "/"
@@ -116,7 +118,7 @@ const navList = [
 <header class="sticky top-0 bg-white z-50">
   <div class="flex wrapper py-4 justify-between items-center">
     <!-- <a href={isCN ? "/cn" : "/"}> -->
-    <a href={homeHref}>
+    <a href={getLocalizedHref("/", lang)}>
       <Image
         src={logoImg}
         alt="Clinic Logo"
@@ -137,7 +139,7 @@ const navList = [
           <Icon name="common/language-mini" class="size-6 text-primary" />
         </summary>
         <ul
-          class="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-md border z-60 min-w-30 border-primary rounded-md"
+          class="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-md border z-60 min-w-25 text-center border-primary rounded-md"
         >
           {
             langList.map((item) => (
@@ -145,11 +147,9 @@ const navList = [
                 <a
                   href={item.href}
                   class:list={[
-                    "block px-5 py-3 transition-colors whitespace-nowrap",
+                    "block w-full py-3 transition-colors whitespace-nowrap",
                     "hover:bg-primary hover:text-white",
-                    item.code === lang
-                      ? "text-primary font-semibold"
-                      : "text-desc",
+                    item.code === lang ? "text-white bg-primary" : "text-desc",
                   ]}
                 >
                   {item.label}
@@ -203,11 +203,11 @@ const navList = [
                       "block px-5 py-3 transition-colors whitespace-nowrap",
                       "hover:bg-primary hover:text-white",
                       item.code === lang
-                        ? "text-primary font-semibold"
+                        ? "text-primary bg-bg-accent"
                         : "text-desc",
                     ]}
                   >
-                    {item.label}
+                    {item.labelPC}
                   </a>
                 </li>
               ))
