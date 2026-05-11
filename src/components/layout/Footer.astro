@@ -1,10 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import logoImg from "@/assets/logo.svg";
-const { lang: langParam } = Astro.params;
-const isCN = langParam === "cn";
+// const { lang: langParam } = Astro.params;
+// const isCN = langParam === "cn";
 import { useI18n } from "@/i18n/utils";
-const { dict } = useI18n(Astro.url);
+import { getLocalizedHref } from "@/i18n/utils";
+const { lang, dict } = useI18n(Astro.url);
 import { Icon } from "astro-icon/components";
 const socialLinks = [
   {
@@ -87,6 +88,7 @@ const sideNav = [
   },
   { title: { text: dict.common.menu.contact, href: "/contact-us" }, links: [] },
 ];
+const homeHref = getLocalizedHref("/", lang);
 const businessClass =
   "font-medium text-sm lg:text-lg tracking-widest leading-[1.8]";
 ---
@@ -99,7 +101,7 @@ const businessClass =
       <div
         class="footer-info flex-1 bg-white max-w-sm lg:max-w-2xl relative border border-primary rounded-4xl pt-8 pl-[clamp(8px,6.667vw,32px)] pr-0 pb-7 lg:p-18 lg:pb-21 lg:pr-29 w-full lg:w-auto -translate-y-8 lg:-translate-y-18"
       >
-        <a href={isCN ? "/cn" : "/"}>
+        <a href={homeHref}>
           <Image
             src={logoImg}
             alt="Clinic Logo"
@@ -179,7 +181,7 @@ const businessClass =
                 <div class="group">
                   {item.title.href ? (
                     <a
-                      href={item.title.href}
+                      href={getLocalizedHref(item.title.href, lang)}
                       class="flex items-center gap-2 lg:gap-4 font-medium text-primary"
                     >
                       <span class="size-2 lg:size-3 rounded-full bg-primary" />
@@ -196,7 +198,9 @@ const businessClass =
                     <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
                       {item.links.map((link) => (
                         <li>
-                          <a href={link.href}>{link.text}</a>
+                          <a href={getLocalizedHref(link.href, lang)}>
+                            {link.text}
+                          </a>
                         </li>
                       ))}
                     </ul>
@@ -211,7 +215,7 @@ const businessClass =
                 <div class="group">
                   {item.title.href ? (
                     <a
-                      href={item.title.href}
+                      href={getLocalizedHref(item.title.href, lang)}
                       class="flex items-center gap-2 lg:gap-4 font-medium text-primary"
                     >
                       <span class="size-2 lg:size-3 rounded-full bg-primary" />
@@ -228,7 +232,9 @@ const businessClass =
                     <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
                       {item.links.map((link) => (
                         <li>
-                          <a href={link.href}>{link.text}</a>
+                          <a href={getLocalizedHref(link.href, lang)}>
+                            {link.text}
+                          </a>
                         </li>
                       ))}
                     </ul>
@@ -250,10 +256,14 @@ const businessClass =
             </div>
           </div>
         </div>
-        <p class="text-desc text-[11px] min-[390px]:text-[12px] md:text-sm lg:text-base tracking-widest">
+        <p
+          class="text-desc text-[11px] min-[390px]:text-[12px] md:text-sm lg:text-base tracking-widest"
+        >
           {dict.common.footer.copyright}<br class="block min-[360px]:hidden" />
-          <a href="/privacy">{dict.common.menu.privacy}</a> | <a
-            href="/disclaimer">{dict.common.menu.disclaimer}</a
+          <a href={getLocalizedHref("/privacy", lang)}
+            >{dict.common.menu.privacy}</a
+          > | <a href={getLocalizedHref("/disclaimer", lang)}
+            >{dict.common.menu.disclaimer}</a
           >
         </p>
       </div>

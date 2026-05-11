@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import logoImg from "@/assets/logo.svg";
 import { Icon } from "astro-icon/components";
 import { useI18n } from "@/i18n/utils";
-const { lang: langParam } = Astro.params;
+// const { lang: langParam } = Astro.params;
 const currentPath = Astro.url.pathname;
 const { lang, dict } = useI18n(Astro.url);
 import { getLocalizedHref } from "@/i18n/utils";
@@ -21,26 +21,27 @@ const langList = [
   {
     code: "zh-hk",
     label: "繁體中文",
-    href: getLocalizedHref(currentPath.replace(/^\/(cn|en)/, ""), "zh-hk"),
+    href: getLocalizedHref(currentPath, "zh-hk"),
   },
   {
     code: "zh-cn",
     label: "简体中文",
-    href: getLocalizedHref(currentPath.replace(/^\/(cn|en)/, ""), "zh-cn"),
+    href: getLocalizedHref(currentPath, "zh-cn"),
   },
-  {
-    code: "en",
-    label: "English",
-    href: getLocalizedHref(currentPath.replace(/^\/(cn|en)/, ""), "en"),
-  },
+  // {
+  //   code: "en",
+  //   label: "English",
+  //   href: getLocalizedHref(currentPath, "en"),
+  // },
 ];
 const currentLangLabel = labelMap[lang] || "繁體中文";
-const isCN = langParam === "cn";
-const toggleHref = isCN
-  ? currentPath.replace(/^\/cn/, "") || "/"
-  : `/cn${currentPath.replace(/\/$/, "")}`;
-const toggleLabelMobile = isCN ? "繁" : "简";
-const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
+const homeHref = getLocalizedHref("/", lang);
+// const isCN = langParam === "cn";
+// const toggleHref = isCN
+//   ? currentPath.replace(/^\/cn/, "") || "/"
+//   : `/cn${currentPath.replace(/\/$/, "")}`;
+// const toggleLabelMobile = isCN ? "繁" : "简";
+// const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
 interface navItem {
   text: string;
   href: string;
@@ -114,7 +115,8 @@ const navList = [
 
 <header class="sticky top-0 bg-white z-50">
   <div class="flex wrapper py-4 justify-between items-center">
-    <a href={isCN ? "/cn" : "/"}>
+    <!-- <a href={isCN ? "/cn" : "/"}> -->
+    <a href={homeHref}>
       <Image
         src={logoImg}
         alt="Clinic Logo"
@@ -125,11 +127,38 @@ const navList = [
     </a>
     <!-- 移动端 -->
     <div class="flex items-center gap-3 lg:hidden">
-      <div class="text-desc text-sm">
+      <!-- <div class="text-desc text-sm">
         <a href={toggleHref} class="hover:text-primary transition-colors">
           {toggleLabelMobile}
         </a>
-      </div>
+      </div> -->
+      <details class="relative group">
+        <summary class="list-none cursor-pointer p-2 outline-none">
+          <Icon name="common/language-mini" class="size-6 text-primary" />
+        </summary>
+        <ul
+          class="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-md border z-60 min-w-30 border-primary rounded-md"
+        >
+          {
+            langList.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    "block px-5 py-3 transition-colors whitespace-nowrap",
+                    "hover:bg-primary hover:text-white",
+                    item.code === lang
+                      ? "text-primary font-semibold"
+                      : "text-desc",
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
       <button>
         <Icon name="common/menu-normal" class="size-10 text-white" />
       </button>
@@ -195,7 +224,7 @@ const navList = [
                 <li class="group pt-3 relative">
                   {item.title.href ? (
                     <a
-                      href={item.title.href}
+                      href={getLocalizedHref(item.title.href, lang)}
                       class:list={[
                         "hover:text-primary transition-colors",
                         { [dotClass]: hasSubNav },
@@ -215,7 +244,7 @@ const navList = [
                       {item.links.map((link) => (
                         <li>
                           <a
-                            href={link.href}
+                            href={getLocalizedHref(link.href, lang)}
                             class="block whitespace-nowrap p-5 hover:bg-primary hover:text-white"
                           >
                             {link.text}
@@ -233,3 +262,17 @@ const navList = [
     </div>
   </div>
 </header>
+<style lang="scss">
+  /* 隐藏 details 默认的箭头 */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* 点击外部自动收起的简单逻辑：利用 transparent overlay (可选) */
+  details[open] summary::before {
+    content: "";
+    fixed: inset-0;
+    z-index: 55;
+    background: transparent;
+  }
+</style>

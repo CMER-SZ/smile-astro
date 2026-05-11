@@ -71,4 +71,11 @@ export const common = {
     holiday: "星期日及公眾假期",
     closed: "休息",
   },
+  cases: {
+    title: "用家分享",
+    intro: "聽聽各位真實用家親身感受",
+  },
+  awards: {
+    title: "榮譽獎項",
+  },
 } as const;

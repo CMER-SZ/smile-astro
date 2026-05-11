@@ -6,8 +6,8 @@
  * @Description: 导出所有语言的字典对象，并定义相关类型
  */
 import { zhHK } from './zh-hk';
-import { en } from './en';
 import { zhCN } from './zh-cn';
+// import { en } from './en';
 
 export type Dictionary = typeof zhHK;
 
@@ -18,8 +18,8 @@ export type Dictionary = typeof zhHK;
 // } as const;
 export const ui = {
   'zh-hk': zhHK,
-  'en': en,
   'zh-cn': zhCN,
+  // 'en': en,
 } as const;
 
 export type Lang = keyof typeof ui;

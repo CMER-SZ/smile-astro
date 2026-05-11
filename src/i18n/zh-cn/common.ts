@@ -1,15 +1,8 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-11 10:38:01
+ * @LastEditTime: 2026-05-11 15:54:13
  * @FilePath: /src/i18n/zh-cn/common.ts
- * @Description: 
- */
-/*
- * @Author: 谭洁莹
- * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-11 10:27:53
- * @FilePath: /src/i18n/en/common.ts
  * @Description: 
  */
 export const common = {
@@ -84,5 +77,9 @@ export const common = {
     weekend: "星期六",
     holiday: "星期日及公众假期",
     closed: "休息",
+  },
+  cases: {
+    title: "用家分享",
+    intro: "聽聽各位真實用家親身感受",
   },
 } as const;

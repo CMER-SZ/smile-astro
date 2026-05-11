@@ -2,11 +2,12 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-04-27 09:54:24
+ * @LastEditTime: 2026-05-11 15:53:25
  * @FilePath: /src/pages/[...lang]/index.astro
- * @Description: 
+ * @Description: 首页
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import UserCases from "@/components/common/UserCases.astro";
 import { i18nPaths, useI18n } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
@@ -23,5 +24,18 @@ const { dict } = useI18n(Astro.url);
       />
       <p set:html={dict.home.subtitle} class="text-primary" />
     </div>
+  </section>
+  <section>
+    <h2>{dict.home.service.title}</h2>
+  </section>
+  <UserCases />
+  <section>
+    <h2>{dict.home.reviews.title}</h2>
+  </section>
+  <section class="bg-primary text-white">
+    <h2>{dict.home.book.title}</h2>
+  </section>
+  <section>
+    <h2>{dict.home.awards.title}</h2>
   </section>
 </BaseLayout>
