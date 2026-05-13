@@ -1,0 +1,10 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { i18nPaths, useI18n } from "@/i18n/utils";
+export function getStaticPaths() {
+  return [...i18nPaths];
+}
+const { dict } = useI18n(Astro.url);
+---
+
+<BaseLayout tdkKey="about"></BaseLayout>

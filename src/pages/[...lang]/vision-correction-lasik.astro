@@ -1,0 +1,17 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { i18nPaths, useI18n } from "@/i18n/utils";
+export function getStaticPaths() {
+  return [...i18nPaths];
+}
+const { dict } = useI18n(Astro.url);
+---
+
+<BaseLayout tdkKey="about">
+  <section class="wrapper">
+    <h1 class="flex flex-col text-primary">
+      <span>LASIK</span>
+      <span>{dict.service.lasik.title}</span>
+    </h1>
+  </section>
+</BaseLayout>

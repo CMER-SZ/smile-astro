@@ -1,9 +1,11 @@
 const smile = {}
 const smilepro = {}
-const icl = {}
+const icl = {
+  title: '植入式隱形眼鏡'
+}
+const clear = {}
+const lasik = {}
 
 export const service = {
-  'surgery':{
-    smile, smilepro, icl
-  }
+  smile, smilepro, icl, clear, lasik
 } as const;
