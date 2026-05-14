@@ -32,7 +32,7 @@ const navList = [
 ---
 
 <section
-  class="fixed bottom-0 w-full bg-[#4f6fb1] text-[#d9eaed] flex lg:hidden"
+  class="fixed z-50 bottom-0 w-full bg-[#4f6fb1] text-[#d9eaed] flex lg:hidden"
 >
   {
     navList.map((item) => (
@@ -50,7 +50,7 @@ const navList = [
     ))
   }
 </section>
-<style lang="scss" scoped>
+<style lang="scss">
   .fixed-item {
     &:not(:last-child) {
       .fixed-link {

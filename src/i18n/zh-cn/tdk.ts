@@ -1,3 +1,10 @@
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-24 18:42:52
+ * @LastEditTime: 2026-04-27 09:36:51
+ * @FilePath: /src/i18n/zh-hk/tdk.ts
+ * @Description: TDK设置
+ */
 export const tdk = {
   home: {
     title: "主頁",
@@ -5,5 +12,15 @@ export const tdk = {
       "希瑪微笑矯視中心為上市公司「香港希瑪眼科集團」旗下的屈光矯視醫療中心，提供一站式眼科專科醫療及矯視服務，包括：SMILE 微笑激光矯視。",
     keywords:
       "smile 矯 視, 矯視中心,希瑪微笑矯視中心,香港 激光 矯 視 中心,SMILE 微笑激光矯視, LASIK激光矯視, 激光矯視, LASIK 香港, 激光矯視 散光, 激光矯視 近視, 激光矯視 價錢, 微笑矯視 安全, 微笑矯視, 微笑香港矯視, 微笑矯視 原理, 微笑矯視 價錢, 微笑矯視 收費, 近視矯正 散光, 眼鏡, 微笑矯視 講座, 隱形眼鏡, 眼科手術, 眼睛健康, 眼睛檢查, 眼睛治療, ICL, 植入式隱形眼鏡, 老花, 近視",
+  },
+  about: {
+    title: "集團簡介",
+    description: "集團簡介",
+    keywords: "希瑪微笑矯視中心",
+  },
+  doctor: {
+    title: "醫生團隊",
+    description: "醫生團隊",
+    keywords: "希瑪微笑矯視中心",
   },
 } as const;

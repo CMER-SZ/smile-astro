@@ -14,6 +14,15 @@ importers:
       '@astrojs/vue':
         specifier: ^6.0.1
         version: 6.0.1(@types/node@24.12.2)(astro@6.1.8(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(sass@1.99.0))(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.99.0)(vue@3.5.33)
+      '@fontsource/noto-sans-hk':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/noto-sans-sc':
+        specifier: ^5.2.9
+        version: 5.2.9
+      '@fontsource/poppins':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@tailwindcss/vite':
         specifier: ^4.2.4
         version: 4.2.4(vite@7.3.2(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.99.0))
@@ -385,6 +394,15 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/noto-sans-hk@5.2.8':
+    resolution: {integrity: sha512-Xp5//IFhWmVA112Y+Kif44y2K+9Hpq9/g1RfAY9aaw4yngDJxsjFs1WmKMdo2u8TzteQRDkBWp2GdhHCDn+TEg==}
+
+  '@fontsource/noto-sans-sc@5.2.9':
+    resolution: {integrity: sha512-bTUIWGBgJDpwi5qAr+x0/lcgv80IHTB9vl6s2f6EymZEa7qYV99yNRBZuKFT+SYDKVunZrjCEhWtpxqmbXWl5Q==}
+
+  '@fontsource/poppins@5.2.7':
+    resolution: {integrity: sha512-6uQyPmseo4FgI97WIhA4yWRlNaoLk4vSDK/PyRwdqqZb5zAEuc+Kunt8JTMcsHYUEGYBtN15SNkMajMdqUSUmg==}
 
   '@iconify/tools@4.2.0':
     resolution: {integrity: sha512-WRxPva/ipxYkqZd1+CkEAQmd86dQmrwH0vwK89gmp2Kh2WyyVw57XbPng0NehP3x4V1LzLsXUneP1uMfTMZmUA==}
@@ -2728,6 +2746,12 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.7':
     optional: true
+
+  '@fontsource/noto-sans-hk@5.2.8': {}
+
+  '@fontsource/noto-sans-sc@5.2.9': {}
+
+  '@fontsource/poppins@5.2.7': {}
 
   '@iconify/tools@4.2.0':
     dependencies:

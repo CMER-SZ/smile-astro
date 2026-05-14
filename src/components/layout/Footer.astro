@@ -1,1 +1,292 @@
-<footer></footer>
+---
+import { Image } from "astro:assets";
+import logoImg from "@/assets/logo.svg";
+// const { lang: langParam } = Astro.params;
+// const isCN = langParam === "cn";
+import { useI18n } from "@/i18n/utils";
+import { getLocalizedHref } from "@/i18n/utils";
+const { lang, dict } = useI18n(Astro.url);
+import { Icon } from "astro-icon/components";
+const socialLinks = [
+  {
+    name: "social/facebook",
+    url: "https://www.facebook.com/CMER.SMILE",
+    label: "Facebook",
+  },
+  {
+    name: "social/instagram",
+    url: "https://www.instagram.com/cmer_smile",
+    label: "Instagram",
+  },
+  {
+    name: "social/youtube",
+    url: "https://www.youtube.com/channel/UCkYbtBhKYc8XyrgG7SAFzRg",
+    label: "YouTube",
+  },
+];
+const mainNav = [
+  {
+    title: { text: dict.common.menu.about.title, href: "" },
+    links: [
+      { text: dict.common.menu.about.group, href: "/group-profile" },
+      { text: dict.common.menu.about.equipment, href: "/medical-equipment" },
+    ],
+  },
+  {
+    title: { text: dict.common.menu.service.title, href: "" },
+    links: [
+      { text: dict.common.menu.service.smilepro, href: "/smilePro" },
+      { text: dict.common.menu.service.icl, href: "/vision-correction-icl" },
+      {
+        text: dict.common.menu.service.smile,
+        href: "/vision-correction/relex-smile",
+      },
+      {
+        text: dict.common.menu.service.presbyopia,
+        href: "/vision-correction-presbyopia",
+      },
+      {
+        text: dict.common.menu.service.lasik,
+        href: "/vision-correction-lasik",
+      },
+    ],
+  },
+  {
+    title: { text: dict.common.menu.instructions.title, href: "/patient-info" },
+    links: [
+      {
+        text: dict.common.menu.instructions.pre,
+        href: "/patient-info#beforeJiaoShi",
+      },
+      {
+        text: dict.common.menu.instructions.process,
+        href: "/patient-info#inJiaoShi",
+      },
+      {
+        text: dict.common.menu.instructions.post,
+        href: "/patient-info#afterJiaoShi",
+      },
+    ],
+  },
+];
+const sideNav = [
+  { title: { text: dict.common.menu.fee, href: "/fee" }, links: [] },
+  {
+    title: { text: dict.common.menu.about.team, href: "/our-medical-team" },
+    links: [],
+  },
+  {
+    title: { text: dict.common.menu.faq.title, href: "/FreQuestions" },
+    links: [],
+  },
+  {
+    title: { text: dict.common.menu.news.title, href: "" },
+    links: [
+      { text: dict.common.menu.news.case, href: "/video" },
+      { text: dict.common.menu.news.knowledge, href: "/blog" },
+    ],
+  },
+  { title: { text: dict.common.menu.contact, href: "/contact-us" }, links: [] },
+];
+const businessClass =
+  "font-medium text-sm lg:text-lg tracking-widest leading-[1.8]";
+---
+
+<footer class="footer pt-8 lg:pt-18">
+  <div class="bg-bg-subtle">
+    <div
+      class="flex wrapper justify-between items-center flex-col lg:flex-row lg:gap-5 xl:gap-12 2xl:gap-24"
+    >
+      <div
+        class="footer-info flex-1 bg-white max-w-sm lg:max-w-2xl relative border border-primary rounded-4xl pt-8 pl-[clamp(8px,6.667vw,32px)] pr-0 pb-7 lg:p-18 lg:pb-21 lg:pr-29 w-full lg:w-auto -translate-y-8 lg:-translate-y-18"
+      >
+        <a href={getLocalizedHref("/", lang)}>
+          <Image
+            src={logoImg}
+            alt="Clinic Logo"
+            width={329}
+            height={104}
+            class="w-4/5 lg:w-82 h-auto"
+          />
+        </a>
+        <div class="mt-9 lg:mt-16 mb-9">
+          <p
+            class="text-primary font-semibold mb-3 lg:mb-3 text-lg md:text-2xl xl:text-3xl tracking-[0.25em]"
+          >
+            {dict.common.businessHours.title}
+          </p>
+          <ul class="font-medium">
+            <li class="flex lg:gap-10">
+              <strong
+                class:list={[
+                  businessClass,
+                  "text-primary w-1/2 lg:w-2/5 whitespace-nowrap",
+                ]}>{dict.common.businessHours.weekday}</strong
+              >
+              <span class:list={[businessClass, "text-desc"]}>9:00-19:00</span>
+            </li>
+            <li class="flex lg:gap-10">
+              <strong
+                class:list={[
+                  businessClass,
+                  "text-primary w-1/2 lg:w-2/5 whitespace-nowrap",
+                ]}>{dict.common.businessHours.weekend}</strong
+              >
+              <span class:list={[businessClass, "text-desc"]}>9:00-18:00</span>
+            </li>
+            <li class="flex lg:gap-10">
+              <strong
+                class:list={[
+                  businessClass,
+                  "text-primary w-1/2 lg:w-2/5 whitespace-nowrap",
+                ]}>{dict.common.businessHours.holiday}</strong
+              >
+              <span class:list={[businessClass, "text-desc"]}
+                >{dict.common.businessHours.closed}</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="space-y-3 md:space-y-6 lg:space-y-9">
+            {
+              Object.values(dict.common.clinic).map((clinic) => (
+                <li>
+                  <p class="text-primary flex items-center text-lg md:text-xl xl:text-2xl font-extrabold tracking-[0.15em]">
+                    <strong>{clinic.title}</strong>
+                    <img
+                      src="https://statichk.cmermedical.com/smile/new-footerV2-address-pc.avif"
+                      alt="{dict.common.footer.map}"
+                      class="w-9 md:w-12 xl:w-15"
+                    />
+                  </p>
+                  <p
+                    class="text-desc text-[12px] lg:text-lg font-light tracking-[0.2em]"
+                    set:html={clinic.address}
+                  />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="pb-32 lg:pt-21 lg:pb-17">
+        <div
+          class="flex gap-x-8 xl:gap-x-16 text-desc mb-12 text-sm md:text-lg xl:text-2xl tracking-[0.15em]"
+        >
+          <div class="flex flex-col gap-4 lg:gap-8">
+            {
+              mainNav.map((item) => (
+                <div class="group">
+                  {item.title.href ? (
+                    <a
+                      href={getLocalizedHref(item.title.href, lang)}
+                      class="flex items-center gap-2 lg:gap-4 font-medium text-primary"
+                    >
+                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
+                      {item.title.text}
+                    </a>
+                  ) : (
+                    <div class="flex items-center gap-2 lg:gap-4 font-medium text-primary">
+                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
+                      {item.title.text}
+                    </div>
+                  )}
+
+                  {item.links && item.links.length > 0 && (
+                    <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
+                      {item.links.map((link) => (
+                        <li>
+                          <a href={getLocalizedHref(link.href, lang)}>
+                            {link.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+          <div class="flex flex-col gap-4 lg:gap-8">
+            {
+              sideNav.map((item) => (
+                <div class="group">
+                  {item.title.href ? (
+                    <a
+                      href={getLocalizedHref(item.title.href, lang)}
+                      class="flex items-center gap-2 lg:gap-4 font-medium text-primary"
+                    >
+                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
+                      {item.title.text}
+                    </a>
+                  ) : (
+                    <div class="flex items-center gap-2 lg:gap-4 font-medium text-primary">
+                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
+                      {item.title.text}
+                    </div>
+                  )}
+
+                  {item.links && item.links.length > 0 && (
+                    <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
+                      {item.links.map((link) => (
+                        <li>
+                          <a href={getLocalizedHref(link.href, lang)}>
+                            {link.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))
+            }
+            <div class="flex items-center gap-4 lg:gap-6">
+              {
+                socialLinks.map((s) => (
+                  <a
+                    href={s.url}
+                    class="text-primary hover:opacity-80 transition-opacity"
+                  >
+                    <Icon name={s.name} class="size-6 lg:size-7" />
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-desc text-[11px] min-[390px]:text-[12px] md:text-sm lg:text-base tracking-widest"
+        >
+          {dict.common.footer.copyright}<br class="block min-[360px]:hidden" />
+          <a href={getLocalizedHref("/privacy", lang)}
+            >{dict.common.menu.privacy}</a
+          > | <a href={getLocalizedHref("/disclaimer", lang)}
+            >{dict.common.menu.disclaimer}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<style lang="scss">
+  .footer-info {
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      right: 12px;
+      width: 100px;
+      aspect-ratio: 15 / 29;
+      height: auto;
+      background: url("https://statichk.cmermedical.com/smile/newFooterV2-bgicon-pc.avif")
+        no-repeat center / contain;
+      z-index: -1;
+      @media screen and (min-width: 1024px) {
+        width: 172px;
+        bottom: -20px;
+        right: 72px;
+      }
+    }
+  }
+</style>
