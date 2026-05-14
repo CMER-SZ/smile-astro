@@ -1,17 +1,19 @@
 ---
 import { Image } from "astro:assets";
 import logoImg from "@/assets/logo.svg";
+import logoDarkImg from "@/assets/logo-dark.svg";
 import { Icon } from "astro-icon/components";
 import { useI18n } from "@/i18n/utils";
-// const { lang: langParam } = Astro.params;
 const currentPath = Astro.url.pathname;
 const { lang, dict } = useI18n(Astro.url);
 import { getLocalizedHref } from "@/i18n/utils";
+
 const labelMap: Record<string, string> = {
   "zh-hk": "繁體中文",
   "zh-cn": "简体中文",
-  en: "English",
+  // en: "English",
 };
+
 const langList = [
   {
     code: "zh-hk",
@@ -25,25 +27,16 @@ const langList = [
     labelPC: "简体中文",
     href: getLocalizedHref(currentPath, "zh-cn"),
   },
-  {
-    code: "en",
-    label: "Eng",
-    labelPC: "English",
-    href: getLocalizedHref(currentPath, "en"),
-  },
+  // {
+  //   code: "en",
+  //   label: "Eng",
+  //   labelPC: "English",
+  //   href: getLocalizedHref(currentPath, "en"),
+  // },
 ];
+
 const currentLangLabel = labelMap[lang] || "繁體中文";
-/**
- * 语言切换逻辑： [cite: 20]
- * 1. 如果是简体 (zh-cn)，目标是繁体，链接去掉 /cn，文字显示“繁” [cite: 21, 22]
- * 2. 如果是繁体 (zh-hk)，目标是简体，链接加上 /cn，文字显示“简” [cite: 21, 22]
- */
-// const isCN = langParam === "cn";
-// const toggleHref = isCN
-//   ? currentPath.replace(/^\/cn/, "") || "/"
-//   : `/cn${currentPath.replace(/\/$/, "")}`;
-// const toggleLabelMobile = isCN ? "繁" : "简";
-// const toggleLabelDesktop = isCN ? "简体中文" : "繁體中文";
+
 interface navItem {
   text: string;
   href: string;
@@ -54,6 +47,7 @@ interface navGroup {
 }
 const getHasSubNav = (item: navGroup) => item.links && item.links.length > 0;
 const dotClass = "nav-dot-indicator";
+
 const navList = [
   {
     title: { text: dict.common.menu.about.title, href: "" },
@@ -116,30 +110,33 @@ const navList = [
 ---
 
 <header class="sticky top-0 bg-white z-50">
-  <div class="flex wrapper py-4 justify-between items-center">
-    <!-- <a href={isCN ? "/cn" : "/"}> -->
-    <a href={getLocalizedHref("/", lang)}>
+  <div class="flex wrapper py-4 justify-between items-center relative">
+    <a href={getLocalizedHref("/", lang)} class="z-60 relative">
       <Image
         src={logoImg}
-        alt="Clinic Logo"
+        alt="Logo"
         width={329}
         height={104}
-        class="w-39.5 lg:w-82 h-auto"
+        class="logo-light w-39.5 lg:w-82 h-auto transition-all duration-300"
+      />
+      <Image
+        src={logoDarkImg}
+        alt="Logo"
+        width={174}
+        height={51}
+        class="logo-dark hidden w-39.5 lg:w-82 h-auto transition-all duration-300"
       />
     </a>
-    <!-- 移动端 -->
-    <div class="flex items-center gap-3 lg:hidden">
-      <!-- <div class="text-desc text-sm">
-        <a href={toggleHref} class="hover:text-primary transition-colors">
-          {toggleLabelMobile}
-        </a>
-      </div> -->
-      <details class="relative group">
+    <div class="flex lg:hidden items-center gap-3 group/menu">
+      <details class="relative group/lang">
         <summary class="list-none cursor-pointer p-2 outline-none">
-          <Icon name="common/language-mini" class="size-6 text-primary" />
+          <Icon
+            name="common/language-mini"
+            class:list={["size-6 transition-colors", "icon-lang text-primary"]}
+          />
         </summary>
         <ul
-          class="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-md border z-60 min-w-25 text-center border-primary rounded-md"
+          class="language-list absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-xl border z-60 min-w-25 text-center rounded-md overflow-hidden border-primary"
         >
           {
             langList.map((item) => (
@@ -148,7 +145,6 @@ const navList = [
                   href={item.href}
                   class:list={[
                     "block w-full py-3 transition-colors whitespace-nowrap",
-                    "hover:bg-primary hover:text-white",
                     item.code === lang ? "text-white bg-primary" : "text-desc",
                   ]}
                 >
@@ -159,18 +155,90 @@ const navList = [
           }
         </ul>
       </details>
-      <button>
-        <Icon name="common/menu-normal" class="size-10 text-white" />
-      </button>
+      <details class="group/menu">
+        <summary class="list-none cursor-pointer outline-none z-60 relative">
+          <div class="size-10 transition-colors">
+            <Icon
+              name="common/menu-normal"
+              class="size-full group-open/menu:hidden"
+            />
+            <Icon
+              name="common/menu-close"
+              class="size-full hidden group-open/menu:block"
+            />
+          </div>
+        </summary>
+        <nav
+          class="fixed inset-x-0 top-18 bottom-0 pb-23 bg-primary z-50 overflow-y-auto px-3 flex flex-col justify-start"
+        >
+          <ul class="flex flex-col text-white font-medium">
+            {
+              navList.map((item) => (
+                <li>
+                  {item.links && item.links.length > 0 ? (
+                    <details class="group/sub">
+                      <summary class="list-none py-2 flex gap-3 items-center justify-start text-lg tracking-[0.15em] group-open/sub:underline group-open/sub:underline-offset-8">
+                        <span class="font-bold">{item.title.text}</span>
+                        <Icon
+                          name="common/language-arrow"
+                          class="w-4 -rotate-90 transition-transform group-open/sub:rotate-0"
+                        />
+                      </summary>
+                      <ul class="mb-2 flex flex-col text-sm text-white tracking-[0.15em] leading-loose">
+                        {item.links.map((link) => (
+                          <li class="relative pl-3 before:content-[''] before:absolute before:size-1 before:bg-white before:rounded-full before:left-0 before:top-1/2 before:-translate-y-1/2">
+                            <a href={getLocalizedHref(link.href, lang)}>
+                              {link.text}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : (
+                    <a
+                      href={getLocalizedHref(item.title.href, lang)}
+                      class="block py-2 text-lg font-bold tracking-[0.15em]"
+                    >
+                      {item.title.text}
+                    </a>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+          <div class="pt-10 flex gap-5 items-center">
+            <a
+              href="https://www.facebook.com/CMER.SMILE"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="social/facebook" class="size-6 text-white" />
+            </a>
+            <a
+              href="https://www.instagram.com/cmer_smile/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="social/instagram" class="size-6 text-white" />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCkYbtBhKYc8XyrgG7SAFzRg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="social/youtube" class="size-6 text-white" />
+            </a>
+          </div>
+        </nav>
+      </details>
     </div>
-    <!-- PC端 -->
     <div class="hidden lg:block">
       <div class="flex mb-5 justify-end">
         <div
           class="flex items-center mr-5 gap-4 text-white text-base font-medium"
         >
           <a
-            href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-G01)%20%E8%A1%93%E5%89%8D%E6%AA%A2%E6%9F%A5/%E7%9F%AF%E8%A6%96%E8%AC%9B%E5%BA%A7"
+            href="https://api.whatsapp.com/send/..."
             class="bg-whatsapp flex items-center px-5 py-2 gap-1.5 rounded-full"
           >
             <Icon name="social/whatsapp" class="size-7" />
@@ -200,8 +268,7 @@ const navList = [
                   <a
                     href={item.href}
                     class:list={[
-                      "block px-5 py-3 transition-colors whitespace-nowrap",
-                      "hover:bg-primary hover:text-white",
+                      "block px-5 py-3",
                       item.code === lang
                         ? "text-primary bg-bg-accent"
                         : "text-desc",
@@ -218,61 +285,82 @@ const navList = [
       <nav aria-label="Main Navigation">
         <ul class="flex gap-6 text-desc tracking-[0.15em]">
           {
-            navList.map((item) => {
-              const hasSubNav = getHasSubNav(item);
-              return (
-                <li class="group pt-3 relative">
-                  {item.title.href ? (
-                    <a
-                      href={getLocalizedHref(item.title.href, lang)}
-                      class:list={[
-                        "hover:text-primary transition-colors",
-                        { [dotClass]: hasSubNav },
-                      ]}
-                    >
-                      {item.title.text}
-                    </a>
-                  ) : (
-                    <span
-                      class:list={["cursor-pointer", { [dotClass]: hasSubNav }]}
-                    >
-                      {item.title.text}
-                    </span>
-                  )}
-                  {item.links.length > 0 && (
-                    <ul class="absolute hidden group-hover:block bg-white shadow-lg">
-                      {item.links.map((link) => (
-                        <li>
-                          <a
-                            href={getLocalizedHref(link.href, lang)}
-                            class="block whitespace-nowrap p-5 hover:bg-primary hover:text-white"
-                          >
-                            {link.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              );
-            })
+            navList.map((item) => (
+              <li class="group pt-3 relative">
+                {item.title.href ? (
+                  <a
+                    href={getLocalizedHref(item.title.href, lang)}
+                    class:list={[
+                      "hover:text-primary transition-colors",
+                      { [dotClass]: getHasSubNav(item) },
+                    ]}
+                  >
+                    {item.title.text}
+                  </a>
+                ) : (
+                  <span
+                    class:list={[
+                      "cursor-pointer",
+                      { [dotClass]: getHasSubNav(item) },
+                    ]}
+                  >
+                    {item.title.text}
+                  </span>
+                )}
+                {item.links.length > 0 && (
+                  <ul class="absolute hidden group-hover:block bg-white shadow-lg whitespace-nowrap">
+                    {item.links.map((link) => (
+                      <li>
+                        <a
+                          href={getLocalizedHref(link.href, lang)}
+                          class="block p-5 hover:bg-primary hover:text-white"
+                        >
+                          {link.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
           }
         </ul>
       </nav>
     </div>
   </div>
 </header>
+
 <style lang="scss">
-  /* 隐藏 details 默认的箭头 */
+  @reference "@/styles/global.css";
+
   summary::-webkit-details-marker {
     display: none;
   }
 
-  /* 点击外部自动收起的简单逻辑：利用 transparent overlay (可选) */
-  details[open] summary::before {
+  // 关键：当移动端菜单 details 展开时
+  header:has(details.group\/menu[open]) {
+    @apply bg-primary;
+    .logo-light {
+      display: none;
+    }
+    .logo-dark {
+      display: block;
+    }
+    .icon-lang {
+      color: #fff;
+    }
+    .language-list {
+      border-color: #fff;
+    }
+  }
+
+  // 内部详情列表点击外部收起
+  details[open] > summary::before {
     content: "";
-    fixed: inset-0;
+    position: fixed;
+    inset: 0;
     z-index: 55;
     background: transparent;
+    pointer-events: none;
   }
 </style>
