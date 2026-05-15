@@ -2,12 +2,12 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-11 15:53:25
+ * @LastEditTime: 2026-05-15 14:37:54
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import UserCases from "@/components/common/UserCases.astro";
+import VideoCarousel from '@/components/common/VideoCarousel.astro';
 import { i18nPaths, useI18n } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
@@ -23,12 +23,13 @@ const { dict } = useI18n(Astro.url);
         class="text-primary text-xl lg:text-3xl font-black"
       />
       <p set:html={dict.home.subtitle} class="text-primary" />
+      <div class="text-normal" set:html={dict.home.intro}></div>
     </div>
   </section>
   <section>
     <h2>{dict.home.service.title}</h2>
   </section>
-  <UserCases />
+  <VideoCarousel />
   <section>
     <h2>{dict.home.reviews.title}</h2>
   </section>
