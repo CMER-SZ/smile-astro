@@ -1,0 +1,49 @@
+---
+import { ALL_VIDEOS, VIDEO_TABS, type VideoType } from "@/data/videoData";
+// 从 URL 获取当前筛选的 tab，默认 smilepro
+const currentType = (Astro.url.searchParams.get("type") ||
+  "smilepro") as VideoType;
+// 根据当前 tab 过滤数据
+const filteredVideos = ALL_VIDEOS.filter((item) =>
+  item.type.includes(currentType),
+);
+---
+
+<div class="video-list-wrapper">
+  <div class="tabs-nav">
+    {
+      VIDEO_TABS.map((tab) => (
+        <a
+          href={`?type=${tab.key}`}
+          class={`tab-item ${currentType === tab.key ? "active" : ""}`}
+        >
+          {tab.label}
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="vertical-grid">
+    {
+      filteredVideos.map((item) => (
+        <div class="video-card">
+          <h3>{item.name}</h3>
+          <p set:html={item.title} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  /* 垂直列表或网格的样式 */
+  .vertical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .tab-item.active {
+    color: blue;
+    font-weight: bold;
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import { useI18n } from "@/i18n/utils";
+const { dict } = useI18n(Astro.url);
+import { ALL_VIDEOS, type VideoType } from "@/data/videoData";
+interface Props {
+  filterType?: VideoType;
+}
+const { filterType } = Astro.props;
+const displayVideos = filterType
+  ? ALL_VIDEOS.filter((item) => item.type.includes(filterType))
+  : ALL_VIDEOS;
+const typeConfig: Record<VideoType, { bg: string; label: string }> = {
+  smilepro: { bg: "bg-[#4570B6]", label: "SMILE Pro" },
+  smile: { bg: "bg-[#30ABE2]", label: "SMILE" },
+  icl: { bg: "bg-[#EB981A]", label: "ICL" },
+};
+---
+
+<section class="bg-bg-accent">
+  <h2>{dict.common.cases.title}</h2>
+  <div class="w-full overflow-x-auto whitespace-nowrap">
+    <div class="flex gap-1">
+      {
+        displayVideos.map((item) => {
+          const primaryType = item.type[0];
+          const currentConfig = typeConfig[primaryType];
+          return (
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0 grow-0 relative aspect-3/5 w-50 lg:w-66 overflow-hidden rounded-lg group"
+            >
+              <img
+                src={item.img}
+                alt={item.name}
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+              {currentConfig && (
+                <span
+                  class={`absolute top-3 right-3 lg:top-4 z-10 text-white text-base lg:text-xl px-4 py-1 rounded-full font-en font-bold ${currentConfig.bg}`}
+                >
+                  {currentConfig.label}
+                </span>
+              )}
+              <div class="z-10 absolute bottom-3 left-3 right-3 text-white tracking-wider whitespace-normal">
+                <p
+                  set:html={item.title}
+                  class="text-sm lg:text-base font-bold leading-snug mb-1"
+                />
+                <div class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
+                  {item.name && (
+                    <h3 class="text-sm lg:text-base font-semibold">
+                      {item.name}
+                    </h3>
+                  )}
+                  {item.enName && (
+                    <span class="text-xs lg:text-sm font-bold">
+                      {item.enName}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
