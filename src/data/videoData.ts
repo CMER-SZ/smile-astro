@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-05-15 14:12:40
- * @LastEditTime: 2026-05-19 17:04:10
+ * @LastEditTime: 2026-05-19 17:17:52
  * @FilePath: /src/data/videoData.ts
  * @Description: 用家分享视频数据合集
  */
@@ -515,6 +515,94 @@ export const ALL_VIDEOS: VideoItem[] = [
     title: "全天候高清視力<br/>我靠ICL!",
     link: "https://youtu.be/M4-FA9U3VPo",
     img: "https://statichk.cmermedical.com/smile/orthopedic-video/icl/icl-012-v1.avif",
+  },
+  {
+    type: ["icl"],
+    name: "梁庭欣",
+    enName: "Ting Yan",
+    title: "ICL矯視過程講解及<br/>注意事項",
+    link: "https://youtu.be/D91jSXnpeNc",
+    img: "https://statichk.cmermedical.com/smile/orthopedic-video/icl/icl-011.avif",
+  },
+  {
+    type: ["icl"],
+    name: "梁庭欣",
+    enName: "Ting Yan",
+    title: "一個「選擇」<br/>睇見自己嘅光芒",
+    link: "https://youtu.be/PmZk2TtrNBc",
+    img: "https://statichk.cmermedical.com/smile/orthopedic-video/icl/icl-010.avif",
+  },
+  {
+    type: ["icl"],
+    name: "王頌茵",
+    enName: "Kathy仔",
+    title: "依家一擘大眼就見到<br/>好清楚嘅世界，好立體",
+    link: "https://youtu.be/fNSShYa7nKk",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem1.avif",
+  },
+  {
+    type: ["icl"],
+    name: "李莉",
+    enName: "Lily",
+    title: "夜間高清視力對<br/>夜晚揸車好重要",
+    link: "https://youtu.be/T9g2qoFI9nU",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem-icl1.avif",
+  },
+  {
+    type: ["icl"],
+    name: "麥沛東",
+    enName: "",
+    title: "眼鏡由「必須品」<br/>變「奢侈品」",
+    link: "https://youtu.be/I2sl4GWqg1w",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem4.avif",
+  },
+  {
+    type: ["icl"],
+    name: "麥沛東",
+    enName: "",
+    title: "原來眼角膜薄都有機會<br/>可以做矯視!",
+    link: "https://youtu.be/r0yDL98l0Zo",
+    img: "https://statichk.cmermedical.com/smile/orthopedic-video/icl/icl4.avif",
+  },
+  {
+    type: ["icl"],
+    name: "麥沛東",
+    enName: "",
+    title: "麥沛東與結婚這回事",
+    link: "https://youtu.be/B12IjJ3tFHE",
+    img: "https://statichk.cmermedical.com/smile/orthopedic-video/icl/icl5.avif",
+  },
+  {
+    type: ["icl"],
+    name: "吳業坤",
+    enName: "Kwan Gor",
+    title: "眼鏡選擇多好多，<br/>世界限制少好多",
+    link: "https://youtu.be/CEbbKFeFdnc",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem-icl4.avif",
+  },
+  {
+    type: ["icl"],
+    name: "林奕匡",
+    enName: "Phil",
+    title: "好Surprise 做完之後<br/>24小時都睇得咁清",
+    link: "https://youtu.be/2t7JjTab4xA",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem-icl2.avif",
+  },
+  {
+    type: ["icl"],
+    name: "林宣妤",
+    enName: "Serene Lim",
+    title: "每日起身唔洗戴Con<br/>慳好多時間 好方便",
+    link: "https://youtu.be/5ihrzFvOy38",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem-icl3.avif",
+  },
+  {
+    type: ["icl"],
+    name: "",
+    enName: "Tiffany Poon",
+    title: "做咗ICL 夜晚湊小朋友<br/>唔洗開燈都睇得清楚",
+    link: "https://youtu.be/e-c_qRuvWTA",
+    img: "https://statichk.cmermedical.com/smile/VisionCorrectionCenter/userShare/boxShareItem-icl5.avif",
   },
 ];
 
