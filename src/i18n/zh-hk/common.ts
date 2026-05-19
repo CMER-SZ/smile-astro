@@ -1,3 +1,10 @@
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-24 18:42:52
+ * @LastEditTime: 2026-05-18 16:45:23
+ * @FilePath: /src/i18n/zh-hk/common.ts
+ * @Description: 公共翻译
+ */
 export const common = {
   menu: {
     about: {
@@ -74,5 +81,6 @@ export const common = {
   cases: {
     title: "用家分享",
     intro: "聽聽各位真實用家親身感受",
+    slogan: "更舒適生活從希瑪矯視開始"
   },
 } as const;

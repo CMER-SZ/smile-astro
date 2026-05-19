@@ -41,4 +41,7 @@ html[lang="zh-cn"] {
   .nav-dot-indicator {
     @apply before:absolute before:content-[''] before:top-0 before:left-1/2 before:-translate-x-1/2 before:size-1.5 before:rounded-full before:bg-primary;
   }
+  .title-normal {
+    @apply text-primary text-xl lg:text-3xl font-black tracking-widest;
+  }
 }

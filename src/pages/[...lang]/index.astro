@@ -2,12 +2,12 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-15 14:37:54
+ * @LastEditTime: 2026-05-18 17:13:21
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import VideoCarousel from '@/components/common/VideoCarousel.astro';
+import VideoCarousel from "@/components/common/VideoCarousel.astro";
 import { i18nPaths, useI18n } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
@@ -18,25 +18,22 @@ const { dict } = useI18n(Astro.url);
 <BaseLayout tdkKey="home">
   <section class="bg-bg-subtle">
     <div class="wrapper text-center">
-      <h1
-        set:html={dict.home.title}
-        class="text-primary text-xl lg:text-3xl font-black"
-      />
+      <h1 set:html={dict.home.title} class="title-normal" />
       <p set:html={dict.home.subtitle} class="text-primary" />
-      <div class="text-normal" set:html={dict.home.intro}></div>
+      <div class="text-normal" set:html={dict.home.intro} />
     </div>
   </section>
   <section>
-    <h2>{dict.home.service.title}</h2>
+    <h2 class="title-normal">{dict.home.service.title}</h2>
   </section>
   <VideoCarousel />
   <section>
-    <h2>{dict.home.reviews.title}</h2>
+    <h2 class="title-normal">{dict.home.reviews.title}</h2>
   </section>
   <section class="bg-primary text-white">
-    <h2>{dict.home.book.title}</h2>
+    <h2 class="title-normal text-white">{dict.home.book.title}</h2>
   </section>
   <section>
-    <h2>{dict.home.awards.title}</h2>
+    <h2 class="title-normal">{dict.home.awards.title}</h2>
   </section>
 </BaseLayout>

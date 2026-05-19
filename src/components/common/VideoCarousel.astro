@@ -2,6 +2,7 @@
 import { useI18n } from "@/i18n/utils";
 const { dict } = useI18n(Astro.url);
 import { ALL_VIDEOS, type VideoType } from "@/data/videoData";
+
 interface Props {
   filterType?: VideoType;
 }
@@ -9,63 +10,358 @@ const { filterType } = Astro.props;
 const displayVideos = filterType
   ? ALL_VIDEOS.filter((item) => item.type.includes(filterType))
   : ALL_VIDEOS;
-const typeConfig: Record<VideoType, { bg: string; label: string }> = {
-  smilepro: { bg: "bg-[#4570B6]", label: "SMILE Pro" },
-  smile: { bg: "bg-[#30ABE2]", label: "SMILE" },
-  icl: { bg: "bg-[#EB981A]", label: "ICL" },
+
+const typeConfig: Record<
+  VideoType,
+  { bg: string; label: string; color: string }
+> = {
+  smilepro: { bg: "bg-[#4570B6]", label: "SMILE Pro", color: "#4570B6" },
+  smile: { bg: "bg-[#30ABE2]", label: "SMILE", color: "#30ABE2" },
+  icl: { bg: "bg-[#EB981A]", label: "ICL", color: "#EB981A" },
 };
 ---
 
-<section class="bg-bg-accent">
-  <h2>{dict.common.cases.title}</h2>
-  <div class="w-full overflow-x-auto whitespace-nowrap">
-    <div class="flex gap-1">
-      {
-        displayVideos.map((item) => {
-          const primaryType = item.type[0];
-          const currentConfig = typeConfig[primaryType];
-          return (
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="shrink-0 grow-0 relative aspect-3/5 w-50 lg:w-66 overflow-hidden rounded-lg group"
+<section class="video">
+  <div class="w-full overflow-hidden bg-bg-accent">
+    <div class="pt-7 pb-9 lg:pt-18 lg:pb-28">
+      <div class="wrapper mb-6">
+        <div
+          class="flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-3 lg:gap-[clamp(12px,10vw,100px)]"
+        >
+          <h2 class="title-normal text-center lg:text-left">
+            {dict.common.cases.title}
+          </h2>
+          <div>
+            <img
+              src="https://statichk.cmermedical.com/newsmile/common/smile-slogan-v1.webp"
+              alt={dict.common.cases.slogan}
+              class="w-3/4 lg:w-[clamp(400px,40vw,720px)] mx-auto lg:mx-0"
+              draggable="false"
+            />
+            <p
+              class="text-desc text-center lg:text-left text-[10px] md:text-base lg:text-xl leading-[1.75] tracking-[0.25em]"
             >
-              <img
-                src={item.img}
-                alt={item.name}
-                class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-              {currentConfig && (
-                <span
-                  class={`absolute top-3 right-3 lg:top-4 z-10 text-white text-base lg:text-xl px-4 py-1 rounded-full font-en font-bold ${currentConfig.bg}`}
+              {dict.common.cases.intro}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="w-full overflow-x-auto whitespace-nowrap scrollbar-none video-list-container cursor-grab active:cursor-grabbing select-none"
+        data-scrollbar-target
+      >
+        <div class="inline-flex gap-1 video-list pr-4 2xl:pr-0">
+          {
+            displayVideos.map((item) => {
+              const primaryType = item.type[0];
+              const currentConfig = typeConfig[primaryType];
+              return (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="video-item shrink-0 grow-0 aspect-3/5 w-50 lg:w-66 overflow-hidden group"
+                  draggable="false"
                 >
-                  {currentConfig.label}
-                </span>
-              )}
-              <div class="z-10 absolute bottom-3 left-3 right-3 text-white tracking-wider whitespace-normal">
-                <p
-                  set:html={item.title}
-                  class="text-sm lg:text-base font-bold leading-snug mb-1"
-                />
-                <div class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
-                  {item.name && (
-                    <h3 class="text-sm lg:text-base font-semibold">
-                      {item.name}
-                    </h3>
-                  )}
-                  {item.enName && (
-                    <span class="text-xs lg:text-sm font-bold">
-                      {item.enName}
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+                  {currentConfig && (
+                    <span
+                      class={`absolute top-3 right-3 lg:top-4 z-10 text-white text-base lg:text-xl px-4 py-1 rounded-full font-en font-bold ${currentConfig.bg}`}
+                    >
+                      {currentConfig.label}
                     </span>
                   )}
-                </div>
-              </div>
-            </a>
-          );
-        })
-      }
+                  <div class="z-10 absolute bottom-3 left-3 right-3 text-white whitespace-normal">
+                    <h3
+                      set:html={item.title}
+                      class="video-title text-sm lg:text-base font-bold tracking-wider leading-normal mb-1 pb-4 lg:pb-7"
+                      style={
+                        currentConfig
+                          ? `--title-color: ${currentConfig.color}`
+                          : ""
+                      }
+                    />
+                    <p class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
+                      {item.name && (
+                        <span class="text-sm lg:text-base font-semibold tracking-wider">
+                          {item.name}
+                        </span>
+                      )}
+                      {item.enName && (
+                        <span class="text-xs lg:text-sm font-bold tracking-wider">
+                          {item.enName}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+      <div class="wrapper mt-6 lg:mt-10">
+        <div
+          class="w-full h-1 bg-white rounded-full relative cursor-pointer select-none"
+          data-scrollbar-track
+        >
+          <div
+            class="absolute top-0 left-0 h-full bg-primary rounded-full cursor-grab active:cursor-grabbing touch-none"
+            data-scrollbar-thumb
+            style="width: 0%;"
+          >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  function initCustomScrollbar() {
+    const container = document.querySelector(
+      "[data-scrollbar-target]",
+    ) as HTMLElement;
+    const track = document.querySelector(
+      "[data-scrollbar-track]",
+    ) as HTMLElement;
+    const thumb = document.querySelector(
+      "[data-scrollbar-thumb]",
+    ) as HTMLElement;
+
+    if (!container || !track || !thumb) return;
+
+    let isThumbDragging = false;
+    let isListDragging = false;
+
+    // 列表拖拽物理变量
+    let listStartX = 0;
+    let listScrollLeft = 0;
+    let dragDistance = 0; // 用来统计本次拖拽位移，判断是“想拖动”还是“想点击”
+
+    // 滑块拖拽物理变量
+    let thumbStartX = 0;
+    let thumbStartLeft = 0;
+
+    // ==========================================
+    // 核心 1：更新滑块大小与位置 (原生滚动 ➔ 驱动假滚动条)
+    // ==========================================
+    const updateScrollbar = () => {
+      if (isThumbDragging) return;
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      const thumbWidthRatio =
+        scrollWidth > clientWidth ? clientWidth / scrollWidth : 1;
+
+      thumb.style.width = `${thumbWidthRatio * 100}%`;
+
+      const maxScrollLeft = scrollWidth - clientWidth;
+      if (maxScrollLeft > 0) {
+        const scrollRatio = scrollLeft / maxScrollLeft;
+        const maxThumbLeft = 100 - thumbWidthRatio * 100;
+        thumb.style.left = `${scrollRatio * maxThumbLeft}%`;
+      } else {
+        thumb.style.left = "0%";
+      }
+    };
+
+    container.addEventListener("scroll", updateScrollbar, { passive: true });
+    window.addEventListener("resize", updateScrollbar, { passive: true });
+    updateScrollbar();
+
+    // ==========================================
+    // 核心 2：PC 端鼠标直接抓取列表拖拽 (List Dragging)
+    // ==========================================
+    container.addEventListener("mousedown", (e) => {
+      // 排除滚动条滑块区域，只在列表卡片或空白处触发
+      if (e.target === thumb) return;
+
+      isListDragging = true;
+      listStartX = e.pageX - container.offsetLeft;
+      listScrollLeft = container.scrollLeft;
+      dragDistance = 0; // 重置拖拽位移
+    });
+
+    // 全局监听移动与抬起，防止鼠标划出容器后断连
+    document.addEventListener("mousemove", (e) => {
+      if (!isListDragging) return;
+      e.preventDefault(); // 强力切断浏览器抓取链接/图片的默认影子
+
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - listStartX) * 1.5; // 1.5 为滚动速度阻尼系数，可按需微调
+      dragDistance += Math.abs(x - listStartX); // 累加绝对位移
+      container.scrollLeft = listScrollLeft - walk;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isListDragging = false;
+    });
+
+    // 防止在卡片上松开鼠标时，误触发 <a> 标签的 click 跳转行为
+    container.addEventListener(
+      "click",
+      (e) => {
+        // 如果本次鼠标按住并滑动的累积像素大于 10，判定用户在“拖动”而不是“点击”
+        if (dragDistance > 10) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true,
+    ); // 注意：使用事件捕获阶段(true)在第一时间拦截跳转
+
+    // ==========================================
+    // 核心 3：小滑块本身的拖拽处理 (Thumb Dragging)
+    // ==========================================
+    const onThumbDragStart = (e: MouseEvent | TouchEvent) => {
+      isThumbDragging = true;
+      thumbStartX = "clientX" in e ? e.clientX : e.touches[0].clientX;
+      thumbStartLeft = parseFloat(thumb.style.left) || 0;
+      document.body.style.userSelect = "none";
+    };
+
+    const onThumbDragMove = (e: MouseEvent | TouchEvent) => {
+      if (!isThumbDragging) return;
+
+      const currentX = "clientX" in e ? e.clientX : e.touches[0].clientX;
+      const deltaX = currentX - thumbStartX;
+      const trackWidth = track.clientWidth;
+      const thumbWidth = thumb.clientWidth;
+
+      const deltaPercent = (deltaX / trackWidth) * 100;
+      let newLeftPercent = thumbStartLeft + deltaPercent;
+
+      const maxLeftPercent = 100 - (thumbWidth / trackWidth) * 100;
+      if (newLeftPercent < 0) newLeftPercent = 0;
+      if (newLeftPercent > maxLeftPercent) newLeftPercent = maxLeftPercent;
+
+      thumb.style.left = `${newLeftPercent}%`;
+
+      const dragRatio = newLeftPercent / maxLeftPercent;
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      container.scrollLeft = dragRatio * maxScrollLeft;
+    };
+
+    const onThumbDragEnd = () => {
+      isThumbDragging = false;
+      document.body.style.userSelect = "";
+    };
+
+    thumb.addEventListener("mousedown", onThumbDragStart);
+    document.addEventListener("mousemove", onThumbDragMove);
+    document.addEventListener("mouseup", onThumbDragEnd);
+
+    thumb.addEventListener("touchstart", onThumbDragStart, { passive: true });
+    document.addEventListener("touchmove", onThumbDragMove, { passive: false });
+    document.addEventListener("touchend", onThumbDragEnd);
+
+    // 轨道点击跳转
+    track.addEventListener("click", (e) => {
+      if (e.target === thumb) return;
+      const rect = track.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const trackWidth = track.clientWidth;
+      const thumbWidth = thumb.clientWidth;
+
+      let targetLeft = ((clickX - thumbWidth / 2) / trackWidth) * 100;
+      const maxLeftPercent = 100 - (thumbWidth / trackWidth) * 100;
+
+      if (targetLeft < 0) targetLeft = 0;
+      if (targetLeft > maxLeftPercent) targetLeft = maxLeftPercent;
+
+      const dragRatio = targetLeft / maxLeftPercent;
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+      container.scrollTo({
+        left: dragRatio * maxScrollLeft,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initCustomScrollbar);
+  initCustomScrollbar();
+</script>
+
+<style lang="scss">
+  .video {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 48px;
+      width: 52px;
+      height: 48px;
+      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTE5IiB2aWV3Qm94PSIwIDAgMTI4IDExOSIgZmlsbD0ibm9uZSI+PGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj48cGF0aCBkPSJNODIuNzA1IDExMS4wNzJjLTEzLjM1LTIuNjM5LTIwLjA3Ny0yNS40OTUtMTUuMDI3LTUxLjA1MnMxOS45NjctNDQuMTM1IDMzLjMxNy00MS40OTcgMjAuMDc4IDI1LjQ5NSAxNS4wMjcgNTEuMDUxYy01LjA1IDI1LjU1Ny0xOS45NjcgNDQuMTM2LTMzLjMxNyA0MS40OThaIiBzdHJva2U9IiMwMDczYmUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIi8+PHBhdGggZD0iTTkzLjQzNCA5MS41NzZjLTEwLjk3Mi0yLjE2OC0xOC4xMS0xMi44Mi0xNS45NC0yMy43OTIgMi4xNjgtMTAuOTcyIDEyLjgyLTE4LjEwOSAyMy43OTItMTUuOTQgMTAuOTcyIDIuMTY4IDE4LjEwOCAxMi44MiAxNS45NCAyMy43OTJzLTEyLjgyMSAxOC4xMDktMjMuNzkzIDE1Ljk0IiBmaWxsPSIjMDA3M2JlIi8+PHBhdGggZD0iTTI2Ljg4MyAxMDAuMDRjLTEzLjM1LTIuNjM4LTIwLjA3OC0yNS40OTUtMTUuMDI3LTUxLjA1MiA1LjA1LTI1LjU1NiAxOS45NjctNDQuMTM1IDMzLjMxNy00MS40OTdTNjUuMjUgMzIuOTg2IDYwLjIgNTguNTQyQzU1LjE1IDg0LjEgNDAuMjMzIDEwMi42NzggMjYuODgzIDEwMC4wNFoiIHN0cm9rZT0iIzAwNzNiZSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiLz48cGF0aCBkPSJNMzYuMzczIDgwLjNjLTEwLjk3My0yLjE3LTE4LjExLTEyLjgyLTE1Ljk0LTIzLjc5M0MyMi42IDQ1LjUzNSAzMy4yNTIgMzguNCA0NC4yMjQgNDAuNTY3YzEwLjk3MSAyLjE2OCAxOC4xMDggMTIuODIgMTUuOTQgMjMuNzkyUzQ3LjM0NSA4Mi40NjggMzYuMzczIDgwLjMiIGZpbGw9IiMwMDczYmUiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTI3LjkyNyAyMS40OSAxOS4xODMgMCAuMDAxIDk3LjA2NGwxMDguNzQzIDIxLjQ5eiIvPjwvY2xpcFBhdGg+PC9kZWZzPjwvc3ZnPg==")
+        no-repeat;
+      background-size: contain;
+      background-position: center;
+      z-index: 10;
+      @media screen and (min-width: 1024px) {
+        width: 112px;
+        height: 100px;
+        top: -48px;
+        left: calc((100vw - 1280px) / 2);
+      }
+      @media screen and (min-width: 1536px) {
+        left: calc((100vw - 1280px) / 2 - 112px);
+      }
+    }
+  }
+  .video-list-container {
+    padding-left: 12px;
+    @media screen and (min-width: 1280px) {
+      padding-left: calc((100vw - 1280px) / 2);
+    }
+
+    // 禁止选择以优化拖拽体验
+    * {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  }
+
+  .video-item {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
+      pointer-events: none;
+    }
+  }
+  .video-title {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      height: 2px;
+      width: 52px;
+      background: var(--title-color, white);
+      @media screen and (min-width: 1024px) {
+        bottom: 16px;
+        height: 3px;
+        width: 68px;
+      }
+    }
+  }
+
+  .scrollbar-none {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
