@@ -1,16 +1,6 @@
 ---
 import { ALL_VIDEOS, VIDEO_TABS, type VideoType } from "@/data/videoData";
-// 从 URL 获取当前筛选的 tab，默认 smilepro
-const currentType = (Astro.url.searchParams.get("type") ||
-  "smilepro") as VideoType;
-// 根据当前 tab 过滤数据
-const displayVideos = ALL_VIDEOS.filter((item) =>
-  item.type.includes(currentType),
-);
-// const displayVideos = currentType
-//   ? ALL_VIDEOS.filter((item) => item.type.includes(currentType))
-//   : ALL_VIDEOS;
-
+const defaultType = "smilepro";
 const typeConfig: Record<
   VideoType,
   { bg: string; label: string; color: string }
@@ -24,75 +14,172 @@ const typeConfig: Record<
 <div class="lg:max-w-7xl mx-auto">
   <div
     class="grid grid-cols-3 text-center text-xl lg:text-3xl font-en font-bold lg:tracking-[0.25em] mb-12 md:mb-20 lg:mb-30"
+    id="video-tabs-container"
   >
     {
       VIDEO_TABS.map((tab) => (
-        <a
-          href={`?type=${tab.key}`}
-          class={`py-7 ${currentType === tab.key ? "bg-primary text-white" : "text-primary border-b border-[#4570b64d]"}`}
+        <button
+          data-tab-key={tab.key}
+          class={`py-7 transition-colors cursor-pointer ${
+            defaultType === tab.key
+              ? "bg-primary text-white"
+              : "text-primary border-b border-[#4570b64d]"
+          }`}
         >
           {tab.label}
-        </a>
+        </button>
       ))
     }
   </div>
+
   <div
     class="video-list overflow-hidden grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-9 w-full lg:w-fit mx-auto"
   >
     {
-      displayVideos.map((item) => {
-        const primaryType = item.type[0];
-        const currentConfig = typeConfig[primaryType];
+      ALL_VIDEOS.map((item) => {
+        const hasDefault = item.type.includes(defaultType);
+        const cardDisplayType = hasDefault ? defaultType : item.type[0];
+        const currentConfig = typeConfig[cardDisplayType];
         return (
-          <a
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="video-item shrink-0 grow-0 aspect-3/5 w-50 lg:w-66 overflow-hidden group"
-            draggable="false"
+          <div
+            class="video-item shrink-0 grow-0 aspect-3/5 w-full lg:w-66 overflow-hidden group"
+            data-types={item.type.join(",")}
+            style={{ display: hasDefault ? "block" : "none" }}
           >
-            <img
-              src={item.img}
-              alt={item.name}
-              class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
-              draggable="false"
-            />
-            {currentConfig && (
-              <span
-                class={`absolute top-3 right-3 lg:top-4 z-10 text-white text-base lg:text-xl px-4 py-1 rounded-full font-en font-bold ${currentConfig.bg}`}
-              >
-                {currentConfig.label}
-              </span>
-            )}
-            <div class="z-10 absolute bottom-3 left-3 right-3 text-white whitespace-normal">
-              <h3
-                set:html={item.title}
-                class="video-title text-sm lg:text-base font-bold tracking-wider leading-normal mb-1 pb-4 lg:pb-7"
-                style={
-                  currentConfig ? `--title-color: ${currentConfig.color}` : ""
-                }
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full"
+            >
+              <img
+                src={item.img}
+                alt={item.name}
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                draggable="false"
               />
-              <p class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
-                {item.name && (
-                  <span class="text-sm lg:text-base font-semibold tracking-wider">
-                    {item.name}
-                  </span>
-                )}
-                {item.enName && (
-                  <span class="text-xs lg:text-sm font-bold tracking-wider">
-                    {item.enName}
-                  </span>
-                )}
-              </p>
-            </div>
-          </a>
+              {currentConfig && (
+                <span
+                  data-label
+                  data-smilepro-bg="bg-[#4570B6]"
+                  data-smilepro-text="SMILE Pro"
+                  data-smile-bg="bg-[#30ABE2]"
+                  data-smile-text="SMILE"
+                  data-icl-bg="bg-[#EB981A]"
+                  data-icl-text="ICL"
+                  class={`absolute top-3 right-3 lg:top-4 z-10 text-white text-base lg:text-xl px-4 py-1 rounded-full font-en font-bold ${currentConfig.bg}`}
+                >
+                  {currentConfig.label}
+                </span>
+              )}
+              <div class="z-10 absolute bottom-3 left-3 right-3 text-white whitespace-nowarp">
+                <h3
+                  set:html={item.title}
+                  class="video-title text-sm lg:text-base font-bold tracking-wider leading-normal mb-1 pb-4 lg:pb-7"
+                  style={
+                    currentConfig ? `--title-color: ${currentConfig.color}` : ""
+                  }
+                />
+                <p class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
+                  {item.name && (
+                    <span class="text-sm lg:text-base font-semibold tracking-wider">
+                      {item.name}
+                    </span>
+                  )}
+                  {item.enName && (
+                    <span class="text-xs lg:text-sm font-bold tracking-wider">
+                      {item.enName}
+                    </span>
+                  )}
+                </p>
+              </div>
+            </a>
+          </div>
         );
       })
     }
   </div>
 </div>
+<script>
+  function initVideoFilter() {
+    const container = document.getElementById("video-tabs-container");
+    if (!container) return;
 
+    const tabs = container.querySelectorAll("button");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const currentActiveType = tab.getAttribute("data-tab-key");
+        if (!currentActiveType) return;
+
+        // 1. 切换 Tab 激活状态的 class
+        tabs.forEach((t) => {
+          if (t === tab) {
+            t.className =
+              "py-7 transition-colors cursor-pointer bg-primary text-white";
+          } else {
+            t.className =
+              "py-7 transition-colors cursor-pointer text-primary border-b border-[#4570b64d]";
+          }
+        });
+
+        // 2. 执行过滤
+        filterVideos(currentActiveType);
+      });
+    });
+
+    // 过滤核心逻辑（这里把参数名更正为了 activeType）
+    function filterVideos(activeType: string) {
+      const videoList = document.querySelectorAll(".video-item");
+      videoList.forEach((card) => {
+        const htmlCard = card as HTMLElement;
+        const typesStr = htmlCard.getAttribute("data-types") || "";
+        const typesArray = typesStr.split(",");
+
+        if (typesArray.includes(activeType)) {
+          htmlCard.style.display = "block";
+
+          const labelEl = htmlCard.querySelector(
+            "[data-label]",
+          ) as HTMLElement | null;
+          const titleEl = htmlCard.querySelector(
+            "[data-title]",
+          ) as HTMLElement | null;
+
+          if (labelEl) {
+            // 完美匹配当前激活的 activeType 属性
+            const targetBg = labelEl.getAttribute(`data-${activeType}-bg`);
+            const targetText = labelEl.getAttribute(`data-${activeType}-text`);
+            const targetColor = labelEl.getAttribute(
+              `data-${activeType}-color`,
+            );
+            if (targetBg && targetText) {
+              labelEl.textContent = targetText;
+              labelEl.classList.remove(
+                "bg-[#4570B6]",
+                "bg-[#30ABE2]",
+                "bg-[#EB981A]",
+              );
+              labelEl.classList.add(targetBg);
+            }
+
+            // 同步修复样式：让小横线的颜色跟着变
+            if (titleEl && targetColor) {
+              titleEl.style.setProperty("--title-color", targetColor);
+            }
+          }
+        } else {
+          htmlCard.style.display = "none";
+        }
+      });
+    }
+  }
+
+  // 确保在 Astro 首屏和启用 ViewTransitions 时都能正常运行
+  initVideoFilter();
+  document.addEventListener("astro:page-load", initVideoFilter);
+</script>
 <style>
   .video-item {
     position: relative;
