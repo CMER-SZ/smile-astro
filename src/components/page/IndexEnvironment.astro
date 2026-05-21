@@ -1,0 +1,147 @@
+---
+import { Image } from "astro:assets";
+import mbBanner1 from "@/assets/images/index/environment-mb-01.jpg";
+import pcBanner1 from "@/assets/images/index/environment-pc-01.jpg";
+import mbBanner2 from "@/assets/images/index/environment-mb-02.jpg";
+import pcBanner2 from "@/assets/images/index/environment-pc-02.jpg";
+import mbBanner3 from "@/assets/images/index/environment-mb-03.jpg";
+import pcBanner3 from "@/assets/images/index/environment-pc-03.jpg";
+import mbBanner4 from "@/assets/images/index/environment-mb-04.jpg";
+import pcBanner4 from "@/assets/images/index/environment-pc-04.jpg";
+
+const banners = [
+  {
+    id: 1,
+    pc: pcBanner1,
+    mb: mbBanner1,
+    title: "環境展示 1",
+    alt: "希瑪微笑矯視中心環境展示1",
+  },
+  {
+    id: 2,
+    pc: pcBanner2,
+    mb: mbBanner2,
+    title: "環境展示 2",
+    alt: "希瑪微笑矯視中心環境展示2",
+  },
+  {
+    id: 3,
+    pc: pcBanner3,
+    mb: mbBanner3,
+    title: "環境展示 3",
+    alt: "希瑪微笑矯視中心環境展示3",
+  },
+  {
+    id: 4,
+    pc: pcBanner4,
+    mb: mbBanner4,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+];
+---
+
+<div class="swiper env-carousel-wrapper mb-8 md:mb-18 lg:mb-30" id="envCarousel">
+  <div class="swiper-wrapper">
+    {
+      banners.map((banner, index) => (
+        <div class="swiper-slide env-carousel-slide">
+          <picture class="block w-full h-full">
+            <source
+              media="(min-width: 1024px)"
+              srcset={banner.pc.src}
+              width="1442"
+              height="813"
+            />
+            <Image
+              src={banner.mb}
+              alt={banner.alt}
+              title={banner.title}
+              width={749}
+              height={520}
+              format="webp"
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchpriority={index === 0 ? "high" : "low"}
+              class="w-full h-full object-cover"
+            />
+          </picture>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style lang="scss">
+  .env-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: #f8fafc;
+
+    img {
+      width: 100%;
+      aspect-ratio: 749 / 520;
+      object-fit: cover;
+      @media (min-width: 1024px) {
+        aspect-ratio: 1442 / 813;
+      }
+    }
+
+    // 2. 强制让 wrapper 具备 Flex 布局，使 slide 排成一排而不会往下平铺堆叠
+    :global(.swiper-wrapper) {
+      display: flex !important;
+      flex-direction: row !important;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition-timing-function: linear !important;
+    }
+    :global(.swiper-slide) {
+      flex-shrink: 0 !important;
+      height: 100% !important;
+      position: relative;
+    }
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { Autoplay } from "swiper/modules";
+  import "swiper/css";
+
+  function startEnvCarousel() {
+    const el = document.getElementById("envCarousel");
+    if (!el) return;
+    // 健壮性检查：如果该节点身上已经有了旧实例，先清理干净再注册
+    if ((el as any).swiper) {
+      (el as any).swiper.destroy(true, true);
+    }
+
+    new Swiper(el, {
+      modules: [Autoplay],
+      loop: true,
+      speed: 5000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+      },
+      spaceBetween: 0,
+      slidesPerView: 1,
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        1280: {
+          slidesPerView: 2.2,
+        },
+        1560: {
+          slidesPerView: 2.5,
+        },
+      },
+    });
+  }
+
+  // 双事件监听，解决 Astro 首屏载入及多语言切换路由时的“死图”问题
+  document.addEventListener("DOMContentLoaded", startEnvCarousel);
+  document.addEventListener("astro:page-load", startEnvCarousel);
+</script>
