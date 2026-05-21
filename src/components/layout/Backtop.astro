@@ -1,0 +1,41 @@
+<svg
+  id="backtop"
+  class="z-50 fixed right-[8.75vw] bottom-35 hidden lg:block lg:size-9 cursor-pointer"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 36 36"
+  fill="none"
+  ><circle cx="18" cy="18" r="17.5" stroke="#4570b6"></circle><path
+    d="M12.24 12.96h11.52"
+    stroke="#4570b6"></path><path
+    d="M12.816 24.768 18 16.992l5.184 7.776"
+    stroke="#4570b6"
+    stroke-linecap="round"></path></svg
+>
+<script>
+  // 封装初始化函数，防止在多页切换（如开启 View Transitions）时失效
+  function initBackToTop() {
+    const backTopBtn = document.getElementById("backtop");
+    if (!backTopBtn) return;
+
+    // 监听滚动事件：当向下滚动超过 300px 时显示按钮，否则隐藏
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backTopBtn.classList.remove("opacity-0", "pointer-events-none");
+        backTopBtn.classList.add("opacity-100");
+      } else {
+        backTopBtn.classList.remove("opacity-100");
+        backTopBtn.classList.add("opacity-0", "pointer-events-none");
+      }
+    });
+
+    // 监听点击事件：实现平滑滚动（丝滑回顶）
+    backTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // 关键：全局原生支持的丝滑滚动
+      });
+    });
+  }
+  // 页面初次加载时运行
+  initBackToTop();
+</script>
