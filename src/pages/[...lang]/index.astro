@@ -2,38 +2,207 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-18 17:13:21
+ * @LastEditTime: 2026-05-21 17:06:20
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
+import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import VideoCarousel from "@/components/common/VideoCarousel.astro";
-import { i18nPaths, useI18n } from "@/i18n/utils";
+import IndexEnvironment from "@/components/page/IndexEnvironment.astro";
+import { i18nPaths, useI18n, getLocalizedHref } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
 }
-const { dict } = useI18n(Astro.url);
+const { lang, dict } = useI18n(Astro.url);
+import featureTitle from "@/assets/images/index/service-feature-title.svg";
+import reviewsBgPc from "@/assets/images/index/index-reviews-bg-pc.jpg";
+import reviewsBgM from "@/assets/images/index/index-reviews-bg-mb.jpg";
+import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
 ---
 
 <BaseLayout tdkKey="home">
-  <section class="bg-bg-subtle">
-    <div class="wrapper text-center">
-      <h1 set:html={dict.home.title} class="title-normal" />
-      <p set:html={dict.home.subtitle} class="text-primary" />
-      <div class="text-normal" set:html={dict.home.intro} />
+  <section class="bg-bg-subtle pt-9 lg:pt-18 pb-13 lg:pb-16">
+    <div
+      class="max-w-5xl mx-auto px-[clamp(14px,7.18vw,28px)] 2xl:px-0 text-center"
+    >
+      <h1
+        set:html={dict.home.title}
+        class="title-normal pb-6 lg:pb-12 relative before:content-[''] before:h-4.5 lg:before:h-8 before:w-px before:bg-primary before:absolute before:bottom-1 lg:before:bottom-2 before:left-1/2 before:-translate-x-1/2"
+      />
+      <p
+        set:html={dict.home.subtitle}
+        class="text-primary lg:text-2xl font-[250] lg:font-thin tracking-widest mb-3 lg:mb-8"
+      />
+      <div
+        class="text-normal space-y-8 lg:space-y-10 md:text-lg lg:text-xl text-desc text-justify lg:text-center font-light [&_strong]:font-bold leading-[2] lg:leading-[1.75] tracking-wider lg:tracking-[0.3em]"
+        set:html={dict.home.intro}
+      />
     </div>
   </section>
-  <section>
-    <h2 class="title-normal">{dict.home.service.title}</h2>
+  <section class="lg:mb-25 pt-13 md:pb-22 lg:pt-38">
+    <h2 class="title-normal text-center mb-11 lg:mb-18">
+      {dict.home.service.title}
+    </h2>
+    <div class="border-t border-primary pb-4 lg:pb-70">
+      <div class="max-w-7xl mx-auto"></div>
+    </div>
+    <div
+      class="flex justify-center items-center gap-4 md:gap-10 lg:gap-18 mb-15 md:mb-40 lg:mb-66"
+    >
+      <a
+        href={getLocalizedHref("/patient-info", lang)}
+        class="flex items-center justify-center gap-4 p-6 lg:px-15 rounded-xl transition duration-300 ease bg-primary text-white hover:bg-white hover:text-primary border border-primary"
+      >
+        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider"
+          >{dict.home.service.button.info}</span
+        >
+        <svg
+          class="hidden lg:block"
+          xmlns="http://www.w3.org/2000/svg"
+          width="29"
+          height="29"
+          viewBox="0 0 29 29"
+          fill="none"
+          ><path
+            d="m2.7 25.779 22.63-22.63"
+            stroke="currentColor"
+            stroke-width="5.4"
+            stroke-linecap="round"></path><path
+            d="M5.998 2.43H26.1v19.44"
+            stroke="currentColor"
+            stroke-width="4.86"
+            stroke-linecap="round"></path></svg
+        >
+      </a>
+      <a
+        href={getLocalizedHref(
+          "https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-15)%E7%9F%AF%E8%A6%96%E5%89%8D%E6%AA%A2%E6%9F%A5%E5%8F%8A%E8%AB%AE%E8%A9%A2",
+          lang,
+        )}
+        class="flex items-center justify-center gap-4 p-6 lg:px-15 rounded-xl transition duration-300 ease bg-primary text-white hover:bg-white hover:text-primary border border-primary"
+      >
+        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider"
+          >{dict.home.service.button.appoint}</span
+        >
+        <svg
+          class="hidden lg:block"
+          xmlns="http://www.w3.org/2000/svg"
+          width="29"
+          height="29"
+          viewBox="0 0 29 29"
+          fill="none"
+          ><path
+            d="m2.7 25.779 22.63-22.63"
+            stroke="currentColor"
+            stroke-width="5.4"
+            stroke-linecap="round"></path><path
+            d="M5.998 2.43H26.1v19.44"
+            stroke="currentColor"
+            stroke-width="4.86"
+            stroke-linecap="round"></path></svg
+        >
+      </a>
+    </div>
+    <div
+      class="w-full max-w-7xl mx-auto flex justify-center flex-col lg:flex-row gap-7 lg:gap-20"
+    >
+      <Image
+        src={featureTitle}
+        alt="4大特色"
+        width={350}
+        height={222}
+        class=""
+      />
+      <div class="grid grid-cols-2"></div>
+    </div>
   </section>
   <VideoCarousel />
-  <section>
-    <h2 class="title-normal">{dict.home.reviews.title}</h2>
+  <section class="reviews lg:h-190 pt-11 lg:pt-13 pb-91 md:pb-80 lg:pb-11">
+    <div class="wrapper">
+      <div class="reviews-main">
+        <h2 class="title-normal text-center">{dict.home.reviews.title}</h2>
+        <Image
+          src={reviewsGood}
+          alt=""
+          width={239}
+          height={161}
+          class="absolute w-25 lg:w-59 -top-6 right-4 lg:top-auto lg:right-auto lg:-left-37 lg:-bottom-21"
+        />
+      </div>
+    </div>
   </section>
-  <section class="bg-primary text-white">
-    <h2 class="title-normal text-white">{dict.home.book.title}</h2>
+  <section class="book bg-primary text-white pt-9 lg:pt-22 pb-55 lg:pb-17">
+    <div class="wrapper">
+      <h2 class="title-normal text-white text-center mb-5 lg:mb-15">
+        {dict.home.book.title}
+      </h2>
+      <div
+        set:html={dict.home.book.intro}
+        class="lg:w-146 text-center lg:text-justify leading-[1.75] tracking-[0.3em] lg:text-xl font-light [&_strong]:font-bold"
+      />
+    </div>
   </section>
-  <section>
-    <h2 class="title-normal">{dict.home.awards.title}</h2>
+  <IndexEnvironment />
+  <section
+    class="wrapper mb-11 lg:mb-62 flex flex-col lg:flex-row gap-7 md:gap-10 lg:gap-16"
+  >
+    <h2
+      class="title-normal text-center lg:py-8 lg:pr-11 lg:border-r-2 lg:border-primary"
+    >
+      {dict.home.awards.title}
+    </h2>
   </section>
 </BaseLayout>
+<style
+  lang="scss"
+  define:vars={{
+    bgPc: `url(${reviewsBgPc.src})`,
+    bgM: `url(${reviewsBgM.src})`,
+  }}
+>
+  .reviews {
+    background-image: var(--bgM);
+    background-size: cover;
+    background-position: bottom;
+    .reviews-main {
+      position: relative;
+      border: 1px solid var(--color-primary);
+      width: 100%;
+      height: 436px;
+      padding: 48px 32px 0 32px;
+      background-color: #fff;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% + 1px);
+        aspect-ratio: 13 / 1;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjUxIDUxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MiI+PHBhdGggc3R5bGU9ImZpbGw6IzQ1NzBiNjtmaWxsLXJ1bGU6bm9uemVybyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEuNzc1KSIgZD0iTTEgMS43NzVoNjUwLjMyNnY1MC4zODNIMXoiLz48cGF0aCBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtcnVsZTpub256ZXJvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAtMS43NzUpIiBkPSJNMTUxLjM3MyAxNS43MjdoNDY4Ljk0OFYzNy40M0gxNTEuMzczeiIvPjxwYXRoIGQ9Ik02Mi4yNSAxNS45MmMtNS45NjkgMC0xMC44MTMgNC44MzgtMTAuODEzIDEwLjgxNHYuMDA2YzAgNS45MjkgNC44NzggMTAuODA3IDEwLjgwNyAxMC44MDdoLjAxMmM1LjkyOSAwIDEwLjgwNy00Ljg3OCAxMC44MDctMTAuODA3di0uMDEzYzAtNS45MjktNC44NzgtMTAuODA3LTEwLjgwNy0xMC44MDd6bS0zNi4wMjggMGMtNS45NjggMC0xMC44MTMgNC44MzgtMTAuODEzIDEwLjgxNHYuMDA2YzAgNS45MjkgNC44NzggMTAuODA3IDEwLjgwNyAxMC44MDdoLjAxMmM1LjkyOSAwIDEwLjgwNy00Ljg3OCAxMC44MDctMTAuODA3di0uMDEzYzAtNS45MjktNC44NzgtMTAuODA3LTEwLjgwNy0xMC44MDd6bTczLjQzNiAwYy01Ljk2OSAwLTEwLjgxMyA0LjgzOC0xMC44MTMgMTAuODE0di4wMDZjMCA1LjkyOSA0Ljg3OCAxMC44MDcgMTAuODA3IDEwLjgwN2guMDA5YzUuOTMgMCAxMC44MS00Ljg4IDEwLjgxLTEwLjgxdi0uMDA3YzAtNS45My00Ljg4LTEwLjgxLTEwLjgxLTEwLjgxeiIgc3R5bGU9ImZpbGw6I2Y0ZmFmYztmaWxsLXJ1bGU6bm9uemVybyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEuNzc1KSIvPjxwYXRoIGQ9Ik0xNjIuNzk0IDMzLjU5NnYtMTQuNThoNC4yNnExLjQ2IDAgMi41NC40IDEuMS4zOCAxLjcgMS4yNC42Mi44NC42MiAyLjI2IDAgMS4zNC0uNjIgMi4yNi0uNi45Mi0xLjcgMS4zOC0xLjA4LjQ2LTIuNTQuNDZoLTMuMDZ2Ni41OHptMS4yLTcuNThoMi44cTEuODgxIDAgMi44OC0uNzYgMS0uNzYgMS0yLjM0IDAtMS42LTEtMi4yNC0uOTk5LS42Ni0yLjg4LS42NmgtMi44em02Ljg2IDcuNTgtNC4wOC02LjkyIDEuMS0uNDQgNC4zNCA3LjM2em05Ljg1NC4yNnEtMS4zOCAwLTIuNTItLjY2LTEuMTItLjY4MS0xLjgtMS45Mi0uNjYtMS4yNC0uNjYtMyAwLTEuMy4zOC0yLjM0dDEuMDQtMS43NnEuNjgtLjc0IDEuNTItMS4xMi44NC0uNCAxLjc0LS40IDEuMjggMCAyLjIuNi45Mi41OCAxLjQyIDEuNy41IDEuMS41IDIuNjYgMCAuMjItLjAyLjQ0IDAgLjItLjA0LjQyaC03LjU2cS4wNCAxLjI4LjUyIDIuMjhhNC4xIDQuMSAwIDAgMCAxLjM2IDEuNTZxLjg2LjU2IDIuMDIuNTZhNC42IDQuNiAwIDAgMCAxLjU0LS4yNHEuNjgtLjI2IDEuMjgtLjY4bC40Ni44NmE5IDkgMCAwIDEtMS40NC43MnEtLjguMzItMS45NC4zMm0tMy44LTYuMzJoNi41NHEwLTEuOTItLjgyLTIuOXQtMi4yMi0uOThxLS44NiAwLTEuNjIuNDYtLjc2LjQ1OS0xLjI2IDEuMzItLjUuODYtLjYyIDIuMW0xNC44NzcgNi4wNi0zLjk2LTEwLjY4aDEuMjRsMi4zMiA2LjU2cS4yNi43NTkuNTIgMS41Ni4yOC43OC41NCAxLjUyaC4wOHEuMjYtLjc0LjUyLTEuNTIuMjgtLjgwMS41NC0xLjU2bDIuMzItNi41NmgxLjE2bC0zLjkgMTAuNjh6bTkuNTY1IDB2LTEwLjY4aDEuMTZ2MTAuNjh6bS42LTEzLjE2cS0uNDIgMC0uNjgtLjI2LS4yNC0uMjgtLjI0LS43MiAwLS40Mi4yNC0uNjguMjYtLjI2LjY4LS4yNi40IDAgLjY2LjI2dC4yNi42OHEwIC40NC0uMjYuNzJhLjkuOSAwIDAgMS0uNjYuMjZtMTAuNjM3IDEzLjQycS0xLjM4IDAtMi41Mi0uNjYtMS4xMi0uNjgxLTEuOC0xLjkyLS42Ni0xLjI0LS42Ni0zIDAtMS4zLjM4LTIuMzR0MS4wNC0xLjc2cS42OC0uNzQgMS41Mi0xLjEyLjg0LS40IDEuNzQtLjQgMS4yOCAwIDIuMi42LjkyLjU4IDEuNDIgMS43LjUgMS4xLjUgMi42NiAwIC4yMi0uMDIuNDQgMCAuMi0uMDQuNDJoLTcuNTZxLjA0IDEuMjguNTIgMi4yOGMuMzExLjYyOC43OCAxLjE2NiAxLjM2IDEuNTZxLjg2LjU2IDIuMDIuNTZhNC42IDQuNiAwIDAgMCAxLjU0LS4yNHEuNjgtLjI2IDEuMjgtLjY4bC40Ni44NmE5IDkgMCAwIDEtMS40NC43MnEtLjguMzItMS45NC4zMm0tMy44LTYuMzJoNi41NHEwLTEuOTItLjgyLTIuOXQtMi4yMi0uOThhMy4wNyAzLjA3IDAgMCAwLTEuNjIuNDZxLS43Ni40NTktMS4yNiAxLjMyLS41Ljg2LS42MiAyLjFtMTQuMjk3IDYuMDYtMy4xMi0xMC42OGgxLjI0bDEuODYgNi43NHEuMTguNzYuMzQgMS40Ni4xOC42OTkuMzQgMS40NGguMXEuMi0uNzQxLjM4LTEuNDQuMTgtLjcuMzgtMS40NmwxLjg4LTYuNzRoMS4zbDEuOSA2Ljc0cS4yLjc2LjM4IDEuNDYuMi42OTkuNCAxLjQ0aC4wOHEuMTgtLjc0MS4zNi0xLjQ0LjE4LS43LjM4LTEuNDZsMS44LTYuNzRoMS4xNmwtMyAxMC42OGgtMS41bC0xLjgtNi40MmEzMiAzMiAwIDAgMS0uNC0xLjUyIDM3IDM3IDAgMCAwLS40LTEuNTRoLS4xcS0uMTguNzgtLjM4IDEuNTYtLjE4Ljc2LS40MiAxLjU0bC0xLjc2IDYuMzh6bTE4LjMxMi4yNnEtMS4xNiAwLTIuMTgtLjQyYTcgNyAwIDAgMS0xLjc0LTEuMDRsLjY0LS44NHEuNjguNTYgMS40Ni45NHQxLjg2LjM4cTEuMjIgMCAxLjg0LS41OC42Mi0uNi42Mi0xLjQyIDAtLjY0LS40LTEuMDZhMi45IDIuOSAwIDAgMC0uOTgtLjcyIDEyIDEyIDAgMCAwLTEuMi0uNXEtLjc4LS4zLTEuNTQtLjY0YTMuOCAzLjggMCAwIDEtMS4yNC0uOTRxLS40OC0uNTgtLjQ4LTEuNDggMC0uODAxLjQtMS40NC40Mi0uNjYgMS4yLTEuMDQuNzgtLjQgMS45LS40YTQuNCA0LjQgMCAwIDEgMS43LjM0cS44Mi4zMiAxLjQuOGwtLjYuOHEtLjU0LS40Mi0xLjE0LS42OC0uNi0uMjgtMS4zOC0uMjgtMS4xOCAwLTEuNzYuNTYtLjU2LjU2LS41NiAxLjI4IDAgLjU3OS4zNC45Ni4zNC4zOC45LjY0LjU2LjI0IDEuMTYuNDguNjQuMjQgMS4yNC41LjYuMjQgMS4wOC42LjUuMzQuOC44NnQuMyAxLjNxMCAuODItLjQyIDEuNTJ0LTEuMjIgMS4xMnEtLjguNC0yIC40bTguOTIzIDBxLS40IDAtLjcyLS4zLS4zLS4zLS4zLS43OCAwLS41Mi4zLS44LjMyLS4zLjcyLS4zLjQyIDAgLjcyLjMuMy4yOC4zLjggMCAuNDgtLjMuNzh0LS43Mi4zIiBzdHlsZT0iZmlsbDojNDU3MGI2O2ZpbGwtcnVsZTpub256ZXJvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAtMS43NzUpIi8+PC9zdmc+");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .reviews {
+      background-position: center 80%;
+      .reviews-main {
+        padding-top: 72px;
+        height: 520px;
+      }
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .reviews {
+      background-image: var(--bgPc);
+      background-position: bottom;
+      .reviews-main {
+        width: 652px;
+        height: 660px;
+        padding: 96px 108px 40px 108px;
+      }
+    }
+  }
+</style>
