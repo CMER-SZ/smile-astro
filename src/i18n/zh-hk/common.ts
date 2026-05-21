@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-18 16:45:23
+ * @LastEditTime: 2026-05-20 18:00:59
  * @FilePath: /src/i18n/zh-hk/common.ts
  * @Description: 公共翻译
  */
@@ -45,7 +45,7 @@ export const common = {
     disclaimer: "免責條款",
   },
   button: {
-    more: "了解更多・預約",
+    more: "了 解 更 多 ・ 預 約",
     btnWhatsapp: "Whatsapp 預約",
     btnBook: "預約講座",
     btnLecture: "講座",
