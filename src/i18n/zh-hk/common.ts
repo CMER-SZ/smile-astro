@@ -51,6 +51,13 @@ export const common = {
     btnLecture: "講座",
     btnPreOperative: "術前檢查",
   },
+  share: {
+    title: "同朋友分享一下啦！",
+    pre: '推薦給你這個頁面：',
+    success: "複製成功",
+    btnShare: "分享到社交媒體",
+    btnCopy: "複製當前頁面鏈接",
+  },
   bottom: {
     tel: "致電查詢",
     chat: "線上對話",
@@ -81,6 +88,6 @@ export const common = {
   cases: {
     title: "用家分享",
     intro: "聽聽各位真實用家親身感受",
-    slogan: "更舒適生活從希瑪矯視開始"
+    slogan: "更舒適生活從希瑪矯視開始",
   },
 } as const;
