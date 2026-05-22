@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-30 08:53:45
- * @LastEditTime: 2026-05-22 09:37:49
+ * @LastEditTime: 2026-05-22 13:59:21
  * @FilePath: /src/components/page/IndexAwards.astro
  * @Description: 轮播图组件，使用Swiper库实现，支持自动播放、分页和导航功能。适用于展示多张图片或重要信息。
  */
@@ -22,86 +22,89 @@ const awards = [
   {
     id: 1,
     img: awards001,
-    title: "環境展示 1",
-    alt: "希瑪微笑矯視中心環境展示1",
+    title: "香港卓越服務名牌",
+    alt: "香港卓越服務名牌",
   },
   {
     id: 2,
     img: awards002,
-    title: "環境展示 2",
-    alt: "希瑪微笑矯視中心環境展示2",
+    title: "香港最優秀企業大獎",
+    alt: "香港最優秀企業大獎",
   },
   {
     id: 3,
     img: awards003,
-    title: "環境展示 3",
-    alt: "希瑪微笑矯視中心環境展示3",
+    title: "亞洲最佳價值服務大獎",
+    alt: "亞洲最佳價值服務大獎",
   },
   {
     id: 4,
     img: awards004,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "香港健康產業大獎",
+    alt: "香港健康產業大獎",
   },
   {
     id: 5,
     img: awards005,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "香港旅遊業十優推介",
+    alt: "香港旅遊業十優推介",
   },
   {
     id: 6,
     img: awards006,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "商界展關懷",
+    alt: "商界展關懷",
   },
   {
     id: 7,
     img: awards007,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "香港星級品牌企業獎",
+    alt: "香港星級品牌企業獎",
   },
   {
     id: 8,
     img: awards008,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "香港經濟日報企業大獎",
+    alt: "香港經濟日報企業大獎",
   },
   {
     id: 9,
     img: awards009,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "HKCT企業大獎",
+    alt: "HKCT企業大獎-年度傑出綜合專科醫療服務",
   },
   {
     id: 10,
     img: awards010,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "真生活至尊品牌大獎",
+    alt: "至尊微笑矯視中心品牌大獎",
   },
 ];
 ---
 
-<div
-  class="swiper awards-carousel-wrapper flex-1"
-  id="awardsCarousel"
->
+<div class="swiper awards-carousel-wrapper flex-1" id="awardsCarousel">
   <div class="swiper-wrapper">
     {
-      awards.map((award, index) => (
-        <div class="swiper-slide awards-carousel-slide">
-          <Image
-            src={award.img}
-            alt={award.alt}
-            title={award.title}
-            width={132}
-            height={132}
-            format="webp"
-            loading="lazy"
-            class="size-full object-cover"
-          />
-        </div>
-      ))
+      awards.map((award, index) => {
+        // 判断当前的图片对象是否是 SVG
+        const isSvg =
+          award.img.format === "svg" || award.img.src.includes(".svg");
+
+        return (
+          <div class="swiper-slide awards-carousel-slide">
+            <Image
+              src={award.img}
+              alt={award.alt}
+              title={award.title}
+              width={132}
+              height={132}
+              format={isSvg ? "svg" : "webp"}
+              loading="lazy"
+              class="size-full object-cover"
+            />
+          </div>
+        );
+      })
     }
   </div>
 </div>
