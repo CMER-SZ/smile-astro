@@ -17,11 +17,14 @@
   --spacing-18: 4.5rem; /* 72px */
 
   /* 字体映射 */
-  --font-en: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-en: "Poppins", "Noto Sans HK", system-ui, -apple-system, sans-serif;
   --font-hk: "Noto Sans HK", "Microsoft JhengHei", sans-serif;
   --font-sc: "Noto Sans SC", "Microsoft YaHei", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 html[lang="en"] {
   font-family: var(--font-en), var(--font-hk), sans-serif;
 }
@@ -41,10 +44,7 @@ html[lang="zh-cn"] {
   .nav-dot-indicator {
     @apply before:absolute before:content-[''] before:top-0 before:left-1/2 before:-translate-x-1/2 before:size-1.5 before:rounded-full before:bg-primary;
   }
-  /* .section-title {
-    @apply text-2xl lg:text-3xl font-bold text-primary leading-tight;
+  .title-normal {
+    @apply text-primary text-xl lg:text-3xl font-black tracking-widest;
   }
-  .section-subtitle {
-    @apply text-base text-desc mt-2 leading-relaxed;
-  } */
 }

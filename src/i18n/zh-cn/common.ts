@@ -45,11 +45,18 @@ export const common = {
     disclaimer: "免责条款",
   },
   button: {
-    more: "了解更多・预约",
+    more: "了 解 更 多 ・ 预 约",
     btnWhatsapp: "Whatsapp 预约",
     btnBook: "预约讲座",
     btnLecture: "讲座",
     btnPreOperative: "术前检查",
+  },
+  share: {
+    title: "同朋友分享一下啦！",
+    pre: '推荐给你这个页面：',
+    success: "复制成功",
+    btnShare: "分享到社交媒体",
+    btnCopy: "复制当前页面链接",
   },
   bottom: {
     tel: "致电查询",
@@ -79,7 +86,8 @@ export const common = {
     closed: "休息",
   },
   cases: {
-    title: "用家分享",
-    intro: "聽聽各位真實用家親身感受",
+    title: "用户分享",
+    intro: "听听各位真实用户亲身感觉",
+    slogan: "更舒适生活从希玛矫视开始",
   },
 } as const;

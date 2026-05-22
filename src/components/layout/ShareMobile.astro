@@ -1,0 +1,187 @@
+---
+import { getLangFromUrl, getLocalizedHref } from "@/i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+import { useI18n } from "@/i18n/utils";
+const { dict } = useI18n(Astro.url);
+---
+
+<section class="lg:hidden wrapper mb-7">
+  <div class="mb-5 flex items-end gap-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="19"
+      viewBox="0 0 20 19"
+      fill="none"
+      ><path d="m.674.725 18.475 17.156" stroke="#4570b6" stroke-width="1.979"
+      ></path></svg
+    >
+    <p class="text-xl font-bold">{dict.common.share.title}</p>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="19"
+      viewBox="0 0 20 19"
+      fill="none"
+      ><path d="M19.148.725.673 17.881" stroke="#4570b6" stroke-width="1.979"
+      ></path></svg
+    >
+  </div>
+  <div class="flex justify-center items-center gap-3">
+    <button
+      id="btn-share"
+      class="size-14 rounded-full border border-primary flex justify-center items-center"
+      aria-label={dict.common.share.btnShare}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="22"
+        viewBox="0 0 20 22"
+        fill="none"
+        ><path
+          d="M0 11.23c0-1.978 1.46-3.604 3.355-3.77 1.151-.1 2.15.263 2.974 1.076.132.132.222.143.382.047q2.841-1.723 5.691-3.428c.149-.089.169-.165.116-.327-.702-2.152.745-4.467 2.986-4.788a3.726 3.726 0 0 1 4.269 3.291c.224 1.947-1.201 3.791-3.149 4.066-1.273.18-2.352-.212-3.245-1.127-.095-.098-.16-.112-.278-.04q-2.88 1.737-5.763 3.467c-.113.068-.147.134-.101.265.234.662.278 1.34.098 2.022-.042.16.014.235.15.305q2.51 1.281 5.018 2.568c.134.068.271.134.399.213.127.077.213.066.313-.056a3.64 3.64 0 0 1 2.303-1.313c1.417-.23 2.914.448 3.682 1.673a3.727 3.727 0 0 1-2.427 5.667c-2.054.418-4.085-1.02-4.388-3.101-.067-.46-.07-.918.069-1.364.063-.206.006-.298-.183-.395a887 887 0 0 1-5.363-2.75c-.13-.066-.204-.05-.295.061-.83 1.009-1.905 1.46-3.206 1.391-1.615-.086-3.128-1.48-3.36-3.096a3 3 0 0 1-.044-.558z"
+          fill="#4570b6"></path></svg
+      >
+    </button>
+    <button
+      id="btn-copy"
+      class="size-14 rounded-full border border-primary flex justify-center items-center relative"
+      aria-label={dict.common.share.btnCopy}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="22"
+        viewBox="0 0 21 22"
+        fill="none"
+        ><g clip-path="url(#a)" fill="#4570b6"
+          ><path
+            d="M8.52 5.804c1.785.002 3.079.52 4.21 1.496.177.154.359.304.533.46.354.318.422.792.136 1.175-.338.454-.696.895-1.065 1.323-.307.356-.78.378-1.145.082-.228-.185-.444-.387-.672-.573-1.039-.844-2.59-.803-3.547.141a94 94 0 0 0-2.993 3.087c-.746.808-.911 1.794-.572 2.84.338 1.048 1.078 1.682 2.122 1.873.868.158 1.666-.067 2.33-.696.214-.202.412-.422.621-.63.384-.379.835-.394 1.221-.019q.57.556 1.11 1.143c.316.345.33.82.03 1.168-1.027 1.197-2.248 2.052-3.812 2.346-3.19.599-6.397-1.7-6.93-4.998-.345-2.136.231-3.98 1.692-5.524a174 174 0 0 1 2.818-2.905C5.775 6.414 7.184 5.82 8.519 5.805z"
+          ></path><path
+            d="M11.726 15.304c-1.579-.007-2.875-.522-4.003-1.5l-.516-.444c-.37-.325-.443-.8-.152-1.191q.512-.68 1.066-1.322c.305-.355.779-.375 1.145-.079.215.175.417.366.634.538 1.167.923 2.67.834 3.714-.23q1.401-1.423 2.78-2.87c.757-.795.986-1.757.689-2.817-.303-1.079-1.024-1.752-2.089-1.974-.896-.187-1.714.035-2.4.682-.215.201-.412.423-.622.63-.383.376-.838.39-1.223.016q-.57-.555-1.108-1.145c-.308-.335-.33-.81-.043-1.146.965-1.13 2.1-1.978 3.56-2.307 3.462-.781 6.822 1.666 7.246 5.298.222 1.906-.305 3.588-1.576 4.98-1.064 1.163-2.147 2.313-3.303 3.381-1.1 1.018-2.423 1.485-3.8 1.5"
+          ></path></g
+        ><defs
+          ><clipPath id="a"
+            ><path fill="#fff" d="M0 0h20.454v21.114H0z"></path></clipPath
+          ></defs
+        ></svg
+      >
+    </button>
+  </div>
+  <div
+    id="toast"
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-2.5 rounded border border-[#e1f3d8] bg-[#f0f9eb] text-[#67c23a] shadow-sm transition-all duration-300 transform -translate-y-10 opacity-0 pointer-events-none"
+    role="alert"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1024 1024"
+      class="size-4 fill-[#67c23a]"
+      ><path
+        d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896m-55.616 534.144L360.96 502.72a32 32 0 0 0-45.248 45.248l122.496 122.496a32 32 0 0 0 45.248 0l291.136-291.136a32 32 0 1 0-45.248-45.248z"
+      ></path></svg
+    >
+    <span class="text-sm font-medium leading-none"
+      >{dict.common.share.success}</span
+    >
+  </div>
+</section>
+<script>
+  // 封装初始化函数，完美兼容 View Transitions 路由跳转
+  function initShareFeatures() {
+    const shareBtn = document.getElementById("btn-share");
+    const copyBtn = document.getElementById("btn-copy");
+    const toast = document.getElementById("toast");
+
+    const pageTitle = document.title;
+    const pageUrl = window.location.href;
+
+    // --- 1. 原生分享逻辑 ---
+    if (shareBtn) {
+      shareBtn.addEventListener("click", async () => {
+        // 判断浏览器是否支持 Web Share API
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: pageTitle,
+              text: `推荐给你这个页面：${pageTitle}`,
+              url: pageUrl,
+            });
+          } catch (err) {
+            // 用户取消分享或者分享失败，不做特殊处理
+            console.log("分享取消或失败:", err);
+          }
+        } else {
+          // 如果系统/浏览器不支持原生分享（如部分 PC 浏览器），降级为“自动复制链接”
+          triggerCopy();
+        }
+      });
+    }
+
+    // --- 2. 复制链接逻辑 ---
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        triggerCopy();
+      });
+    }
+
+    // 核心复制与提示函数
+    function triggerCopy() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(pageUrl)
+          .then(() => showToast())
+          .catch((err) => {
+            console.error("复制失败，使用降级方案", err);
+            fallbackCopy(pageUrl);
+          });
+      } else {
+        fallbackCopy(pageUrl);
+      }
+    }
+
+    // 老旧浏览器降级复制方案
+    function fallbackCopy(text: string) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      // 隐蔽隐藏
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand("copy");
+        showToast();
+      } catch (err) {
+        alert("复制失败，请手动复制浏览器地址栏链接");
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // 显示“复制成功”小气泡
+    function showToast() {
+      if (!toast) return;
+      toast.classList.remove(
+        "opacity-0",
+        "-translate-y-10",
+        "pointer-events-none",
+      );
+      toast.classList.add("opacity-100", "translate-y-0"); // 向上浮动并淡入
+
+      // 1.5 秒后自动消失
+      setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add(
+          "opacity-0",
+          "-translate-y-10",
+          "pointer-events-none",
+        );
+      }, 1500);
+    }
+  }
+
+  // 首次加载时执行
+  initShareFeatures();
+</script>

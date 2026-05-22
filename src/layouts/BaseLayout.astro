@@ -2,7 +2,10 @@
 import "@/styles/global.css";
 import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
+import ShareMobile from "@/components/layout/ShareMobile.astro";
 import MobileBottom from "@/components/layout/MobileBottom.astro";
+import SidebarDesktop from "@/components/layout/SidebarDesktop.astro";
+import Backtop from "@/components/layout/Backtop.astro";
 import { useI18n } from "@/i18n/utils";
 import { ui } from "@/i18n/ui";
 type TDKKeys = keyof (typeof ui)["zh-hk"]["tdk"];
@@ -48,6 +51,9 @@ if (tdkKey && dict.tdk[tdkKey]) {
     <main>
       <slot />
     </main>
+    <SidebarDesktop />
+    <Backtop />
+    <ShareMobile />
     <MobileBottom />
     <Footer />
   </body>
@@ -58,6 +64,12 @@ if (tdkKey && dict.tdk[tdkKey]) {
   body {
     margin: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
   }
 </style>

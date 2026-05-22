@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import VideoList from "@/components/page/VideoList.astro";
 import { i18nPaths, useI18n } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
@@ -7,4 +8,8 @@ export function getStaticPaths() {
 const { dict } = useI18n(Astro.url);
 ---
 
-<BaseLayout tdkKey="about"></BaseLayout>
+<BaseLayout tdkKey="about">
+  <div class="mb-12 lg:mb-17">
+    <VideoList />
+  </div>
+</BaseLayout>

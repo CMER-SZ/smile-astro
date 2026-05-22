@@ -13,8 +13,8 @@ const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'static',
-  trailingSlash: 'ignore',
+  output: "static",
+  trailingSlash: "ignore",
   site: "https://smile.hkcmereye.com",
   i18n: {
     defaultLocale: "zh-hk",
@@ -33,5 +33,13 @@ export default defineConfig({
         "@": path.resolve(__dirname, "./src"),
       },
     },
+  },
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "admin.hkcmereye.com",
+      },
+    ],
   },
 });
