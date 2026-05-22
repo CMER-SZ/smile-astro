@@ -1,0 +1,177 @@
+---
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-30 08:53:45
+ * @LastEditTime: 2026-05-22 09:37:49
+ * @FilePath: /src/components/page/IndexAwards.astro
+ * @Description: 轮播图组件，使用Swiper库实现，支持自动播放、分页和导航功能。适用于展示多张图片或重要信息。
+ */
+import { Image } from "astro:assets";
+import awards001 from "@/assets/images/awards/awards-001.png";
+import awards002 from "@/assets/images/awards/awards-002.png";
+import awards003 from "@/assets/images/awards/awards-003.png";
+import awards004 from "@/assets/images/awards/awards-004.png";
+import awards005 from "@/assets/images/awards/awards-005.png";
+import awards006 from "@/assets/images/awards/awards-006.png";
+import awards007 from "@/assets/images/awards/awards-007.png";
+import awards008 from "@/assets/images/awards/awards-008.svg";
+import awards009 from "@/assets/images/awards/awards-009.svg";
+import awards010 from "@/assets/images/awards/awards-010.svg";
+
+const awards = [
+  {
+    id: 1,
+    img: awards001,
+    title: "環境展示 1",
+    alt: "希瑪微笑矯視中心環境展示1",
+  },
+  {
+    id: 2,
+    img: awards002,
+    title: "環境展示 2",
+    alt: "希瑪微笑矯視中心環境展示2",
+  },
+  {
+    id: 3,
+    img: awards003,
+    title: "環境展示 3",
+    alt: "希瑪微笑矯視中心環境展示3",
+  },
+  {
+    id: 4,
+    img: awards004,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+  {
+    id: 5,
+    img: awards005,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+  {
+    id: 6,
+    img: awards006,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+  {
+    id: 7,
+    img: awards007,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+  {
+    id: 8,
+    img: awards008,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+  {
+    id: 9,
+    img: awards009,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+  {
+    id: 10,
+    img: awards010,
+    title: "環境展示 4",
+    alt: "希瑪微笑矯視中心環境展示4",
+  },
+];
+---
+
+<div
+  class="swiper awards-carousel-wrapper flex-1"
+  id="awardsCarousel"
+>
+  <div class="swiper-wrapper">
+    {
+      awards.map((award, index) => (
+        <div class="swiper-slide awards-carousel-slide">
+          <Image
+            src={award.img}
+            alt={award.alt}
+            title={award.title}
+            width={132}
+            height={132}
+            format="webp"
+            loading="lazy"
+            class="size-full object-cover"
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
+<style lang="scss">
+  .awards-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+    }
+
+    // 2. 强制让 wrapper 具备 Flex 布局，使 slide 排成一排而不会往下平铺堆叠
+    :global(.swiper-wrapper) {
+      display: flex !important;
+      flex-direction: row !important;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition-timing-function: linear !important;
+    }
+    :global(.swiper-slide) {
+      flex-shrink: 0 !important;
+      height: 100% !important;
+      position: relative;
+    }
+  }
+</style>
+<script>
+  import Swiper from "swiper";
+  import { Autoplay } from "swiper/modules";
+  import "swiper/css";
+
+  function startAwardsCarousel() {
+    const el = document.getElementById("awardsCarousel");
+    if (!el) return;
+    // 健壮性检查：如果该节点身上已经有了旧实例，先清理干净再注册
+    if ((el as any).swiper) {
+      (el as any).swiper.destroy(true, true);
+    }
+
+    new Swiper(el, {
+      modules: [Autoplay],
+      loop: true,
+      speed: 5000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 3.2,
+      spaceBetween: 28,
+      breakpoints: {
+        768: {
+          slidesPerView: 5,
+        },
+        1280: {
+          slidesPerView: 7,
+        },
+        1560: {
+          slidesPerView: 9,
+          spaceBetween: 36,
+        },
+      },
+    });
+  }
+
+  // 双事件监听，解决 Astro 首屏载入及多语言切换路由时的“死图”问题
+  document.addEventListener("DOMContentLoaded", startAwardsCarousel);
+  document.addEventListener("astro:page-load", startAwardsCarousel);
+</script>
