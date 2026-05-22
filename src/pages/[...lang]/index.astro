@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-22 11:13:24
+ * @LastEditTime: 2026-05-22 17:14:44
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -130,13 +130,13 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
           alt=""
           width={239}
           height={161}
-          class="absolute w-25 lg:w-59 -top-6 right-4 lg:top-auto lg:right-auto lg:-left-37 lg:-bottom-21"
+          class="absolute w-25 lg:w-59 -top-6 right-4 lg:top-auto lg:right-auto lg:-left-37 lg:-bottom-21 z-10"
         />
       </div>
     </div>
   </section>
-  <section class="book bg-primary text-white pt-9 lg:pt-22 pb-55 lg:pb-17">
-    <div class="wrapper">
+  <section class="book bg-primary text-white relative">
+    <div class="wrapper pt-9 lg:pt-22 pb-55 lg:pb-17">
       <h2 class="title-normal text-white text-center mb-5 lg:mb-15">
         {dict.home.book.title}
       </h2>
@@ -144,6 +144,84 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
         set:html={dict.home.book.intro}
         class="lg:w-146 text-center lg:text-justify leading-[1.75] tracking-[0.3em] lg:text-xl font-light [&_strong]:font-bold"
       />
+      <div class="book-button-group">
+        <a
+          href={getLocalizedHref("/patient-info", lang)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="book-button"
+        >
+          <div
+            class="book-check text-white hover:text-primary bg-primary hover:bg-white"
+          >
+            <svg
+              class="w-19 md:w-25 xl:w-40"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 79 47"
+              fill="none"
+            >
+              <path
+                d="M21.384 27.108 17.5 35.01m-1.586-8.45-2.338 4.75m51.414-3.927-3.887 7.9m-1.586-8.448-2.337 4.751M37.367 6.825c-2.373.513-4.402 2.131-5.468 4.403a10.8 10.8 0 0 1-6.034 5.54m26.622.045a10.78 10.78 0 0 1-6.17-5.598c-1.029-2.194-2.962-3.774-5.232-4.338m.273-5.037h8.235c6.158 0 11.149 5.032 11.149 11.24m-43.261.932v-.934c0-6.209 4.991-11.24 11.15-11.24h8.281"
+                stroke="currentColor"
+                stroke-width="1.927"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M39.687 7.35c1.737-.285 2.917-1.935 2.635-3.687s-1.92-2.941-3.657-2.657-2.917 1.935-2.635 3.687 1.92 2.941 3.657 2.657m-6.352 21.902a7.5 7.5 0 0 1 5.76-2.692h.018a7.5 7.5 0 0 1 5.766 2.72l.03.034m-40.36 8.759c2.526 4.38 7.234 7.323 12.622 7.323 5.387 0 10.013-2.893 12.554-7.21M3.527 34.977l-1.77.766a16.4 16.4 0 0 1-.793-5.059c0-9.006 7.241-16.309 16.176-16.309 8.936 0 16.177 7.3 16.177 16.31 0 1.765-.279 3.466-.793 5.058l-1.873-.846m17.844 3.176c2.526 4.38 7.234 7.323 12.622 7.323s10.013-2.893 12.554-7.21m-26.197-3.209-1.771.766a16.4 16.4 0 0 1-.793-5.059c0-9.006 7.241-16.309 16.177-16.309s16.176 7.3 16.176 16.31a16.4 16.4 0 0 1-.792 5.058l-1.873-.846M14.448 11.6v4.744M63.773 11.6v4.744"
+                stroke="currentColor"
+                stroke-width="1.927"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M18.74 39.938c5.436-.89 9.128-6.055 8.246-11.537-.883-5.482-6.006-9.204-11.443-8.314s-9.13 6.055-8.247 11.536c.883 5.482 6.006 9.205 11.443 8.315m43.944-.002c5.437-.89 9.129-6.055 8.246-11.536-.882-5.482-6.005-9.205-11.443-8.315s-9.129 6.055-8.246 11.537 6.005 9.204 11.442 8.314"
+                stroke="currentColor"
+                stroke-width="1.927"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            <span class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black"
+              >{dict.home.book.button.appoint}</span
+            >
+          </div>
+        </a>
+        <a
+          href={getLocalizedHref("/ophthalmicInfo/AppointForm", lang)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="book-button group"
+        >
+          <div class="book-lecture">
+            <svg
+              class="w-16 md:w-22 xl:w-34 group-hover:animate-shake origin-center"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 68 51"
+              fill="none"
+            >
+              <path
+                d="M52.27 12.365h11.572c1.482 0 2.68 1.183 2.68 2.636v26.537c0 1.453-1.198 2.636-2.68 2.636h-6.014l-3.335 5.259-3.335-5.259H26.446c-1.482 0-2.68-1.183-2.68-2.636v-2.922"
+                stroke="#4570b6"
+                stroke-width="1.927"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M43.718.963H3.814a2.86 2.86 0 0 0-2.85 2.85v25.654a2.86 2.86 0 0 0 2.85 2.85h6.413l3.563 5.7 3.563-5.7h26.365a2.86 2.86 0 0 0 2.85-2.85V3.814a2.86 2.86 0 0 0-2.85-2.85"
+                stroke="#4570b6"
+                stroke-width="1.927"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M23.768 14.754a1.887 1.887 0 1 1-.001 3.774 1.887 1.887 0 0 1 0-3.774Zm-11.404 0a1.887 1.887 0 1 1 0 3.774 1.887 1.887 0 0 1 0-3.774Zm22.803 0a1.887 1.887 0 1 1 0 3.774 1.887 1.887 0 0 1 0-3.774Z"
+                fill="#fff"
+                stroke="#4570b6"
+                stroke-width="1.927"></path>
+            </svg>
+            <span
+              class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black text-primary"
+              >{dict.home.book.button.lecture}</span
+            >
+          </div>
+        </a>
+      </div>
     </div>
   </section>
   <IndexEnvironment />
@@ -165,6 +243,71 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
     bgM: `url(${reviewsBgM.src})`,
   }}
 >
+  %book-button {
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+  }
+  %book-before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    background-color: var(--color-primary);
+    border: 1px solid #fff;
+    z-index: -1;
+  }
+  .book {
+    .book-button {
+      position: absolute;
+      z-index: 20;
+      &:first-child {
+        left: 28px;
+        bottom: 48px;
+        width: clamp(140px, 41vw, 160px);
+      }
+      &:last-child {
+        right: 40px;
+        bottom: -52px;
+        width: clamp(144px, 43vw, 168px);
+      }
+    }
+    .book-check {
+      @extend %book-button;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition:
+        background-color 300ms ease-in-out,
+        color 300ms ease-in-out;
+      &::before {
+        @extend %book-before;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      &:hover::before {
+        opacity: 100;
+      }
+    }
+    .book-lecture {
+      @extend %book-button;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      &::before {
+        @extend %book-before;
+      }
+    }
+  }
   .reviews {
     background-image: var(--bgM);
     background-size: cover;
@@ -210,6 +353,50 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
     }
     .awards {
       margin-left: calc((100vw - 1280px) / 2);
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    .book {
+      .book-button {
+        &:first-child {
+          width: 17.292vw;
+          top: 60px;
+          right: 22.5vw;
+          bottom: auto;
+          left: auto;
+        }
+        &:last-child {
+          width: 18.125vw;
+          right: 9.1vw;
+          bottom: -48px;
+        }
+      }
+
+      .book-lecture,
+      .book-check {
+        &::before {
+          right: -8px;
+          bottom: -8px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 1560px) {
+    .book {
+      .book-button {
+        &:first-child {
+          width: 17.292vw;
+          top: 40px;
+          right: 27.5vw;
+          bottom: auto;
+          left: auto;
+        }
+        &:last-child {
+          width: 18.125vw;
+          right: 11.1vw;
+          bottom: -84px;
+        }
+      }
     }
   }
 </style>

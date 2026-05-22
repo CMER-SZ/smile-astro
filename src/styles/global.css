@@ -20,6 +20,15 @@
   --font-en: "Poppins", "Noto Sans HK", system-ui, -apple-system, sans-serif;
   --font-hk: "Noto Sans HK", "Microsoft JhengHei", sans-serif;
   --font-sc: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+
+  --animate-shake: shake .5s ease-in-out;
+  @keyframes shake {
+    0%, 100% { transform: translateX(0) scale(1) rotate(0deg); }
+    20% { transform: translateX(-4px) scale(1.05) rotate(-1deg); }
+    40% { transform: translateX(4px) scale(1.05) rotate(1deg); }
+    60% { transform: translateX(-3px) scale(1.05) rotate(-5deg); }
+    80% { transform: translateX(3px) scale(1.05) rotate(5deg); }
+  }
 }
 
 html {
@@ -36,7 +45,6 @@ html[lang="zh"],
 html[lang="zh-cn"] {
   font-family: var(--font-sc), sans-serif;
 }
-
 @layer components {
   .wrapper {
     @apply max-w-7xl mx-auto px-3 2xl:px-0;
