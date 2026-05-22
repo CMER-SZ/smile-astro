@@ -2,12 +2,13 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-22 09:38:48
+ * @LastEditTime: 2026-05-22 11:13:24
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
 import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import BannerSwiper from "@/components/common/BannerSwiper.astro";
 import VideoCarousel from "@/components/common/VideoCarousel.astro";
 import IndexEnvironment from "@/components/page/IndexEnvironment.astro";
 import IndexAwards from "@/components/page/IndexAwards.astro";
@@ -23,6 +24,7 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
 ---
 
 <BaseLayout tdkKey="home">
+  <BannerSwiper />
   <section class="bg-bg-subtle pt-9 lg:pt-18 pb-13 lg:pb-16">
     <div
       class="max-w-5xl mx-auto px-[clamp(14px,7.18vw,28px)] 2xl:px-0 text-center"
