@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-25 17:33:03
+ * @LastEditTime: 2026-05-25 17:53:01
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -606,12 +606,28 @@ const reviewList: Review[] = [
     &::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzkwIiBoZWlnaHQ9IjM5MCIgdmlld0JveD0iMCAwIDM5MCAzOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTS43MiAxOTQuOTM3aDM4OE0xOTQuNTUyLjcydjE4Mi4yMTZtMCAyMy41NDh2MTgyLjIxNyIgc3Ryb2tlPSIjNDU3MGI2IiBzdHJva2Utd2lkdGg9IjEuNDQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMC40OCA0LjMyIi8+PC9zdmc+");
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOTAgMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTS43Mi43MmgzODgiIHN0cm9rZT0iIzQ1NzBiNiIgc3Ryb2tlLXdpZHRoPSIxLjQ0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjAuNDggNC4zMiIvPjwvc3ZnPg==");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       width: 100%;
+      height: 1.5px;
+      pointer-events: none;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMiAzOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTS43Mi43MnYxODIuMjE2bTAgMjMuNTQ4djE4Mi4yMTciIHN0cm9rZT0iIzQ1NzBiNiIgc3Ryb2tlLXdpZHRoPSIxLjQ0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjAuNDggNC4zMiIvPjwvc3ZnPg==");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 1.5px;
       height: 100%;
       pointer-events: none;
     }
@@ -693,6 +709,14 @@ const reviewList: Review[] = [
     }
   }
   @media screen and (min-width: 1024px) {
+    .feature-main {
+      &::before {
+        height: 3px;
+      }
+      &::after {
+        width: 3px;
+      }
+    }
     .reviews {
       background-image: var(--bgPc);
       background-position: bottom;
