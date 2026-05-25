@@ -1,14 +1,14 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-21 14:38:12
+ * @LastEditTime: 2026-05-25 15:15:56
  * @FilePath: /src/i18n/zh-hk/home.ts
  * @Description: 首页多语言翻译
  */
 export const home = {
   title: "希瑪微笑矯視中心",
   subtitle: "您的視力 • 我們的使命",
-  intro: `<p>希瑪微笑矯視中心為上市公司「希瑪醫療控股有限公司」旗下的屈光矯視醫療中心。中心團隊由林順潮教授帶領，加上13名眼科專科醫生、多名註冊視光師及護士組成。於香港擁有2間微笑矯視中心，均<strong>符合FDA激光矯視標準</strong>，交通便利，環境舒適。提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro微笑激光矯視、SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視、LASIK激光矯視等。</p><p>希瑪一直與STAAR Surgical及Zeiss蔡司保持良好的合作關係。於2023年，<strong>STAAR Surgical</strong>公司宣佈將希瑪微笑矯視中心設立為首間官方認證EVO ICL國際培訓中心。同年，本中心亦獲得<strong>Zeiss蔡司頒發《全飛秒屈光手術 卓越手術中心》</strong>，而且更是首個香港矯視中心被評為卓越手術中心。</p>`,
+  intro: `<p>希瑪微笑矯視中心為上市公司「希瑪醫療控股有限公司」旗下的屈光矯視醫療中心。<br class="hidden 2xl:block"/>中心團隊由林順潮教授帶領，加上13名眼科專科醫生、多名註冊視光師及護士組成。<br class="hidden 2xl:block"/>於香港擁有2間微笑矯視中心，均<strong>符合FDA激光矯視標準</strong>，交通便利，環境舒適。<br class="hidden 2xl:block"/>提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro微笑激光矯視、<br class="hidden 2xl:block"/>SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視、LASIK激光矯視等。</p><p>希瑪一直與STAAR Surgical及Zeiss蔡司保持良好的合作關係。於2023年，<strong>STAAR <br class="hidden 2xl:block"/>Surgical</strong>公司宣佈將希瑪微笑矯視中心設立為首間官方認證EVO ICL國際培訓中心。<br class="hidden 2xl:block"/>同年，本中心亦獲得<strong>Zeiss蔡司頒發《全飛秒屈光手術 卓越手術中心》</strong>，而且更是首個<br class="hidden 2xl:block"/>香港矯視中心被評為卓越手術中心。</p>`,
   service: {
     title: "矯視中心服務",
     smilepro: '適合<br />擔心眼睛無法<br class="hidden lg:block" />對焦太久',
