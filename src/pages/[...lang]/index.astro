@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-22 17:14:44
+ * @LastEditTime: 2026-05-25 15:10:44
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -17,6 +17,8 @@ export function getStaticPaths() {
   return [...i18nPaths];
 }
 const { lang, dict } = useI18n(Astro.url);
+import introAiming from "@/assets/images/index/deco-aiming.svg";
+import introLens from "@/assets/images/index/deco-lens.svg";
 import featureTitle from "@/assets/images/index/service-feature-title.svg";
 import reviewsBgPc from "@/assets/images/index/index-reviews-bg-pc.jpg";
 import reviewsBgM from "@/assets/images/index/index-reviews-bg-mb.jpg";
@@ -25,9 +27,9 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
 
 <BaseLayout tdkKey="home">
   <BannerSwiper />
-  <section class="bg-bg-subtle pt-9 lg:pt-18 pb-13 lg:pb-16">
+  <section class="intro bg-bg-subtle relative mt-12 lg:mt-18 mb-13 lg:mb-22">
     <div
-      class="max-w-5xl mx-auto px-[clamp(14px,7.18vw,28px)] 2xl:px-0 text-center"
+      class="intro-main max-w-5xl mx-auto pt-9 lg:pt-18 pb-13 lg:pb-16 px-[clamp(14px,7.18vw,28px)] 2xl:px-0 text-center"
     >
       <h1
         set:html={dict.home.title}
@@ -43,7 +45,7 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
       />
     </div>
   </section>
-  <section class="lg:mb-25 pt-13 md:pb-22 lg:pt-38">
+  <section class="lg:mb-25 md:pb-22">
     <h2 class="title-normal text-center mb-11 lg:mb-18">
       {dict.home.service.title}
     </h2>
@@ -179,7 +181,8 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
                 stroke-linecap="round"
                 stroke-linejoin="round"></path>
             </svg>
-            <span class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black"
+            <span
+              class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black"
               >{dict.home.book.button.appoint}</span
             >
           </div>
@@ -241,6 +244,8 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
   define:vars={{
     bgPc: `url(${reviewsBgPc.src})`,
     bgM: `url(${reviewsBgM.src})`,
+    introAiming: `url(${introAiming.src})`,
+    introLens: `url(${introLens.src})`,
   }}
 >
   %book-button {
@@ -264,6 +269,31 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
     background-color: var(--color-primary);
     border: 1px solid #fff;
     z-index: -1;
+  }
+  .intro-main {
+    position: relative;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    &::before {
+      width: clamp(100px, 32vw, 140px);
+      height: clamp(100px, 32vw, 140px);
+      background-image: var(--introAiming);
+      right: -48px;
+      top: clamp(-40px, -7vw, -32px);
+    }
+    &::after {
+      width: clamp(160px, 39vw, 180px);
+      aspect-ratio: 25/16;
+      bottom: -68px;
+      left: -40px;
+      background-image: var(--introLens);
+      rotate: 22deg;
+    }
   }
   .book {
     .book-button {
@@ -356,6 +386,15 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
     }
   }
   @media screen and (min-width: 1280px) {
+    .intro-main {
+      &::before {
+        top: -20px;
+      }
+      &::after {
+        left: calc((100vw - 1280px) / 2 - 160px);
+        bottom: -60px;
+      }
+    }
     .book {
       .book-button {
         &:first-child {
@@ -382,17 +421,29 @@ import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
     }
   }
   @media screen and (min-width: 1560px) {
+    .intro-main {
+      &::before {
+        width: 192px;
+        height: 192px;
+        top: -28px;
+      }
+      &::after {
+        width: 260px;
+        left: calc((100vw - 1280px) / 2 - 600px);
+        bottom: -80px;
+      }
+    }
     .book {
       .book-button {
         &:first-child {
-          width: 17.292vw;
+          width: 332px;
           top: 40px;
           right: 27.5vw;
           bottom: auto;
           left: auto;
         }
         &:last-child {
-          width: 18.125vw;
+          width: 348px;
           right: 11.1vw;
           bottom: -84px;
         }
