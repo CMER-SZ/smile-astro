@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-25 16:02:20
+ * @LastEditTime: 2026-05-25 17:33:03
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -194,9 +194,205 @@ const reviewList: Review[] = [
         alt="4大特色"
         width={350}
         height={222}
-        class=""
+        class="w-54 md:w-72 lg:w-87 mx-auto"
       />
-      <div class="grid grid-cols-2"></div>
+      <div class="grid grid-cols-2 relative feature-main">
+        <div
+          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 bg-[#F9F9F9] tracking-[0.25em]"
+        >
+          <span
+            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
+            >{dict.home.feature.case.type}</span
+          >
+          <div class="size-16 lg:size-28 5 flex justify-center items-center">
+            <svg
+              class="size-full object-contain"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 62 64"
+              fill="none"
+              ><path
+                d="M5.24 37.535A21.864 21.864 0 1 1 26.502 54.43a21.55 21.55 0 0 1-12.383-3.893"
+                stroke="#4570b6"
+                stroke-width="1.92"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="M36.889 47.19c6.355 0 11.507-6.683 11.507-14.926s-5.152-14.926-11.507-14.926-11.507 6.682-11.507 14.926S30.534 47.19 36.889 47.19"
+                stroke="#4570b6"
+                stroke-width="1.92"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="M37.78 25.841q.3-.021.603 0c3.017 0 5.473 3.175 5.473 7.111S41.4 40.05 38.383 40.05s-5.474-3.175-5.474-7.097a8.8 8.8 0 0 1 .82-3.75m17.725-8.964c0-5-4.008-10.229-8.935-10.229A8.995 8.995 0 0 0 51.454.96a8.995 8.995 0 0 0 8.935 9.08c-4.941 0-8.935 5.2-8.935 10.199M8.374 53.61c0-3.447-2.773-7.068-6.178-7.068a6.22 6.22 0 0 0 6.178-6.263 6.22 6.22 0 0 0 6.177 6.263c-3.405 0-6.177 3.62-6.177 7.068M5.399 13.875c0-2.485-1.982-5.071-4.439-5.071a4.453 4.453 0 0 0 4.439-4.511 4.453 4.453 0 0 0 4.425 4.482c-2.443.029-4.425 2.615-4.425 5.1m46.015 48.557c0-2.471-1.983-5.071-4.425-5.071a4.454 4.454 0 0 0 4.425-4.482 4.453 4.453 0 0 0 4.439 4.482c-2.457 0-4.44 2.6-4.44 5.07"
+                stroke="#4570b6"
+                stroke-width="1.92"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <p
+            set:html={dict.home.feature.case.title}
+            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
+          />
+          <p
+            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
+          >
+            {dict.home.feature.case.intro}
+          </p>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]"
+        >
+          <span
+            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
+            >{dict.home.feature.first.type}</span
+          >
+          <div class="size-16 lg:size-28 5 flex justify-center items-center">
+            <svg
+              class="size-full object-contain"
+              viewBox="0 0 55 65"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              ><path
+                d="M3.877 11.97a2.296 2.296 0 0 0 1.449-2.905A2.296 2.296 0 0 0 2.41 7.637a2.296 2.296 0 0 0-1.45 2.906 2.296 2.296 0 0 0 2.916 1.428Zm16.628-5.627a2.296 2.296 0 0 0 1.449-2.906 2.296 2.296 0 0 0-2.916-1.428 2.296 2.296 0 0 0-1.449 2.905 2.296 2.296 0 0 0 2.916 1.429Z"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-miterlimit="10"></path><path
+                d="m3.878 11.972 4.893 7.265 13.125-4.443-1.39-8.45"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-miterlimit="10"></path><path
+                d="m5.645 10.002 4.116.812.589-5.135m8.074-.003-2.777 3.146L12.06 5.1"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-miterlimit="10"></path><path
+                d="m25.086 25.81-.64.413a3.06 3.06 0 0 0-.917 4.23l6.214 9.566a3.1 3.1 0 0 0 4.253.909l.644-.412a3.06 3.06 0 0 0 .914-4.23l-6.212-9.563a3.097 3.097 0 0 0-4.253-.91zm-5.814 3.736-.643.412a3.06 3.06 0 0 0-.914 4.23l6.214 9.563a3.096 3.096 0 0 0 4.254.91l.64-.413a3.056 3.056 0 0 0 .915-4.23l-6.215-9.565c-.917-1.415-2.831-1.821-4.25-.91zm24.515 4.375-.041-22.735c0-1.924-1.584-3.499-3.517-3.499h-.74c-1.934 0-3.515 1.575-3.515 3.5v13.07"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="m30.895 22.078-.641.412a3.06 3.06 0 0 0-.917 4.23l4.824 7.424a3.093 3.093 0 0 0 4.253.909l.643-.412a3.06 3.06 0 0 0 .915-4.23l-4.821-7.424a3.094 3.094 0 0 0-4.254-.909z"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="m17.347 33.37.953 15.953 5.43 11.835a27.9 27.9 0 0 0 11.544 2.24 27.8 27.8 0 0 0 10.327-2.238s4.022-8.257 5.452-10.941c1.427-2.684 4.008-11.452.492-13.75-1.638-1.071-9.218-2.92-9.218-2.92s-1.716-.594-2.547.88c-1.058 1.883-.862 4.043.73 5.325l4.044 2.795-.706 2.958q-4.596 4.598-9.194 9.19"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="M11.475 5.297a2.296 2.296 0 0 0 1.448-2.906A2.296 2.296 0 0 0 10.008.963a2.296 2.296 0 0 0-1.45 2.906 2.296 2.296 0 0 0 2.917 1.428Z"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-miterlimit="10"></path>
+            </svg>
+          </div>
+          <p
+            set:html={dict.home.feature.first.title}
+            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
+          />
+          <p
+            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
+          >
+            {dict.home.feature.first.intro}
+          </p>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]"
+        >
+          <span
+            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
+            >{dict.home.feature.doctor.type}</span
+          >
+          <div class="size-16 lg:size-28 5 flex justify-center items-center">
+            <svg
+              class="size-full object-contain"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 59 60"
+              fill="none"
+              ><path
+                d="M34.115 32.238c6.567-2.77 7.252-10.241 7.965-15.985.385-3.103.507-6.437-1.013-9.29-1.389-2.604-3.95-4.414-6.736-5.338a15.66 15.66 0 0 0-9.795 0c-2.795.933-5.347 2.734-6.736 5.338-1.52 2.844-1.397 6.187-1.013 9.29.713 5.744 1.398 13.215 7.965 15.985"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="M21.023 13.736c9.345 0 11.214-1.795 12.149-4.486 0 0 0 4.486 4.672 4.486M22.146 37.284c0 5.505 7.288 10.092 7.288 10.092s7.29-4.587 7.29-10.092m-17.449.916c-3.7 2.877-2.775 7.672-2.775 7.672"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="M19.943 58.59h2.763v-3.685c0-4.053-2.763-9.21-6.448-9.21-3.684 0-6.447 5.157-6.447 9.21v3.685h2.763M39.412 38.2c2.877.919 2.877 9.19 2.877 9.19v1.838"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path><path
+                d="M42.33 58.59c2.477 0 4.486-2.134 4.486-4.766s-2.009-4.766-4.486-4.766-4.485 2.134-4.485 4.766 2.008 4.766 4.485 4.766m-41.46 0s-.925-13.92 7.4-16.704l13.876-4.64v-5.568m14.576 0v5.568l13.875 4.64c8.325 2.784 7.4 16.705 7.4 16.705"
+                stroke="#4570b6"
+                stroke-width="1.68"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <p
+            set:html={dict.home.feature.doctor.title}
+            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
+          />
+          <p
+            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
+          >
+            {dict.home.feature.doctor.intro}
+          </p>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 bg-[#F9F9F9] tracking-[0.25em]"
+        >
+          <span
+            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
+            >{dict.home.feature.size.type}</span
+          >
+          <div class="size-18 lg:size-28 5 flex justify-center items-center">
+            <svg
+              class="size-full object-contain"
+              viewBox="0 0 80 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#a)" fill="#4570b6">
+                <path
+                  d="M45.139 55.733H34.03a.91.91 0 0 1-.909-.914v-8.692c0-.504.407-.913.91-.913h11.108c.502 0 .909.409.909.913v8.692a.91.91 0 0 1-.91.914m-10.2-1.828h9.29V47.04h-9.29zm27.051-32.421H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.58H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.579H41.382a.91.91 0 0 1-.91-.914c0-.504.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.504.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.504.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.58H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914M57.805 14.6a.91.91 0 0 1-.909-.914V10.76H21.864v2.925a.91.91 0 0 1-.909.914.91.91 0 0 1-.91-.914V9.847c0-.504.408-.913.91-.913h36.85c.502 0 .91.409.91.913v3.839a.91.91 0 0 1-.91.914"
+                ></path>
+                <path
+                  d="M39.623 55.905a.91.91 0 0 1-.91-.913v-8.895c0-.505.408-.914.91-.914s.91.41.91.914v8.895a.91.91 0 0 1-.91.913"
+                ></path>
+              </g>
+              <path
+                d="M62.495 55.733a.91.91 0 0 1-.91-.914v-40.22h-44v40.22a.91.91 0 0 1-.91.914.91.91 0 0 1-.908-.914V13.686c0-.505.407-.914.909-.914h45.82c.502 0 .91.41.91.914v41.133a.91.91 0 0 1-.91.914"
+                fill="#4570b6"></path><path
+                d="M66.837 55.844H12.289a.91.91 0 0 1-.91-.913c0-.505.408-.914.91-.914h54.548c.502 0 .91.409.91.913a.91.91 0 0 1-.91.914"
+                fill="#4570b6"></path><path
+                d="M70.56 17.247c0-4.223-3.386-8.641-7.55-8.641A7.597 7.597 0 0 0 70.56.96a7.597 7.597 0 0 0 7.549 7.67c-4.175 0-7.55 4.394-7.55 8.617M6.179 50.116c0-2.913-2.343-5.971-5.219-5.971a5.256 5.256 0 0 0 5.219-5.292 5.255 5.255 0 0 0 5.218 5.292c-2.876 0-5.218 3.058-5.218 5.971"
+                stroke="#4570b6"
+                stroke-width="1.92"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <defs>
+                <clipPath id="a">
+                  <path fill="#fff" d="M11.38 8.934h56.366v46.972H11.38z"
+                  ></path>
+                </clipPath></defs
+              >
+            </svg>
+          </div>
+
+          <p
+            set:html={dict.home.feature.size.title}
+            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
+          />
+          <p
+            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
+          >
+            {dict.home.feature.size.intro}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
   <VideoCarousel />
@@ -404,6 +600,20 @@ const reviewList: Review[] = [
       left: -40px;
       background-image: var(--introLens);
       rotate: 22deg;
+    }
+  }
+  .feature-main {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzkwIiBoZWlnaHQ9IjM5MCIgdmlld0JveD0iMCAwIDM5MCAzOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTS43MiAxOTQuOTM3aDM4OE0xOTQuNTUyLjcydjE4Mi4yMTZtMCAyMy41NDh2MTgyLjIxNyIgc3Ryb2tlPSIjNDU3MGI2IiBzdHJva2Utd2lkdGg9IjEuNDQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMC40OCA0LjMyIi8+PC9zdmc+");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
   }
   .book {

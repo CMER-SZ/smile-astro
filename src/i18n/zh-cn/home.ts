@@ -22,25 +22,25 @@ export const home = {
       appoint: "预约术前咨询",
     },
   },
-  features: {
+  feature: {
     case: {
-      title: "案例",
-      strong: "超过<span>35,000</span>只",
+      type: "案例",
+      title: "超过<strong>35,000</strong>只",
       intro: "眼睛完成微笑矫视",
     },
     first: {
-      title: "首间",
-      strong: "第<span>1</span>间",
+      type: "首间",
+      title: "第<strong>1</strong>间",
       intro: "香港上市眼科中心",
     },
     doctor: {
-      title: "医生",
-      strong: "<span>13</span>位",
+      type: "医生",
+      title: "<strong>13</strong>位",
       intro: "眼科专科医生",
     },
     size: {
-      title: "面积",
-      strong: "<span>8,000</span>尺",
+      type: "面积",
+      title: "<strong>8,000</strong>尺",
       intro: "宽敞、舒适中心环境",
     },
   },
