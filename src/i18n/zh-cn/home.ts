@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-25 15:17:19
+ * @LastEditTime: 2026-05-26 10:36:12
  * @FilePath: /src/i18n/zh-cn/home.ts
  * @Description: 首页
  */
@@ -14,7 +14,7 @@ export const home = {
     smilepro: '适合<br />担心眼睛无法<br class="hidden lg:block" />对焦太久',
     smile: "适合<br />1000度以下近视<br />500度以下散光",
     icl: "适合<br />1800度以下近视<br />1000度以下远视<br />600度以下散光",
-    clear:
+    presbyopia:
       '适合<br />39岁以上有老花同时有近视<br class="block lg:hidden" />/远视/<br class="hidden lg:block" />散光问题',
     lasik: "适合<br />1400度以下近视<br />600度以下远视<br />600度以下散光",
     button: {

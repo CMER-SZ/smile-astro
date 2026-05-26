@@ -14,8 +14,8 @@ export const home = {
     smilepro: '適合<br />擔心眼睛無法<br class="hidden lg:block" />對焦太久',
     smile: "適合<br />1000度以下近視<br />500度以下散光",
     icl: "適合<br />1800度以下近視<br />1000度以下遠視<br />600度以下散光",
-    clear:
-      '適合<br />39歲以上有老花同時有近視<br class="block lg:hidden" />/遠視/<br class="hidden lg:block" />散光問題',
+    presbyopia:
+      '適合<br />39歲以上有老花<br class="hidden lg:block" />同時有<br class="block lg:hidden" />近視/遠視/<br class="hidden lg:block" />散光問題',
     lasik: "適合<br />1400度以下近視<br />600度以下遠視<br />600度以下散光",
     button: {
       info: "診症須知",
