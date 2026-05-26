@@ -49,6 +49,9 @@ html[lang="zh-cn"] {
   .wrapper {
     @apply max-w-7xl mx-auto px-3 2xl:px-0;
   }
+  .center {
+    @apply flex justify-center items-center;
+  }
   .nav-dot-indicator {
     @apply before:absolute before:content-[''] before:top-0 before:left-1/2 before:-translate-x-1/2 before:size-1.5 before:rounded-full before:bg-primary;
   }
