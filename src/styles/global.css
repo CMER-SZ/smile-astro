@@ -4,6 +4,9 @@
 @import "@fontsource/noto-sans-sc";
 
 @theme {
+  /* 增加自定义断点 */
+  --breakpoint-xs: 22.5rem; /* 360px (360/16) */
+  
   /* 扩展颜色 */
   --color-primary: #4570b6;
   --color-whatsapp: #67ad5b;

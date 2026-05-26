@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-26 16:38:40
+ * @LastEditTime: 2026-05-26 17:22:53
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -119,15 +119,15 @@ const reviewList: Review[] = [
       />
     </div>
   </section>
-  <section class="lg:mb-25 md:pb-22">
+  <section class="service md:pb-22 lg:mb-25">
     <h2 class="title-normal text-center mb-11 lg:mb-18">
       {dict.home.service.title}
     </h2>
-    <div class="border-t border-primary pb-4 lg:pb-33">
+    <div class="service-main border-t border-primary pb-4 lg:pb-25 lg:mb-7">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 lg:h-75">
         <a
           href={getLocalizedHref("/smilePro", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-all duration-500 ease lg:border-x lg:border-b border-primary"
+          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-x lg:border-b border-primary"
         >
           <h3
             class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
@@ -135,11 +135,11 @@ const reviewList: Review[] = [
             SMILE <br />PRO
           </h3>
           <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none transition-all duration-300 ease"
+            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
           >
             <p
               set:html={dict.home.service.smilepro}
-              class="tracking-[0.2em] text-sm lg:text-xl lg:text-center"
+              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
             />
             <svg
               class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
@@ -159,7 +159,7 @@ const reviewList: Review[] = [
         </a>
         <a
           href={getLocalizedHref("/vision-correction/relex-smile", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition duration-300 ease lg:border-r lg:border-b border-primary"
+          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
         >
           <h3
             class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
@@ -167,11 +167,11 @@ const reviewList: Review[] = [
             SMILE
           </h3>
           <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
+            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
           >
             <p
               set:html={dict.home.service.smile}
-              class="tracking-[0.2em] text-sm lg:text-xl lg:text-center"
+              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
             />
             <svg
               class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
@@ -191,7 +191,7 @@ const reviewList: Review[] = [
         </a>
         <a
           href={getLocalizedHref("/vision-correction-icl", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition duration-300 ease lg:border-r lg:border-b border-primary"
+          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
         >
           <h3
             class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
@@ -199,11 +199,11 @@ const reviewList: Review[] = [
             ICL
           </h3>
           <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
+            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
           >
             <p
               set:html={dict.home.service.icl}
-              class="tracking-[0.2em] text-sm lg:text-xl lg:text-center"
+              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
             />
             <svg
               class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
@@ -223,7 +223,7 @@ const reviewList: Review[] = [
         </a>
         <a
           href={getLocalizedHref("/vision-correction-presbyopia", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition duration-300 ease lg:border-r lg:border-b border-primary"
+          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
         >
           <h3
             class="w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
@@ -231,11 +231,11 @@ const reviewList: Review[] = [
             {dict.common.menu.service.presbyopia}
           </h3>
           <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
+            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
           >
             <p
               set:html={dict.home.service.presbyopia}
-              class="tracking-[0.2em] text-sm lg:text-xl lg:text-center"
+              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
             />
             <svg
               class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
@@ -255,7 +255,7 @@ const reviewList: Review[] = [
         </a>
         <a
           href={getLocalizedHref("/vision-correction-lasik", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition duration-300 ease lg:border-r lg:border-b border-primary"
+          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
         >
           <h3
             class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
@@ -263,11 +263,11 @@ const reviewList: Review[] = [
             LASIK
           </h3>
           <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-primary lg:border-none"
+            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
           >
             <p
               set:html={dict.home.service.lasik}
-              class="tracking-[0.2em] text-sm lg:text-xl lg:text-center"
+              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
             />
             <svg
               class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
@@ -287,7 +287,9 @@ const reviewList: Review[] = [
         </a>
       </div>
     </div>
-    <div class="center gap-6 md:gap-10 lg:gap-18 mb-15 md:mb-40 lg:mb-66">
+    <div
+      class="center gap-3 xs:gap-6 md:gap-10 lg:gap-18 mb-15 md:mb-40 lg:mb-66"
+    >
       <a href={getLocalizedHref("/patient-info", lang)} class="service-button">
         <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider"
           >{dict.home.service.button.info}</span
@@ -879,15 +881,22 @@ const reviewList: Review[] = [
     }
   }
   @media screen and (min-width: 1024px) {
-    .service-button {
-      padding-left: 60px;
-      padding-right: 60px;
-      &:hover {
-        background: transparent;
-        color: var(--color-primary);
+    .service {
+      .service-main {
+        background-image: url("@/assets/images/index/bg-service.svg");
+        background-repeat: no-repeat;
+        background-position: center 100%;
       }
-      &::before {
-        border: none;
+      .service-button {
+        padding-left: 60px;
+        padding-right: 60px;
+        &:hover {
+          background: transparent;
+          color: var(--color-primary);
+        }
+        &::before {
+          border: none;
+        }
       }
     }
     .feature-main {
