@@ -2,10 +2,11 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-05-14 09:49:59
- * @LastEditTime: 2026-05-22 17:25:03
+ * @LastEditTime: 2026-05-26 17:26:17
  * @FilePath: /src/components/common/BannerSwiper.astro
  * @Description: 轮播图Banner组件
  */
+import { Image } from "astro:assets";
 import { useI18n, getLocalizedHref } from "@/i18n/utils";
 
 // 1. 获取多语言状态
@@ -82,15 +83,15 @@ try {
                 >
                   <picture class="block size-full">
                     <source media="(min-width: 768px)" srcset={pcImgUrl} />
-                    <img
+                    <Image
                       src={mbImgUrl}
                       alt={banner.subtitle || "Banner Image"}
                       title={banner.subtitle}
-                      width={1920}
-                      height={720}
+                      width={800}
+                      height={800}
                       loading={index === 0 ? "eager" : "lazy"}
                       fetchpriority={index === 0 ? "high" : "low"}
-                      class="size-full object-cover rounded-xl md:rounded-2xl"
+                      class="size-full object-cover md:aspect-8/3 rounded-xl md:rounded-2xl"
                     />
                   </picture>
                 </a>
@@ -98,15 +99,15 @@ try {
                 /* 如果后台没有配置链接，则不渲染 a 标签，避免无效点击 */
                 <picture class="block size-full">
                   <source media="(min-width: 768px)" srcset={pcImgUrl} />
-                  <img
+                  <Image
                     src={mbImgUrl}
                     alt={banner.subtitle || "Banner Image"}
                     title={banner.subtitle}
-                    width={1920}
-                    height={720}
+                    width={800}
+                    height={800}
                     loading={index === 0 ? "eager" : "lazy"}
                     fetchpriority={index === 0 ? "high" : "low"}
-                    class="size-full object-cover rounded-xl md:rounded-2xl"
+                    class="size-full object-cover md:aspect-8/3 rounded-xl md:rounded-2xl"
                   />
                 </picture>
               )}

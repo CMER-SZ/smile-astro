@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { useI18n } from "@/i18n/utils";
 const { dict } = useI18n(Astro.url);
 import { ALL_VIDEOS, type VideoType } from "@/data/videoData";
@@ -32,9 +33,11 @@ const typeConfig: Record<
             {dict.common.cases.title}
           </h2>
           <div>
-            <img
+            <Image
               src="https://statichk.cmermedical.com/newsmile/common/smile-slogan-v1.webp"
               alt={dict.common.cases.slogan}
+              width={772}
+              height={60}
               class="w-3/4 lg:w-[clamp(400px,40vw,720px)] mx-auto lg:mx-0"
               draggable="false"
             />
@@ -64,9 +67,11 @@ const typeConfig: Record<
                   class="video-item shrink-0 grow-0 aspect-3/5 w-50 lg:w-66 overflow-hidden group"
                   draggable="false"
                 >
-                  <img
+                  <Image
                     src={item.img}
                     alt={item.name}
+                    width={265}
+                    height={439}
                     class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                     draggable="false"
