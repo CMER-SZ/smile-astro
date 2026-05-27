@@ -31,24 +31,32 @@ const navList = [
 ];
 ---
 
-<section
-  class="fixed z-50 bottom-0 w-full bg-[#4f6fb1] text-[#d9eaed] flex lg:hidden"
->
-  {
-    navList.map((item) => (
-      <a
-        href={getLocalizedHref(item.href, lang)}
-        class="fixed-item w-1/4 center py-4"
-      >
-        <div class="fixed-link w-full flex flex-col justify-center items-center gap-4">
-          <Icon name={`${item.icon}`} class="size-7" />
-          <span class="text-[10px] tracking-widest whitespace-nowrap">
-            {item.label}
-          </span>
-        </div>
-      </a>
-    ))
-  }
+<section class="w-full fixed bottom-0">
+  <a
+    href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3(WM-BAW01)%E4%BA%86%E8%A7%A3%E5%B8%8C%E7%91%AA%E7%9F%AF%E8%A6%96%E6%9C%8D%E5%8B%99"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="center relative z-60 -mb-4 ml-4 size-15 bg-[#65ce5a] rounded-full"
+  >
+    <Icon name="social/whatsapp-o" class="size-8 text-white" />
+  </a>
+  <div class="z-50 w-full bg-[#4f6fb1] text-[#d9eaed] flex lg:hidden">
+    {
+      navList.map((item) => (
+        <a
+          href={getLocalizedHref(item.href, lang)}
+          class="fixed-item w-1/4 center py-4"
+        >
+          <div class="fixed-link w-full flex flex-col justify-center items-center gap-4">
+            <Icon name={`${item.icon}`} class="size-7" />
+            <span class="text-[10px] tracking-widest whitespace-nowrap">
+              {item.label}
+            </span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
 </section>
 <style lang="scss">
   .fixed-item {

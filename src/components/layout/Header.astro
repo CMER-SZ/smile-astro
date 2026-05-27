@@ -7,9 +7,9 @@
  * @Description: 公共页头
  */
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import logoImg from "@/assets/logo.svg";
 import logoDarkImg from "@/assets/logo-dark.svg";
-import { Icon } from "astro-icon/components";
 import { useI18n } from "@/i18n/utils";
 const currentPath = Astro.url.pathname;
 const { lang, dict } = useI18n(Astro.url);
