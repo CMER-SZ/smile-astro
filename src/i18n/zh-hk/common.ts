@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-20 18:00:59
+ * @LastEditTime: 2026-05-26 17:32:52
  * @FilePath: /src/i18n/zh-hk/common.ts
  * @Description: 公共翻译
  */
@@ -53,7 +53,7 @@ export const common = {
   },
   share: {
     title: "同朋友分享一下啦！",
-    pre: '推薦給你這個頁面：',
+    pre: "推薦給你這個頁面：",
     success: "複製成功",
     btnShare: "分享到社交媒體",
     btnCopy: "複製當前頁面鏈接",
@@ -66,6 +66,7 @@ export const common = {
   },
   footer: {
     copyright: "©2026 香港希瑪微笑矯視中心版權所有",
+    map: "谷歌地圖",
   },
   clinic: {
     Central: {

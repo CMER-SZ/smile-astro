@@ -4,6 +4,9 @@
 @import "@fontsource/noto-sans-sc";
 
 @theme {
+  /* 增加自定义断点 */
+  --breakpoint-xs: 22.5rem; /* 360px (360/16) */
+  
   /* 扩展颜色 */
   --color-primary: #4570b6;
   --color-whatsapp: #67ad5b;
@@ -20,6 +23,15 @@
   --font-en: "Poppins", "Noto Sans HK", system-ui, -apple-system, sans-serif;
   --font-hk: "Noto Sans HK", "Microsoft JhengHei", sans-serif;
   --font-sc: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+
+  --animate-shake: shake .5s ease-in-out;
+  @keyframes shake {
+    0%, 100% { transform: translateX(0) scale(1) rotate(0deg); }
+    20% { transform: translateX(-4px) scale(1.05) rotate(-1deg); }
+    40% { transform: translateX(4px) scale(1.05) rotate(1deg); }
+    60% { transform: translateX(-3px) scale(1.05) rotate(-5deg); }
+    80% { transform: translateX(3px) scale(1.05) rotate(5deg); }
+  }
 }
 
 html {
@@ -36,10 +48,12 @@ html[lang="zh"],
 html[lang="zh-cn"] {
   font-family: var(--font-sc), sans-serif;
 }
-
 @layer components {
   .wrapper {
     @apply max-w-7xl mx-auto px-3 2xl:px-0;
+  }
+  .center {
+    @apply flex justify-center items-center;
   }
   .nav-dot-indicator {
     @apply before:absolute before:content-[''] before:top-0 before:left-1/2 before:-translate-x-1/2 before:size-1.5 before:rounded-full before:bg-primary;

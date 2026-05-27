@@ -3,7 +3,7 @@
  * @Date: 2026-04-24 18:42:52
  * @LastEditTime: 2026-05-11 15:54:13
  * @FilePath: /src/i18n/zh-cn/common.ts
- * @Description: 
+ * @Description:
  */
 export const common = {
   menu: {
@@ -53,7 +53,7 @@ export const common = {
   },
   share: {
     title: "同朋友分享一下啦！",
-    pre: '推荐给你这个页面：',
+    pre: "推荐给你这个页面：",
     success: "复制成功",
     btnShare: "分享到社交媒体",
     btnCopy: "复制当前页面链接",
@@ -66,6 +66,7 @@ export const common = {
   },
   footer: {
     copyright: "©2026 香港希玛微笑矫视中心版权所有",
+    map: "谷歌地图",
   },
   clinic: {
     Central: {

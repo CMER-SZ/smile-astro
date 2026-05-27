@@ -1,3 +1,10 @@
+/*
+ * @Author: 谭洁莹
+ * @Date: 2026-04-22 16:53:05
+ * @LastEditTime: 2026-05-22 17:30:26
+ * @FilePath: /astro.config.mjs
+ * @Description: Astro 配置
+ */
 // @ts-check
 import { defineConfig } from "astro/config";
 
@@ -39,6 +46,9 @@ export default defineConfig({
       {
         protocol: "https",
         hostname: "admin.hkcmereye.com",
+      },{
+        protocol: "https",
+        hostname: "statichk.cmermedical.com",
       },
     ],
   },
