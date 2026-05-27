@@ -5,7 +5,7 @@ import logoImg from "@/assets/images/common/logo.svg";
 // const isCN = langParam === "cn";
 import { useI18n } from "@/i18n/utils";
 import { getLocalizedHref } from "@/i18n/utils";
-const { lang, dict } = useI18n(Astro.url);
+const { dict, lang } = useI18n(Astro.url);
 import { Icon } from "astro-icon/components";
 const socialLinks = [
   {

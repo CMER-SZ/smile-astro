@@ -16,7 +16,7 @@ import { i18nPaths, useI18n, getLocalizedHref } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
 }
-const { lang, dict } = useI18n(Astro.url);
+const { dict, lang } = useI18n(Astro.url);
 import introAiming from "@/assets/images/index/deco-aiming.svg";
 import featureTitle from "@/assets/images/index/service-feature-title.svg";
 import reviewsGood from "@/assets/images/index/index-reviews-good.svg";

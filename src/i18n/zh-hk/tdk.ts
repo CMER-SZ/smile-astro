@@ -23,4 +23,9 @@ export const tdk = {
     description: "醫生團隊",
     keywords: "希瑪微笑矯視中心",
   },
+  video: {
+    title: "個案分享及矯視資訊影片",
+    description: "個案分享及矯視資訊影片",
+    keywords: "希瑪微笑矯視中心",
+  }
 } as const;

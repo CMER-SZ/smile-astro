@@ -1,15 +1,57 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import VideoList from "@/components/page/VideoList.astro";
-import { i18nPaths, useI18n } from "@/i18n/utils";
+import { i18nPaths, useI18n, getLocalizedHref } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
 }
-const { dict } = useI18n(Astro.url);
+const { dict, lang } = useI18n(Astro.url);
 ---
 
-<BaseLayout tdkKey="about">
-  <div class="mb-12 lg:mb-17">
-    <VideoList />
-  </div>
+<BaseLayout tdkKey="video">
+  <section
+    class="banner relative wrapper mb-5 lg:mb-10 pt-[clamp(48px,15.385vw,60px)] lg:pt-35"
+  >
+    <div class="text-primary pb-[clamp(68px,21.538vw,84px)] lg:pb-24">
+      <span
+        class="font-en text-5xl lg:text-[clamp(68px,7.16vw,138px)] font-bold"
+        >VIDEO</span
+      >
+      <h1 class="text-2xl lg:text-7xl lg:mb-4">{dict.common.menu.news.case}</h1>
+      <span class="font-en text-[10px] lg:text-3xl">Case Sharing</span>
+    </div>
+    <div class="text-xs lg:text-xl text-desc font-light tracking-wide">
+      <a href="">{dict.common.menu.home}</a>&nbsp;&gt;
+      <span>{dict.common.menu.news.title}</span>&nbsp;&gt;
+      <span class="text-primary font-medium">{dict.common.menu.news.case}</span>
+    </div>
+  </section>
+  <VideoList />
 </BaseLayout>
+<style lang="scss" scoped>
+  .banner {
+    &::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: clamp(144px, 45.128vw, 176px);
+      height: clamp(160px, 50.256vw, 196px);
+      background: url("@/assets/images/video/bg-head-mb.svg") no-repeat center;
+      background-size: cover;
+      z-index: -1;
+    }
+  }
+  @media (min-width: 1024px) {
+    .banner {
+      &::before {
+        top: -20px;
+        right: unset;
+        left: 500px;
+        width: 388px;
+        height: 452px;
+        background-image: url("@/assets/images/video/bg-head-pc.svg");
+      }
+    }
+  }
+</style>

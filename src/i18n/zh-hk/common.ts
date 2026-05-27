@@ -7,6 +7,7 @@
  */
 export const common = {
   menu: {
+    home: "主頁",
     about: {
       title: "關於希瑪",
       group: "集團及中心簡介",
