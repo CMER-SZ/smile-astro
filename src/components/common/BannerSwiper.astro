@@ -10,7 +10,7 @@ import { Image } from "astro:assets";
 import { useI18n, getLocalizedHref } from "@/i18n/utils";
 
 // 1. 获取多语言状态
-const { lang, dict } = useI18n(Astro.url);
+const { dict, lang } = useI18n(Astro.url);
 
 // 2. 映射当前语言对应的 API gid
 const gidMap: Record<string, string> = {

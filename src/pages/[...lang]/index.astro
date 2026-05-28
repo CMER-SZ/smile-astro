@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-26 17:22:53
+ * @LastEditTime: 2026-05-28 11:12:28
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -10,13 +10,13 @@ import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BannerSwiper from "@/components/common/BannerSwiper.astro";
 import VideoCarousel from "@/components/common/VideoCarousel.astro";
-import IndexEnvironment from "@/components/page/IndexEnvironment.astro";
-import IndexAwards from "@/components/page/IndexAwards.astro";
+import IndexEnvironment from "@/components/views/IndexEnvironment.astro";
+import IndexAwards from "@/components/views/IndexAwards.astro";
 import { i18nPaths, useI18n, getLocalizedHref } from "@/i18n/utils";
 export function getStaticPaths() {
   return [...i18nPaths];
 }
-const { lang, dict } = useI18n(Astro.url);
+const { dict, lang } = useI18n(Astro.url);
 import introAiming from "@/assets/images/index/deco-aiming.svg";
 import featureTitle from "@/assets/images/index/service-feature-title.svg";
 import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
@@ -848,7 +848,7 @@ const reviewList: Review[] = [
     }
   }
   .reviews {
-    background-image: url("@/assets/images/index/index-reviews-bg-mb.jpg");
+    background-image: url("@/assets/images/index/index-reviews-bg-mb.webp");
     background-size: cover;
     background-position: bottom;
     .reviews-main {
@@ -908,7 +908,7 @@ const reviewList: Review[] = [
       }
     }
     .reviews {
-      background-image: url("@/assets/images/index/index-reviews-bg-pc.jpg");
+      background-image: url("@/assets/images/index/index-reviews-bg-pc.webp");
       background-position: bottom;
       .reviews-main {
         width: 652px;

@@ -1,7 +1,8 @@
 @import "tailwindcss";
-@import "@fontsource/poppins";
 @import "@fontsource/noto-sans-hk";
 @import "@fontsource/noto-sans-sc";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/700.css";
 
 @theme {
   /* 增加自定义断点 */

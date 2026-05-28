@@ -3,16 +3,16 @@
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
  * @LastEditTime: 2026-05-14 09:43:42
- * @FilePath: /src/components/layout/Header.astro
+ * @FilePath: /src/components/global/Header.astro
  * @Description: 公共页头
  */
 import { Image } from "astro:assets";
-import logoImg from "@/assets/logo.svg";
-import logoDarkImg from "@/assets/logo-dark.svg";
 import { Icon } from "astro-icon/components";
+import logoImg from "@/assets/images/common/logo.svg";
+import logoDarkImg from "@/assets/images/common/logo-dark.svg";
 import { useI18n } from "@/i18n/utils";
 const currentPath = Astro.url.pathname;
-const { lang, dict } = useI18n(Astro.url);
+const { dict, lang } = useI18n(Astro.url);
 import { getLocalizedHref } from "@/i18n/utils";
 
 const labelMap: Record<string, string> = {

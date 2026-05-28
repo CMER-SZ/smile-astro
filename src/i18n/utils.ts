@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-04-27 09:08:08
+ * @LastEditTime: 2026-05-27 11:48:40
  * @FilePath: /src/i18n/utils.ts
  * @Description: 多语言公共函数
  */
@@ -12,7 +12,7 @@ import { ui, type Lang } from "./ui";
  */
 const langMap: Record<string, Lang> = {
   "cn": "zh-cn",
-  "en": "en",
+  // "en": "en",
   "zh-hk": "zh-hk"
 };
 
