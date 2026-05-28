@@ -67,7 +67,7 @@ const typeConfig: Record<
     class="video-list overflow-hidden grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-9 w-full lg:w-fit mx-auto"
   >
     {
-      ALL_VIDEOS.map((item) => {
+      ALL_VIDEOS.map((item, index) => {
         const hasDefault = item.type.includes(defaultType);
         const cardDisplayType = hasDefault ? defaultType : item.type[0];
         const currentConfig = typeConfig[cardDisplayType];
@@ -91,7 +91,7 @@ const typeConfig: Record<
                 width={265}
                 height={439}
                 class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
+                loading={index < 4 ? "eager" : "lazy"}
                 draggable="false"
               />
               {currentConfig && (
@@ -261,7 +261,11 @@ const typeConfig: Record<
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.2)
+      );
       pointer-events: none;
     }
   }
