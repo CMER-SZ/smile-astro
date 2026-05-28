@@ -41,6 +41,10 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    // 将默认的 '_astro' 改为 'assets'
+    assets: 'assets' 
+  },
   image: {
     remotePatterns: [
       {
