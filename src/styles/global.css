@@ -7,14 +7,11 @@
 @theme {
   /* 增加自定义断点 */
   --breakpoint-xs: 22.5rem; /* 360px (360/16) */
-  
+
   /* 扩展颜色 */
-  --color-primary: #4570b6;
+  --color-primary: #2958a3;
   --color-whatsapp: #67ad5b;
-  --color-desc: #6d6e71;
-  --color-bg-subtle: #f4fafc;
-  --color-bg-soft: #f6fafd;
-  --color-bg-accent: #f2f7ff;
+  --color-desc: #515151;
 
   /* 扩展间距 */
   --spacing-15: 3.75rem; /* 60px */
@@ -25,13 +22,25 @@
   --font-hk: "Noto Sans HK", "Microsoft JhengHei", sans-serif;
   --font-sc: "Noto Sans SC", "Microsoft YaHei", sans-serif;
 
-  --animate-shake: shake .5s ease-in-out;
+  /* 动画设置 */
+  --animate-shake: shake 0.5s ease-in-out;
   @keyframes shake {
-    0%, 100% { transform: translateX(0) scale(1) rotate(0deg); }
-    20% { transform: translateX(-4px) scale(1.05) rotate(-1deg); }
-    40% { transform: translateX(4px) scale(1.05) rotate(1deg); }
-    60% { transform: translateX(-3px) scale(1.05) rotate(-5deg); }
-    80% { transform: translateX(3px) scale(1.05) rotate(5deg); }
+    0%,
+    100% {
+      transform: translateX(0) scale(1) rotate(0deg);
+    }
+    20% {
+      transform: translateX(-4px) scale(1.05) rotate(-1deg);
+    }
+    40% {
+      transform: translateX(4px) scale(1.05) rotate(1deg);
+    }
+    60% {
+      transform: translateX(-3px) scale(1.05) rotate(-5deg);
+    }
+    80% {
+      transform: translateX(3px) scale(1.05) rotate(5deg);
+    }
   }
 }
 
