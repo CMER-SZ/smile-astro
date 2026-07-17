@@ -87,8 +87,7 @@ const awards = [
     {
       awards.map((award, index) => {
         // 判断当前的图片对象是否是 SVG
-        const isSvg =
-          award.img.format === "svg" || award.img.src.includes(".svg");
+        const isSvg = award.img.format === "svg" || award.img.src.includes(".svg");
 
         return (
           <div class="swiper-slide awards-carousel-slide">

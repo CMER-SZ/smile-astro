@@ -9,14 +9,9 @@ interface Props {
   filterType?: VideoType;
 }
 const { filterType } = Astro.props;
-const displayVideos = filterType
-  ? ALL_VIDEOS.filter((item) => item.type.includes(filterType))
-  : ALL_VIDEOS;
+const displayVideos = filterType ? ALL_VIDEOS.filter((item) => item.type.includes(filterType)) : ALL_VIDEOS;
 
-const typeConfig: Record<
-  VideoType,
-  { bg: string; label: string; color: string }
-> = {
+const typeConfig: Record<VideoType, { bg: string; label: string; color: string }> = {
   smilepro: { bg: "bg-[#4570B6]", label: "SMILE Pro", color: "#4570B6" },
   smile: { bg: "bg-[#30ABE2]", label: "SMILE", color: "#30ABE2" },
   icl: { bg: "bg-[#EB981A]", label: "ICL", color: "#EB981A" },
@@ -89,23 +84,11 @@ const typeConfig: Record<
                     <h3
                       set:html={item.title}
                       class="video-title text-sm lg:text-base font-bold tracking-wider leading-normal mb-1 pb-4 lg:pb-7"
-                      style={
-                        currentConfig
-                          ? `--title-color: ${currentConfig.color}`
-                          : ""
-                      }
+                      style={currentConfig ? `--title-color: ${currentConfig.color}` : ""}
                     />
                     <p class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
-                      {item.name && (
-                        <span class="text-sm lg:text-base font-semibold tracking-wider">
-                          {item.name}
-                        </span>
-                      )}
-                      {item.enName && (
-                        <span class="text-xs lg:text-sm font-bold tracking-wider">
-                          {item.enName}
-                        </span>
-                      )}
+                      {item.name && <span class="text-sm lg:text-base font-semibold tracking-wider">{item.name}</span>}
+                      {item.enName && <span class="text-xs lg:text-sm font-bold tracking-wider">{item.enName}</span>}
                     </p>
                   </div>
                 </a>
@@ -115,10 +98,7 @@ const typeConfig: Record<
         </div>
       </div>
       <div class="wrapper mt-6 lg:mt-10">
-        <div
-          class="w-full h-1 bg-white rounded-full relative cursor-pointer select-none"
-          data-scrollbar-track
-        >
+        <div class="w-full h-1 bg-white rounded-full relative cursor-pointer select-none" data-scrollbar-track>
           <div
             class="absolute top-0 left-0 h-full bg-primary rounded-full cursor-grab active:cursor-grabbing touch-none"
             data-scrollbar-thumb
@@ -133,15 +113,9 @@ const typeConfig: Record<
 
 <script>
   function initCustomScrollbar() {
-    const container = document.querySelector(
-      "[data-scrollbar-target]",
-    ) as HTMLElement;
-    const track = document.querySelector(
-      "[data-scrollbar-track]",
-    ) as HTMLElement;
-    const thumb = document.querySelector(
-      "[data-scrollbar-thumb]",
-    ) as HTMLElement;
+    const container = document.querySelector("[data-scrollbar-target]") as HTMLElement;
+    const track = document.querySelector("[data-scrollbar-track]") as HTMLElement;
+    const thumb = document.querySelector("[data-scrollbar-thumb]") as HTMLElement;
 
     if (!container || !track || !thumb) return;
 
@@ -163,8 +137,7 @@ const typeConfig: Record<
     const updateScrollbar = () => {
       if (isThumbDragging) return;
       const { scrollLeft, scrollWidth, clientWidth } = container;
-      const thumbWidthRatio =
-        scrollWidth > clientWidth ? clientWidth / scrollWidth : 1;
+      const thumbWidthRatio = scrollWidth > clientWidth ? clientWidth / scrollWidth : 1;
 
       thumb.style.width = `${thumbWidthRatio * 100}%`;
 
@@ -341,11 +314,7 @@ const typeConfig: Record<
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 50%,
-        rgba(0, 0, 0, 0.2)
-      );
+      background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.2));
       pointer-events: none;
     }
   }

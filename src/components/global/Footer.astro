@@ -88,62 +88,40 @@ const sideNav = [
   },
   { title: { text: dict.common.menu.contact, href: "/contact-us" }, links: [] },
 ];
-const businessClass =
-  "font-medium text-sm lg:text-lg tracking-widest leading-[1.8]";
+const businessClass = "font-medium text-sm lg:text-lg tracking-widest leading-[1.8]";
 ---
 
 <footer class="footer pt-8 lg:pt-18">
   <div class="bg-bg-subtle">
-    <div
-      class="flex wrapper justify-between items-center flex-col lg:flex-row lg:gap-5 xl:gap-12 2xl:gap-24"
-    >
+    <div class="flex wrapper justify-between items-center flex-col lg:flex-row lg:gap-5 xl:gap-12 2xl:gap-24">
       <div
         class="footer-info flex-1 bg-white max-w-sm lg:max-w-2xl relative border border-primary rounded-4xl pt-8 pl-[clamp(8px,6.667vw,32px)] pr-0 pb-7 lg:p-18 lg:pb-21 lg:pr-29 w-full lg:w-auto -translate-y-8 lg:-translate-y-18"
       >
         <a href={getLocalizedHref("/", lang)}>
-          <Image
-            src={logoImg}
-            alt="Clinic Logo"
-            width={329}
-            height={104}
-            class="w-4/5 lg:w-82 h-auto"
-          />
+          <Image src={logoImg} alt="Clinic Logo" width={329} height={104} class="w-4/5 lg:w-82 h-auto" />
         </a>
         <div class="mt-9 lg:mt-16 mb-9">
-          <p
-            class="text-primary font-semibold mb-3 lg:mb-3 text-lg md:text-2xl xl:text-3xl tracking-[0.25em]"
-          >
+          <p class="text-primary font-semibold mb-3 lg:mb-3 text-lg md:text-2xl xl:text-3xl tracking-[0.25em]">
             {dict.common.businessHours.title}
           </p>
           <ul class="font-medium">
             <li class="flex lg:gap-10">
-              <strong
-                class:list={[
-                  businessClass,
-                  "text-primary w-1/2 lg:w-2/5 whitespace-nowrap",
-                ]}>{dict.common.businessHours.weekday}</strong
-              >
+              <strong class:list={[businessClass, "text-primary w-1/2 lg:w-2/5 whitespace-nowrap"]}>
+                {dict.common.businessHours.weekday}
+              </strong>
               <span class:list={[businessClass, "text-desc"]}>9:00-19:00</span>
             </li>
             <li class="flex lg:gap-10">
-              <strong
-                class:list={[
-                  businessClass,
-                  "text-primary w-1/2 lg:w-2/5 whitespace-nowrap",
-                ]}>{dict.common.businessHours.weekend}</strong
-              >
+              <strong class:list={[businessClass, "text-primary w-1/2 lg:w-2/5 whitespace-nowrap"]}>
+                {dict.common.businessHours.weekend}
+              </strong>
               <span class:list={[businessClass, "text-desc"]}>9:00-18:00</span>
             </li>
             <li class="flex lg:gap-10">
-              <strong
-                class:list={[
-                  businessClass,
-                  "text-primary w-1/2 lg:w-2/5 whitespace-nowrap",
-                ]}>{dict.common.businessHours.holiday}</strong
-              >
-              <span class:list={[businessClass, "text-desc"]}
-                >{dict.common.businessHours.closed}</span
-              >
+              <strong class:list={[businessClass, "text-primary w-1/2 lg:w-2/5 whitespace-nowrap"]}>
+                {dict.common.businessHours.holiday}
+              </strong>
+              <span class:list={[businessClass, "text-desc"]}>{dict.common.businessHours.closed}</span>
             </li>
           </ul>
         </div>
@@ -162,10 +140,7 @@ const businessClass =
                       class="w-9 md:w-12 xl:w-15"
                     />
                   </p>
-                  <p
-                    class="text-desc text-[12px] lg:text-lg font-light tracking-[0.2em]"
-                    set:html={clinic.address}
-                  />
+                  <p class="text-desc text-[12px] lg:text-lg font-light tracking-[0.2em]" set:html={clinic.address} />
                 </li>
               ))
             }
@@ -173,9 +148,7 @@ const businessClass =
         </div>
       </div>
       <div class="pb-32 lg:pt-21 lg:pb-17">
-        <div
-          class="flex gap-x-8 xl:gap-x-16 text-desc mb-12 text-sm md:text-lg xl:text-2xl tracking-[0.15em]"
-        >
+        <div class="flex gap-x-8 xl:gap-x-16 text-desc mb-12 text-sm md:text-lg xl:text-2xl tracking-[0.15em]">
           <div class="flex flex-col gap-4 lg:gap-8">
             {
               mainNav.map((item) => (
@@ -199,9 +172,7 @@ const businessClass =
                     <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
                       {item.links.map((link) => (
                         <li>
-                          <a href={getLocalizedHref(link.href, lang)}>
-                            {link.text}
-                          </a>
+                          <a href={getLocalizedHref(link.href, lang)}>{link.text}</a>
                         </li>
                       ))}
                     </ul>
@@ -233,9 +204,7 @@ const businessClass =
                     <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
                       {item.links.map((link) => (
                         <li>
-                          <a href={getLocalizedHref(link.href, lang)}>
-                            {link.text}
-                          </a>
+                          <a href={getLocalizedHref(link.href, lang)}>{link.text}</a>
                         </li>
                       ))}
                     </ul>
@@ -246,10 +215,7 @@ const businessClass =
             <div class="flex items-center gap-4 lg:gap-6">
               {
                 socialLinks.map((s) => (
-                  <a
-                    href={s.url}
-                    class="text-primary hover:opacity-80 transition-opacity"
-                  >
+                  <a href={s.url} class="text-primary hover:opacity-80 transition-opacity">
                     <Icon name={s.name} class="size-6 lg:size-7" />
                   </a>
                 ))
@@ -257,15 +223,13 @@ const businessClass =
             </div>
           </div>
         </div>
-        <p
-          class="text-desc text-[11px] min-[390px]:text-[12px] md:text-sm lg:text-base tracking-widest"
-        >
+        <p class="text-desc text-[11px] min-[390px]:text-[12px] md:text-sm lg:text-base tracking-widest">
           {dict.common.footer.copyright}<br class="block xs:hidden" />
-          <a href={getLocalizedHref("/privacy", lang)}
-            >{dict.common.menu.privacy}</a
-          > | <a href={getLocalizedHref("/disclaimer", lang)}
-            >{dict.common.menu.disclaimer}</a
+          <a href={getLocalizedHref("/privacy", lang)}>{dict.common.menu.privacy}</a> | <a
+            href={getLocalizedHref("/disclaimer", lang)}
           >
+            {dict.common.menu.disclaimer}
+          </a>
         </p>
       </div>
     </div>
@@ -281,8 +245,7 @@ const businessClass =
       width: 100px;
       aspect-ratio: 15 / 29;
       height: auto;
-      background: url("https://statichk.cmermedical.com/smile/newFooterV2-bgicon-pc.avif")
-        no-repeat center / contain;
+      background: url("https://statichk.cmermedical.com/smile/newFooterV2-bgicon-pc.avif") no-repeat center / contain;
       z-index: -1;
       @media screen and (min-width: 1024px) {
         width: 172px;

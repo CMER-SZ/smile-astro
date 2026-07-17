@@ -5,12 +5,8 @@ import { useI18n } from "@/i18n/utils";
 const { dict } = useI18n(Astro.url);
 ---
 
-<div
-  class="sidebar hidden lg:flex items-center group fixed right-0 top-1/2 translate-y-[-45%] z-50 tracking-[0.2em]"
->
-  <div
-    class="bg-primary text-white [writing-mode:vertical-rl] rounded-l-3xl text-xl font-medium p-5 h-fit"
-  >
+<div class="sidebar hidden lg:flex items-center group fixed right-0 top-1/2 translate-y-[-45%] z-50 tracking-[0.2em]">
+  <div class="bg-primary text-white [writing-mode:vertical-rl] rounded-l-3xl text-xl font-medium p-5 h-fit">
     {dict.common.button.more}
   </div>
   <div
@@ -20,26 +16,26 @@ const { dict } = useI18n(Astro.url);
       href={getLocalizedHref("/ophthalmicInfo/AppointForm", lang)}
       class="hover:shadow-[0_0_4px_3px_#4570b6ba] flex flex-col justify-center items-center gap-4 w-40 h-35 rounded-2xl bg-primary text-white"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="59"
-        height="44"
-        viewBox="0 0 59 44"
-        fill="none"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="59" height="44" viewBox="0 0 59 44" fill="none">
         <path
           d="M44.855 10.746h9.892c1.266 0 2.29 1.01 2.29 2.253v22.683c0 1.242-1.024 2.253-2.29 2.253h-5.141l-2.85 4.495-2.851-4.495H22.78c-1.266 0-2.29-1.01-2.29-2.253v-2.498"
           stroke="#a6e1d6"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"></path><path
+          stroke-linejoin="round"
+        >
+        </path><path
           d="M37.546 1H3.435A2.444 2.444 0 0 0 1 3.436v21.928A2.444 2.444 0 0 0 3.436 27.8h5.482l3.046 4.873 3.045-4.873h22.536a2.444 2.444 0 0 0 2.437-2.436V3.436A2.443 2.443 0 0 0 37.545 1"
           stroke="#fff"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"></path><path
+          stroke-linejoin="round"
+        >
+        </path><path
           d="M20.492 16.836a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872m-9.746 0a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872m19.491 0a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872"
-          fill="#fff"></path>
+          fill="#fff"
+        >
+        </path>
       </svg>
       <span class="text-xl font-bold">{dict.common.button.btnLecture}</span>
     </a>
@@ -47,39 +43,41 @@ const { dict } = useI18n(Astro.url);
       href={getLocalizedHref("/patient-info#PreCorrection", lang)}
       class="hover:shadow-[0_0_4px_3px_#0003] flex flex-col justify-center items-center gap-4 w-40 h-35 rounded-2xl text-primary border border-primary"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="84"
-        height="50"
-        viewBox="0 0 84 50"
-        fill="none"
-        ><path
+      <svg xmlns="http://www.w3.org/2000/svg" width="84" height="50" viewBox="0 0 84 50" fill="none">
+        <path
           d="m22.8 29.416-4.148 8.436M16.96 28.83l-2.495 5.073m54.889-4.193-4.15 8.433m-1.693-9.018-2.495 5.072"
           stroke="#a6e1d6"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"></path>
+          stroke-linejoin="round"
+        >
+        </path>
         <path
           d="M39.863 7.76c-2.533.549-4.7 2.276-5.837 4.701a11.52 11.52 0 0 1-6.442 5.915m28.422.048a11.5 11.5 0 0 1-6.588-5.976c-1.098-2.342-3.161-4.03-5.585-4.631m.292-5.377h8.791c6.575 0 11.903 5.372 11.903 12m-46.185.995v-.998c0-6.628 5.328-12 11.902-12h8.842"
           stroke="#4570b6"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"></path>
+          stroke-linejoin="round"
+        >
+        </path>
         <path
           d="M42.34 8.322c1.855-.304 3.115-2.066 2.814-3.936s-2.049-3.14-3.904-2.836c-1.855.303-3.114 2.065-2.813 3.935s2.049 3.14 3.904 2.837m-6.782 23.383a8.01 8.01 0 0 1 6.15-2.874h.018a8.01 8.01 0 0 1 6.156 2.903l.031.038m-43.087 9.35c2.697 4.676 7.723 7.818 13.475 7.818s10.69-3.088 13.403-7.698M3.737 37.817l-1.891.818a17.6 17.6 0 0 1-.846-5.4c0-9.616 7.73-17.412 17.27-17.412s17.27 7.794 17.27 17.411c0 1.885-.297 3.7-.846 5.401l-2-.903m19.05 3.39c2.697 4.676 7.723 7.818 13.475 7.818s10.69-3.088 13.403-7.698m-27.968-3.425-1.891.818a17.6 17.6 0 0 1-.846-5.4c0-9.616 7.73-17.412 17.27-17.412s17.27 7.794 17.27 17.411c0 1.885-.297 3.7-.846 5.401l-2-.903M15.396 12.86v5.064m52.658-5.064v5.064"
           stroke="#4570b6"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"></path>
+          stroke-linejoin="round"
+        >
+        </path>
         <path
           d="M19.976 43.113c5.805-.95 9.747-6.464 8.804-12.316s-6.41-9.827-12.216-8.877-9.746 6.464-8.804 12.317 6.411 9.826 12.216 8.876m46.915-.001c5.805-.95 9.747-6.464 8.804-12.317S69.284 20.97 63.48 21.92s-9.746 6.464-8.804 12.316 6.412 9.827 12.216 8.877"
           stroke="#a6e1d6"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"></path>
+          stroke-linejoin="round"
+        >
+        </path>
       </svg>
-      <span class="text-xl font-bold">{dict.common.button.btnPreOperative}</span
-      >
+      <span class="text-xl font-bold">{dict.common.button.btnPreOperative}</span>
     </a>
   </div>
 </div>

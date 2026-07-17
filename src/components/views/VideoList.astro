@@ -4,10 +4,7 @@ import { ALL_VIDEOS, VIDEO_TABS, type VideoType } from "@/data/videoData";
 import { useI18n } from "@/i18n/utils";
 const { dict } = useI18n(Astro.url);
 const defaultType = "smilepro";
-const typeConfig: Record<
-  VideoType,
-  { bg: string; label: string; color: string }
-> = {
+const typeConfig: Record<VideoType, { bg: string; label: string; color: string }> = {
   smilepro: { bg: "bg-[#4570B6]", label: "SMILE Pro", color: "#4570B6" },
   smile: { bg: "bg-[#30ABE2]", label: "SMILE", color: "#30ABE2" },
   icl: { bg: "bg-[#EB981A]", label: "ICL", color: "#EB981A" },
@@ -18,17 +15,13 @@ const typeConfig: Record<
   <div class="search mb-10 lg:mb-18 px-7 md:px-0">
     <div class="border border-primary flex w-full md:w-fit mx-auto">
       <div class="center p-3 bg-primary size-13">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="25"
-          viewBox="0 0 24 25"
-          fill="none"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
           <g clip-path="url(#a)">
             <path
               d="M15.818 18.349c-4.536 3.166-10.583 2.091-13.81-2.199-3.101-4.124-2.56-9.959 1.276-13.518 3.739-3.47 9.54-3.512 13.392-.103 3.983 3.526 4.63 9.726 1.053 14.057q.194.209.395.418l5.45 5.7c.555.58.568 1.395.035 1.919-.538.529-1.35.5-1.905-.076-.928-.965-1.85-1.935-2.776-2.902q-1.481-1.547-2.961-3.096c-.056-.058-.098-.13-.15-.2zm-5.793-.797c4.077.016 7.403-3.315 7.425-7.434.021-4.105-3.288-7.46-7.377-7.481-4.096-.022-7.433 3.31-7.449 7.433-.015 4.118 3.296 7.465 7.401 7.482"
-              fill="#fff"></path>
+              fill="#fff"
+            >
+            </path>
           </g>
         </svg>
       </div>
@@ -52,9 +45,7 @@ const typeConfig: Record<
         <button
           data-tab-key={tab.key}
           class={`py-7 transition-colors cursor-pointer ${
-            defaultType === tab.key
-              ? "bg-primary text-white"
-              : "text-primary border-b border-[#4570b64d]"
+            defaultType === tab.key ? "bg-primary text-white" : "text-primary border-b border-[#4570b64d]"
           }`}
         >
           {tab.label}
@@ -63,9 +54,7 @@ const typeConfig: Record<
     }
   </div>
 
-  <div
-    class="video-list overflow-hidden grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-9 w-full lg:w-fit mx-auto"
-  >
+  <div class="video-list overflow-hidden grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-9 w-full lg:w-fit mx-auto">
     {
       ALL_VIDEOS.map((item, index) => {
         const hasDefault = item.type.includes(defaultType);
@@ -79,12 +68,7 @@ const typeConfig: Record<
             data-en-name={item.enName || ""}
             style={{ display: hasDefault ? "block" : "none" }}
           >
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block size-full"
-            >
+            <a href={item.link} target="_blank" rel="noopener noreferrer" class="block size-full">
               <Image
                 src={item.img}
                 alt={item.name}
@@ -112,21 +96,11 @@ const typeConfig: Record<
                 <h3
                   set:html={item.title}
                   class="video-title text-sm lg:text-base font-bold tracking-wider leading-normal mb-1 pb-4 lg:pb-7"
-                  style={
-                    currentConfig ? `--title-color: ${currentConfig.color}` : ""
-                  }
+                  style={currentConfig ? `--title-color: ${currentConfig.color}` : ""}
                 />
                 <p class="flex flex-wrap items-baseline gap-x-1.5 mt-1">
-                  {item.name && (
-                    <span class="text-sm lg:text-base font-semibold tracking-wider">
-                      {item.name}
-                    </span>
-                  )}
-                  {item.enName && (
-                    <span class="text-xs lg:text-sm font-bold tracking-wider">
-                      {item.enName}
-                    </span>
-                  )}
+                  {item.name && <span class="text-sm lg:text-base font-semibold tracking-wider">{item.name}</span>}
+                  {item.enName && <span class="text-xs lg:text-sm font-bold tracking-wider">{item.enName}</span>}
                 </p>
               </div>
             </a>
@@ -139,9 +113,7 @@ const typeConfig: Record<
 <script>
   function initVideoFilter() {
     const container = document.getElementById("video-tabs-container");
-    const searchInput = document.getElementById(
-      "video-search",
-    ) as HTMLInputElement | null;
+    const searchInput = document.getElementById("video-search") as HTMLInputElement | null;
     if (!container) return;
 
     const tabs = container.querySelectorAll("button");
@@ -161,11 +133,9 @@ const typeConfig: Record<
         // 切换 Tab 激活状态的 class
         tabs.forEach((t) => {
           if (t === tab) {
-            t.className =
-              "py-7 transition-colors cursor-pointer bg-primary text-white";
+            t.className = "py-7 transition-colors cursor-pointer bg-primary text-white";
           } else {
-            t.className =
-              "py-7 transition-colors cursor-pointer text-primary border-b border-[#4570b64d]";
+            t.className = "py-7 transition-colors cursor-pointer text-primary border-b border-[#4570b64d]";
           }
         });
 
@@ -197,45 +167,30 @@ const typeConfig: Record<
         const typesStr = htmlCard.getAttribute("data-types") || "";
         const typesArray = typesStr.split(",");
         const name = htmlCard.getAttribute("data-name") || "";
-        const enName = (
-          htmlCard.getAttribute("data-en-name") || ""
-        ).toLowerCase(); // 转小写用于匹配
+        const enName = (htmlCard.getAttribute("data-en-name") || "").toLowerCase(); // 转小写用于匹配
 
         // 条件 1: 判定 Tab 分类是否匹配
         const matchesType = typesArray.includes(currentType);
 
         // 条件 2: 判定 搜索框 关键词是否匹配 (中文名包含 或 英文名包含)
         // 如果 searchQuery 为空，则默认视为匹配成功
-        const matchesSearch =
-          !searchQuery ||
-          name.includes(searchQuery) ||
-          enName.includes(searchQuery);
+        const matchesSearch = !searchQuery || name.includes(searchQuery) || enName.includes(searchQuery);
 
         // 只有两个条件同时满足才显示
         if (matchesType && matchesSearch) {
           htmlCard.style.display = "block";
 
-          const labelEl = htmlCard.querySelector(
-            "[data-label]",
-          ) as HTMLElement | null;
-          const titleEl = htmlCard.querySelector(
-            ".video-title",
-          ) as HTMLElement | null;
+          const labelEl = htmlCard.querySelector("[data-label]") as HTMLElement | null;
+          const titleEl = htmlCard.querySelector(".video-title") as HTMLElement | null;
 
           if (labelEl) {
             const targetBg = labelEl.getAttribute(`data-${currentType}-bg`);
             const targetText = labelEl.getAttribute(`data-${currentType}-text`);
-            const targetColor = labelEl.getAttribute(
-              `data-${currentType}-color`,
-            );
+            const targetColor = labelEl.getAttribute(`data-${currentType}-color`);
 
             if (targetBg && targetText) {
               labelEl.textContent = targetText;
-              labelEl.classList.remove(
-                "bg-[#4570B6]",
-                "bg-[#30ABE2]",
-                "bg-[#EB981A]",
-              );
+              labelEl.classList.remove("bg-[#4570B6]", "bg-[#30ABE2]", "bg-[#EB981A]");
               labelEl.classList.add(targetBg);
             }
 
@@ -261,11 +216,7 @@ const typeConfig: Record<
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 50%,
-        rgba(0, 0, 0, 0.2)
-      );
+      background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.2));
       pointer-events: none;
     }
   }

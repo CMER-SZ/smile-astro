@@ -1,9 +1,5 @@
 ---
-import {
-  useI18n,
-  useTranslations,
-  getLocalizedHref,
-} from "@/i18n/utils";
+import { useI18n, useTranslations, getLocalizedHref } from "@/i18n/utils";
 import { Icon } from "astro-icon/components";
 // const lang = getLangFromUrl(Astro.url);
 const { dict, lang } = useI18n(Astro.url);
@@ -44,15 +40,10 @@ const navList = [
   <div class="z-50 w-full bg-[#4f6fb1] text-[#d9eaed] flex">
     {
       navList.map((item) => (
-        <a
-          href={getLocalizedHref(item.href, lang)}
-          class="fixed-item w-1/4 center py-4"
-        >
+        <a href={getLocalizedHref(item.href, lang)} class="fixed-item w-1/4 center py-4">
           <div class="fixed-link w-full flex flex-col justify-center items-center gap-4">
             <Icon name={`${item.icon}`} class="size-7" />
-            <span class="text-[10px] tracking-widest whitespace-nowrap">
-              {item.label}
-            </span>
+            <span class="text-[10px] tracking-widest whitespace-nowrap">{item.label}</span>
           </div>
         </a>
       ))
