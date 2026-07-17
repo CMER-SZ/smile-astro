@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-27 11:48:40
+ * @LastEditTime: 2026-07-17 15:21:05
  * @FilePath: /src/i18n/utils.ts
  * @Description: 多语言公共函数
  */
@@ -11,9 +11,9 @@ import { ui, type Lang } from "./ui";
  * 路由前缀与语言代码的映射表
  */
 const langMap: Record<string, Lang> = {
-  "cn": "zh-cn",
+  cn: "zh-cn",
   // "en": "en",
-  "zh-hk": "zh-hk"
+  "zh-hk": "zh-hk",
 };
 
 /**
@@ -35,7 +35,7 @@ export function getLangFromUrl(url: URL, currentLocale?: string): Lang {
 export function useTranslations(lang: string) {
   const dictKey = langMap[lang] || lang;
   const dictionary = ui[dictKey as keyof typeof ui] || ui["zh-hk"];
-  
+
   /**
    * @param {string} key - 字典中的键路径，支持点语法 (例如 'common.menu.about')
    */
@@ -51,8 +51,8 @@ export function useTranslations(lang: string) {
  */
 export const i18nPaths = [
   { params: { lang: undefined } }, // 对应 /
-  { params: { lang: "cn" } },      // 对应 /cn
-  { params: { lang: "en" } },      // 对应 /en
+  { params: { lang: "cn" } }, // 对应 /cn
+  { params: { lang: "en" } }, // 对应 /en
 ];
 
 /**
@@ -72,10 +72,10 @@ export function getLocalizedHref(href: string, lang: string): string {
   const baseHref = href.replace(/^\/(cn|en)/, "");
 
   // 3. 规范化路径，确保以单斜杠开头
-  const cleanHref = baseHref.startsWith('/') ? baseHref : `/${baseHref}`;
-  
+  const cleanHref = baseHref.startsWith("/") ? baseHref : `/${baseHref}`;
+
   // 4. 查找对应的路由前缀 (例如 zh-cn 对应 cn)
-  const prefix = Object.keys(langMap).find(key => langMap[key] === lang);
+  const prefix = Object.keys(langMap).find((key) => langMap[key] === lang);
 
   // 5. 如果是默认语言 (zh-hk) 或找不到前缀，直接返回原路径
   if (!prefix || prefix === "zh-hk") {
@@ -83,7 +83,7 @@ export function getLocalizedHref(href: string, lang: string): string {
   }
 
   // 6. 返回带前缀的路径，并过滤掉双斜杠
-  return `/${prefix}${cleanHref}`.replace(/\/+/g, '/');
+  return `/${prefix}${cleanHref}`.replace(/\/+/g, "/");
 }
 export function useI18n(url: URL) {
   const lang = getLangFromUrl(url);

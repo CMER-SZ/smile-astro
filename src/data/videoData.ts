@@ -21,6 +21,14 @@ export interface VideoItem {
 // 统一管理所有视频数据
 export const ALL_VIDEOS: VideoItem[] = [
   {
+    type: ["smilepro"],
+    name: "王嘉慧",
+    enName: "Cathy",
+    title: "同隱形眼鏡正式分手～",
+    link: "https://youtu.be/YAGjW1TSCqg",
+    img: "https://statichk.cmermedical.com/smile/orthopedic-video/smilepro/smilepro-028-v1.avif",
+  },
+  {
     type: ["smilepro", "icl"],
     name: "群星",
     enName: "",

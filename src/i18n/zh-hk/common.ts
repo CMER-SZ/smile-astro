@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-26 17:32:52
+ * @LastEditTime: 2026-07-17 15:46:37
  * @FilePath: /src/i18n/zh-hk/common.ts
  * @Description: 公共翻译
  */
@@ -16,7 +16,7 @@ export const common = {
     },
     service: {
       title: "矯視服務",
-      smilepro: "SMILE Pro微笑激光矯視",
+      smilepro: "SMILE Pro 2.0微笑激光矯視",
       smile: "SMILE微笑激光矯視",
       icl: "ICL植入式隱形眼鏡",
       presbyopia: "老花矯視",
@@ -31,7 +31,7 @@ export const common = {
     fee: "收費詳情",
     faq: {
       title: "常見問題",
-      smile: "SMILE Pro/SMILE微笑激光矯視",
+      smile: "SMILE Pro 2.0/SMILE微笑激光矯視",
       lasik: "LASIK 激光矯視",
       icl: "ICL植入式隱形眼鏡",
       presbyopia: "老花矯視",

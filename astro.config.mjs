@@ -1,7 +1,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-22 16:53:05
- * @LastEditTime: 2026-05-22 17:30:26
+ * @LastEditTime: 2026-07-17 15:21:32
  * @FilePath: /astro.config.mjs
  * @Description: Astro 配置
  */
@@ -43,14 +43,15 @@ export default defineConfig({
   },
   build: {
     // 将默认的 '_astro' 改为 'assets'
-    assets: 'assets' 
+    assets: "assets",
   },
   image: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "admin.hkcmereye.com",
-      },{
+      },
+      {
         protocol: "https",
         hostname: "statichk.cmermedical.com",
       },

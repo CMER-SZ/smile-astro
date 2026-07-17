@@ -47,12 +47,7 @@ const banners = [
       banners.map((banner, index) => (
         <div class="swiper-slide env-carousel-slide">
           <picture class="block w-full h-full">
-            <source
-              media="(min-width: 1024px)"
-              srcset={banner.pc.src}
-              width="1442"
-              height="813"
-            />
+            <source media="(min-width: 1024px)" srcset={banner.pc.src} width="1442" height="813" />
             <Image
               src={banner.mb}
               alt={banner.alt}

@@ -2,7 +2,7 @@
 /*
  * @Author: 谭洁莹
  * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-05-28 11:12:28
+ * @LastEditTime: 2026-07-17 15:17:08
  * @FilePath: /src/pages/[...lang]/index.astro
  * @Description: 首页
  */
@@ -17,7 +17,6 @@ export function getStaticPaths() {
   return [...i18nPaths];
 }
 const { dict, lang } = useI18n(Astro.url);
-import introAiming from "@/assets/images/index/deco-aiming.svg";
 import featureTitle from "@/assets/images/index/service-feature-title.svg";
 import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
 interface Review {
@@ -31,15 +30,13 @@ const reviewList: Review[] = [
     name: "Yee",
     href: "https://g.co/kgs/vjM7NyN",
     date: "2月1日12:07",
-    commit:
-      "成個手術都有清楚指引👍🏻醫生同姑娘們都超好 勁有耐性so far 術後以黎都完全無問題👍🏻👍🏻👍🏻",
+    commit: "成個手術都有清楚指引👍🏻醫生同姑娘們都超好 勁有耐性so far 術後以黎都完全無問題👍🏻👍🏻👍🏻",
   },
   {
     name: "Wing",
     href: "https://g.co/kgs/rgifBJJ",
     date: "2月1日12:07",
-    commit:
-      "手術過程順暢✨隻眼都復原好快術後嘅跟進都好貼🙆🏻‍♀️想做矯視都可以考慮一下呢間✨",
+    commit: "手術過程順暢✨隻眼都復原好快術後嘅跟進都好貼🙆🏻‍♀️想做矯視都可以考慮一下呢間✨",
   },
   {
     name: "Benedict",
@@ -59,36 +56,31 @@ const reviewList: Review[] = [
     name: "Andy",
     href: "https://g.co/kgs/yAzUwfK",
     date: "2月1日12:07",
-    commit:
-      "做手術過程好smooth, 術後嘅護理同複診都跟進得足。視力已經完全去翻正常人程度",
+    commit: "做手術過程好smooth, 術後嘅護理同複診都跟進得足。視力已經完全去翻正常人程度",
   },
   {
     name: "Milk",
     href: "https://g.co/kgs/7kMRjJ5",
     date: "2月1日12:07",
-    commit:
-      "由預約到術後覆診流程都十分順暢。診所內職員每一個步驟講解十分清楚，令手術當日都沒有太大緊張感",
+    commit: "由預約到術後覆診流程都十分順暢。診所內職員每一個步驟講解十分清楚，令手術當日都沒有太大緊張感",
   },
   {
     name: "Eileen",
     href: "https://g.co/kgs/vECv4wB",
     date: "2月1日12:07",
-    commit:
-      "診所位置方便，旺角及中環都有手術過程安全及快捷醫生講解亦十分細心是你選擇矯視中心的一個安心的選擇",
+    commit: "診所位置方便，旺角及中環都有手術過程安全及快捷醫生講解亦十分細心是你選擇矯視中心的一個安心的選擇",
   },
   {
     name: "Nam",
     href: "https://g.co/kgs/CyiwQGb",
     date: "2月1日12:07",
-    commit:
-      "術前檢查全面、準備充足；術間操作穩定專業，十分安心；術後貼心跟進。",
+    commit: "術前檢查全面、準備充足；術間操作穩定專業，十分安心；術後貼心跟進。",
   },
   {
     name: "Bobo",
     href: "https://g.co/kgs/S3w8ubm",
     date: "2月1日12:07",
-    commit:
-      "環境幾好👍🏻 術後檢查做得很足。so far 做完icl 一個月後 都暫時沒有好唔舒服。無後悔做呢個選擇",
+    commit: "環境幾好👍🏻 術後檢查做得很足。so far 做完icl 一個月後 都暫時沒有好唔舒服。無後悔做呢個選擇",
   },
   {
     name: "Vincy",
@@ -132,7 +124,7 @@ const reviewList: Review[] = [
           <h3
             class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
           >
-            SMILE <br />PRO
+            SMILE <br />PRO 2.0
           </h3>
           <div
             class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
@@ -287,13 +279,9 @@ const reviewList: Review[] = [
         </a>
       </div>
     </div>
-    <div
-      class="center gap-3 xs:gap-6 md:gap-10 lg:gap-18 mb-15 md:mb-40 lg:mb-66"
-    >
+    <div class="center gap-3 xs:gap-6 md:gap-10 lg:gap-18 mb-15 md:mb-40 lg:mb-66">
       <a href={getLocalizedHref("/patient-info", lang)} class="service-button">
-        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider"
-          >{dict.home.service.button.info}</span
-        >
+        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider">{dict.home.service.button.info}</span>
         <svg
           class="hidden lg:block"
           xmlns="http://www.w3.org/2000/svg"
@@ -301,16 +289,15 @@ const reviewList: Review[] = [
           height="29"
           viewBox="0 0 29 29"
           fill="none"
-          ><path
-            d="m2.7 25.779 22.63-22.63"
-            stroke="currentColor"
-            stroke-width="5.4"
-            stroke-linecap="round"></path><path
+        >
+          <path d="m2.7 25.779 22.63-22.63" stroke="currentColor" stroke-width="5.4" stroke-linecap="round"></path><path
             d="M5.998 2.43H26.1v19.44"
             stroke="currentColor"
             stroke-width="4.86"
-            stroke-linecap="round"></path></svg
-        >
+            stroke-linecap="round"
+          >
+          </path>
+        </svg>
       </a>
       <a
         href={getLocalizedHref(
@@ -319,9 +306,9 @@ const reviewList: Review[] = [
         )}
         class="service-button"
       >
-        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider"
-          >{dict.home.service.button.appoint}</span
-        >
+        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider">
+          {dict.home.service.button.appoint}
+        </span>
         <svg
           class="hidden lg:block"
           xmlns="http://www.w3.org/2000/svg"
@@ -329,221 +316,208 @@ const reviewList: Review[] = [
           height="29"
           viewBox="0 0 29 29"
           fill="none"
-          ><path
-            d="m2.7 25.779 22.63-22.63"
-            stroke="currentColor"
-            stroke-width="5.4"
-            stroke-linecap="round"></path><path
+        >
+          <path d="m2.7 25.779 22.63-22.63" stroke="currentColor" stroke-width="5.4" stroke-linecap="round"></path><path
             d="M5.998 2.43H26.1v19.44"
             stroke="currentColor"
             stroke-width="4.86"
-            stroke-linecap="round"></path></svg
-        >
+            stroke-linecap="round"
+          >
+          </path>
+        </svg>
       </a>
     </div>
-    <div
-      class="w-full max-w-7xl mx-auto flex justify-center flex-col lg:flex-row gap-7 lg:gap-20"
-    >
-      <Image
-        src={featureTitle}
-        alt="4大特色"
-        width={350}
-        height={222}
-        class="w-54 md:w-72 lg:w-87 mx-auto"
-      />
+    <div class="w-full max-w-7xl mx-auto flex justify-center flex-col lg:flex-row gap-7 lg:gap-20">
+      <Image src={featureTitle} alt="4大特色" width={350} height={222} class="w-54 md:w-72 lg:w-87 mx-auto" />
       <div class="grid grid-cols-2 relative feature-main">
         <div
           class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 bg-[#F9F9F9] tracking-[0.25em]"
         >
-          <span
-            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
-            >{dict.home.feature.case.type}</span
-          >
+          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
+            {dict.home.feature.case.type}
+          </span>
           <div class="size-16 lg:size-28 5 center">
-            <svg
-              class="size-full object-contain"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 62 64"
-              fill="none"
-              ><path
+            <svg class="size-full object-contain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 64" fill="none">
+              <path
                 d="M5.24 37.535A21.864 21.864 0 1 1 26.502 54.43a21.55 21.55 0 0 1-12.383-3.893"
                 stroke="#4570b6"
                 stroke-width="1.92"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M36.889 47.19c6.355 0 11.507-6.683 11.507-14.926s-5.152-14.926-11.507-14.926-11.507 6.682-11.507 14.926S30.534 47.19 36.889 47.19"
                 stroke="#4570b6"
                 stroke-width="1.92"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M37.78 25.841q.3-.021.603 0c3.017 0 5.473 3.175 5.473 7.111S41.4 40.05 38.383 40.05s-5.474-3.175-5.474-7.097a8.8 8.8 0 0 1 .82-3.75m17.725-8.964c0-5-4.008-10.229-8.935-10.229A8.995 8.995 0 0 0 51.454.96a8.995 8.995 0 0 0 8.935 9.08c-4.941 0-8.935 5.2-8.935 10.199M8.374 53.61c0-3.447-2.773-7.068-6.178-7.068a6.22 6.22 0 0 0 6.178-6.263 6.22 6.22 0 0 0 6.177 6.263c-3.405 0-6.177 3.62-6.177 7.068M5.399 13.875c0-2.485-1.982-5.071-4.439-5.071a4.453 4.453 0 0 0 4.439-4.511 4.453 4.453 0 0 0 4.425 4.482c-2.443.029-4.425 2.615-4.425 5.1m46.015 48.557c0-2.471-1.983-5.071-4.425-5.071a4.454 4.454 0 0 0 4.425-4.482 4.453 4.453 0 0 0 4.439 4.482c-2.457 0-4.44 2.6-4.44 5.07"
                 stroke="#4570b6"
                 stroke-width="1.92"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
+                stroke-linejoin="round"
+              >
+              </path>
             </svg>
           </div>
           <p
             set:html={dict.home.feature.case.title}
             class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
           />
-          <p
-            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
-          >
+          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
             {dict.home.feature.case.intro}
           </p>
         </div>
-        <div
-          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]"
-        >
-          <span
-            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
-            >{dict.home.feature.first.type}</span
-          >
+        <div class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]">
+          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
+            {dict.home.feature.first.type}
+          </span>
           <div class="size-16 lg:size-28 5 center">
-            <svg
-              class="size-full object-contain"
-              viewBox="0 0 55 65"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              ><path
+            <svg class="size-full object-contain" viewBox="0 0 55 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
                 d="M3.877 11.97a2.296 2.296 0 0 0 1.449-2.905A2.296 2.296 0 0 0 2.41 7.637a2.296 2.296 0 0 0-1.45 2.906 2.296 2.296 0 0 0 2.916 1.428Zm16.628-5.627a2.296 2.296 0 0 0 1.449-2.906 2.296 2.296 0 0 0-2.916-1.428 2.296 2.296 0 0 0-1.449 2.905 2.296 2.296 0 0 0 2.916 1.429Z"
                 stroke="#4570b6"
                 stroke-width="1.68"
-                stroke-miterlimit="10"></path><path
+                stroke-miterlimit="10"
+              >
+              </path><path
                 d="m3.878 11.972 4.893 7.265 13.125-4.443-1.39-8.45"
                 stroke="#4570b6"
                 stroke-width="1.68"
-                stroke-miterlimit="10"></path><path
+                stroke-miterlimit="10"
+              >
+              </path><path
                 d="m5.645 10.002 4.116.812.589-5.135m8.074-.003-2.777 3.146L12.06 5.1"
                 stroke="#4570b6"
                 stroke-width="1.68"
-                stroke-miterlimit="10"></path><path
+                stroke-miterlimit="10"
+              >
+              </path><path
                 d="m25.086 25.81-.64.413a3.06 3.06 0 0 0-.917 4.23l6.214 9.566a3.1 3.1 0 0 0 4.253.909l.644-.412a3.06 3.06 0 0 0 .914-4.23l-6.212-9.563a3.097 3.097 0 0 0-4.253-.91zm-5.814 3.736-.643.412a3.06 3.06 0 0 0-.914 4.23l6.214 9.563a3.096 3.096 0 0 0 4.254.91l.64-.413a3.056 3.056 0 0 0 .915-4.23l-6.215-9.565c-.917-1.415-2.831-1.821-4.25-.91zm24.515 4.375-.041-22.735c0-1.924-1.584-3.499-3.517-3.499h-.74c-1.934 0-3.515 1.575-3.515 3.5v13.07"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="m30.895 22.078-.641.412a3.06 3.06 0 0 0-.917 4.23l4.824 7.424a3.093 3.093 0 0 0 4.253.909l.643-.412a3.06 3.06 0 0 0 .915-4.23l-4.821-7.424a3.094 3.094 0 0 0-4.254-.909z"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="m17.347 33.37.953 15.953 5.43 11.835a27.9 27.9 0 0 0 11.544 2.24 27.8 27.8 0 0 0 10.327-2.238s4.022-8.257 5.452-10.941c1.427-2.684 4.008-11.452.492-13.75-1.638-1.071-9.218-2.92-9.218-2.92s-1.716-.594-2.547.88c-1.058 1.883-.862 4.043.73 5.325l4.044 2.795-.706 2.958q-4.596 4.598-9.194 9.19"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M11.475 5.297a2.296 2.296 0 0 0 1.448-2.906A2.296 2.296 0 0 0 10.008.963a2.296 2.296 0 0 0-1.45 2.906 2.296 2.296 0 0 0 2.917 1.428Z"
                 stroke="#4570b6"
                 stroke-width="1.68"
-                stroke-miterlimit="10"></path>
+                stroke-miterlimit="10"
+              >
+              </path>
             </svg>
           </div>
           <p
             set:html={dict.home.feature.first.title}
             class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
           />
-          <p
-            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
-          >
+          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
             {dict.home.feature.first.intro}
           </p>
         </div>
-        <div
-          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]"
-        >
-          <span
-            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
-            >{dict.home.feature.doctor.type}</span
-          >
+        <div class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]">
+          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
+            {dict.home.feature.doctor.type}
+          </span>
           <div class="size-16 lg:size-28 5 center">
-            <svg
-              class="size-full object-contain"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 59 60"
-              fill="none"
-              ><path
+            <svg class="size-full object-contain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 60" fill="none">
+              <path
                 d="M34.115 32.238c6.567-2.77 7.252-10.241 7.965-15.985.385-3.103.507-6.437-1.013-9.29-1.389-2.604-3.95-4.414-6.736-5.338a15.66 15.66 0 0 0-9.795 0c-2.795.933-5.347 2.734-6.736 5.338-1.52 2.844-1.397 6.187-1.013 9.29.713 5.744 1.398 13.215 7.965 15.985"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M21.023 13.736c9.345 0 11.214-1.795 12.149-4.486 0 0 0 4.486 4.672 4.486M22.146 37.284c0 5.505 7.288 10.092 7.288 10.092s7.29-4.587 7.29-10.092m-17.449.916c-3.7 2.877-2.775 7.672-2.775 7.672"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M19.943 58.59h2.763v-3.685c0-4.053-2.763-9.21-6.448-9.21-3.684 0-6.447 5.157-6.447 9.21v3.685h2.763M39.412 38.2c2.877.919 2.877 9.19 2.877 9.19v1.838"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path><path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M42.33 58.59c2.477 0 4.486-2.134 4.486-4.766s-2.009-4.766-4.486-4.766-4.485 2.134-4.485 4.766 2.008 4.766 4.485 4.766m-41.46 0s-.925-13.92 7.4-16.704l13.876-4.64v-5.568m14.576 0v5.568l13.875 4.64c8.325 2.784 7.4 16.705 7.4 16.705"
                 stroke="#4570b6"
                 stroke-width="1.68"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
+                stroke-linejoin="round"
+              >
+              </path>
             </svg>
           </div>
           <p
             set:html={dict.home.feature.doctor.title}
             class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
           />
-          <p
-            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
-          >
+          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
             {dict.home.feature.doctor.intro}
           </p>
         </div>
         <div
           class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 bg-[#F9F9F9] tracking-[0.25em]"
         >
-          <span
-            class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold"
-            >{dict.home.feature.size.type}</span
-          >
+          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
+            {dict.home.feature.size.type}
+          </span>
           <div class="size-18 lg:size-28 5 center">
-            <svg
-              class="size-full object-contain"
-              viewBox="0 0 80 56"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg class="size-full object-contain" viewBox="0 0 80 56" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#a)" fill="#4570b6">
                 <path
                   d="M45.139 55.733H34.03a.91.91 0 0 1-.909-.914v-8.692c0-.504.407-.913.91-.913h11.108c.502 0 .909.409.909.913v8.692a.91.91 0 0 1-.91.914m-10.2-1.828h9.29V47.04h-9.29zm27.051-32.421H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.58H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.579H41.382a.91.91 0 0 1-.91-.914c0-.504.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.504.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.504.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.58H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914M57.805 14.6a.91.91 0 0 1-.909-.914V10.76H21.864v2.925a.91.91 0 0 1-.909.914.91.91 0 0 1-.91-.914V9.847c0-.504.408-.913.91-.913h36.85c.502 0 .91.409.91.913v3.839a.91.91 0 0 1-.91.914"
-                ></path>
-                <path
+                >
+                </path><path
                   d="M39.623 55.905a.91.91 0 0 1-.91-.913v-8.895c0-.505.408-.914.91-.914s.91.41.91.914v8.895a.91.91 0 0 1-.91.913"
-                ></path>
-              </g>
-              <path
+                >
+                </path>
+              </g><path
                 d="M62.495 55.733a.91.91 0 0 1-.91-.914v-40.22h-44v40.22a.91.91 0 0 1-.91.914.91.91 0 0 1-.908-.914V13.686c0-.505.407-.914.909-.914h45.82c.502 0 .91.41.91.914v41.133a.91.91 0 0 1-.91.914"
-                fill="#4570b6"></path><path
+                fill="#4570b6"
+              >
+              </path><path
                 d="M66.837 55.844H12.289a.91.91 0 0 1-.91-.913c0-.505.408-.914.91-.914h54.548c.502 0 .91.409.91.913a.91.91 0 0 1-.91.914"
-                fill="#4570b6"></path><path
+                fill="#4570b6"
+              >
+              </path><path
                 d="M70.56 17.247c0-4.223-3.386-8.641-7.55-8.641A7.597 7.597 0 0 0 70.56.96a7.597 7.597 0 0 0 7.549 7.67c-4.175 0-7.55 4.394-7.55 8.617M6.179 50.116c0-2.913-2.343-5.971-5.219-5.971a5.256 5.256 0 0 0 5.219-5.292 5.255 5.255 0 0 0 5.218 5.292c-2.876 0-5.218 3.058-5.218 5.971"
                 stroke="#4570b6"
                 stroke-width="1.92"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <defs>
-                <clipPath id="a">
-                  <path fill="#fff" d="M11.38 8.934h56.366v46.972H11.38z"
-                  ></path>
-                </clipPath></defs
+                stroke-linejoin="round"
               >
+              </path><defs>
+                <clipPath id="a"><path fill="#fff" d="M11.38 8.934h56.366v46.972H11.38z"></path></clipPath>
+              </defs>
             </svg>
           </div>
-
           <p
             set:html={dict.home.feature.size.title}
             class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
           />
-          <p
-            class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl"
-          >
+          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
             {dict.home.feature.size.intro}
           </p>
         </div>
@@ -563,20 +537,11 @@ const reviewList: Review[] = [
             {
               reviewList.map((review) => (
                 <div class="py-3 lg:py-6 border-dashed border-primary border-b">
-                  <a
-                    href={review.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={review.href} target="_blank" rel="noopener noreferrer">
                     <p class="mb-1.5 lg:mb-2.5 font-light">{review.commit}</p>
                     <div class="flex justify-between items-center">
                       <span class="font-bold">{review.name}</span>
-                      <svg
-                        class="h-4.5 lg:h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 149 25"
-                        fill="none"
-                      >
+                      <svg class="h-4.5 lg:h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149 25" fill="none">
                         <path
                           d="m12.5 0 3.248 8.03 8.64.607-6.633 5.57 2.092 8.406-7.347-4.588-7.347 4.588 2.092-8.406-6.633-5.57 8.64-.607zm30.769 0 3.248 8.03 8.64.607-6.633 5.57 2.092 8.406-7.347-4.588-7.347 4.588 2.093-8.406-6.634-5.57 8.64-.607zm30.77 0 3.247 8.03 8.64.607-6.633 5.57 2.093 8.406-7.347-4.588-7.348 4.588 2.093-8.406-6.634-5.57 8.641-.607zm30.769 0 3.247 8.03 8.641.607-6.634 5.57 2.093 8.406-7.347-4.588-7.348 4.588 2.093-8.406-6.634-5.57 8.641-.607zm30.769 0 3.248 8.03 8.64.607-6.633 5.57 2.092 8.406-7.347-4.588-7.347 4.588 2.093-8.406-6.634-5.57 8.641-.607z"
                           fill="#4570b6"
@@ -609,44 +574,35 @@ const reviewList: Review[] = [
         class="lg:w-146 text-center lg:text-justify leading-[1.75] tracking-[0.3em] lg:text-xl font-light [&_strong]:font-bold"
       />
       <div class="book-button-group">
-        <a
-          href={getLocalizedHref("/patient-info", lang)}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="book-button"
-        >
-          <div
-            class="book-check text-white hover:text-primary bg-primary hover:bg-white"
-          >
-            <svg
-              class="w-19 md:w-25 xl:w-40"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 79 47"
-              fill="none"
-            >
+        <a href={getLocalizedHref("/patient-info", lang)} target="_blank" rel="noopener noreferrer" class="book-button">
+          <div class="book-check text-white hover:text-primary bg-primary hover:bg-white">
+            <svg class="w-19 md:w-25 xl:w-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79 47" fill="none">
               <path
                 d="M21.384 27.108 17.5 35.01m-1.586-8.45-2.338 4.75m51.414-3.927-3.887 7.9m-1.586-8.448-2.337 4.751M37.367 6.825c-2.373.513-4.402 2.131-5.468 4.403a10.8 10.8 0 0 1-6.034 5.54m26.622.045a10.78 10.78 0 0 1-6.17-5.598c-1.029-2.194-2.962-3.774-5.232-4.338m.273-5.037h8.235c6.158 0 11.149 5.032 11.149 11.24m-43.261.932v-.934c0-6.209 4.991-11.24 11.15-11.24h8.281"
                 stroke="currentColor"
                 stroke-width="1.927"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M39.687 7.35c1.737-.285 2.917-1.935 2.635-3.687s-1.92-2.941-3.657-2.657-2.917 1.935-2.635 3.687 1.92 2.941 3.657 2.657m-6.352 21.902a7.5 7.5 0 0 1 5.76-2.692h.018a7.5 7.5 0 0 1 5.766 2.72l.03.034m-40.36 8.759c2.526 4.38 7.234 7.323 12.622 7.323 5.387 0 10.013-2.893 12.554-7.21M3.527 34.977l-1.77.766a16.4 16.4 0 0 1-.793-5.059c0-9.006 7.241-16.309 16.176-16.309 8.936 0 16.177 7.3 16.177 16.31 0 1.765-.279 3.466-.793 5.058l-1.873-.846m17.844 3.176c2.526 4.38 7.234 7.323 12.622 7.323s10.013-2.893 12.554-7.21m-26.197-3.209-1.771.766a16.4 16.4 0 0 1-.793-5.059c0-9.006 7.241-16.309 16.177-16.309s16.176 7.3 16.176 16.31a16.4 16.4 0 0 1-.792 5.058l-1.873-.846M14.448 11.6v4.744M63.773 11.6v4.744"
                 stroke="currentColor"
                 stroke-width="1.927"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M18.74 39.938c5.436-.89 9.128-6.055 8.246-11.537-.883-5.482-6.006-9.204-11.443-8.314s-9.13 6.055-8.247 11.536c.883 5.482 6.006 9.205 11.443 8.315m43.944-.002c5.437-.89 9.129-6.055 8.246-11.536-.882-5.482-6.005-9.205-11.443-8.315s-9.129 6.055-8.246 11.537 6.005 9.204 11.442 8.314"
                 stroke="currentColor"
                 stroke-width="1.927"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
+                stroke-linejoin="round"
+              >
+              </path>
             </svg>
-            <span
-              class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black"
-              >{dict.home.book.button.appoint}</span
-            >
+            <span class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black">
+              {dict.home.book.button.appoint}
+            </span>
           </div>
         </a>
         <a
@@ -667,35 +623,34 @@ const reviewList: Review[] = [
                 stroke="#4570b6"
                 stroke-width="1.927"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M43.718.963H3.814a2.86 2.86 0 0 0-2.85 2.85v25.654a2.86 2.86 0 0 0 2.85 2.85h6.413l3.563 5.7 3.563-5.7h26.365a2.86 2.86 0 0 0 2.85-2.85V3.814a2.86 2.86 0 0 0-2.85-2.85"
                 stroke="#4570b6"
                 stroke-width="1.927"
                 stroke-linecap="round"
-                stroke-linejoin="round"></path>
-              <path
+                stroke-linejoin="round"
+              >
+              </path><path
                 d="M23.768 14.754a1.887 1.887 0 1 1-.001 3.774 1.887 1.887 0 0 1 0-3.774Zm-11.404 0a1.887 1.887 0 1 1 0 3.774 1.887 1.887 0 0 1 0-3.774Zm22.803 0a1.887 1.887 0 1 1 0 3.774 1.887 1.887 0 0 1 0-3.774Z"
                 fill="#fff"
                 stroke="#4570b6"
-                stroke-width="1.927"></path>
+                stroke-width="1.927"
+              >
+              </path>
             </svg>
-            <span
-              class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black text-primary"
-              >{dict.home.book.button.lecture}</span
-            >
+            <span class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black text-primary">
+              {dict.home.book.button.lecture}
+            </span>
           </div>
         </a>
       </div>
     </div>
   </section>
   <IndexEnvironment />
-  <section
-    class="awards mb-11 lg:mb-62 flex flex-col lg:flex-row gap-7 md:gap-10 lg:gap-16"
-  >
-    <h2
-      class="title-normal text-center lg:py-8 lg:pr-11 lg:border-r-2 lg:border-primary"
-    >
+  <section class="awards mb-11 lg:mb-62 flex flex-col lg:flex-row gap-7 md:gap-10 lg:gap-16">
+    <h2 class="title-normal text-center lg:py-8 lg:pr-11 lg:border-r-2 lg:border-primary">
       {dict.home.awards.title}
     </h2>
     <IndexAwards />

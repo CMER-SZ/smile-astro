@@ -8,7 +8,7 @@
 export const home = {
   title: "希瑪微笑矯視中心",
   subtitle: "您的視力 • 我們的使命",
-  intro: `<p>希瑪微笑矯視中心為上市公司「希瑪醫療控股有限公司」旗下的屈光矯視醫療中心。<br class="hidden 2xl:block"/>中心團隊由林順潮教授帶領，加上13名眼科專科醫生、多名註冊視光師及護士組成。<br class="hidden 2xl:block"/>於香港擁有2間微笑矯視中心，均<strong>符合FDA激光矯視標準</strong>，交通便利，環境舒適。<br class="hidden 2xl:block"/>提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro微笑激光矯視、<br class="hidden 2xl:block"/>SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視、LASIK激光矯視等。</p><p>希瑪一直與STAAR Surgical及Zeiss蔡司保持良好的合作關係。於2023年，<strong>STAAR <br class="hidden 2xl:block"/>Surgical</strong>公司宣佈將希瑪微笑矯視中心設立為首間官方認證EVO ICL國際培訓中心。<br class="hidden 2xl:block"/>同年，本中心亦獲得<strong>Zeiss蔡司頒發《全飛秒屈光手術 卓越手術中心》</strong>，而且更是首個<br class="hidden 2xl:block"/>香港矯視中心被評為卓越手術中心。</p>`,
+  intro: `<p>希瑪微笑矯視中心為上市公司「希瑪醫療控股有限公司」旗下的屈光矯視醫療中心。<br class="hidden 2xl:block"/>中心團隊由林順潮教授帶領，加上13名眼科專科醫生、多名註冊視光師及護士組成。<br class="hidden 2xl:block"/>於香港擁有2間微笑矯視中心，均<strong>符合FDA激光矯視標準</strong>，交通便利，環境舒適。<br class="hidden 2xl:block"/>提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro 2.0微笑激光矯視、<br class="hidden 2xl:block"/>SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視、LASIK激光矯視等。</p><p>希瑪一直與STAAR Surgical及Zeiss蔡司保持良好的合作關係。於2023年，<strong>STAAR <br class="hidden 2xl:block"/>Surgical</strong>公司宣佈將希瑪微笑矯視中心設立為首間官方認證EVO ICL國際培訓中心。<br class="hidden 2xl:block"/>同年，本中心亦獲得<strong>Zeiss蔡司頒發《全飛秒屈光手術 卓越手術中心》</strong>，而且更是首個<br class="hidden 2xl:block"/>香港矯視中心被評為卓越手術中心。</p>`,
   service: {
     title: "矯視中心服務",
     smilepro: '適合<br />擔心眼睛無法<br class="hidden lg:block" />對焦太久',
@@ -49,7 +49,7 @@ export const home = {
   },
   book: {
     title: "預約服務",
-    intro: `<p>矯視前先要進行全面術前眼睛檢查，包括屈光檢查、全面眼底檢查、醫生會診為你的眼睛狀況評估及提供矯視方案建議等。如有興趣<strong>進行矯視，立即WhatsApp預約</strong>我們的<strong>術前眼睛檢查服務</strong>。</p><p>如想了解更多有關SMILE Pro/SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視等資訊，或對以上的矯視方式<strong>有疑問，歡迎預約</strong>我們矯視中心的<strong>講座了解更多</strong>。</p>`,
+    intro: `<p>矯視前先要進行全面術前眼睛檢查，包括屈光檢查、全面眼底檢查、醫生會診為你的眼睛狀況評估及提供矯視方案建議等。如有興趣<strong>進行矯視，立即WhatsApp預約</strong>我們的<strong>術前眼睛檢查服務</strong>。</p><p>如想了解更多有關SMILE Pro 2.0/SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視等資訊，或對以上的矯視方式<strong>有疑問，歡迎預約</strong>我們矯視中心的<strong>講座了解更多</strong>。</p>`,
     button: {
       appoint: "術前眼睛檢查",
       lecture: "講座",
