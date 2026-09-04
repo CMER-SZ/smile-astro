@@ -27,7 +27,7 @@ const bookingTitle = isCn ? "预约服务" : "預約服務";
       <div class="UserRatingBox-top">
         <div class="container">
           <div class="UserRatingBox-top-content">
-            <h5 id="user-rating-heading">{sectionTitle}</h5>
+            <h3 id="user-rating-heading">{sectionTitle}</h3>
             <div class="swiperWrapList" id="userRatingSwiper">
               <div class="swiper-wrapper">
                 {
@@ -43,7 +43,7 @@ const bookingTitle = isCn ? "预约服务" : "預約服務";
                         <p class="swiperWrapList-item-text">{item.commit}</p>
                         <div class="swiperWrapList-item-nameStart">
                           <span>{item.name}</span>
-                          <div class="swiperWrapList-item-nameStart-star" aria-label="5星評價">
+                          <div class="swiperWrapList-item-nameStart-star" role="img" aria-label="5星評價">
                             <!-- 移動端五星圖標 (< 992px) -->
                             <svg
                               class="d-lg-none"

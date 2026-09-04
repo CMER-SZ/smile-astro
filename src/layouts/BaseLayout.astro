@@ -57,7 +57,8 @@ if (tdkKey && dict.tdk[tdkKey]) {
       lang={lang}
     />
 
-    <!-- Google Tag Manager (GTM-5M8VLLM) -->
+    <!-- Google Tag Manager (GTM-5M8VLLM) [已按要求暫時註釋以測試 TBT 性能影響] -->
+    <!--
     <script is:inline>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -70,12 +71,14 @@ if (tdkKey && dict.tdk[tdkKey]) {
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-5M8VLLM");
     </script>
+    -->
 
     <!-- Schema.org 診所實體標記 (Local SEO / E-E-A-T) -->
     {showClinicSchema && <SchemaClinic lang={lang} />}
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) [已按要求暫時註釋] -->
+    <!--
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-5M8VLLM"
@@ -83,6 +86,7 @@ if (tdkKey && dict.tdk[tdkKey]) {
         width="0"
         style="display:none;visibility:hidden"></iframe></noscript
     >
+    -->
 
     <Header />
     <main id="main-content">
