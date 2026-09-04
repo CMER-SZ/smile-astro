@@ -1,0 +1,22 @@
+{
+  "name": "香港希瑪微笑矯視中心 CMER Smile",
+  "short_name": "希瑪矯視",
+  "description": "香港希瑪微笑矯視中心 - SMILE Pro 2.0 / ICL / 激光矯視官方網站",
+  "lang": "zh-HK",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4570b6",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

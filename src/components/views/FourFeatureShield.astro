@@ -1,0 +1,38 @@
+---
+// 四大特色標題左側十字醫療圖形（保留 2.2s 描邊生長動效，標記 aria-hidden 確保 RAG 與無障礙純淨）
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class={className} aria-hidden="true">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="176"
+    height="222"
+    viewBox="0 0 176 222"
+    fill="none"
+    aria-hidden="true"
+  >
+    <g clip-path="url(#clip0_10487_141)">
+      <path
+        d="M176 182.689V182.999H151.497V222H97.4096V182.999H67.9331V182.689H176Z"
+        fill="#6C98D8"
+      />
+      <path
+        d="M176 138.607V138.822L56.772 138.607H101V73.8854L151.497 0V138.607H176Z"
+        fill="#6C98D8"
+      />
+      <path
+        d="M56.7718 138.607L56.7785 138.593L56.7718 138.6L101 73.8855L151.497 0H151.49H98.906L0 141.599V182.999H67.9329V182.689H176V138.822L56.7718 138.607Z"
+        fill="#4570B6"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_10487_141">
+        <rect width="176" height="222" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+</div>

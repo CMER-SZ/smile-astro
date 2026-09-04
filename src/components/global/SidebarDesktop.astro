@@ -1,83 +1,343 @@
 ---
-import { getLangFromUrl, getLocalizedHref } from "@/i18n/utils";
+/*
+ * @Author: Antigravity AI
+ * @Date: 2026-09-01
+ * @FilePath: /src/components/global/SidebarDesktop.astro
+ * @Description: 桌面端側邊浮動條 (100% 官方原版 Sidebar.vue 1:1 像素級還原 + 雙 SVG + 原始字階)
+ */
+import { getLangFromUrl, getLocalizedHref, useI18n } from "@/i18n/utils";
+
 const lang = getLangFromUrl(Astro.url);
-import { useI18n } from "@/i18n/utils";
-const { dict } = useI18n(Astro.url);
+const isCn = lang === "zh-cn";
 ---
 
-<div class="sidebar hidden lg:flex items-center group fixed right-0 top-1/2 translate-y-[-45%] z-50 tracking-[0.2em]">
-  <div class="bg-primary text-white [writing-mode:vertical-rl] rounded-l-3xl text-xl font-medium p-5 h-fit">
-    {dict.common.button.more}
+<aside class="Sidebar z-60" aria-label="Desktop Floating Sidebar">
+  <!-- 側邊常駐觸發標籤：了 解 更 多 ・ 預 約 -->
+  <div class="sidebar-trigger">
+    {isCn ? "了 解 更 多 ・ 预 约" : "了 解 更 多 ・ 預 約"}
   </div>
-  <div
-    class="shadow-[-2px_0_7px_3px_#4570b640] hidden group-hover:flex group-hover:flex-col gap-11 py-8 px-4 rounded-l-3xl bg-white transition-all duration-300 ease-in-out"
-  >
+
+  <!-- 展開面板 -->
+  <div class="sidebar-content">
+    <!-- 按鈕 1: 講座 -->
     <a
       href={getLocalizedHref("/ophthalmicInfo/AppointForm", lang)}
-      class="hover:shadow-[0_0_4px_3px_#4570b6ba] flex flex-col justify-center items-center gap-4 w-40 h-35 rounded-2xl bg-primary text-white"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="sidebar-btn sidebar-btn-lecture"
+      data-cta="lecture"
+      data-position="desktop_sidebar"
+      title={isCn ? "预约希玛眼科矫视讲座" : "預約希瑪眼科矯視講座"}
+      aria-label={isCn ? "预约矫视讲座" : "預約矯視講座"}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="59" height="44" viewBox="0 0 59 44" fill="none">
-        <path
-          d="M44.855 10.746h9.892c1.266 0 2.29 1.01 2.29 2.253v22.683c0 1.242-1.024 2.253-2.29 2.253h-5.141l-2.85 4.495-2.851-4.495H22.78c-1.266 0-2.29-1.01-2.29-2.253v-2.498"
-          stroke="#a6e1d6"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+      <div class="sidebar-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="59"
+          height="44"
+          viewBox="0 0 59 44"
+          fill="none"
+          aria-hidden="true"
         >
-        </path><path
-          d="M37.546 1H3.435A2.444 2.444 0 0 0 1 3.436v21.928A2.444 2.444 0 0 0 3.436 27.8h5.482l3.046 4.873 3.045-4.873h22.536a2.444 2.444 0 0 0 2.437-2.436V3.436A2.443 2.443 0 0 0 37.545 1"
-          stroke="#fff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-        </path><path
-          d="M20.492 16.836a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872m-9.746 0a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872m19.491 0a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872"
-          fill="#fff"
-        >
-        </path>
-      </svg>
-      <span class="text-xl font-bold">{dict.common.button.btnLecture}</span>
+          <path
+            d="M44.8548 10.7455H54.7465C56.0134 10.7455 57.0367 11.7566 57.0367 12.9991V35.6817C57.0367 36.9242 56.0134 37.9353 54.7465 37.9353H49.6058L46.7552 42.4304L43.9047 37.9353H22.7814C21.5145 37.9353 20.4912 36.9242 20.4912 35.6817V33.1844"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M37.5455 1H3.43636C2.09636 1 1 2.09636 1 3.43636V25.3636C1 26.7036 2.09636 27.8 3.43636 27.8H8.91818L11.9636 32.6727L15.0091 27.8H37.5455C38.8855 27.8 39.9818 26.7036 39.9818 25.3636V3.43636C39.9818 2.09636 38.8855 1 37.5455 1Z"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M20.492 16.8364C21.8376 16.8364 22.9284 15.7456 22.9284 14.4C22.9284 13.0544 21.8376 11.9636 20.492 11.9636C19.1465 11.9636 18.0557 13.0544 18.0557 14.4C18.0557 15.7456 19.1465 16.8364 20.492 16.8364Z"
+            fill="white"
+          />
+          <path
+            d="M10.7459 16.8364C12.0915 16.8364 13.1823 15.7456 13.1823 14.4C13.1823 13.0544 12.0915 11.9636 10.7459 11.9636C9.40037 11.9636 8.30957 13.0544 8.30957 14.4C8.30957 15.7456 9.40037 16.8364 10.7459 16.8364Z"
+            fill="white"
+          />
+          <path
+            d="M30.2371 16.8364C31.5827 16.8364 32.6735 15.7456 32.6735 14.4C32.6735 13.0544 31.5827 11.9636 30.2371 11.9636C28.8916 11.9636 27.8008 13.0544 27.8008 14.4C27.8008 15.7456 28.8916 16.8364 30.2371 16.8364Z"
+            fill="white"
+          />
+        </svg>
+      </div>
+      <div class="sidebar-text">{isCn ? "讲座" : "講座"}</div>
     </a>
+
+    <!-- 按鈕 2: 術前檢查 -->
     <a
-      href={getLocalizedHref("/patient-info#PreCorrection", lang)}
-      class="hover:shadow-[0_0_4px_3px_#0003] flex flex-col justify-center items-center gap-4 w-40 h-35 rounded-2xl text-primary border border-primary"
+      href={getLocalizedHref("/patient-info#beforeJiaoShi", lang)}
+      class="sidebar-btn sidebar-btn-check"
+      data-cta="patient_info"
+      data-position="desktop_sidebar"
+      title={isCn ? "查看矫视术前眼睛检查流程" : "查看矯視術前眼睛檢查流程"}
+      aria-label={isCn ? "术前眼睛检查" : "術前眼睛檢查"}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="84" height="50" viewBox="0 0 84 50" fill="none">
-        <path
-          d="m22.8 29.416-4.148 8.436M16.96 28.83l-2.495 5.073m54.889-4.193-4.15 8.433m-1.693-9.018-2.495 5.072"
-          stroke="#a6e1d6"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+      <div class="sidebar-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="84"
+          height="50"
+          viewBox="0 0 84 50"
+          fill="none"
+          aria-hidden="true"
         >
-        </path>
-        <path
-          d="M39.863 7.76c-2.533.549-4.7 2.276-5.837 4.701a11.52 11.52 0 0 1-6.442 5.915m28.422.048a11.5 11.5 0 0 1-6.588-5.976c-1.098-2.342-3.161-4.03-5.585-4.631m.292-5.377h8.791c6.575 0 11.903 5.372 11.903 12m-46.185.995v-.998c0-6.628 5.328-12 11.902-12h8.842"
-          stroke="#4570b6"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-        </path>
-        <path
-          d="M42.34 8.322c1.855-.304 3.115-2.066 2.814-3.936s-2.049-3.14-3.904-2.836c-1.855.303-3.114 2.065-2.813 3.935s2.049 3.14 3.904 2.837m-6.782 23.383a8.01 8.01 0 0 1 6.15-2.874h.018a8.01 8.01 0 0 1 6.156 2.903l.031.038m-43.087 9.35c2.697 4.676 7.723 7.818 13.475 7.818s10.69-3.088 13.403-7.698M3.737 37.817l-1.891.818a17.6 17.6 0 0 1-.846-5.4c0-9.616 7.73-17.412 17.27-17.412s17.27 7.794 17.27 17.411c0 1.885-.297 3.7-.846 5.401l-2-.903m19.05 3.39c2.697 4.676 7.723 7.818 13.475 7.818s10.69-3.088 13.403-7.698m-27.968-3.425-1.891.818a17.6 17.6 0 0 1-.846-5.4c0-9.616 7.73-17.412 17.27-17.412s17.27 7.794 17.27 17.411c0 1.885-.297 3.7-.846 5.401l-2-.903M15.396 12.86v5.064m52.658-5.064v5.064"
-          stroke="#4570b6"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-        </path>
-        <path
-          d="M19.976 43.113c5.805-.95 9.747-6.464 8.804-12.316s-6.41-9.827-12.216-8.877-9.746 6.464-8.804 12.317 6.411 9.826 12.216 8.876m46.915-.001c5.805-.95 9.747-6.464 8.804-12.317S69.284 20.97 63.48 21.92s-9.746 6.464-8.804 12.316 6.412 9.827 12.216 8.877"
-          stroke="#a6e1d6"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-        </path>
-      </svg>
-      <span class="text-xl font-bold">{dict.common.button.btnPreOperative}</span>
+          <path
+            d="M22.8001 29.4161L18.6523 37.852"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16.9604 28.8304L14.4648 33.9026"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M69.3535 29.7101L65.2031 38.1432"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M63.5112 29.1246L61.0156 34.1968"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M39.8628 7.76086C37.3301 8.30899 35.1634 10.0363 34.0257 12.4614C32.7422 15.194 30.4243 17.3357 27.584 18.3758"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M56.0058 18.424C53.0965 17.4026 50.7229 15.2315 49.4182 12.448C48.3202 10.1058 46.257 8.41862 43.833 7.81702"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M44.125 2.44006H52.9164C59.4908 2.44006 64.8187 7.81172 64.8187 14.4401"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M18.6338 15.4347V14.4374C18.6338 7.80904 23.9617 2.43738 30.536 2.43738H39.3779"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M42.3405 8.32191C44.1954 8.01835 45.455 6.25623 45.1539 4.3861C44.8528 2.51598 43.1051 1.24603 41.2502 1.54959C39.3953 1.85316 38.1357 3.61528 38.4368 5.4854C38.7379 7.35553 40.4856 8.62548 42.3405 8.32191Z"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M35.5586 31.7049C37.0941 29.876 39.3351 28.8306 41.7086 28.8306C41.7166 28.8306 41.7219 28.8306 41.7272 28.8306C44.1087 28.8359 46.3523 29.8947 47.8825 31.7343L47.9143 31.7717"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M4.82715 41.1221C7.52425 45.7985 12.5498 48.9402 18.3021 48.9402C24.0543 48.9402 28.9923 45.852 31.7053 41.2424"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3.73688 37.8172L1.84599 38.6353C1.29703 36.9348 1 35.1193 1 33.2343C1 23.6193 8.73063 15.8225 18.2699 15.8225C27.8092 15.8225 35.5399 23.6166 35.5399 33.2343C35.5399 35.1193 35.2429 36.9348 34.6939 38.6353L32.6943 37.7316"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M51.7441 41.1221C54.4412 45.7985 59.4668 48.9402 65.219 48.9402C70.9713 48.9402 75.9093 45.852 78.6223 41.2424"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M50.6539 37.8172L48.763 38.6353C48.214 36.9348 47.917 35.1193 47.917 33.2343C47.917 23.6193 55.6476 15.8225 65.1869 15.8225C74.7262 15.8225 82.4569 23.6166 82.4569 33.2343C82.4569 35.1193 82.1598 36.9348 81.6109 38.6353L79.6113 37.7316"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M15.3955 12.86V17.9242"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M68.0537 12.86V17.9242"
+            stroke="#4570B6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M19.9761 43.1134C25.7808 42.1634 29.7226 36.6491 28.7803 30.7967C27.8381 24.9444 22.3687 20.9702 16.564 21.9202C10.7593 22.8702 6.81754 28.3845 7.75977 34.2369C8.702 40.0892 14.1714 44.0634 19.9761 43.1134Z"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M66.8912 43.1119C72.6958 42.162 76.6376 36.6476 75.6954 30.7953C74.7532 24.9429 69.2837 20.9688 63.479 21.9187C57.6744 22.8687 53.7326 28.3831 54.6748 34.2354C55.617 40.0877 61.0865 44.0619 66.8912 43.1119Z"
+            stroke="#A6E1D6"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <div class="sidebar-text">{isCn ? "术前检查" : "術前檢查"}</div>
     </a>
   </div>
-</div>
+</aside>
+
+<style lang="scss">
+  /* 默認隱藏，大於 1024px 桌面端顯示 */
+  .Sidebar {
+    display: none;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-45%) translateX(calc(100% - 64px));
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 99;
+
+    @media screen and (min-width: 1024px) {
+      display: flex;
+    }
+
+    /* 懸停滑出：1:1 對標原版 */
+    &:hover {
+      transform: translateY(-50%) translateX(0);
+      @media screen and (min-width: 1024px) and (max-width: 1440px) {
+        transform: translateY(-50%) translateX(0) scale(0.85);
+        transform-origin: right center;
+      }
+    }
+
+    /* 左側常駐觸發標籤 */
+    .sidebar-trigger {
+      width: 64px;
+      border-radius: 25px 0 0 25px;
+      background: #4570b6;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      color: #ffffff;
+      text-align: center;
+      font-family: var(--font-hk);
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 30px;
+      letter-spacing: 4px;
+      padding: 22px 20px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: -3px 0 10px rgba(69, 112, 182, 0.2);
+      flex-shrink: 0;
+    }
+
+    /* 右側面板 */
+    .sidebar-content {
+      padding: 30px 18px;
+      background: #ffffff;
+      border-radius: 0 0 0 25px;
+      box-shadow: -4px 4px 15px rgba(69, 112, 182, 0.2);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+
+      .sidebar-btn {
+        width: 160px;
+        height: 140px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+        .sidebar-icon {
+          margin-bottom: 14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .sidebar-text {
+          text-align: center;
+          text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+          font-family: var(--font-hk);
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: 4px;
+        }
+      }
+
+      /* 藍卡：講座 */
+      .sidebar-btn-lecture {
+        background: #4570b6;
+        margin-bottom: 30px;
+
+        .sidebar-text {
+          color: #ffffff;
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 8px 4px rgba(69, 112, 182, 0.5);
+          transform: translateY(-2px);
+        }
+      }
+
+      /* 白卡：術前檢查 */
+      .sidebar-btn-check {
+        background: #ffffff;
+        border: 1px solid #4570b6;
+
+        .sidebar-text {
+          color: #4570b6;
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.15);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+</style>

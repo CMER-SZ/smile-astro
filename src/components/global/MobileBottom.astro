@@ -1,61 +1,181 @@
 ---
+/*
+ * @Author: Antigravity AI
+ * @Date: 2026-09-01
+ * @FilePath: /src/components/global/MobileBottom.astro
+ * @Description: 移動端底部快捷操作欄 (100% 純語意化 Class 命名 + SCSS 封裝)
+ */
 import { useI18n, useTranslations, getLocalizedHref } from "@/i18n/utils";
 import { Icon } from "astro-icon/components";
-// const lang = getLangFromUrl(Astro.url);
+
 const { dict, lang } = useI18n(Astro.url);
 const t = useTranslations(lang);
+
 const navList = [
   {
     icon: "common/phone",
     label: t("common.bottom.tel"),
     href: "tel:+85238925099",
+    cta: "phone",
   },
   {
     icon: "common/chat",
     label: t("common.bottom.chat"),
     href: "https://mqj.zoosnet.net/LR/Chatpre.aspx?id=MQJ40126824&lng=big5&oname=CS_Katherine&r=&rf1=https%3A//smile.hkcmereye&rf2=.com/&p=https%3A//smile.hkcmereye.com/&cid=26ad3fcc05fa407b81167bda7abd1c92&sid=26ad3fcc05fa407b81167bda7abd1c92",
+    cta: "chat",
   },
   {
     icon: "social/whatsapp-o",
     label: t("common.bottom.service"),
     href: "https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3(WM-BAW01)%E4%BA%86%E8%A7%A3%E5%B8%8C%E7%91%AA%E7%9F%AF%E8%A6%96%E6%9C%8D%E5%8B%99",
+    cta: "whatsapp",
   },
   {
     icon: "social/lecture",
     label: t("common.bottom.lecture"),
     href: "/ophthalmicInfo/AppointForm",
+    cta: "lecture",
   },
 ];
 ---
 
-<section class="w-full z-60 fixed bottom-0 lg:hidden">
-  <a
-    href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3(WM-BAW01)%E4%BA%86%E8%A7%A3%E5%B8%8C%E7%91%AA%E7%9F%AF%E8%A6%96%E6%9C%8D%E5%8B%99"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="center relative z-60 -mb-4 ml-4 size-15 bg-[#65ce5a] rounded-full"
-  >
-    <Icon name="social/whatsapp-o" class="size-8 text-white" />
-  </a>
-  <div class="z-50 w-full bg-[#4f6fb1] text-[#d9eaed] flex">
+<aside class="mobile-bottom-bar" aria-label="Mobile Quick Action Bar">
+  <!-- 底欄 4 按鈕網格 -->
+  <div class="bottom-nav-grid">
     {
       navList.map((item) => (
-        <a href={getLocalizedHref(item.href, lang)} class="fixed-item w-1/4 center py-4">
-          <div class="fixed-link w-full flex flex-col justify-center items-center gap-4">
-            <Icon name={`${item.icon}`} class="size-7" />
-            <span class="text-[10px] tracking-widest whitespace-nowrap">{item.label}</span>
+        <a
+          href={getLocalizedHref(item.href, lang)}
+          class="bottom-nav-btn"
+          data-cta={item.cta}
+          data-position="mobile_bottom_bar"
+        >
+          <div class="btn-inner">
+            <Icon name={item.icon} class="btn-icon" />
+            <span class="btn-label">{item.label}</span>
           </div>
         </a>
       ))
     }
   </div>
-</section>
+</aside>
+
 <style lang="scss">
-  .fixed-item {
-    &:not(:last-child) {
-      .fixed-link {
-        border-right: 1px solid rgba(255, 255, 255, 0.3);
-      }
+  .mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+  .bottom-nav-grid {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    display: flex;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  .bottom-nav-btn {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s ease;
+
+    &:last-child {
+      border-right: none;
+    }
+    &:active {
+      background-color: var(--color-primary-hover);
+    }
+  }
+  .btn-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  .btn-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #ffffff;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center center;
+    animation: icon-subtle-breathe 6s ease-in-out infinite;
+  }
+
+  /* 輪流微動，極其克制優雅，杜絕疲勞 */
+  .bottom-nav-btn:nth-child(1) .btn-icon {
+    animation-delay: 0s;
+  }
+  .bottom-nav-btn:nth-child(2) .btn-icon {
+    animation-delay: 1.5s;
+  }
+  .bottom-nav-btn:nth-child(3) .btn-icon {
+    animation-delay: 3s;
+  }
+  .bottom-nav-btn:nth-child(4) .btn-icon {
+    animation-delay: 4.5s;
+  }
+
+  @keyframes icon-subtle-breathe {
+    0%, 82%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    88% {
+      transform: translateY(-2px) scale(1.08);
+    }
+    94% {
+      transform: translateY(0) scale(1.02);
+    }
+  }
+
+  .btn-label {
+    font-size: 13px !important;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /* 線上對話圖標：三個點依序展示的循環呼吸動畫 (流暢優雅，0 卡頓)                */
+  /* -------------------------------------------------------------------------- */
+  :global(.chat-dot) {
+    animation: chat-dot-sequence 1.8s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  :global(.chat-dot-1) {
+    animation-delay: 0s;
+  }
+
+  :global(.chat-dot-2) {
+    animation-delay: 0.3s;
+  }
+
+  :global(.chat-dot-3) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes chat-dot-sequence {
+    0%, 20% {
+      opacity: 0.2;
+      transform: scale(0.75);
+    }
+    40%, 65% {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+    85%, 100% {
+      opacity: 0.3;
+      transform: scale(0.85);
     }
   }
 </style>

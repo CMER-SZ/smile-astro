@@ -25,7 +25,7 @@ export default defineConfig({
   site: "https://smile.hkcmereye.com",
   i18n: {
     defaultLocale: "zh-hk",
-    locales: ["zh-hk", "en", "cn"],
+    locales: ["zh-hk", "cn"],
     routing: {
       prefixDefaultLocale: false,
       fallbackType: "redirect",

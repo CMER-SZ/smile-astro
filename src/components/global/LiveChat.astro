@@ -1,0 +1,75 @@
+---
+/**
+ * LiveChat.astro
+ * 商務通智能延遲加載組件（預先注入 CSS 防止樣式丟失 + MutationObserver 防 Lighthouse 扣分 + 用戶互動才觸發）
+ */
+---
+
+<script is:inline>
+(function() {
+  var isLoaded = false;
+
+  // 1. 動態補齊商務通圖片 alt 與無障礙屬性
+  var fixAltObserver = new MutationObserver(function() {
+    var imgs = document.querySelectorAll('div[id^="LR"] img:not([alt]), div[id^="LR"] img[alt=""]');
+    for (var i = 0; i < imgs.length; i++) {
+      var src = imgs[i].getAttribute('src') || '';
+      if (src.indexOf('close.png') !== -1) {
+        imgs[i].setAttribute('alt', '關閉諮詢視窗');
+      } else if (src.indexOf('jiantou.png') !== -1) {
+        imgs[i].setAttribute('alt', '展開在線客服');
+      } else {
+        imgs[i].setAttribute('alt', '希瑪客服');
+      }
+      imgs[i].setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // 2. 真正的延遲加載邏輯
+  function loadZoosnet() {
+    if (isLoaded) return;
+    isLoaded = true;
+
+    // A. 啟動 DOM 屬性修復監聽（10 秒後自動銷毀，覆蓋彈窗生命週期且防內存洩漏）
+    try {
+      fixAltObserver.observe(document.body || document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+      setTimeout(function() {
+        fixAltObserver.disconnect();
+      }, 10000);
+    } catch (e) {}
+
+    // B. 先插入核心 CSS，徹底解決動態加載時 document.write 被攔截導致的樣式丟失問題
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = 'https://mqj.zoosnet.net/js/JS5_2.css';
+    document.head.appendChild(link);
+
+    // C. 動態插入希瑪微笑矯視專屬商務通腳本
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://mqj.zoosnet.net/JS/LsJS.aspx?siteid=MQJ40126824&float=1&lng=big5';
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  // 3. 綁定真實互動時機（滑動、滾動、手機觸控）才觸發
+  var events = ['scroll', 'mousemove', 'touchstart'];
+  var triggerHandler = function() {
+    loadZoosnet();
+    for (var i = 0; i < events.length; i++) {
+      window.removeEventListener(events[i], triggerHandler);
+    }
+  };
+
+  for (var j = 0; j < events.length; j++) {
+    window.addEventListener(events[j], triggerHandler, { passive: true, once: true });
+  }
+
+  // 4. 兜底保障：若訪客完全未操作，5 秒後依然自動載入，確保不遺漏潛在諮詢客戶
+  setTimeout(triggerHandler, 5000);
+})();
+</script>

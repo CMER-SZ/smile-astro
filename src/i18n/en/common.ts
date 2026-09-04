@@ -1,5 +1,6 @@
 export const common = {
   menu: {
+    home: "Home",
     about: {
       title: "About",
       group: "集團及中心簡介",

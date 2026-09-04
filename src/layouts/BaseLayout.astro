@@ -1,19 +1,25 @@
 ---
-import "@/styles/global.css";
+import "@/styles/comm.css";
 import Header from "@/components/global/Header.astro";
 import Footer from "@/components/global/Footer.astro";
 import ShareMobile from "@/components/global/ShareMobile.astro";
 import MobileBottom from "@/components/global/MobileBottom.astro";
 import SidebarDesktop from "@/components/global/SidebarDesktop.astro";
 import Backtop from "@/components/global/Backtop.astro";
+import LiveChat from "@/components/global/LiveChat.astro";
+import SEOHead from "@/components/seo/SEOHead.astro";
+import SchemaClinic from "@/components/seo/SchemaClinic.astro";
 import { useI18n } from "@/i18n/utils";
 import { ui } from "@/i18n/ui";
+
 type TDKKeys = keyof (typeof ui)["zh-hk"]["tdk"];
 interface Props {
   tdkKey?: TDKKeys; // 接收如 "home" 或 "about"
   seo?: any; // 兼容某些特殊页面手动传入完整的 SEO 对象
+  showClinicSchema?: boolean;
 }
-const { tdkKey, seo } = Astro.props;
+
+const { tdkKey, seo, showClinicSchema = true } = Astro.props;
 const { dict, lang } = useI18n(Astro.url);
 let finalSeo = seo || dict.tdk.home;
 if (tdkKey && dict.tdk[tdkKey]) {
@@ -25,14 +31,34 @@ if (tdkKey && dict.tdk[tdkKey]) {
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4570b6" />
+
+    <!-- Google 官方搜尋標準 Favicon 與多設備圖標矩陣 -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
-    <title>{finalSeo.title}</title>
-    <meta name="description" content={finalSeo.description} />
-    <meta name="keywords" content={finalSeo.keywords} />
-    <!-- <script is:inline>
+
+    <!-- Google Fonts API (預設註釋停用，優先使用本機原生系統字體棧，杜絕阻塞 PageSpeed 評分；未來若需開啟直接解除註釋) -->
+    <!--
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    -->
+
+    <!-- 現代化 SEO 規範 Header -->
+    <SEOHead
+      title={finalSeo.title}
+      description={finalSeo.description}
+      keywords={finalSeo.keywords}
+      lang={lang}
+    />
+
+    <!-- Google Tag Manager (GTM-5M8VLLM) -->
+    <script is:inline>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -42,13 +68,24 @@ if (tdkKey && dict.tdk[tdkKey]) {
         j.async = true;
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-XXXXXXX");
-    </script> -->
+      })(window, document, "script", "dataLayer", "GTM-5M8VLLM");
+    </script>
+
+    <!-- Schema.org 診所實體標記 (Local SEO / E-E-A-T) -->
+    {showClinicSchema && <SchemaClinic lang={lang} />}
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5M8VLLM"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+
     <Header />
-    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <SidebarDesktop />
@@ -56,6 +93,7 @@ if (tdkKey && dict.tdk[tdkKey]) {
     <ShareMobile />
     <MobileBottom />
     <Footer />
+    <LiveChat />
   </body>
 </html>
 
@@ -71,6 +109,6 @@ if (tdkKey && dict.tdk[tdkKey]) {
 
   main {
     flex: 1;
-    overflow: hidden;
+    overflow-x: clip;
   }
 </style>

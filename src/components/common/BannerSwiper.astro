@@ -1,130 +1,287 @@
 ---
 /*
- * @Author: 谭洁莹
- * @Date: 2026-05-14 09:49:59
- * @LastEditTime: 2026-07-17 15:19:47
+ * @Author: Antigravity AI
+ * @Date: 2026-09-02
  * @FilePath: /src/components/common/BannerSwiper.astro
- * @Description: 轮播图Banner组件
+ * @Description: 首頁頂部輪播圖 Banner 組件 (1280px 罐頭級嚴絲合縫對齊 + 100% 純語意化類名 + SCSS @apply 封裝 + 0 CLS 防抖動 + 智慧多語言連結轉化)
  */
-import { Image } from "astro:assets";
 import { useI18n, getLocalizedHref } from "@/i18n/utils";
 
-// 1. 获取多语言状态
-const { dict, lang } = useI18n(Astro.url);
+const { lang } = useI18n(Astro.url);
 
-// 2. 映射当前语言对应的 API gid
 const gidMap: Record<string, string> = {
-  "zh-hk": "1", // 繁体中文
-  "zh-cn": "2", // 简体中文
-  en: "3", // 英文
+  "zh-hk": "1",
+  "zh-cn": "2",
+  en: "3",
 };
 const gid = gidMap[lang] || "1";
 
-// 3. 定义接口地址与域名（用于补全图片绝对路径）
-const DOMAIN_URL = "https://admin.hkcmereye.com";
-const apiUrl = `${DOMAIN_URL}/api.php/cms/slide/gid/${gid}/num/10`;
+const NEW_CMS_URL = "https://cms.cmermedical.com.hk";
+const OLD_CMS_URL = "https://admin.hkcmereye.com";
 
-// 4. 定义 Banner 数据接口类型
+interface RawSlideItem {
+  id: number | string;
+  pic?: string;
+  pic_mobile?: string;
+  mobilepic?: string;
+  link?: string;
+  title?: string;
+  subtitle?: string;
+}
+
 interface BannerItem {
   id: string;
-  pic: string; // PC端图片相对路径
-  mobilepic: string; // 移动端图片相对路径
-  link: string; // 跳转目标链接
-  subtitle: string; // 标题/Alt 文案
+  pcImg: string;
+  mbImg: string;
+  link: string;
+  title: string;
+  subtitle: string;
+  isExternal: boolean;
 }
 
 let banners: BannerItem[] = [];
-let errorMsg = "";
 
-// 5. 异步获取后台 Banner 数据
+function sanitizeUrl(rawUrl?: string): string {
+  if (!rawUrl) return "";
+  return rawUrl.replace(/&amp;/g, "&").trim();
+}
+
+function checkIsExternal(url: string): boolean {
+  if (!url || url.startsWith("#")) return false;
+  return (
+    /^[a-z][a-z0-9+.-]*:\/\//i.test(url) ||
+    url.startsWith("//") ||
+    url.startsWith("tel:") ||
+    url.startsWith("mailto:") ||
+    url.startsWith("whatsapp:")
+  );
+}
+
+// 優先請求新 CMS 官方接口 (帶 X-Site-Id: smile)
 try {
-  const response = await fetch(apiUrl);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  const resData = await response.json();
-  if (resData && resData.code === 1 && Array.isArray(resData.data)) {
-    banners = resData.data;
+  const newApiUrl = `${NEW_CMS_URL}/api/v1/slides?gid=${gid}&pageSize=10`;
+  const response = await fetch(newApiUrl, {
+    headers: { "X-Site-Id": "smile" },
+    signal: AbortSignal.timeout(4000),
+  });
+  if (response.ok) {
+    const resData = await response.json();
+    if (resData && resData.code === 0 && Array.isArray(resData.data) && resData.data.length > 0) {
+      banners = resData.data.map((item: RawSlideItem, idx: number) => {
+        const cleanLink = sanitizeUrl(item.link);
+        const isExt = checkIsExternal(cleanLink);
+        const pc = item.pic || "";
+        const mb = item.pic_mobile || item.mobilepic || pc;
+        const pcUrl = pc.startsWith("http") ? pc : `${NEW_CMS_URL}${pc}`;
+        const mbUrl = mb.startsWith("http") ? mb : `${NEW_CMS_URL}${mb}`;
+        const defaultTitle = `香港希瑪微笑矯視中心 - 矯視優惠服務 ${idx + 1}`;
+
+        return {
+          id: String(item.id || `banner-${idx}`),
+          pcImg: pcUrl,
+          mbImg: mbUrl,
+          link: isExt ? cleanLink : getLocalizedHref(cleanLink || "#", lang),
+          title: item.title || item.subtitle || defaultTitle,
+          subtitle: item.subtitle || defaultTitle,
+          isExternal: isExt,
+        };
+      });
+    }
   }
 } catch (e) {
-  console.error("Fetch Banner Error:", e);
-  errorMsg = "Failed to load banners";
+  // 如果新 CMS 超時或不可達，嘗試舊版 fallback
+}
+
+// 次選舊 CMS 降級容錯
+if (banners.length === 0) {
+  try {
+    const oldApiUrl = `${OLD_CMS_URL}/api.php/cms/slide/gid/${gid}/num/10`;
+    const response = await fetch(oldApiUrl, { signal: AbortSignal.timeout(3000) });
+    if (response.ok) {
+      const resData = await response.json();
+      if (resData && resData.code === 1 && Array.isArray(resData.data)) {
+        banners = resData.data.map((item: any, idx: number) => {
+          const cleanLink = sanitizeUrl(item.link);
+          const isExt = checkIsExternal(cleanLink);
+          const pcUrl = item.pic.startsWith("http") ? item.pic : `${OLD_CMS_URL}${item.pic}`;
+          const mbUrl = item.mobilepic.startsWith("http") ? item.mobilepic : `${OLD_CMS_URL}${item.mobilepic}`;
+          const defaultTitle = `香港希瑪微笑矯視中心 - 矯視優惠服務 ${idx + 1}`;
+
+          return {
+            id: String(item.id || `banner-${idx}`),
+            pcImg: pcUrl,
+            mbImg: mbUrl,
+            link: isExt ? cleanLink : getLocalizedHref(cleanLink || "#", lang),
+            title: item.title || item.subtitle || defaultTitle,
+            subtitle: item.subtitle || defaultTitle,
+            isExternal: isExt,
+          };
+        });
+      }
+    }
+  } catch (e) {
+    // Graceful fallback
+  }
+}
+
+// 降級備用 Banner (若 CMS 暫時無法連通)
+if (banners.length === 0) {
+  banners = [
+    {
+      id: "fallback-smilepro",
+      pcImg: "https://statichk.cmermedical.com/static/loffee/imgs/050623_1280-480TC.avif",
+      mbImg: "https://statichk.cmermedical.com/imgs/2023/06/90f03c94953b46b5.jpg",
+      link: getLocalizedHref("/smilePro", lang),
+      title: "SMILE Pro 2.0 微笑激光矯視 - 10秒極速全飛秒",
+      subtitle: "SMILE Pro 2.0 微笑激光矯視",
+      isExternal: false,
+    },
+    {
+      id: "fallback-icl",
+      pcImg: "https://statichk.cmermedical.com/imgs/2023/05/f98c9fee4d7f0f66.jpg",
+      mbImg: "https://statichk.cmermedical.com/imgs/2023/06/2f47a87064825e90.jpg",
+      link: getLocalizedHref("/vision-correction-icl", lang),
+      title: "ICL 植入式隱形眼鏡 - 高度近視及散光首選",
+      subtitle: "ICL 植入式隱形眼鏡",
+      isExternal: false,
+    },
+  ];
 }
 ---
 
-<section class="wrapper banner-carousel-wrapper md:pt-4 lg:pt-7">
-  {errorMsg && <div class="text-center py-4 text-red-500">{errorMsg}</div>}
-
-  <div id="bannerCarousel" class="swiper rounded-xl md:rounded-2xl overflow-hidden aspect-square md:aspect-8/3">
-    <div class="swiper-wrapper">
-      {
-        banners.map((banner, index) => {
-          // 补全远程图片绝对路径
-          const pcImgUrl = banner.pic.startsWith("http") ? banner.pic : `${DOMAIN_URL}${banner.pic}`;
-          const mbImgUrl = banner.mobilepic.startsWith("http") ? banner.mobilepic : `${DOMAIN_URL}${banner.mobilepic}`;
-
-          // 使用多语言机制安全处理包裹跳转链接
-          const safeHref = getLocalizedHref(banner.link || "#", lang);
-
-          return (
-            <div class="swiper-slide h-full">
-              {banner.link ? (
-                <a href={safeHref} class="block size-full cursor-pointer" title={banner.subtitle}>
-                  <picture class="block size-full">
-                    <source media="(min-width: 768px)" srcset={pcImgUrl} />
-                    <Image
-                      src={mbImgUrl}
-                      alt={banner.subtitle || "Banner Image"}
-                      title={banner.subtitle}
-                      width={800}
-                      height={800}
+<section class="banner-section" aria-label="希瑪微笑矯視中心精選焦點">
+  <div class="banner-container">
+    <div id="bannerCarousel" class="banner-swiper swiper" role="region" aria-roledescription="carousel" aria-label="全站熱門優惠與服務輪播">
+      <div class="swiper-wrapper">
+        {
+          banners.map((banner, index) => (
+            <div class="swiper-slide banner-slide" role="group" aria-roledescription="slide" aria-label={`第 ${index + 1} 張，共 ${banners.length} 張: ${banner.title}`}>
+              {banner.link && banner.link !== "#" ? (
+                <a
+                  href={banner.link}
+                  target={banner.isExternal ? "_blank" : "_self"}
+                  rel={banner.isExternal ? "noopener noreferrer" : undefined}
+                  class="banner-card-link"
+                  title={banner.title}
+                  data-cta="banner"
+                  data-banner-id={banner.id}
+                >
+                  <picture class="banner-picture">
+                    <source media="(min-width: 768px)" srcset={banner.pcImg} width="1280" height="480" />
+                    <img
+                      src={banner.mbImg}
+                      alt={banner.title}
+                      title={banner.title}
+                      width="800"
+                      height="800"
                       loading={index === 0 ? "eager" : "lazy"}
                       fetchpriority={index === 0 ? "high" : "low"}
-                      class="size-full object-cover md:aspect-8/3 rounded-xl md:rounded-2xl"
+                      decoding={index === 0 ? "sync" : "async"}
+                      class="banner-image"
                     />
                   </picture>
                 </a>
               ) : (
-                /* 如果后台没有配置链接，则不渲染 a 标签，避免无效点击 */
-                <picture class="block size-full">
-                  <source media="(min-width: 768px)" srcset={pcImgUrl} />
-                  <Image
-                    src={mbImgUrl}
-                    alt={banner.subtitle || "Banner Image"}
-                    title={banner.subtitle}
-                    width={800}
-                    height={800}
+                <picture class="banner-picture">
+                  <source media="(min-width: 768px)" srcset={banner.pcImg} width="1280" height="480" />
+                  <img
+                    src={banner.mbImg}
+                    alt={banner.title}
+                    title={banner.title}
+                    width="800"
+                    height="800"
                     loading={index === 0 ? "eager" : "lazy"}
                     fetchpriority={index === 0 ? "high" : "low"}
-                    class="size-full object-cover md:aspect-8/3 rounded-xl md:rounded-2xl"
+                    decoding={index === 0 ? "sync" : "async"}
+                    class="banner-image"
                   />
                 </picture>
               )}
             </div>
-          );
-        })
-      }
+          ))
+        }
+      </div>
+
+      <!-- 輪播分頁指示膠囊圓點 -->
+      <div class="swiper-pagination banner-pagination" aria-hidden="true"></div>
     </div>
   </div>
 </section>
 
 <style lang="scss">
-  .banner-carousel-wrapper {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
+  @reference "@/styles/global.css";
+  /* -------------------------------------------------------------------------- */
+  /* 全域 Banner 現代化 SCSS 封裝 (@apply 模式，0 內聯原子類混亂)               */
+  /* -------------------------------------------------------------------------- */
 
-    // 核心 CLS 优化：提前声明响应式宽高比，防止页面产生因图片延迟加载导致的抖动
-    picture,
-    img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1/1; // 移动端标准比例
-      object-fit: cover;
+  .banner-section {
+    @apply w-full pt-2.5 sm:pt-4 lg:pt-5;
+  }
 
-      @media (min-width: 768px) {
-        aspect-ratio: 8/3; // PC端标准比例
+  /* 容器：直接繼承全站 1280px 統一基準線 (桌面 1280px，移動 15px 絕對鎖定) */
+  .banner-container {
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 輪播視窗卡片 (防 CLS 固定比例 + 現代圓角陰影) */
+  .banner-swiper {
+    @apply w-full rounded-xl sm:rounded-2xl overflow-hidden shadow-xs relative bg-gray-50;
+    aspect-ratio: 1 / 1;
+
+    @media (min-width: 768px) {
+      aspect-ratio: 8 / 3;
+    }
+  }
+
+  .banner-slide {
+    @apply size-full shrink-0;
+  }
+
+  .banner-card-link {
+    @apply block size-full cursor-pointer transition-opacity hover:opacity-98;
+    &:focus-visible {
+      @apply ring-2 ring-primary outline-hidden;
+    }
+  }
+
+  /* 響應式圖片防 CLS 填充 */
+  .banner-picture {
+    @apply block size-full;
+  }
+
+  .banner-image {
+    @apply block size-full object-cover;
+    aspect-ratio: 1 / 1;
+
+    @media (min-width: 768px) {
+      aspect-ratio: 8 / 3;
+    }
+  }
+
+  /* 分頁指示點 (精緻膠囊微動效) */
+  .banner-pagination {
+    @apply flex justify-center items-center gap-1.5;
+    bottom: 0.625rem !important;
+
+    @media (min-width: 640px) {
+      bottom: 1rem !important;
+    }
+
+    :global(.swiper-pagination-bullet) {
+      @apply bg-white opacity-60 size-2 sm:size-2.5 rounded-full transition-all duration-300 cursor-pointer shadow-sm m-0;
+      &:hover {
+        @apply opacity-90;
       }
+    }
+
+    :global(.swiper-pagination-bullet-active) {
+      @apply bg-primary opacity-100 w-5 sm:w-6.5 rounded-full shadow-md;
     }
   }
 </style>
@@ -139,27 +296,27 @@ try {
     const el = document.getElementById("bannerCarousel");
     if (!el) return;
 
-    // 健壮性检查：如果旧实例存在，先销毁再初始化（防止 Astro 路由跳转时重复绑定）
     if ((el as any).swiper) {
       (el as any).swiper.destroy(true, true);
     }
 
-    new Swiper("#bannerCarousel", {
+    new Swiper(el, {
       modules: [Autoplay, Pagination],
       loop: true,
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
       },
       pagination: {
-        el: ".swiper-pagination",
+        el: el.querySelector(".banner-pagination") as HTMLElement,
         clickable: true,
       },
       slidesPerView: 1,
+      speed: 600,
     });
   }
 
-  // 支持标准首次加载与 Astro 的 view-transitions 路由切换事件
   document.addEventListener("DOMContentLoaded", startBannerCarousel);
   document.addEventListener("astro:page-load", startBannerCarousel);
 </script>

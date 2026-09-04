@@ -52,7 +52,6 @@ export function useTranslations(lang: string) {
 export const i18nPaths = [
   { params: { lang: undefined } }, // 对应 /
   { params: { lang: "cn" } }, // 对应 /cn
-  { params: { lang: "en" } }, // 对应 /en
 ];
 
 /**

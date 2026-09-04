@@ -14,75 +14,95 @@ const banners = [
     id: 1,
     pc: pcBanner1,
     mb: mbBanner1,
-    title: "環境展示 1",
-    alt: "希瑪微笑矯視中心環境展示1",
+    title: "香港希瑪微笑矯視中心 - 現代化眼科接待大堂與寬敞舒適等候區",
+    alt: "香港希瑪微笑矯視中心現代化接待大堂環境",
   },
   {
     id: 2,
     pc: pcBanner2,
     mb: mbBanner2,
-    title: "環境展示 2",
-    alt: "希瑪微笑矯視中心環境展示2",
+    title: "香港希瑪微笑矯視中心 - 德國蔡司國際標準百級無菌層流手術室",
+    alt: "希瑪微笑矯視中心德國蔡司全飛秒無菌手術室",
   },
   {
     id: 3,
     pc: pcBanner3,
     mb: mbBanner3,
-    title: "環境展示 3",
-    alt: "希瑪微笑矯視中心環境展示3",
+    title: "香港希瑪微笑矯視中心 - 精密屈光術前多維度眼睛檢查室與儀器設備",
+    alt: "希瑪微笑矯視精密術前檢查室與儀器設備",
   },
   {
     id: 4,
     pc: pcBanner4,
     mb: mbBanner4,
-    title: "環境展示 4",
-    alt: "希瑪微笑矯視中心環境展示4",
+    title: "香港希瑪微笑矯視中心 - 一對一專科醫生獨立諮詢與精準診症室",
+    alt: "希瑪微笑矯視專科醫生獨立諮詢與診症空間",
   },
 ];
 ---
 
-<div class="swiper env-carousel-wrapper mb-8 md:mb-18 lg:mb-30" id="envCarousel">
-  <div class="swiper-wrapper">
-    {
-      banners.map((banner, index) => (
-        <div class="swiper-slide env-carousel-slide">
-          <picture class="block w-full h-full">
-            <source media="(min-width: 1024px)" srcset={banner.pc.src} width="1442" height="813" />
-            <Image
-              src={banner.mb}
-              alt={banner.alt}
-              title={banner.title}
-              width={749}
-              height={520}
-              format="webp"
-              loading={index === 0 ? "eager" : "lazy"}
-              fetchpriority={index === 0 ? "high" : "low"}
-              class="w-full h-full object-cover"
-            />
-          </picture>
-        </div>
-      ))
-    }
+<section class="section-environment" aria-label="希瑪微笑矯視中心門市與手術室環境展示">
+  <div class="swiper env-carousel-wrapper" id="envCarousel">
+    <div class="swiper-wrapper">
+      {
+        banners.map((banner, index) => (
+          <div class="swiper-slide env-carousel-slide">
+            <picture class="block w-full h-full">
+              <source media="(min-width: 1024px)" srcset={banner.pc.src} width="1442" height="813" />
+              <Image
+                src={banner.mb}
+                alt={banner.alt}
+                title={banner.title}
+                width={749}
+                height={520}
+                format="webp"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchpriority={index === 0 ? "high" : "low"}
+                class="w-full h-full object-cover"
+              />
+            </picture>
+          </div>
+        ))
+      }
+    </div>
   </div>
-</div>
+</section>
 
 <style lang="scss">
+  .section-environment {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+    @media (min-width: 768px) {
+      margin-bottom: 4rem;
+    }
+    @media (min-width: 1024px) {
+      margin-bottom: 6rem;
+    }
+  }
   .env-carousel-wrapper {
     width: 100%;
     overflow: hidden;
     position: relative;
     background-color: #fff;
+    @media (min-width: 1024px) {
+      max-height: 450px;
+      height: 450px;
+    }
 
     img {
       width: 100%;
       aspect-ratio: 749 / 520;
       object-fit: cover;
       @media (min-width: 1024px) {
-        aspect-ratio: 1442 / 813;
+        aspect-ratio: auto;
+        height: 450px !important;
+        max-height: 450px !important;
+        object-fit: cover;
       }
     }
 
-    // 2. 强制让 wrapper 具备 Flex 布局，使 slide 排成一排而不会往下平铺堆叠
     :global(.swiper-wrapper) {
       display: flex !important;
       flex-direction: row !important;
@@ -95,6 +115,10 @@ const banners = [
       flex-shrink: 0 !important;
       height: 100% !important;
       position: relative;
+      @media (min-width: 1024px) {
+        max-height: 450px !important;
+        height: 450px !important;
+      }
     }
   }
 </style>
@@ -107,7 +131,6 @@ const banners = [
   function startEnvCarousel() {
     const el = document.getElementById("envCarousel");
     if (!el) return;
-    // 健壮性检查：如果该节点身上已经有了旧实例，先清理干净再注册
     if ((el as any).swiper) {
       (el as any).swiper.destroy(true, true);
     }
@@ -136,7 +159,6 @@ const banners = [
     });
   }
 
-  // 双事件监听，解决 Astro 首屏载入及多语言切换路由时的“死图”问题
   document.addEventListener("DOMContentLoaded", startEnvCarousel);
   document.addEventListener("astro:page-load", startEnvCarousel);
 </script>

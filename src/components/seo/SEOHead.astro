@@ -1,0 +1,70 @@
+---
+/**
+ * SEOHead.astro
+ * 遵循 2026 現代化 SEO 規範：
+ * - 自我參照 Canonical 鏈接
+ * - 多語言雙向 Hreflang 標籤 (zh-HK, zh-CN, x-default)
+ * - 社交分享 OpenGraph & Twitter Card
+ * - 嚴格剔除無效的 geo.position 垃圾標籤
+ */
+import { getLocalizedHref } from "@/i18n/utils";
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  lang?: string;
+}
+
+const {
+  title = "香港希瑪微笑矯視中心 | SMILE Pro 2.0 / ICL 植入式隱形眼鏡 / 激光矯視",
+  description = "香港希瑪微笑矯視中心為上市「希瑪眼科」旗下屈光中心，提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro 2.0、SMILE 微笑激光矯視、ICL 植入式隱形眼鏡及老花矯視。",
+  keywords = "希瑪微笑矯視中心, 矯視中心, SMILE Pro 2.0, SMILE 微笑激光矯視, ICL 植入式隱形眼鏡, 老花矯視, 香港矯視",
+  image = "/favicon.png",
+  lang = "zh-hk",
+} = Astro.props;
+
+const siteUrl = Astro.site?.origin || "https://smile.hkcmereye.com";
+const pathname = Astro.url.pathname;
+
+// 剝離可能已有的語言前綴以獲取乾淨的路徑
+const cleanPath = pathname.replace(/^\/cn/, "") || "/";
+
+const canonicalUrl = new URL(pathname, siteUrl).href;
+const hkUrl = new URL(cleanPath === "/" ? "/" : cleanPath, siteUrl).href;
+const cnUrl = new URL(`/cn${cleanPath === "/" ? "" : cleanPath}`, siteUrl).href;
+const defaultUrl = hkUrl;
+
+const ogLocale = lang === "zh-cn" ? "zh_CN" : "zh_HK";
+const ogImage = image.startsWith("http") ? image : new URL(image, siteUrl).href;
+---
+
+<!-- 基礎 Meta -->
+<title>{title}</title>
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+<meta name="robots" content="index, follow" />
+
+<!-- 規範鏈接 Canonical -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- 多語言 Hreflang 雙向宣告 (Google SEO 國際化標準) -->
+<link rel="alternate" hreflang="zh-HK" href={hkUrl} />
+<link rel="alternate" hreflang="zh-CN" href={cnUrl} />
+<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+
+<!-- Open Graph / Facebook / 社交媒體分享卡片 -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="香港希瑪微笑矯視中心 CMER Smile" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={ogLocale} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

@@ -1,984 +1,451 @@
 ---
 /*
- * @Author: 谭洁莹
- * @Date: 2026-04-24 18:42:52
- * @LastEditTime: 2026-07-17 15:17:08
+ * @Author: Antigravity AI
+ * @Date: 2026-09-01
  * @FilePath: /src/pages/[...lang]/index.astro
- * @Description: 首页
+ * @Description: 香港希瑪微笑矯視中心官方首頁 (100% 原版專利級版面還原 + 頂級醫療 SEO/GEO alt/title + 0 CLS)
  */
-import { Image } from "astro:assets";
+import { getLangFromUrl, useI18n, getLocalizedHref } from "@/i18n/utils";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/styles/pages/index.scss";
 import BannerSwiper from "@/components/common/BannerSwiper.astro";
-import VideoCarousel from "@/components/common/VideoCarousel.astro";
-import IndexEnvironment from "@/components/views/IndexEnvironment.astro";
+import UserShare from "@/components/views/UserShare.astro";
+import UserRating from "@/components/views/UserRating.astro";
 import IndexAwards from "@/components/views/IndexAwards.astro";
-import { i18nPaths, useI18n, getLocalizedHref } from "@/i18n/utils";
-export function getStaticPaths() {
-  return [...i18nPaths];
+import IndexEnvironment from "@/components/views/IndexEnvironment.astro";
+import FourFeatureShield from "@/components/views/FourFeatureShield.astro";
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: "cn" } },
+  ];
 }
-const { dict, lang } = useI18n(Astro.url);
-import featureTitle from "@/assets/images/index/service-feature-title.svg";
-import reviewsGood from "@/assets/images/index/index-reviews-good.svg";
-interface Review {
-  name: string;
-  href: string;
-  date: string;
-  commit: string;
-}
-const reviewList: Review[] = [
+
+const lang = getLangFromUrl(Astro.url);
+const { dict } = useI18n(Astro.url);
+
+
+// 5 大核心服務 (對標線上原版 home.vue 1:1)
+const serverList = [
   {
-    name: "Yee",
-    href: "https://g.co/kgs/vjM7NyN",
-    date: "2月1日12:07",
-    commit: "成個手術都有清楚指引👍🏻醫生同姑娘們都超好 勁有耐性so far 術後以黎都完全無問題👍🏻👍🏻👍🏻",
+    title: "SMILE<br/>PRO 2.0",
+    text: ["適合", "擔心眼睛無法", "對焦太久"],
+    link: "/smilePro",
   },
   {
-    name: "Wing",
-    href: "https://g.co/kgs/rgifBJJ",
-    date: "2月1日12:07",
-    commit: "手術過程順暢✨隻眼都復原好快術後嘅跟進都好貼🙆🏻‍♀️想做矯視都可以考慮一下呢間✨",
+    title: "SMILE",
+    text: ["適合", "1000度以下近視", "500度以下散光"],
+    link: "/vision-correction/relex-smile",
   },
   {
-    name: "Benedict",
-    href: "https://g.co/kgs/5BgAuFF",
-    date: "2月1日12:07",
-    commit:
-      "過程好順利，工作人員都解釋得好清楚有啲咩突發嘢手術人員都處理得好瞬速同有效可能效果因人而異，但係起碼我眼乾情況唔算嚴重😃可以接受嘅同埋都恢復得快",
+    title: "ICL",
+    text: ["適合", "1800度以下近視", "1000度以下遠視", "600度以下散光"],
+    link: "/vision-correction-icl",
   },
   {
-    name: "Kate",
-    href: "https://g.co/kgs/Ais2ge6",
-    date: "2月1日12:07",
-    commit:
-      "推薦 Smile Pro 手術，醫生和診所護士十分專業和細心。術前檢查充足，手術過程迅速，術後都有專人跟進情況，十分安心。",
+    title: "老花矯視",
+    text: ["適合", "39歲以上有老花", "同時有近視/遠視/散光問題"],
+    link: "/vision-correction-presbyopia",
   },
   {
-    name: "Andy",
-    href: "https://g.co/kgs/yAzUwfK",
-    date: "2月1日12:07",
-    commit: "做手術過程好smooth, 術後嘅護理同複診都跟進得足。視力已經完全去翻正常人程度",
-  },
-  {
-    name: "Milk",
-    href: "https://g.co/kgs/7kMRjJ5",
-    date: "2月1日12:07",
-    commit: "由預約到術後覆診流程都十分順暢。診所內職員每一個步驟講解十分清楚，令手術當日都沒有太大緊張感",
-  },
-  {
-    name: "Eileen",
-    href: "https://g.co/kgs/vECv4wB",
-    date: "2月1日12:07",
-    commit: "診所位置方便，旺角及中環都有手術過程安全及快捷醫生講解亦十分細心是你選擇矯視中心的一個安心的選擇",
-  },
-  {
-    name: "Nam",
-    href: "https://g.co/kgs/CyiwQGb",
-    date: "2月1日12:07",
-    commit: "術前檢查全面、準備充足；術間操作穩定專業，十分安心；術後貼心跟進。",
-  },
-  {
-    name: "Bobo",
-    href: "https://g.co/kgs/S3w8ubm",
-    date: "2月1日12:07",
-    commit: "環境幾好👍🏻 術後檢查做得很足。so far 做完icl 一個月後 都暫時沒有好唔舒服。無後悔做呢個選擇",
-  },
-  {
-    name: "Vincy",
-    href: "https://g.co/kgs/vjM7NyN",
-    date: "2月1日12:07",
-    commit: "好開心唔需要再戴眼鏡，生活便利，特別係大熱天時👍🏻",
+    title: "LASIK",
+    text: ["適合", "1400度以下近視", "600度以下遠視", "600度以下散光"],
+    link: "/vision-correction-lasik",
   },
 ];
 ---
 
 <BaseLayout tdkKey="home">
-  <BannerSwiper />
-  <section class="intro bg-bg-subtle relative mt-12 lg:mt-18 mb-13 lg:mb-22">
-    <div
-      class="intro-main max-w-5xl mx-auto pt-9 lg:pt-18 pb-13 lg:pb-16 px-[clamp(14px,7.18vw,28px)] 2xl:px-0 text-center"
-    >
-      <h1
-        set:html={dict.home.title}
-        class="title-normal pb-6 lg:pb-12 relative before:content-[''] before:h-4.5 lg:before:h-8 before:w-px before:bg-primary before:absolute before:bottom-1 lg:before:bottom-2 before:left-1/2 before:-translate-x-1/2"
-      />
-      <p
-        set:html={dict.home.subtitle}
-        class="text-primary lg:text-2xl font-[250] lg:font-thin tracking-widest mb-3 lg:mb-8"
-      />
-      <div
-        class="text-normal space-y-8 lg:space-y-10 md:text-lg lg:text-xl text-desc text-justify lg:text-center font-light [&_strong]:font-bold leading-loose lg:leading-[1.75] tracking-wider lg:tracking-[0.3em]"
-        set:html={dict.home.intro}
-      />
-    </div>
-  </section>
-  <section class="service md:pb-22 lg:mb-25">
-    <h2 class="title-normal text-center mb-11 lg:mb-18">
-      {dict.home.service.title}
-    </h2>
-    <div class="service-main border-t border-primary pb-4 lg:pb-25 lg:mb-7">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 lg:h-75">
-        <a
-          href={getLocalizedHref("/smilePro", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-x lg:border-b border-primary"
-        >
-          <h3
-            class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
-          >
-            SMILE <br />PRO 2.0
-          </h3>
-          <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
-          >
-            <p
-              set:html={dict.home.service.smilepro}
-              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
-            />
-            <svg
-              class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M1 12.973 12.604 1.37M2.691 1h10.31v9.969"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-              </path>
-            </svg>
-          </div>
-        </a>
-        <a
-          href={getLocalizedHref("/vision-correction/relex-smile", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
-        >
-          <h3
-            class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
-          >
-            SMILE
-          </h3>
-          <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
-          >
-            <p
-              set:html={dict.home.service.smile}
-              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
-            />
-            <svg
-              class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M1 12.973 12.604 1.37M2.691 1h10.31v9.969"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-              </path>
-            </svg>
-          </div>
-        </a>
-        <a
-          href={getLocalizedHref("/vision-correction-icl", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
-        >
-          <h3
-            class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
-          >
-            ICL
-          </h3>
-          <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
-          >
-            <p
-              set:html={dict.home.service.icl}
-              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
-            />
-            <svg
-              class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M1 12.973 12.604 1.37M2.691 1h10.31v9.969"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-              </path>
-            </svg>
-          </div>
-        </a>
-        <a
-          href={getLocalizedHref("/vision-correction-presbyopia", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
-        >
-          <h3
-            class="w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
-          >
-            {dict.common.menu.service.presbyopia}
-          </h3>
-          <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
-          >
-            <p
-              set:html={dict.home.service.presbyopia}
-              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
-            />
-            <svg
-              class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M1 12.973 12.604 1.37M2.691 1h10.31v9.969"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-              </path>
-            </svg>
-          </div>
-        </a>
-        <a
-          href={getLocalizedHref("/vision-correction-lasik", lang)}
-          class="group relative h-27 lg:h-38 hover:h-75 flex lg:flex-col lg:gap-4 hover:lg:bg-primary hover:lg:text-white font-bold transition-height duration-500 ease lg:border-r lg:border-b border-primary"
-        >
-          <h3
-            class="font-en w-31 lg:h-28 lg:pt-12 lg:w-full text-xl lg:text-3xl lg:leading-none text-center tracking-wider center text-primary group-hover:text-white border-b border-primary lg:border-none"
-          >
-            LASIK
-          </h3>
-          <div
-            class="flex-1 lg:flex-none pl-6 lg:pl-0 bg-primary lg:bg-transparent text-white flex items-center lg:justify-center lg:hidden lg:group-hover:flex border-b border-white lg:border-none"
-          >
-            <p
-              set:html={dict.home.service.lasik}
-              class="tracking-[0.2em] text-[3.8vw] xs:text-sm lg:text-xl lg:text-center"
-            />
-            <svg
-              class="size-3 lg:size-6 absolute bottom-4 right-4 lg:bottom-6 lg:right-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M1 12.973 12.604 1.37M2.691 1h10.31v9.969"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-              </path>
-            </svg>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="center gap-3 xs:gap-6 md:gap-10 lg:gap-18 mb-15 md:mb-40 lg:mb-66">
-      <a href={getLocalizedHref("/patient-info", lang)} class="service-button">
-        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider">{dict.home.service.button.info}</span>
-        <svg
-          class="hidden lg:block"
-          xmlns="http://www.w3.org/2000/svg"
-          width="29"
-          height="29"
-          viewBox="0 0 29 29"
-          fill="none"
-        >
-          <path d="m2.7 25.779 22.63-22.63" stroke="currentColor" stroke-width="5.4" stroke-linecap="round"></path><path
-            d="M5.998 2.43H26.1v19.44"
-            stroke="currentColor"
-            stroke-width="4.86"
-            stroke-linecap="round"
-          >
-          </path>
-        </svg>
-      </a>
-      <a
-        href={getLocalizedHref(
-          "https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-15)%E7%9F%AF%E8%A6%96%E5%89%8D%E6%AA%A2%E6%9F%A5%E5%8F%8A%E8%AB%AE%E8%A9%A2",
-          lang,
-        )}
-        class="service-button"
-      >
-        <span class="text-lg lg:text-4xl font-black lg:font-bold tracking-wider">
-          {dict.home.service.button.appoint}
-        </span>
-        <svg
-          class="hidden lg:block"
-          xmlns="http://www.w3.org/2000/svg"
-          width="29"
-          height="29"
-          viewBox="0 0 29 29"
-          fill="none"
-        >
-          <path d="m2.7 25.779 22.63-22.63" stroke="currentColor" stroke-width="5.4" stroke-linecap="round"></path><path
-            d="M5.998 2.43H26.1v19.44"
-            stroke="currentColor"
-            stroke-width="4.86"
-            stroke-linecap="round"
-          >
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="w-full max-w-7xl mx-auto flex justify-center flex-col lg:flex-row gap-7 lg:gap-20">
-      <Image src={featureTitle} alt="4大特色" width={350} height={222} class="w-54 md:w-72 lg:w-87 mx-auto" />
-      <div class="grid grid-cols-2 relative feature-main">
-        <div
-          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 bg-[#F9F9F9] tracking-[0.25em]"
-        >
-          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
-            {dict.home.feature.case.type}
-          </span>
-          <div class="size-16 lg:size-28 5 center">
-            <svg class="size-full object-contain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 64" fill="none">
-              <path
-                d="M5.24 37.535A21.864 21.864 0 1 1 26.502 54.43a21.55 21.55 0 0 1-12.383-3.893"
-                stroke="#4570b6"
-                stroke-width="1.92"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M36.889 47.19c6.355 0 11.507-6.683 11.507-14.926s-5.152-14.926-11.507-14.926-11.507 6.682-11.507 14.926S30.534 47.19 36.889 47.19"
-                stroke="#4570b6"
-                stroke-width="1.92"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M37.78 25.841q.3-.021.603 0c3.017 0 5.473 3.175 5.473 7.111S41.4 40.05 38.383 40.05s-5.474-3.175-5.474-7.097a8.8 8.8 0 0 1 .82-3.75m17.725-8.964c0-5-4.008-10.229-8.935-10.229A8.995 8.995 0 0 0 51.454.96a8.995 8.995 0 0 0 8.935 9.08c-4.941 0-8.935 5.2-8.935 10.199M8.374 53.61c0-3.447-2.773-7.068-6.178-7.068a6.22 6.22 0 0 0 6.178-6.263 6.22 6.22 0 0 0 6.177 6.263c-3.405 0-6.177 3.62-6.177 7.068M5.399 13.875c0-2.485-1.982-5.071-4.439-5.071a4.453 4.453 0 0 0 4.439-4.511 4.453 4.453 0 0 0 4.425 4.482c-2.443.029-4.425 2.615-4.425 5.1m46.015 48.557c0-2.471-1.983-5.071-4.425-5.071a4.454 4.454 0 0 0 4.425-4.482 4.453 4.453 0 0 0 4.439 4.482c-2.457 0-4.44 2.6-4.44 5.07"
-                stroke="#4570b6"
-                stroke-width="1.92"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path>
-            </svg>
-          </div>
-          <p
-            set:html={dict.home.feature.case.title}
-            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
-          />
-          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
-            {dict.home.feature.case.intro}
-          </p>
+  <!-- 全域唯一 <h1> (無障礙與 SEO/GEO 核心實體標籤) -->
+  <h1 class="sr-only">
+      {lang === "zh-cn" ? "香港希玛微笑矫视中心 (CMER Smile) - SMILE Pro 2.0 / ICL / 激光矫视" : "香港希瑪微笑矯視中心 (CMER Smile) - SMILE Pro 2.0 / ICL / 激光矯視"}
+    </h1>
+
+    <!-- 頂部首屏輪播 Banner 區 -->
+    <BannerSwiper />
+
+        <!-- 希瑪微笑矯視中心 (100% 原版還原) -->
+    <section class="centerIntro">
+      <div class="container centerIntroBox">
+        <img class="centerSevice-svg-top" src="/images/home/deco/aiming-circle.svg" alt="" width="278" height="278" aria-hidden="true" />
+        <img class="centerSevice-svg-bottom" src="/images/home/deco/lens-path.svg" alt="" width="299" height="285" aria-hidden="true" />
+        <div class="centerIntroBox-top">
+          <h2 class="centerIntroBox-top-title">
+            {dict.home.title}
+          </h2>
+          <p>{dict.home.subtitle}</p>
         </div>
-        <div class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]">
-          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
-            {dict.home.feature.first.type}
-          </span>
-          <div class="size-16 lg:size-28 5 center">
-            <svg class="size-full object-contain" viewBox="0 0 55 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M3.877 11.97a2.296 2.296 0 0 0 1.449-2.905A2.296 2.296 0 0 0 2.41 7.637a2.296 2.296 0 0 0-1.45 2.906 2.296 2.296 0 0 0 2.916 1.428Zm16.628-5.627a2.296 2.296 0 0 0 1.449-2.906 2.296 2.296 0 0 0-2.916-1.428 2.296 2.296 0 0 0-1.449 2.905 2.296 2.296 0 0 0 2.916 1.429Z"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-miterlimit="10"
-              >
-              </path><path
-                d="m3.878 11.972 4.893 7.265 13.125-4.443-1.39-8.45"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-miterlimit="10"
-              >
-              </path><path
-                d="m5.645 10.002 4.116.812.589-5.135m8.074-.003-2.777 3.146L12.06 5.1"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-miterlimit="10"
-              >
-              </path><path
-                d="m25.086 25.81-.64.413a3.06 3.06 0 0 0-.917 4.23l6.214 9.566a3.1 3.1 0 0 0 4.253.909l.644-.412a3.06 3.06 0 0 0 .914-4.23l-6.212-9.563a3.097 3.097 0 0 0-4.253-.91zm-5.814 3.736-.643.412a3.06 3.06 0 0 0-.914 4.23l6.214 9.563a3.096 3.096 0 0 0 4.254.91l.64-.413a3.056 3.056 0 0 0 .915-4.23l-6.215-9.565c-.917-1.415-2.831-1.821-4.25-.91zm24.515 4.375-.041-22.735c0-1.924-1.584-3.499-3.517-3.499h-.74c-1.934 0-3.515 1.575-3.515 3.5v13.07"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="m30.895 22.078-.641.412a3.06 3.06 0 0 0-.917 4.23l4.824 7.424a3.093 3.093 0 0 0 4.253.909l.643-.412a3.06 3.06 0 0 0 .915-4.23l-4.821-7.424a3.094 3.094 0 0 0-4.254-.909z"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="m17.347 33.37.953 15.953 5.43 11.835a27.9 27.9 0 0 0 11.544 2.24 27.8 27.8 0 0 0 10.327-2.238s4.022-8.257 5.452-10.941c1.427-2.684 4.008-11.452.492-13.75-1.638-1.071-9.218-2.92-9.218-2.92s-1.716-.594-2.547.88c-1.058 1.883-.862 4.043.73 5.325l4.044 2.795-.706 2.958q-4.596 4.598-9.194 9.19"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M11.475 5.297a2.296 2.296 0 0 0 1.448-2.906A2.296 2.296 0 0 0 10.008.963a2.296 2.296 0 0 0-1.45 2.906 2.296 2.296 0 0 0 2.917 1.428Z"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-miterlimit="10"
-              >
-              </path>
-            </svg>
-          </div>
-          <p
-            set:html={dict.home.feature.first.title}
-            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
-          />
-          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
-            {dict.home.feature.first.intro}
+        <div class="centerIntroBox-bottom">
+          <p>
+            希瑪微笑矯視中心為上市公司「希瑪醫療控股有限公司」旗下的屈光矯視醫療中心。<br class="hidden lg:block" />中心團隊由林順潮教授帶領，加上13名眼科專科醫生、多名註冊視光師及護士組成。<br class="hidden lg:block" />於香港擁有2間微笑矯視中心，均<span>符合FDA激光矯視標準</span>，交通便利，環境舒適。<br class="hidden lg:block" />提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro 2.0微笑激光矯視、<br class="hidden lg:block" />SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視、LASIK激光矯視等。
           </p>
-        </div>
-        <div class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 tracking-[0.25em]">
-          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
-            {dict.home.feature.doctor.type}
-          </span>
-          <div class="size-16 lg:size-28 5 center">
-            <svg class="size-full object-contain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 60" fill="none">
-              <path
-                d="M34.115 32.238c6.567-2.77 7.252-10.241 7.965-15.985.385-3.103.507-6.437-1.013-9.29-1.389-2.604-3.95-4.414-6.736-5.338a15.66 15.66 0 0 0-9.795 0c-2.795.933-5.347 2.734-6.736 5.338-1.52 2.844-1.397 6.187-1.013 9.29.713 5.744 1.398 13.215 7.965 15.985"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M21.023 13.736c9.345 0 11.214-1.795 12.149-4.486 0 0 0 4.486 4.672 4.486M22.146 37.284c0 5.505 7.288 10.092 7.288 10.092s7.29-4.587 7.29-10.092m-17.449.916c-3.7 2.877-2.775 7.672-2.775 7.672"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M19.943 58.59h2.763v-3.685c0-4.053-2.763-9.21-6.448-9.21-3.684 0-6.447 5.157-6.447 9.21v3.685h2.763M39.412 38.2c2.877.919 2.877 9.19 2.877 9.19v1.838"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M42.33 58.59c2.477 0 4.486-2.134 4.486-4.766s-2.009-4.766-4.486-4.766-4.485 2.134-4.485 4.766 2.008 4.766 4.485 4.766m-41.46 0s-.925-13.92 7.4-16.704l13.876-4.64v-5.568m14.576 0v5.568l13.875 4.64c8.325 2.784 7.4 16.705 7.4 16.705"
-                stroke="#4570b6"
-                stroke-width="1.68"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path>
-            </svg>
-          </div>
-          <p
-            set:html={dict.home.feature.doctor.title}
-            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
-          />
-          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
-            {dict.home.feature.doctor.intro}
-          </p>
-        </div>
-        <div
-          class="flex flex-col justify-center items-center gap-3 lg:gap-5 p-[4vw] md:p-10 bg-[#F9F9F9] tracking-[0.25em]"
-        >
-          <span class="bg-primary text-white w-fit rounded-full py-1 px-5 text-sm lg:text-xl font-bold">
-            {dict.home.feature.size.type}
-          </span>
-          <div class="size-18 lg:size-28 5 center">
-            <svg class="size-full object-contain" viewBox="0 0 80 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#a)" fill="#4570b6">
-                <path
-                  d="M45.139 55.733H34.03a.91.91 0 0 1-.909-.914v-8.692c0-.504.407-.913.91-.913h11.108c.502 0 .909.409.909.913v8.692a.91.91 0 0 1-.91.914m-10.2-1.828h9.29V47.04h-9.29zm27.051-32.421H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.58H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.579H41.382a.91.91 0 0 1-.91-.914c0-.504.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.504.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.504.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914m37.457 6.58H41.382a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h20.607c.502 0 .909.41.909.914a.91.91 0 0 1-.91.914m-26.304 0h-6.061a.91.91 0 0 1-.91-.914c0-.505.408-.914.91-.914h6.06c.503 0 .91.41.91.914a.91.91 0 0 1-.91.914m-11.151 0h-1.94a.91.91 0 0 1-.908-.914c0-.505.407-.914.909-.914h1.94c.501 0 .908.41.908.914a.91.91 0 0 1-.909.914M57.805 14.6a.91.91 0 0 1-.909-.914V10.76H21.864v2.925a.91.91 0 0 1-.909.914.91.91 0 0 1-.91-.914V9.847c0-.504.408-.913.91-.913h36.85c.502 0 .91.409.91.913v3.839a.91.91 0 0 1-.91.914"
-                >
-                </path><path
-                  d="M39.623 55.905a.91.91 0 0 1-.91-.913v-8.895c0-.505.408-.914.91-.914s.91.41.91.914v8.895a.91.91 0 0 1-.91.913"
-                >
-                </path>
-              </g><path
-                d="M62.495 55.733a.91.91 0 0 1-.91-.914v-40.22h-44v40.22a.91.91 0 0 1-.91.914.91.91 0 0 1-.908-.914V13.686c0-.505.407-.914.909-.914h45.82c.502 0 .91.41.91.914v41.133a.91.91 0 0 1-.91.914"
-                fill="#4570b6"
-              >
-              </path><path
-                d="M66.837 55.844H12.289a.91.91 0 0 1-.91-.913c0-.505.408-.914.91-.914h54.548c.502 0 .91.409.91.913a.91.91 0 0 1-.91.914"
-                fill="#4570b6"
-              >
-              </path><path
-                d="M70.56 17.247c0-4.223-3.386-8.641-7.55-8.641A7.597 7.597 0 0 0 70.56.96a7.597 7.597 0 0 0 7.549 7.67c-4.175 0-7.55 4.394-7.55 8.617M6.179 50.116c0-2.913-2.343-5.971-5.219-5.971a5.256 5.256 0 0 0 5.219-5.292 5.255 5.255 0 0 0 5.218 5.292c-2.876 0-5.218 3.058-5.218 5.971"
-                stroke="#4570b6"
-                stroke-width="1.92"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><defs>
-                <clipPath id="a"><path fill="#fff" d="M11.38 8.934h56.366v46.972H11.38z"></path></clipPath>
-              </defs>
-            </svg>
-          </div>
-          <p
-            set:html={dict.home.feature.size.title}
-            class="feature-title text-primary text-[clamp(10px,3.077vw,14px)] font-bold [&_strong]:text-[clamp(16px,5.5vw,28px)] [&_strong]:font-en lg:text-2xl lg:[&_strong]:text-3xl xl:[&_strong]:text-5xl"
-          />
-          <p class="-mt-2 lg:-mt-5 feature-intro text-desc text-[clamp(8px,2.564vw,12px)] lg:text-xl">
-            {dict.home.feature.size.intro}
+          <br />
+          <p>
+            希瑪一直與STAAR Surgical及Zeiss蔡司保持良好的合作關係。於2023年，
+            <span>STAAR <br class="hidden lg:block" />Surgical</span>公司宣佈將希瑪微笑矯視中心設立為<span>首間官方認證EVO ICL國際培訓中心</span>。<br class="hidden lg:block" />同年，本中心亦獲得<span>Zeiss蔡司頒發《全飛秒屈光手術 卓越手術中心》</span>，而且更是首個<br class="hidden lg:block" />香港矯視中心被評為卓越手術中心。
           </p>
         </div>
       </div>
-    </div>
-  </section>
-  <VideoCarousel />
-  <section class="reviews lg:h-190 pt-11 lg:pt-13 pb-91 md:pb-80 lg:pb-11">
-    <div class="wrapper">
-      <div class="reviews-main flex flex-col gap-4 lg:gap-9">
-        <h2 class="title-normal text-center">{dict.home.reviews.title}</h2>
-        <div
-          data-reviews-container
-          class="reviews-list flex-1 overflow-hidden text-desc text-sm md:text-base lg:text-lg tracking-widest"
-        >
-          <div class="reviews-scroll">
+    </section>
+
+    <!-- 中心服務 (100% 線上原版還原) -->
+    <div class="centerSevice-service">
+      <h2 class="centerSevice-service-title">{dict.home.service.title}</h2>
+      <div class="centerSevice-wrapper">
+        <!-- PC 端手風琴卡片組 (>= 992px) -->
+        <div class="centerSevice">
+          <div class="centerSeviceNewList">
             {
-              reviewList.map((review) => (
-                <div class="py-3 lg:py-6 border-dashed border-primary border-b">
-                  <a href={review.href} target="_blank" rel="noopener noreferrer">
-                    <p class="mb-1.5 lg:mb-2.5 font-light">{review.commit}</p>
-                    <div class="flex justify-between items-center">
-                      <span class="font-bold">{review.name}</span>
-                      <svg class="h-4.5 lg:h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149 25" fill="none">
-                        <path
-                          d="m12.5 0 3.248 8.03 8.64.607-6.633 5.57 2.092 8.406-7.347-4.588-7.347 4.588 2.092-8.406-6.633-5.57 8.64-.607zm30.769 0 3.248 8.03 8.64.607-6.633 5.57 2.092 8.406-7.347-4.588-7.347 4.588 2.093-8.406-6.634-5.57 8.64-.607zm30.77 0 3.247 8.03 8.64.607-6.633 5.57 2.093 8.406-7.347-4.588-7.348 4.588 2.093-8.406-6.634-5.57 8.641-.607zm30.769 0 3.247 8.03 8.641.607-6.634 5.57 2.093 8.406-7.347-4.588-7.348 4.588 2.093-8.406-6.634-5.57 8.641-.607zm30.769 0 3.248 8.03 8.64.607-6.633 5.57 2.092 8.406-7.347-4.588-7.347 4.588 2.093-8.406-6.634-5.57 8.641-.607z"
-                          fill="#4570b6"
-                        />
-                      </svg>
-                    </div>
-                  </a>
-                </div>
+              serverList.map((item) => (
+                <a
+                  href={getLocalizedHref(item.link, lang)}
+                  class="centerSeviceNewItem"
+                  data-cta="service_card"
+                  title={`了解更多 ${item.title.replace(/<[^>]*>/g, "")} 矯視方案詳情`}
+                >
+                  <h3 set:html={item.title} />
+                  <div class="centerSeviceNewItem-text">
+                    {item.text.map((text) => (
+                      <p>{text}</p>
+                    ))}
+                    <img
+                      class="centerSeviceNewItem-arrow"
+                      src="/images/icons/arrow-up-right.svg"
+                      alt=""
+                      width="29"
+                      height="30"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </a>
               ))
             }
           </div>
+          <div class="centerSevice-btn-List">
+            <a
+              href={getLocalizedHref("/patient-info", lang)}
+              class="centerSevice-btn"
+              data-cta="patient_info"
+              title="查看診症須知與術前術後注意事項"
+            >
+              <span>{dict.home.service.button.info}</span>
+              <img
+                class="centerSevice-btn-arrow"
+                src="/images/icons/arrow-up-right.svg"
+                alt=""
+                width="29"
+                height="29"
+                aria-hidden="true"
+              />
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://api.whatsapp.com/send/?phone=85269408569&text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84(W-15)%E7%9F%AF%E8%A6%96%E5%89%8D%E6%AA%A2%E6%9F%A5%E5%8F%8A%E8%AB%AE%E8%A9%A2"
+              class="centerSevice-btn centerSevice-btnTwo"
+              data-cta="whatsapp"
+              title="立即透過 WhatsApp 預約術前眼睛檢查及諮詢 (W-15)"
+            >
+              <span>{dict.home.service.button.appoint}</span>
+              <img
+                class="centerSevice-btn-arrow"
+                src="/images/icons/arrow-up-right.svg"
+                alt=""
+                width="29"
+                height="29"
+                aria-hidden="true"
+              />
+            </a>
+          </div>
         </div>
-        <Image
-          src={reviewsGood}
-          alt=""
-          width={239}
-          height={161}
-          class="absolute w-25 lg:w-59 -top-6 right-4 lg:top-auto lg:right-auto lg:-left-37 lg:-bottom-21 z-10"
-        />
       </div>
     </div>
-  </section>
-  <section class="book bg-primary text-white relative">
-    <div class="wrapper pt-9 lg:pt-22 pb-55 lg:pb-17">
-      <h2 class="title-normal text-white text-center mb-5 lg:mb-15">
-        {dict.home.book.title}
-      </h2>
-      <div
-        set:html={dict.home.book.intro}
-        class="lg:w-146 text-center lg:text-justify leading-[1.75] tracking-[0.3em] lg:text-xl font-light [&_strong]:font-bold"
-      />
-      <div class="book-button-group">
-        <a href={getLocalizedHref("/patient-info", lang)} target="_blank" rel="noopener noreferrer" class="book-button">
-          <div class="book-check text-white hover:text-primary bg-primary hover:bg-white">
-            <svg class="w-19 md:w-25 xl:w-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79 47" fill="none">
-              <path
-                d="M21.384 27.108 17.5 35.01m-1.586-8.45-2.338 4.75m51.414-3.927-3.887 7.9m-1.586-8.448-2.337 4.751M37.367 6.825c-2.373.513-4.402 2.131-5.468 4.403a10.8 10.8 0 0 1-6.034 5.54m26.622.045a10.78 10.78 0 0 1-6.17-5.598c-1.029-2.194-2.962-3.774-5.232-4.338m.273-5.037h8.235c6.158 0 11.149 5.032 11.149 11.24m-43.261.932v-.934c0-6.209 4.991-11.24 11.15-11.24h8.281"
-                stroke="currentColor"
-                stroke-width="1.927"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+
+    <!-- 四大特色 -->
+    <section class="fourFeature" id="fourFeature" aria-labelledby="heading-four-feature">
+      <div class="container">
+        <div class="fourFeature-Box">
+          <h2 id="heading-four-feature" class="sr-only">
+            {lang === "zh-cn" ? "CMER 希玛眼科 4 大核心特色优势 - Reasons to choose us" : "CMER 希瑪眼科 4 大核心特色優勢 - Reasons to choose us"}
+          </h2>
+          <div class="fourFeature-Box-title">
+            <FourFeatureShield class="fourFeature-Box-title-left" />
+            <div class="fourFeature-Box-title-right">
+              <img
+                class="fourFeature-Box-title-right-svgone"
+                src="/images/home/features/title-text.svg"
+                alt="四大特色"
+                width="157"
+                height="82"
+                aria-hidden="true"
+              />
+              <p>
+                Reasons<br />
+                to choose us
+              </p>
+              <svg
+                class="fourFeature-Box-title-right-svgtwo"
+                xmlns="http://www.w3.org/2000/svg"
+                width="158"
+                height="4"
+                viewBox="0 0 158 4"
+                fill="none"
               >
-              </path><path
-                d="M39.687 7.35c1.737-.285 2.917-1.935 2.635-3.687s-1.92-2.941-3.657-2.657-2.917 1.935-2.635 3.687 1.92 2.941 3.657 2.657m-6.352 21.902a7.5 7.5 0 0 1 5.76-2.692h.018a7.5 7.5 0 0 1 5.766 2.72l.03.034m-40.36 8.759c2.526 4.38 7.234 7.323 12.622 7.323 5.387 0 10.013-2.893 12.554-7.21M3.527 34.977l-1.77.766a16.4 16.4 0 0 1-.793-5.059c0-9.006 7.241-16.309 16.176-16.309 8.936 0 16.177 7.3 16.177 16.31 0 1.765-.279 3.466-.793 5.058l-1.873-.846m17.844 3.176c2.526 4.38 7.234 7.323 12.622 7.323s10.013-2.893 12.554-7.21m-26.197-3.209-1.771.766a16.4 16.4 0 0 1-.793-5.059c0-9.006 7.241-16.309 16.177-16.309s16.176 7.3 16.176 16.31a16.4 16.4 0 0 1-.792 5.058l-1.873-.846M14.448 11.6v4.744M63.773 11.6v4.744"
-                stroke="currentColor"
-                stroke-width="1.927"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M18.74 39.938c5.436-.89 9.128-6.055 8.246-11.537-.883-5.482-6.006-9.204-11.443-8.314s-9.13 6.055-8.247 11.536c.883 5.482 6.006 9.205 11.443 8.315m43.944-.002c5.437-.89 9.129-6.055 8.246-11.536-.882-5.482-6.005-9.205-11.443-8.315s-9.129 6.055-8.246 11.537 6.005 9.204 11.442 8.314"
-                stroke="currentColor"
-                stroke-width="1.927"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path>
-            </svg>
-            <span class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black">
-              {dict.home.book.button.appoint}
-            </span>
+                <path
+                  d="M2 2H156"
+                  stroke="#4570B6"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-dasharray="1 9"
+                />
+              </svg>
+              <span>大特色</span>
+            </div>
           </div>
-        </a>
-        <a
-          href={getLocalizedHref("/ophthalmicInfo/AppointForm", lang)}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="book-button group"
-        >
-          <div class="book-lecture">
+          <div class="fourFeature-Box-List">
+            <div class="fourFeature-Box-List-item">
+              <h3>案例</h3>
+              <img
+                src="/images/home/features/icon-cases.svg"
+                alt="35,000宗微笑矯視案例"
+                width="110"
+                height="114"
+                aria-hidden="true"
+              />
+              <p>超過<span class="counter-num" data-target="35000">35,000</span>隻</p>
+              <i>眼睛完成微笑矯視</i>
+            </div>
+            <div class="fourFeature-Box-List-item">
+              <h3>首間</h3>
+              <img
+                src="/images/home/features/icon-training.svg"
+                alt="香港上市眼科中心"
+                width="98"
+                height="116"
+                aria-hidden="true"
+              />
+              <p>第1間</p>
+              <i>香港上市眼科中心</i>
+            </div>
+            <div class="fourFeature-Box-List-item">
+              <h3>醫生</h3>
+              <img
+                src="/images/home/features/icon-doctors.svg"
+                alt="眼科專科醫生團隊"
+                width="106"
+                height="107"
+                aria-hidden="true"
+              />
+              <p><span class="counter-num" data-target="13">13</span>位</p>
+              <i>眼科專科醫生</i>
+            </div>
+            <div class="fourFeature-Box-List-item">
+              <h3>面積</h3>
+              <img
+                src="/images/home/features/icon-space.svg"
+                alt="8000尺中心環境"
+                width="142"
+                height="100"
+                aria-hidden="true"
+              />
+              <p>8,000尺</p>
+              <i>寬敞、舒適中心環境</i>
+            </div>
             <svg
-              class="w-16 md:w-22 xl:w-34 group-hover:animate-shake origin-center"
+              class="fourFeature-Box-List-svg-top hidden lg:block"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 68 51"
+              width="4"
+              height="329"
+              viewBox="0 0 4 329"
               fill="none"
             >
               <path
-                d="M52.27 12.365h11.572c1.482 0 2.68 1.183 2.68 2.636v26.537c0 1.453-1.198 2.636-2.68 2.636h-6.014l-3.335 5.259-3.335-5.259H26.446c-1.482 0-2.68-1.183-2.68-2.636v-2.922"
-                stroke="#4570b6"
-                stroke-width="1.927"
+                d="M2 2L1.99999 327"
+                stroke="#4570B6"
+                stroke-width="3"
                 stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M43.718.963H3.814a2.86 2.86 0 0 0-2.85 2.85v25.654a2.86 2.86 0 0 0 2.85 2.85h6.413l3.563 5.7 3.563-5.7h26.365a2.86 2.86 0 0 0 2.85-2.85V3.814a2.86 2.86 0 0 0-2.85-2.85"
-                stroke="#4570b6"
-                stroke-width="1.927"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-              </path><path
-                d="M23.768 14.754a1.887 1.887 0 1 1-.001 3.774 1.887 1.887 0 0 1 0-3.774Zm-11.404 0a1.887 1.887 0 1 1 0 3.774 1.887 1.887 0 0 1 0-3.774Zm22.803 0a1.887 1.887 0 1 1 0 3.774 1.887 1.887 0 0 1 0-3.774Z"
-                fill="#fff"
-                stroke="#4570b6"
-                stroke-width="1.927"
-              >
-              </path>
+                stroke-dasharray="1 9"
+              />
             </svg>
-            <span class="md:text-xl xl:text-[24px,1.875vw,36px] 2xl:text-4xl font-black text-primary">
-              {dict.home.book.button.lecture}
-            </span>
+            <svg
+              class="fourFeature-Box-List-svg-top block lg:hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              width="2"
+              height="184"
+              viewBox="0 0 2 184"
+              fill="none"
+            >
+              <path
+                d="M0.832031 0.783325L0.832023 183"
+                stroke="#4570B6"
+                stroke-width="1.43995"
+                stroke-linecap="round"
+                stroke-dasharray="0.48 4.32"
+              />
+            </svg>
+            <svg
+              class="fourFeature-Box-List-svg-bottom hidden lg:block"
+              xmlns="http://www.w3.org/2000/svg"
+              width="4"
+              height="329"
+              viewBox="0 0 4 329"
+              fill="none"
+            >
+              <path
+                d="M2 2L1.99999 327"
+                stroke="#4570B6"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-dasharray="1 9"
+              />
+            </svg>
+            <svg
+              class="fourFeature-Box-List-svg-bottom block lg:hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              width="2"
+              height="185"
+              viewBox="0 0 2 185"
+              fill="none"
+            >
+              <path
+                d="M0.832031 1.54761L0.832023 183.764"
+                stroke="#4570B6"
+                stroke-width="1.43995"
+                stroke-linecap="round"
+                stroke-dasharray="0.48 4.32"
+              />
+            </svg>
+            <svg
+              class="fourFeature-Box-List-svg-center hidden lg:block"
+              xmlns="http://www.w3.org/2000/svg"
+              width="696"
+              height="4"
+              viewBox="0 0 696 4"
+              fill="none"
+            >
+              <path
+                d="M2 2H694"
+                stroke="#4570B6"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-dasharray="1 9"
+              />
+            </svg>
+            <svg
+              class="fourFeature-Box-List-svg-center block lg:hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              width="390"
+              height="2"
+              viewBox="0 0 390 2"
+              fill="none"
+            >
+              <path
+                d="M1 1H389"
+                stroke="#4570B6"
+                stroke-width="1.43995"
+                stroke-linecap="round"
+                stroke-dasharray="0.48 4.32"
+              />
+            </svg>
           </div>
-        </a>
+        </div>
       </div>
-    </div>
-  </section>
-  <IndexEnvironment />
-  <section class="awards mb-11 lg:mb-62 flex flex-col lg:flex-row gap-7 md:gap-10 lg:gap-16">
-    <h2 class="title-normal text-center lg:py-8 lg:pr-11 lg:border-r-2 lg:border-primary">
-      {dict.home.awards.title}
-    </h2>
-    <IndexAwards />
-  </section>
-</BaseLayout>
-<style lang="scss">
-  %book-button {
-    aspect-ratio: 1/1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    border: 1px solid #fff;
-    border-radius: 50%;
-  }
-  %book-before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    position: absolute;
-    right: -4px;
-    bottom: -4px;
-    background-color: var(--color-primary);
-    border: 1px solid #fff;
-    z-index: -1;
-  }
-  .intro-main {
-    position: relative;
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-    &::before {
-      width: clamp(100px, 32vw, 140px);
-      height: clamp(100px, 32vw, 140px);
-      background-image: url("@/assets/images/index/deco-aiming.svg");
-      right: -48px;
-      top: clamp(-40px, -7vw, -32px);
-    }
-    &::after {
-      width: clamp(160px, 39vw, 180px);
-      aspect-ratio: 25/16;
-      bottom: -68px;
-      left: -40px;
-      background-image: url("@/assets/images/index/deco-lens.svg");
-      rotate: 22deg;
-    }
-  }
-  .service-button {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    border: 1px solid var(--color-primary);
-    background-color: var(--color-primary);
-    color: #fff;
-    padding: 24px;
-    border-radius: 12px;
-    transition:
-      background-color 300ms ease-in-out,
-      color 300ms ease-in-out;
-    &::before {
-      content: "";
-      position: absolute;
-      right: -6px;
-      bottom: -6px;
-      border: 1px solid var(--color-primary);
-      width: 100%;
-      height: 100%;
-      border-radius: 12px;
-    }
-  }
-  .feature-main {
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOTAgMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTS43Mi43MmgzODgiIHN0cm9rZT0iIzQ1NzBiNiIgc3Ryb2tlLXdpZHRoPSIxLjQ0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjAuNDggNC4zMiIvPjwvc3ZnPg==");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 100%;
-      height: 1.5px;
-      pointer-events: none;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMiAzOTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTS43Mi43MnYxODIuMjE2bTAgMjMuNTQ4djE4Mi4yMTciIHN0cm9rZT0iIzQ1NzBiNiIgc3Ryb2tlLXdpZHRoPSIxLjQ0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjAuNDggNC4zMiIvPjwvc3ZnPg==");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 1.5px;
-      height: 100%;
-      pointer-events: none;
-    }
-  }
-  .book {
-    .book-button {
-      position: absolute;
-      z-index: 20;
-      &:first-child {
-        left: 28px;
-        bottom: 48px;
-        width: clamp(140px, 41vw, 160px);
-      }
-      &:last-child {
-        right: 40px;
-        bottom: -52px;
-        width: clamp(144px, 43vw, 168px);
-      }
-    }
-    .book-check {
-      @extend %book-button;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition:
-        background-color 300ms ease-in-out,
-        color 300ms ease-in-out;
-      &::before {
-        @extend %book-before;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-      &:hover::before {
-        opacity: 100;
-      }
-    }
-    .book-lecture {
-      @extend %book-button;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background-color: #fff;
-      &::before {
-        @extend %book-before;
-      }
-    }
-  }
-  .reviews {
-    background-image: url("@/assets/images/index/index-reviews-bg-mb.webp");
-    background-size: cover;
-    background-position: bottom;
-    .reviews-main {
-      position: relative;
-      border: 1px solid var(--color-primary);
-      width: 100%;
-      height: 436px;
-      padding: 48px 32px 0 32px;
-      background-color: #fff;
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: calc(100% + 1px);
-        aspect-ratio: 13 / 1;
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjUxIDUxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MiI+PHBhdGggc3R5bGU9ImZpbGw6IzQ1NzBiNjtmaWxsLXJ1bGU6bm9uemVybyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEuNzc1KSIgZD0iTTEgMS43NzVoNjUwLjMyNnY1MC4zODNIMXoiLz48cGF0aCBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtcnVsZTpub256ZXJvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAtMS43NzUpIiBkPSJNMTUxLjM3MyAxNS43MjdoNDY4Ljk0OFYzNy40M0gxNTEuMzczeiIvPjxwYXRoIGQ9Ik02Mi4yNSAxNS45MmMtNS45NjkgMC0xMC44MTMgNC44MzgtMTAuODEzIDEwLjgxNHYuMDA2YzAgNS45MjkgNC44NzggMTAuODA3IDEwLjgwNyAxMC44MDdoLjAxMmM1LjkyOSAwIDEwLjgwNy00Ljg3OCAxMC44MDctMTAuODA3di0uMDEzYzAtNS45MjktNC44NzgtMTAuODA3LTEwLjgwNy0xMC44MDd6bS0zNi4wMjggMGMtNS45NjggMC0xMC44MTMgNC44MzgtMTAuODEzIDEwLjgxNHYuMDA2YzAgNS45MjkgNC44NzggMTAuODA3IDEwLjgwNyAxMC44MDdoLjAxMmM1LjkyOSAwIDEwLjgwNy00Ljg3OCAxMC44MDctMTAuODA3di0uMDEzYzAtNS45MjktNC44NzgtMTAuODA3LTEwLjgwNy0xMC44MDd6bTczLjQzNiAwYy01Ljk2OSAwLTEwLjgxMyA0LjgzOC0xMC44MTMgMTAuODE0di4wMDZjMCA1LjkyOSA0Ljg3OCAxMC44MDcgMTAuODA3IDEwLjgwN2guMDA5YzUuOTMgMCAxMC44MS00Ljg4IDEwLjgxLTEwLjgxdi0uMDA3YzAtNS45My00Ljg4LTEwLjgxLTEwLjgxLTEwLjgxeiIgc3R5bGU9ImZpbGw6I2Y0ZmFmYztmaWxsLXJ1bGU6bm9uemVybyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEuNzc1KSIvPjxwYXRoIGQ9Ik0xNjIuNzk0IDMzLjU5NnYtMTQuNThoNC4yNnExLjQ2IDAgMi41NC40IDEuMS4zOCAxLjcgMS4yNC42Mi44NC42MiAyLjI2IDAgMS4zNC0uNjIgMi4yNi0uNi45Mi0xLjcgMS4zOC0xLjA4LjQ2LTIuNTQuNDZoLTMuMDZ2Ni41OHptMS4yLTcuNThoMi44cTEuODgxIDAgMi44OC0uNzYgMS0uNzYgMS0yLjM0IDAtMS42LTEtMi4yNC0uOTk5LS42Ni0yLjg4LS42NmgtMi44em02Ljg2IDcuNTgtNC4wOC02LjkyIDEuMS0uNDQgNC4zNCA3LjM2em05Ljg1NC4yNnEtMS4zOCAwLTIuNTItLjY2LTEuMTItLjY4MS0xLjgtMS45Mi0uNjYtMS4yNC0uNjYtMyAwLTEuMy4zOC0yLjM0dDEuMDQtMS43NnEuNjgtLjc0IDEuNTItMS4xMi44NC0uNCAxLjc0LS40IDEuMjggMCAyLjIuNi45Mi41OCAxLjQyIDEuNy41IDEuMS41IDIuNjYgMCAuMjItLjAyLjQ0IDAgLjItLjA0LjQyaC03LjU2cS4wNCAxLjI4LjUyIDIuMjhhNC4xIDQuMSAwIDAgMCAxLjM2IDEuNTZxLjg2LjU2IDIuMDIuNTZhNC42IDQuNiAwIDAgMCAxLjU0LS4yNHEuNjgtLjI2IDEuMjgtLjY4bC40Ni44NmE5IDkgMCAwIDEtMS40NC43MnEtLjguMzItMS45NC4zMm0tMy44LTYuMzJoNi41NHEwLTEuOTItLjgyLTIuOXQtMi4yMi0uOThxLS44NiAwLTEuNjIuNDYtLjc2LjQ1OS0xLjI2IDEuMzItLjUuODYtLjYyIDIuMW0xNC44NzcgNi4wNi0zLjk2LTEwLjY4aDEuMjRsMi4zMiA2LjU2cS4yNi43NTkuNTIgMS41Ni4yOC43OC41NCAxLjUyaC4wOHEuMjYtLjc0LjUyLTEuNTIuMjgtLjgwMS41NC0xLjU2bDIuMzItNi41NmgxLjE2bC0zLjkgMTAuNjh6bTkuNTY1IDB2LTEwLjY4aDEuMTZ2MTAuNjh6bS42LTEzLjE2cS0uNDIgMC0uNjgtLjI2LS4yNC0uMjgtLjI0LS43MiAwLS40Mi4yNC0uNjguMjYtLjI2LjY4LS4yNi40IDAgLjY2LjI2dC4yNi42OHEwIC40NC0uMjYuNzJhLjkuOSAwIDAgMS0uNjYuMjZtMTAuNjM3IDEzLjQycS0xLjM4IDAtMi41Mi0uNjYtMS4xMi0uNjgxLTEuOC0xLjkyLS42Ni0xLjI0LS42Ni0zIDAtMS4zLjM4LTIuMzR0MS4wNC0xLjc2cS42OC0uNzQgMS41Mi0xLjEyLjg0LS40IDEuNzQtLjQgMS4yOCAwIDIuMi42LjkyLjU4IDEuNDIgMS43LjUgMS4xLjUgMi42NiAwIC4yMi0uMDIuNDQgMCAuMi0uMDQuNDJoLTcuNTZxLjA0IDEuMjguNTIgMi4yOGMuMzExLjYyOC43OCAxLjE2NiAxLjM2IDEuNTZxLjg2LjU2IDIuMDIuNTZhNC42IDQuNiAwIDAgMCAxLjU0LS4yNHEuNjgtLjI2IDEuMjgtLjY4bC40Ni44NmE5IDkgMCAwIDEtMS40NC43MnEtLjguMzItMS45NC4zMm0tMy44LTYuMzJoNi41NHEwLTEuOTItLjgyLTIuOXQtMi4yMi0uOThhMy4wNyAzLjA3IDAgMCAwLTEuNjIuNDZxLS43Ni40NTktMS4yNiAxLjMyLS41Ljg2LS42MiAyLjFtMTQuMjk3IDYuMDYtMy4xMi0xMC42OGgxLjI0bDEuODYgNi43NHEuMTguNzYuMzQgMS40Ni4xOC42OTkuMzQgMS40NGguMXEuMi0uNzQxLjM4LTEuNDQuMTgtLjcuMzgtMS40NmwxLjg4LTYuNzRoMS4zbDEuOSA2Ljc0cS4yLjc2LjM4IDEuNDYuMi42OTkuNCAxLjQ0aC4wOHEuMTgtLjc0MS4zNi0xLjQ0LjE4LS43LjM4LTEuNDZsMS44LTYuNzRoMS4xNmwtMyAxMC42OGgtMS41bC0xLjgtNi40MmEzMiAzMiAwIDAgMS0uNC0xLjUyIDM3IDM3IDAgMCAwLS40LTEuNTRoLS4xcS0uMTguNzgtLjM4IDEuNTYtLjE4Ljc2LS40MiAxLjU0bC0xLjc2IDYuMzh6bTE4LjMxMi4yNnEtMS4xNiAwLTIuMTgtLjQyYTcgNyAwIDAgMS0xLjc0LTEuMDRsLjY0LS44NHEuNjguNTYgMS40Ni45NHQxLjg2LjM4cTEuMjIgMCAxLjg0LS41OC42Mi0uNi42Mi0xLjQyIDAtLjY0LS40LTEuMDZhMi45IDIuOSAwIDAgMC0uOTgtLjcyIDEyIDEyIDAgMCAwLTEuMi0uNXEtLjc4LS4zLTEuNTQtLjY0YTMuOCAzLjggMCAwIDEtMS4yNC0uOTRxLS40OC0uNTgtLjQ4LTEuNDggMC0uODAxLjQtMS40NC40Mi0uNjYgMS4yLTEuMDQuNzgtLjQgMS45LS40YTQuNCA0LjQgMCAwIDEgMS43LjM0cS44Mi4zMiAxLjQuOGwtLjYuOHEtLjU0LS40Mi0xLjE0LS42OC0uNi0uMjgtMS4zOC0uMjgtMS4xOCAwLTEuNzYuNTYtLjU2LjU2LS41NiAxLjI4IDAgLjU3OS4zNC45Ni4zNC4zOC45LjY0LjU2LjI0IDEuMTYuNDguNjQuMjQgMS4yNC41LjYuMjQgMS4wOC42LjUuMzQuOC44NnQuMyAxLjNxMCAuODItLjQyIDEuNTJ0LTEuMjIgMS4xMnEtLjguNC0yIC40bTguOTIzIDBxLS40IDAtLjcyLS4zLS4zLS4zLS4zLS43OCAwLS41Mi4zLS44LjMyLS4zLjcyLS4zLjQyIDAgLjcyLjMuMy4yOC4zLjggMCAuNDgtLjMuNzh0LS43Mi4zIiBzdHlsZT0iZmlsbDojNDU3MGI2O2ZpbGwtcnVsZTpub256ZXJvIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAtMS43NzUpIi8+PC9zdmc+");
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-    }
-  }
-  @media screen and (min-width: 768px) {
-    .reviews {
-      background-position: center 80%;
-      .reviews-main {
-        padding-top: 72px;
-        height: 520px;
-      }
-    }
-  }
-  @media screen and (min-width: 1024px) {
-    .service {
-      .service-main {
-        background-image: url("@/assets/images/index/bg-service.svg");
-        background-repeat: no-repeat;
-        background-position: center 100%;
-      }
-      .service-button {
-        padding-left: 60px;
-        padding-right: 60px;
-        &:hover {
-          background: transparent;
-          color: var(--color-primary);
-        }
-        &::before {
-          border: none;
-        }
-      }
-    }
-    .feature-main {
-      &::before {
-        height: 3px;
-      }
-      &::after {
-        width: 3px;
-      }
-    }
-    .reviews {
-      background-image: url("@/assets/images/index/index-reviews-bg-pc.webp");
-      background-position: bottom;
-      .reviews-main {
-        width: 652px;
-        height: 660px;
-        padding: 96px 108px 0 108px;
-      }
-    }
-    .awards {
-      margin-left: calc((100vw - 1280px) / 2);
-    }
-  }
-  @media screen and (min-width: 1280px) {
-    .intro-main {
-      &::before {
-        top: -20px;
-      }
-      &::after {
-        left: calc((100vw - 1280px) / 2 - 160px);
-        bottom: -60px;
-      }
-    }
-    .book {
-      .book-button {
-        &:first-child {
-          width: 17.292vw;
-          top: 60px;
-          right: 22.5vw;
-          bottom: auto;
-          left: auto;
-        }
-        &:last-child {
-          width: 18.125vw;
-          right: 9.1vw;
-          bottom: -48px;
-        }
-      }
+    </section>
 
-      .book-lecture,
-      .book-check {
-        &::before {
-          right: -8px;
-          bottom: -8px;
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 1560px) {
-    .intro-main {
-      &::before {
-        width: 192px;
-        height: 192px;
-        top: -28px;
-      }
-      &::after {
-        width: 260px;
-        left: -280px;
-        bottom: -80px;
-      }
-    }
-    .book {
-      .book-button {
-        &:first-child {
-          width: 332px;
-          top: 40px;
-          right: 27.5vw;
-          bottom: auto;
-          left: auto;
-        }
-        &:last-child {
-          width: 348px;
-          right: 11.1vw;
-          bottom: -84px;
-        }
-      }
-    }
-  }
-</style>
+    <!-- 4. 用家真實個案與心聲分享 (UserShare) -->
+    <UserShare />
+
+    <!-- 5. 用戶評分與預約服務 (UserRating) -->
+    <UserRating />
+
+    <!-- 7. 中心環境輪播展示區塊 (Environment) -->
+    <IndexEnvironment />
+
+    <!-- 8. 榮譽與權威認證輪播區塊 (Awards) -->
+    <IndexAwards />
+</BaseLayout>
+
+<!-- GSAP 評價平滑滾動控制腳本 -->
 <script>
   import { gsap } from "gsap";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector("[data-reviews-container]");
-    const wrapper = container?.querySelector(".reviews-scroll");
+  function initReviewsMarquee() {
+    const track = document.getElementById("reviews-track");
+    const marquee = document.getElementById("reviews-marquee");
+    if (!track || !marquee) return;
 
-    if (container && wrapper) {
-      // 1. 克隆列表
-      const clone = wrapper.cloneNode(true);
-      container.appendChild(clone);
+    const cardHeight = 110;
+    const totalItems = track.children.length;
+    const halfItems = totalItems / 2;
+    const scrollDistance = halfItems * cardHeight;
 
-      // 2. 创建动画
-      const tl = gsap.to([wrapper, clone], {
-        yPercent: -100,
-        ease: "none",
-        duration: 20,
-        repeat: -1,
-      });
+    const tween = gsap.to(track, {
+      y: -scrollDistance,
+      duration: 30,
+      ease: "none",
+      repeat: -1,
+      modifiers: {
+        y: gsap.utils.unitize((y) => parseFloat(y) % scrollDistance),
+      },
+    });
 
-      // --- 3. 事件监听（完美兼容 PC + 移动端） ---
+    marquee.addEventListener("mouseenter", () => tween.pause());
+    marquee.addEventListener("mouseleave", () => tween.play());
+    marquee.addEventListener("touchstart", () => tween.pause(), { passive: true });
+    marquee.addEventListener("touchend", () => tween.play(), { passive: true });
+  }
 
-      // PC 端：鼠标移入暂停，移出恢复
-      container.addEventListener("mouseenter", () => tl.pause());
-      container.addEventListener("mouseleave", () => tl.play());
+  function initFourFeatureObserver() {
+    const el = document.getElementById("fourFeature");
+    if (!el) return;
 
-      // 移动端：手指按下暂停
-      container.addEventListener("touchstart", () => tl.pause(), {
-        passive: true,
-      });
-      // 移动端：手指抬起恢复
-      container.addEventListener("touchend", () => tl.play(), {
-        passive: true,
-      });
-      // 移动端：手指滑出容器范围时也恢复（防止动画死锁）
-      container.addEventListener("touchcancel", () => tl.play(), {
-        passive: true,
+    function runCounters(container: HTMLElement) {
+      const counters = container.querySelectorAll<HTMLElement>(".counter-num");
+      counters.forEach((counter) => {
+        const target = parseFloat(counter.getAttribute("data-target") || "0");
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 2.2,
+          ease: "power2.out",
+          delay: 0.6, // 等待十字架生長與卡片浮現展開時同步跑數
+          onUpdate: () => {
+            counter.textContent = Math.floor(obj.val).toLocaleString();
+          },
+          onComplete: () => {
+            counter.textContent = target.toLocaleString();
+          },
+        });
       });
     }
-  });
+
+    if (!("IntersectionObserver" in window)) {
+      el.classList.add("is-inview");
+      runCounters(el);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.add("is-inview");
+            runCounters(el);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+  }
+
+  function initPageInteractions() {
+    initReviewsMarquee();
+    initFourFeatureObserver();
+  }
+
+  document.addEventListener("DOMContentLoaded", initPageInteractions);
+  document.addEventListener("astro:page-load", initPageInteractions);
 </script>

@@ -1,0 +1,36 @@
+---
+/*
+ * @Author: Antigravity AI
+ * @Date: 2026-09-02
+ * @FilePath: /src/components/common/SiteLogo.astro
+ * @Description: 希瑪微笑矯視中心官方 Logo (引用 public 靜態資源，保證 0 404，純靜態無打包雜訊)
+ */
+interface Props {
+  variant?: "default" | "white";
+  class?: string;
+  width?: number;
+  height?: number;
+  loading?: "eager" | "lazy";
+}
+
+const {
+  variant = "default",
+  class: className = "",
+  width = variant === "white" ? 174 : 190,
+  height = variant === "white" ? 51 : 60,
+  loading = "eager",
+} = Astro.props;
+
+const logoSrc = variant === "white" ? "/images/logo-white.svg" : "/images/logo.svg";
+---
+
+<img
+  src={logoSrc}
+  alt="香港希瑪微笑矯視中心 (CMER Smile) - SMILE Pro 2.0 / ICL / 激光矯視"
+  title="香港希瑪微笑矯視中心官方 Logo"
+  width={width}
+  height={height}
+  loading={loading}
+  fetchpriority={loading === "eager" ? "high" : "auto"}
+  class:list={["site-logo block h-auto w-auto max-h-full object-contain", className]}
+/>

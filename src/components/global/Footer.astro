@@ -1,256 +1,811 @@
 ---
-import { Image } from "astro:assets";
-import logoImg from "@/assets/images/common/logo.svg";
-// const { lang: langParam } = Astro.params;
-// const isCN = langParam === "cn";
-import { useI18n } from "@/i18n/utils";
-import { getLocalizedHref } from "@/i18n/utils";
+/*
+ * @Author: Antigravity AI
+ * @Date: 2026-09-03
+ * @FilePath: /src/components/global/Footer.astro
+ * @Description: 1:1 像素級還原線上官方標準 new-Footer-v2 (浮動白卡、門市地址、營業時間、吉祥物、雙欄導航與社群連結)
+ */
+import { useI18n, getLocalizedHref } from "@/i18n/utils";
+
 const { dict, lang } = useI18n(Astro.url);
-import { Icon } from "astro-icon/components";
-const socialLinks = [
-  {
-    name: "social/facebook",
-    url: "https://www.facebook.com/CMER.SMILE",
-    label: "Facebook",
-  },
-  {
-    name: "social/instagram",
-    url: "https://www.instagram.com/cmer_smile",
-    label: "Instagram",
-  },
-  {
-    name: "social/youtube",
-    url: "https://www.youtube.com/channel/UCkYbtBhKYc8XyrgG7SAFzRg",
-    label: "YouTube",
-  },
+const isCn = lang === "zh-cn";
+
+// 導航鏈接配置 (嚴格遵循 AGENTS.md 路由零 404 與駝峰大小寫規則)
+const aboutList = [
+  { title: isCn ? "集团及中心简介" : "集團及中心簡介", href: "/group-profile" },
+  { title: isCn ? "中心设备" : "中心設備", href: "/medical-equipment" },
 ];
-const mainNav = [
-  {
-    title: { text: dict.common.menu.about.title, href: "" },
-    links: [
-      { text: dict.common.menu.about.group, href: "/group-profile" },
-      { text: dict.common.menu.about.equipment, href: "/medical-equipment" },
-    ],
-  },
-  {
-    title: { text: dict.common.menu.service.title, href: "" },
-    links: [
-      { text: dict.common.menu.service.smilepro, href: "/smilePro" },
-      { text: dict.common.menu.service.icl, href: "/vision-correction-icl" },
-      {
-        text: dict.common.menu.service.smile,
-        href: "/vision-correction/relex-smile",
-      },
-      {
-        text: dict.common.menu.service.presbyopia,
-        href: "/vision-correction-presbyopia",
-      },
-      {
-        text: dict.common.menu.service.lasik,
-        href: "/vision-correction-lasik",
-      },
-    ],
-  },
-  {
-    title: { text: dict.common.menu.instructions.title, href: "/patient-info" },
-    links: [
-      {
-        text: dict.common.menu.instructions.pre,
-        href: "/patient-info#beforeJiaoShi",
-      },
-      {
-        text: dict.common.menu.instructions.process,
-        href: "/patient-info#inJiaoShi",
-      },
-      {
-        text: dict.common.menu.instructions.post,
-        href: "/patient-info#afterJiaoShi",
-      },
-    ],
-  },
+
+const serviceList = [
+  { title: isCn ? "SMILE Pro 1.0/2.0微笑激光矫视" : "SMILE Pro 1.0/2.0微笑激光矯視", href: "/smilePro" },
+  { title: isCn ? "ICL植入式隐形眼镜" : "ICL植入式隱形眼鏡", href: "/vision-correction-icl" },
+  { title: isCn ? "SMILE 微笑激光矫视" : "SMILE 微笑激光矯視", href: "/vision-correction/relex-smile" },
+  { title: isCn ? "老花矫视" : "老花矯視", href: "/vision-correction-presbyopia" },
+  { title: isCn ? "LASIK 激光矫视" : "LASIK 激光矯視", href: "/vision-correction-lasik" },
 ];
-const sideNav = [
-  { title: { text: dict.common.menu.fee, href: "/fee" }, links: [] },
-  {
-    title: { text: dict.common.menu.about.team, href: "/our-medical-team" },
-    links: [],
-  },
-  {
-    title: { text: dict.common.menu.faq.title, href: "/FreQuestions" },
-    links: [],
-  },
-  {
-    title: { text: dict.common.menu.news.title, href: "" },
-    links: [
-      { text: dict.common.menu.news.case, href: "/video" },
-      { text: dict.common.menu.news.knowledge, href: "/blog" },
-    ],
-  },
-  { title: { text: dict.common.menu.contact, href: "/contact-us" }, links: [] },
+
+const diagnosisList = [
+  { title: isCn ? "眼睛检查及矫视前" : "眼睛檢查及矯視前", href: "/patient-info#beforeJiaoShi" },
+  { title: isCn ? "矫视后覆诊" : "矯視後覆診", href: "/patient-info#afterJiaoShi" },
+  { title: isCn ? "矫视流程" : "矯視流程", href: "/patient-info#inJiaoShi" },
 ];
-const businessClass = "font-medium text-sm lg:text-lg tracking-widest leading-[1.8]";
+
+const newsList = [
+  { title: isCn ? "科普知识" : "科普知識", href: "/blog" },
+  { title: isCn ? "个案分享" : "個案分享", href: "/video" },
+];
 ---
 
-<footer class="footer pt-8 lg:pt-18">
-  <div class="bg-bg-subtle">
-    <div class="flex wrapper justify-between items-center flex-col lg:flex-row lg:gap-5 xl:gap-12 2xl:gap-24">
-      <div
-        class="footer-info flex-1 bg-white max-w-sm lg:max-w-2xl relative border border-primary rounded-4xl pt-8 pl-[clamp(8px,6.667vw,32px)] pr-0 pb-7 lg:p-18 lg:pb-21 lg:pr-29 w-full lg:w-auto -translate-y-8 lg:-translate-y-18"
-      >
-        <a href={getLocalizedHref("/", lang)}>
-          <Image src={logoImg} alt="Clinic Logo" width={329} height={104} class="w-4/5 lg:w-82 h-auto" />
+<footer class="new-Footer-v2" id="site-footer" aria-label={isCn ? "网站页脚与门市资讯" : "網站頁尾與門市資訊"}>
+  <div class="container">
+    <section>
+      <!-- 左側白色浮動卡片 (含 Logo、營業時間、中環/旺角門市、吉祥物形象) -->
+      <div class="new-Footer-v2-address">
+        <a class="new-Footer-v2-logo" href={getLocalizedHref("/", lang)} title="香港希瑪微笑矯視中心官方首頁" aria-label="香港希瑪微笑矯視中心官方首頁">
+          <img
+            src="https://statichk.cmermedical.com/smile/smileproV2/Smile-footer-mobile-LogoV2.svg"
+            alt="香港希瑪微笑矯視中心 (CMER SMILE Refractive Center)"
+            title="香港希瑪微笑矯視中心 (CMER SMILE Refractive Center)"
+            width="492"
+            height="104"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
-        <div class="mt-9 lg:mt-16 mb-9">
-          <p class="text-primary font-semibold mb-3 lg:mb-3 text-lg md:text-2xl xl:text-3xl tracking-[0.25em]">
-            {dict.common.businessHours.title}
-          </p>
-          <ul class="font-medium">
-            <li class="flex lg:gap-10">
-              <strong class:list={[businessClass, "text-primary w-1/2 lg:w-2/5 whitespace-nowrap"]}>
-                {dict.common.businessHours.weekday}
-              </strong>
-              <span class:list={[businessClass, "text-desc"]}>9:00-19:00</span>
-            </li>
-            <li class="flex lg:gap-10">
-              <strong class:list={[businessClass, "text-primary w-1/2 lg:w-2/5 whitespace-nowrap"]}>
-                {dict.common.businessHours.weekend}
-              </strong>
-              <span class:list={[businessClass, "text-desc"]}>9:00-18:00</span>
-            </li>
-            <li class="flex lg:gap-10">
-              <strong class:list={[businessClass, "text-primary w-1/2 lg:w-2/5 whitespace-nowrap"]}>
-                {dict.common.businessHours.holiday}
-              </strong>
-              <span class:list={[businessClass, "text-desc"]}>{dict.common.businessHours.closed}</span>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <ul class="space-y-3 md:space-y-6 lg:space-y-9">
-            {
-              Object.values(dict.common.clinic).map((clinic) => (
-                <li>
-                  <p class="text-primary flex items-center text-lg md:text-xl xl:text-2xl font-extrabold tracking-[0.15em]">
-                    <strong>{clinic.title}</strong>
-                    <Image
-                      src="https://statichk.cmermedical.com/smile/new-footerV2-address-pc.avif"
-                      alt={dict.common.footer.map}
-                      width={62}
-                      height={56}
-                      class="w-9 md:w-12 xl:w-15"
-                    />
-                  </p>
-                  <p class="text-desc text-[12px] lg:text-lg font-light tracking-[0.2em]" set:html={clinic.address} />
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-      <div class="pb-32 lg:pt-21 lg:pb-17">
-        <div class="flex gap-x-8 xl:gap-x-16 text-desc mb-12 text-sm md:text-lg xl:text-2xl tracking-[0.15em]">
-          <div class="flex flex-col gap-4 lg:gap-8">
-            {
-              mainNav.map((item) => (
-                <div class="group">
-                  {item.title.href ? (
-                    <a
-                      href={getLocalizedHref(item.title.href, lang)}
-                      class="flex items-center gap-2 lg:gap-4 font-medium text-primary"
-                    >
-                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
-                      {item.title.text}
-                    </a>
-                  ) : (
-                    <div class="flex items-center gap-2 lg:gap-4 font-medium text-primary">
-                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
-                      {item.title.text}
-                    </div>
-                  )}
 
-                  {item.links && item.links.length > 0 && (
-                    <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
-                      {item.links.map((link) => (
-                        <li>
-                          <a href={getLocalizedHref(link.href, lang)}>{link.text}</a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))
-            }
+        <!-- 營業時間 -->
+        <div class="new-Footer-v2-addressTime">
+          <h2 class="new-Footer-v2-addressTime-title">
+            {isCn ? "营业时间" : "營業時間"}
+          </h2>
+          <div class="new-Footer-v2-addressTime-item">
+            <div>{isCn ? "星期一至五" : "星期一至五"}</div>
+            <div>9:00-19:00</div>
           </div>
-          <div class="flex flex-col gap-4 lg:gap-8">
-            {
-              sideNav.map((item) => (
-                <div class="group">
-                  {item.title.href ? (
-                    <a
-                      href={getLocalizedHref(item.title.href, lang)}
-                      class="flex items-center gap-2 lg:gap-4 font-medium text-primary"
-                    >
-                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
-                      {item.title.text}
-                    </a>
-                  ) : (
-                    <div class="flex items-center gap-2 lg:gap-4 font-medium text-primary">
-                      <span class="size-2 lg:size-3 rounded-full bg-primary" />
-                      {item.title.text}
-                    </div>
-                  )}
+          <div class="new-Footer-v2-addressTime-item">
+            <div>{isCn ? "星期六" : "星期六"}</div>
+            <div>9:00-18:00</div>
+          </div>
+          <div class="new-Footer-v2-addressTime-item">
+            <div>{isCn ? "星期日及公众假期" : "星期日及公眾假期"}</div>
+            <div>{isCn ? "休息" : "休息"}</div>
+          </div>
+        </div>
 
-                  {item.links && item.links.length > 0 && (
-                    <ul class="pl-4 lg:pl-7 mt-1 lg:mt-1.5 space-y-1 lg:space-y-1.5">
-                      {item.links.map((link) => (
-                        <li>
-                          <a href={getLocalizedHref(link.href, lang)}>{link.text}</a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))
-            }
-            <div class="flex items-center gap-4 lg:gap-6">
+        <!-- 門市地址列表 (增強 Local SEO 語意標記) -->
+        <address class="new-Footer-v2-loction not-italic">
+          <div class="new-Footer-v2-loction-item">
+            <div>
+              <strong>{isCn ? "中环" : "中環"}</strong>
+              <a
+                href="https://maps.google.com/?q=Central+Building+Pedder+Street"
+                target="_blank"
+                rel="noopener noreferrer"
+                title={isCn ? "在 Google 地图查看中环诊所" : "在 Google 地圖查看中環診所"}
+                aria-label="Google 地圖查看中環門市"
+              >
+                <img
+                  src="https://statichk.cmermedical.com/smile/new-footerV2-address-pc.avif"
+                  alt={isCn ? "香港中环中建大厦门市地图导航" : "香港中環中建大廈門市地圖導航"}
+                  title={isCn ? "Google 地图查看中环门市" : "Google 地圖查看中環門市"}
+                  width="58"
+                  height="52"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <p>
+              {isCn ? "毕打街1-3号中建大厦1512室" : "畢打街1-3號中建大廈1512室"}<br />
+              {isCn ? "(港铁站G出口，置地广场楼上)" : "(港鐵站G出口，置地廣場樓上)"}
+            </p>
+          </div>
+
+          <div class="new-Footer-v2-loction-item">
+            <div>
+              <strong>{isCn ? "旺角" : "旺角"}</strong>
+              <a
+                href="https://maps.google.com/?q=Grand+Century+Place+Mong+Kok"
+                target="_blank"
+                rel="noopener noreferrer"
+                title={isCn ? "在 Google 地图查看旺角诊所" : "在 Google 地圖查看旺角診所"}
+                aria-label="Google 地圖查看旺角門市"
+              >
+                <img
+                  src="https://statichk.cmermedical.com/smile/new-footerV2-address-pc.avif"
+                  alt={isCn ? "香港旺角雅兰中心门市地图导航" : "香港旺角雅蘭中心門市地圖導航"}
+                  title={isCn ? "Google 地图查看旺角门市" : "Google 地圖查看旺角門市"}
+                  width="58"
+                  height="52"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <p>
+              {isCn ? "弥敦道625及639号雅兰中心一期" : "彌敦道625及639號雅蘭中心一期"}<br />
+              {isCn ? "1725B室 (港铁站E1出口)" : "1725B室 (港鐵站E1出口)"}
+            </p>
+          </div>
+        </address>
+      </div>
+
+      <!-- 右側全域導航選單 (雙欄藍點佈局) -->
+      <nav class="new-Footer-v2-menu" aria-label={isCn ? "全站导航链接" : "全站導航鏈接"}>
+        <!-- 選單欄 1 -->
+        <div class="new-Footer-v2-menu-left">
+          <!-- 關於希瑪 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <span class="new-Footer-v2-menu-item-title">{isCn ? "关于希玛" : "關於希瑪"}</span>
+            <ul>
               {
-                socialLinks.map((s) => (
-                  <a href={s.url} class="text-primary hover:opacity-80 transition-opacity">
-                    <Icon name={s.name} class="size-6 lg:size-7" />
-                  </a>
+                aboutList.map((item) => (
+                  <li>
+                    <a class="new-Footer-v2-menu-item-link" href={getLocalizedHref(item.href, lang)}>
+                      {item.title}
+                    </a>
+                  </li>
                 ))
               }
-            </div>
+            </ul>
+          </div>
+
+          <!-- 矯視服務 -->
+          <div class="new-Footer-v2-menu-left-item services">
+            <span class="new-Footer-v2-menu-item-title">{isCn ? "矫视服务" : "矯視服務"}</span>
+            <ul>
+              {
+                serviceList.map((item) => (
+                  <li>
+                    <a class="new-Footer-v2-menu-item-link" href={getLocalizedHref(item.href, lang)}>
+                      {item.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- 診症須知 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <a class="new-Footer-v2-menu-item-title" href={getLocalizedHref("/patient-info", lang)}>
+              {isCn ? "诊症须知" : "診症須知"}
+            </a>
+            <ul>
+              {
+                diagnosisList.map((item) => (
+                  <li>
+                    <a class="new-Footer-v2-menu-item-link" href={getLocalizedHref(item.href, lang)}>
+                      {item.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
-        <p class="text-desc text-[11px] min-[390px]:text-[12px] md:text-sm lg:text-base tracking-widest">
-          {dict.common.footer.copyright}<br class="block xs:hidden" />
-          <a href={getLocalizedHref("/privacy", lang)}>{dict.common.menu.privacy}</a> | <a
-            href={getLocalizedHref("/disclaimer", lang)}
-          >
-            {dict.common.menu.disclaimer}
-          </a>
-        </p>
-      </div>
+
+        <!-- 選單欄 2 -->
+        <div class="new-Footer-v2-menu-right">
+          <!-- 收費詳情 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <a class="new-Footer-v2-menu-item-title" href={getLocalizedHref("/fee", lang)}>
+              {isCn ? "收费详情" : "收費詳情"}
+            </a>
+          </div>
+
+          <!-- 醫生介紹 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <a class="new-Footer-v2-menu-item-title" href={getLocalizedHref("/our-medical-team", lang)}>
+              {isCn ? "医生介绍" : "醫生介紹"}
+            </a>
+          </div>
+
+          <!-- 常見問題 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <a class="new-Footer-v2-menu-item-title" href={getLocalizedHref("/FreQuestions", lang)}>
+              {isCn ? "常见问题" : "常見問題"}
+            </a>
+          </div>
+
+          <!-- 矯視資訊 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <span class="new-Footer-v2-menu-item-title">{isCn ? "矫视资讯" : "矯視資訊"}</span>
+            <ul>
+              {
+                newsList.map((item) => (
+                  <li>
+                    <a class="new-Footer-v2-menu-item-link" href={getLocalizedHref(item.href, lang)}>
+                      {item.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- 聯絡我們 -->
+          <div class="new-Footer-v2-menu-left-item">
+            <a class="new-Footer-v2-menu-item-title" href={getLocalizedHref("/contact-us", lang)}>
+              {isCn ? "联络我们" : "聯絡我們"}
+            </a>
+          </div>
+
+          <!-- 社交媒體官方入口 -->
+          <div class="new-Footer-v2-menu-right-url">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.facebook.com/CMER.SMILE"
+              title="Facebook 官方專頁"
+              aria-label="Facebook 官方專頁"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="27" viewBox="0 0 26 27" fill="none">
+                <path d="M26 13.5C26 6.04415 20.1797 0 13 0C5.82029 0 0 6.04415 0 13.5C0 20.2381 4.75389 25.8232 10.9688 26.836V17.4023H7.66797V13.5H10.9688V10.5258C10.9688 7.14234 12.9096 5.27344 15.879 5.27344C17.3009 5.27344 18.7891 5.53711 18.7891 5.53711V8.85938H17.1498C15.535 8.85938 15.0313 9.90009 15.0313 10.9688V13.5H18.6367L18.0604 17.4023H15.0313V26.836C21.2461 25.8232 26 20.2381 26 13.5Z" fill="#4570B6"/>
+              </svg>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.instagram.com/cmer_smile/?hl=en"
+              title="Instagram 官方專頁"
+              aria-label="Instagram 官方專頁"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                <path d="M13.5 2.43105C17.107 2.43105 17.5342 2.44687 18.9527 2.51016C20.2711 2.56816 20.983 2.78965 21.4576 2.97422C22.0852 3.2168 22.5387 3.51211 23.008 3.98145C23.4826 4.45605 23.7727 4.9043 24.0152 5.53184C24.1998 6.00645 24.4213 6.72363 24.4793 8.03672C24.5426 9.46055 24.5584 9.8877 24.5584 13.4895C24.5584 17.0965 24.5426 17.5236 24.4793 18.9422C24.4213 20.2605 24.1998 20.9725 24.0152 21.4471C23.7727 22.0746 23.4773 22.5281 23.008 22.9975C22.5334 23.4721 22.0852 23.7621 21.4576 24.0047C20.983 24.1893 20.2658 24.4107 18.9527 24.4688C17.5289 24.532 17.1018 24.5479 13.5 24.5479C9.89297 24.5479 9.46582 24.532 8.04727 24.4688C6.72891 24.4107 6.01699 24.1893 5.54238 24.0047C4.91484 23.7621 4.46133 23.4668 3.99199 22.9975C3.51738 22.5229 3.22734 22.0746 2.98477 21.4471C2.8002 20.9725 2.57871 20.2553 2.5207 18.9422C2.45742 17.5184 2.4416 17.0912 2.4416 13.4895C2.4416 9.88242 2.45742 9.45527 2.5207 8.03672C2.57871 6.71836 2.8002 6.00645 2.98477 5.53184C3.22734 4.9043 3.52266 4.45078 3.99199 3.98145C4.4666 3.50684 4.91484 3.2168 5.54238 2.97422C6.01699 2.78965 6.73418 2.56816 8.04727 2.51016C9.46582 2.44687 9.89297 2.43105 13.5 2.43105ZM13.5 0C9.83496 0 9.37617 0.0158203 7.93652 0.0791016C6.50215 0.142383 5.51602 0.374414 4.66172 0.706641C3.77051 1.05469 3.01641 1.51348 2.26758 2.26758C1.51348 3.01641 1.05469 3.77051 0.706641 4.65645C0.374414 5.51602 0.142383 6.49687 0.0791016 7.93125C0.0158203 9.37617 0 9.83496 0 13.5C0 17.165 0.0158203 17.6238 0.0791016 19.0635C0.142383 20.4979 0.374414 21.484 0.706641 22.3383C1.05469 23.2295 1.51348 23.9836 2.26758 24.7324C3.01641 25.4813 3.77051 25.9453 4.65645 26.2881C5.51602 26.6203 6.49688 26.8523 7.93125 26.9156C9.3709 26.9789 9.82969 26.9947 13.4947 26.9947C17.1598 26.9947 17.6186 26.9789 19.0582 26.9156C20.4926 26.8523 21.4787 26.6203 22.333 26.2881C23.2189 25.9453 23.973 25.4813 24.7219 24.7324C25.4707 23.9836 25.9348 23.2295 26.2775 22.3436C26.6098 21.484 26.8418 20.5031 26.9051 19.0688C26.9684 17.6291 26.9842 17.1703 26.9842 13.5053C26.9842 9.84023 26.9684 9.38145 26.9051 7.9418C26.8418 6.50742 26.6098 5.52129 26.2775 4.66699C25.9453 3.77051 25.4865 3.01641 24.7324 2.26758C23.9836 1.51875 23.2295 1.05469 22.3436 0.711914C21.484 0.379687 20.5031 0.147656 19.0688 0.084375C17.6238 0.0158203 17.165 0 13.5 0Z" fill="#4570B6"/>
+                <path d="M13.501 6.56543C9.67246 6.56543 6.56641 9.67148 6.56641 13.5C6.56641 17.3285 9.67246 20.4346 13.501 20.4346C17.3295 20.4346 20.4355 17.3285 20.4355 13.5C20.4355 9.67148 17.3295 6.56543 13.501 6.56543ZM13.501 17.9982C11.0172 17.9982 9.00273 15.9838 9.00273 13.5C9.00273 11.0162 11.0172 9.00176 13.501 9.00176C15.9848 9.00176 17.9992 11.0162 17.9992 13.5C17.9992 15.9838 15.9848 17.9982 13.501 17.9982Z" fill="#4570B6"/>
+                <path d="M22.3277 6.29131C22.3277 7.1878 21.6 7.91026 20.7088 7.91026C19.8123 7.91026 19.0898 7.18252 19.0898 6.29131C19.0898 5.39483 19.8176 4.67236 20.7088 4.67236C21.6 4.67236 22.3277 5.4001 22.3277 6.29131Z" fill="#4570B6"/>
+              </svg>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.youtube.com/channel/UCkYbtBhKYc8XyrgG7SAFzRg?view_as=public"
+              title="YouTube 官方頻道"
+              aria-label="YouTube 官方頻道"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.6163 1.44974C25.0197 1.87135 25.3094 2.39559 25.4564 2.97C26 5.09011 26 9.51136 26 9.51136C26 9.51136 26 13.9326 25.4564 16.0527C25.3094 16.6271 25.0197 17.1514 24.6163 17.573C24.2129 17.9946 23.7099 18.2988 23.1577 18.4551C21.125 19.0227 13 19.0227 13 19.0227C13 19.0227 4.875 19.0227 2.84227 18.4551C2.29009 18.2988 1.78713 17.9946 1.38373 17.573C0.980326 17.1514 0.690631 16.6271 0.543636 16.0527C0 13.9326 0 9.51136 0 9.51136C0 9.51136 0 5.09011 0.543636 2.97C0.690631 2.39559 0.980326 1.87135 1.38373 1.44974C1.78713 1.02813 2.29009 0.723939 2.84227 0.567614C4.875 0 13 0 13 0C13 0 21.125 0 23.1577 0.567614C23.7099 0.723939 24.2129 1.02813 24.6163 1.44974ZM17.1392 9.5113L10.3438 5.49658V13.526L17.1392 9.5113Z" fill="#4570B6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 桌面端底部版權與免責聲明 -->
+        <div class="footer-bottom footer-bottom-mobile m-auto d-none d-lg-block">
+          <p class="footer-copyright-links">
+            <span>©2026 {isCn ? "香港希玛微笑矫视中心版权所有" : "香港希瑪微笑矯視中心版權所有"}</span>
+            <span>
+              <a href={getLocalizedHref("/privacy-policy", lang)}>{isCn ? "隐私政策" : "私隱政策"}</a>
+            </span>
+            |
+            <span>
+              <a href={getLocalizedHref("/disclaimer", lang)}>{isCn ? "免责条款" : "免責條款"}</a>
+            </span>
+          </p>
+          <p class="footer-disclaimer">
+            {isCn 
+              ? "本网站资讯仅供参考，不能作诊疗及医疗为依据。" 
+              : "本網站資訊僅供參考，不能作診療及醫療為依據。"}
+          </p>
+        </div>
+      </nav>
+    </section>
+
+    <!-- 移動端底部版權與免責聲明 -->
+    <div class="footer-bottom m-auto d-lg-none">
+      <p class="footer-copyright-links">
+        <span>©2026 {isCn ? "香港希玛微笑矫视中心版权所有" : "香港希瑪微笑矯視中心版權所有"}</span>
+        <span class="footer-policy-links">
+          <a href={getLocalizedHref("/privacy-policy", lang)}>{isCn ? "隐私政策" : "私隱政策"}</a>
+          |
+          <a href={getLocalizedHref("/disclaimer", lang)}>{isCn ? "免责条款" : "免責條款"}</a>
+        </span>
+      </p>
+      <p class="footer-disclaimer">
+        {isCn 
+          ? "本网站资讯仅供参考，不能作诊疗及医疗为依据。" 
+          : "本網站資訊僅供參考，不能作診療及醫療為依據。"}
+      </p>
     </div>
   </div>
 </footer>
+
 <style lang="scss">
-  .footer-info {
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      right: 12px;
-      width: 100px;
-      aspect-ratio: 15 / 29;
-      height: auto;
-      background: url("https://statichk.cmermedical.com/smile/newFooterV2-bgicon-pc.avif") no-repeat center / contain;
-      z-index: -1;
-      @media screen and (min-width: 1024px) {
-        width: 172px;
-        bottom: -20px;
-        right: 72px;
+  /* 輔助響應式顯示類 */
+  .d-none {
+    display: none !important;
+  }
+  .d-lg-none {
+    display: block;
+  }
+  .d-lg-block {
+    display: none;
+  }
+
+  /* 移動端樣式 (< 992px) */
+  @media screen and (max-width: 991px) {
+    .new-Footer-v2 {
+      width: 100%;
+      background: #f4fafc;
+      padding-top: 50px;
+      padding-bottom: 90px;
+
+      /* 移除 section 0 10px padding */
+      section {
+        padding: 0;
+      }
+
+      .new-Footer-v2-address {
+        max-width: 360px;
+        margin: 0 auto;
+        border-radius: 14.5px;
+        border: 1px solid #4570b6;
+        background-color: #fff;
+        padding: 30px 20px 24px;
+        position: relative;
+
+        &::after {
+          background-repeat: no-repeat;
+          content: url("https://statichk.cmermedical.com/smile/smileproV2/newFooterV2-bgicon.png");
+          position: absolute;
+          right: 16px;
+          bottom: -10px;
+          z-index: 1;
+        }
+
+        /* 刪除 max-width */
+        .new-Footer-v2-logo {
+          display: block;
+          margin: 0 auto;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .new-Footer-v2-addressTime {
+          margin-top: 28px;
+          .new-Footer-v2-addressTime-title {
+            margin-bottom: 10px;
+            color: #4570b6;
+            text-align: left;
+            font-family: var(--font-hk);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 3px;
+          }
+          .new-Footer-v2-addressTime-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            & > div:nth-child(1) {
+              color: #4570b6;
+              font-family: var(--font-hk);
+              font-size: 16px;
+              font-weight: 500;
+              line-height: 1.8;
+            }
+            & > div:nth-child(2) {
+              width: 96px;
+              text-align: left;
+              color: #6d6e71;
+              font-family: var(--font-number);
+              font-size: 16px;
+              font-weight: 500;
+              line-height: 1.8;
+            }
+          }
+        }
+
+        .new-Footer-v2-loction {
+          position: relative;
+          z-index: 2;
+          margin-top: 24px;
+          .new-Footer-v2-loction-item {
+            margin-bottom: 18px;
+            & > div {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              strong {
+                color: #4570b6;
+                font-family: var(--font-hk);
+                font-size: 18px;
+                font-weight: 700;
+              }
+              a img {
+                width: 24px;
+                height: 24px;
+              }
+            }
+            p {
+              margin-top: 4px;
+              color: #6d6e71;
+              font-family: var(--font-hk);
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 1.5;
+            }
+          }
+        }
+      }
+
+      .new-Footer-v2-menu {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 36px;
+
+        .new-Footer-v2-menu-left,
+        .new-Footer-v2-menu-right {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .new-Footer-v2-menu-left-item {
+            position: relative;
+            padding-left: 14px;
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: 0;
+              top: 7px;
+              width: 7px;
+              height: 7px;
+              background: #4570b6;
+              border-radius: 50%;
+              flex-shrink: 0;
+            }
+
+            .new-Footer-v2-menu-item-title {
+              color: #4570b6;
+              font-family: var(--font-hk);
+              font-size: 16px;
+              font-weight: 600;
+              text-decoration: none;
+              line-height: 1.3;
+              display: inline-block;
+            }
+
+            ul {
+              padding-left: 4px;
+              margin-top: 4px;
+              list-style: none;
+              li {
+                margin-top: 4px;
+                .new-Footer-v2-menu-item-link {
+                  color: #6d6e71;
+                  font-family: var(--font-hk);
+                  font-size: 16px;
+                  font-weight: 400;
+                  text-decoration: none;
+                  transition: color 0.2s ease;
+                  &:hover {
+                    color: #4570b6;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .new-Footer-v2-menu-right-url {
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          margin-top: 8px;
+          svg {
+            width: 22px;
+            height: 22px;
+          }
+        }
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 32px;
+        font-family: var(--font-hk);
+        font-size: 12px;
+        color: #6d6e71;
+        line-height: 1.6;
+
+        .footer-disclaimer {
+          font-size: 11px;
+          color: #88898c;
+          margin-top: 8px;
+          padding: 0 10px;
+          line-height: 1.5;
+        }
+
+        .footer-copyright-links {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          .footer-policy-links {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            align-items: center;
+          }
+
+          a {
+            color: #6d6e71;
+            text-decoration: none;
+            &:hover {
+              color: #4570b6;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* 桌面端樣式 (>= 992px) */
+  @media screen and (min-width: 992px) {
+    .d-lg-block {
+      display: block !important;
+    }
+    .d-lg-none {
+      display: none !important;
+    }
+
+    .new-Footer-v2 {
+      width: 100%;
+      background: #f4fafc;
+      padding-bottom: 24px;
+      margin-top: 90px;
+      position: relative;
+
+      section {
+        display: flex;
+        align-items: center;
+        gap: clamp(30px, 3.5vw, 65px);
+        position: relative;
+      }
+
+      /* 左側浮動白卡 */
+      .new-Footer-v2-address {
+        flex-shrink: 0;
+        width: clamp(450px, 38vw, 600px);
+        border-radius: 30px;
+        border: 1px solid #4570b6;
+        background-color: #fff;
+        padding: clamp(40px, 3.8vw, 60px) clamp(28px, 3vw, 52px) clamp(50px, 4.5vw, 75px);
+        position: relative;
+        top: -65px;
+        box-shadow: 0 10px 30px rgba(69, 112, 182, 0.08);
+
+        &::after {
+          background-repeat: no-repeat;
+          content: url("https://statichk.cmermedical.com/smile/newFooterV2-bgicon-pc.avif");
+          position: absolute;
+          right: clamp(16px, 2.5vw, 50px);
+          bottom: -20px;
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .new-Footer-v2-logo {
+          display: block;
+          width: 100%;
+          max-width: clamp(340px, 30vw, 440px);
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .new-Footer-v2-addressTime {
+          margin-top: clamp(30px, 2.8vw, 45px);
+          .new-Footer-v2-addressTime-title {
+            margin-bottom: 12px;
+            color: #4570b6;
+            text-align: left;
+            font-family: var(--font-hk);
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 7.5px;
+          }
+          .new-Footer-v2-addressTime-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 380px;
+            & > div:nth-child(1) {
+              color: #4570b6;
+              font-family: var(--font-hk);
+              font-size: 19px;
+              font-weight: 500;
+              line-height: 1.8;
+              letter-spacing: 2.28px;
+            }
+            & > div:nth-child(2) {
+              width: 120px;
+              text-align: left;
+              color: #6d6e71;
+              font-family: var(--font-number);
+              font-size: 19px;
+              font-weight: 500;
+              line-height: 1.8;
+              letter-spacing: 2.28px;
+            }
+          }
+        }
+
+        .new-Footer-v2-loction {
+          position: relative;
+          z-index: 2;
+          margin-top: clamp(26px, 2.5vw, 38px);
+          .new-Footer-v2-loction-item {
+            margin-bottom: clamp(22px, 2vw, 32px);
+            & > div {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              strong {
+                color: #4570b6;
+                font-family: var(--font-hk);
+                font-size: 24px;
+                font-weight: 800;
+                line-height: 1.25;
+              }
+              a {
+                display: inline-block;
+                width: 48px;
+                height: 44px;
+                img {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+            p {
+              margin-top: 10px;
+              color: #6d6e71;
+              font-family: var(--font-hk);
+              font-size: 18px;
+              font-weight: 300;
+              line-height: 1.66;
+            }
+          }
+        }
+      }
+
+      /* 右側導航選單 */
+      .new-Footer-v2-menu {
+        position: relative;
+        padding-top: 25px;
+        padding-bottom: 60px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: clamp(30px, 5vw, 40px);
+        flex: 1;
+
+        .new-Footer-v2-menu-left {
+          flex: 1.15;
+        }
+
+        .new-Footer-v2-menu-right {
+          flex: 0.95;
+        }
+
+        .new-Footer-v2-menu-left,
+        .new-Footer-v2-menu-right {
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          gap: clamp(20px, 2vw, 32px);
+
+          .new-Footer-v2-menu-left-item {
+            white-space: nowrap;
+
+            &::before {
+              content: "";
+              display: inline-block;
+              width: 12px;
+              height: 12px;
+              flex-shrink: 0;
+              background: #4570b6;
+              border-radius: 50%;
+              margin-right: 16px;
+              margin-bottom: 3px;
+            }
+
+            .new-Footer-v2-menu-item-title {
+              white-space: nowrap;
+              color: #4570b6;
+              font-family: var(--font-hk);
+              font-size: clamp(20px, 1.4vw, 24px);
+              font-weight: 500;
+              line-height: normal;
+              letter-spacing: 3.6px;
+              text-decoration: none;
+            }
+
+            ul {
+              padding-left: 28px;
+              list-style: none;
+              margin-top: 6px;
+              li {
+                margin-top: 6px;
+                .new-Footer-v2-menu-item-link {
+                  white-space: normal;
+                  color: #6d6e71;
+                  font-family: var(--font-hk);
+                  font-size: clamp(15px, 1.1vw, 19px);
+                  font-weight: 400;
+                  line-height: 1.4;
+                  text-decoration: none;
+                  transition: color 0.2s ease;
+                  &:hover {
+                    color: #4570b6;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .new-Footer-v2-menu-right-url {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          margin-top: 8px;
+          a {
+            display: inline-block;
+            transition: transform 0.2s ease;
+            &:hover {
+              transform: translateY(-2px);
+            }
+            svg {
+              width: 26px;
+              height: 26px;
+            }
+          }
+        }
+
+        /* 桌面端版權行與免責聲明 */
+        .footer-bottom {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          color: #6d6e71;
+          text-align: left;
+          font-family: var(--font-hk);
+          font-size: 15px;
+          font-weight: 400;
+          line-height: 1.5;
+
+          .footer-disclaimer {
+            font-size: 13px;
+            color: #88898c;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            white-space: normal;
+          }
+
+          .footer-copyright-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            letter-spacing: 1.6px;
+            white-space: nowrap;
+
+            a {
+              color: #6d6e71;
+              text-decoration: none;
+              &:hover {
+                color: #4570b6;
+              }
+            }
+          }
+        }
       }
     }
   }

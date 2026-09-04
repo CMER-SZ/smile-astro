@@ -1,0 +1,32 @@
+---
+/**
+ * SchemaProcedure.astro
+ * 醫療程序結構化數據 MedicalProcedure (SMILE Pro, ICL, LASIK, LBV)
+ */
+interface Props {
+  name: string;
+  description: string;
+  procedureType?: string;
+}
+
+const {
+  name,
+  description,
+  procedureType = "SurgicalProcedure"
+} = Astro.props;
+
+const procedureData = {
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": name,
+  "description": description,
+  "procedureType": procedureType,
+  "relevantSpecialty": {
+    "@type": "MedicalSpecialty",
+    "name": "Ophthalmology"
+  },
+  "howPerformed": "由眼科專科醫生在無菌手術室使用先進蔡司/STAAR專業設備進行精密矯視手術。"
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(procedureData)} />

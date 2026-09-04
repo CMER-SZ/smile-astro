@@ -1,0 +1,31 @@
+# Robots.txt for 香港希瑪微笑矯視中心 (CMER Smile)
+# Production URL: https://smile.hkcmereye.com
+
+User-agent: *
+Allow: /
+
+# GEO & Search Engine Specialised Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemap Index Declaration
+Sitemap: https://smile.hkcmereye.com/sitemap.xml
+Sitemap: https://smile.hkcmereye.com/sitemap-index.xml

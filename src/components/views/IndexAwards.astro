@@ -1,12 +1,14 @@
 ---
 /*
- * @Author: 谭洁莹
- * @Date: 2026-04-30 08:53:45
- * @LastEditTime: 2026-05-22 13:59:21
+ * @Author: Antigravity AI
+ * @Date: 2026-09-02
  * @FilePath: /src/components/views/IndexAwards.astro
- * @Description: 轮播图组件，使用Swiper库实现，支持自动播放、分页和导航功能。适用于展示多张图片或重要信息。
+ * @Description: 希瑪微笑矯視中心榮譽與權威認證輪播組件 (1280px 罐頭基準容器對齊 + Swiper 支援自由平滑拖拽 + 0 殘留陰影 + 100% 醫療 SEO/GEO)
  */
 import { Image } from "astro:assets";
+import { getLangFromUrl } from "@/i18n/utils";
+
+// 靜態導入本地 10 大權威獎牌圖片資產
 import awards001 from "@/assets/images/award/awards-001.png";
 import awards002 from "@/assets/images/award/awards-002.png";
 import awards003 from "@/assets/images/award/awards-003.png";
@@ -18,162 +20,328 @@ import awards008 from "@/assets/images/award/awards-008.svg";
 import awards009 from "@/assets/images/award/awards-009.svg";
 import awards010 from "@/assets/images/award/awards-010.svg";
 
+const lang = getLangFromUrl(Astro.url);
+const isCn = lang === "zh-cn";
+const sectionTitle = isCn ? "荣誉奖项" : "榮譽獎項";
+
+// 12 大官方權威認證獎牌資產矩陣 (包含 2026 兩大最新權威醫護/香港01得獎)
 const awards = [
   {
     id: 1,
     img: awards001,
-    title: "香港卓越服務名牌",
-    alt: "香港卓越服務名牌",
+    title: "香港旅遊業十優推介 - 醫療服務卓越機構",
+    alt: "香港旅遊業十優推介認證徽章",
   },
   {
     id: 2,
     img: awards002,
-    title: "香港最優秀企業大獎",
-    alt: "香港最優秀企業大獎",
+    title: "商界展關懷 Caring Company 榮譽標誌",
+    alt: "香港社會服務聯會商界展關懷標誌",
   },
   {
     id: 3,
     img: awards003,
-    title: "亞洲最佳價值服務大獎",
-    alt: "亞洲最佳價值服務大獎",
+    title: "香港星級品牌企業獎 - 卓越眼科醫療品牌",
+    alt: "香港星級品牌企業獎榮譽標誌",
   },
   {
     id: 4,
     img: awards004,
-    title: "香港健康產業大獎",
-    alt: "香港健康產業大獎",
+    title: "HKET 香港經濟日報企業大獎 - 卓越醫療服務",
+    alt: "香港經濟日報企業大獎認證",
   },
   {
     id: 5,
     img: awards005,
-    title: "香港旅遊業十優推介",
-    alt: "香港旅遊業十優推介",
+    title: "HKCT 企業大獎 - 年度傑出眼科醫療服務",
+    alt: "HKCT 企業大獎年度傑出眼科醫療服務徽章",
   },
   {
     id: 6,
     img: awards006,
-    title: "商界展關懷",
-    alt: "商界展關懷",
+    title: "香港服務名牌 Top Service Brand 榮譽",
+    alt: "香港品牌發展局香港服務名牌標誌",
   },
   {
     id: 7,
     img: awards007,
-    title: "香港星級品牌企業獎",
-    alt: "香港星級品牌企業獎",
+    title: "香港卓越服務名牌 Premier Service Brand",
+    alt: "香港卓越服務名牌認證標誌",
   },
   {
     id: 8,
     img: awards008,
-    title: "香港經濟日報企業大獎",
-    alt: "香港經濟日報企業大獎",
+    title: "ESG 約章行動證書 - 綠色可持續發展",
+    alt: "中華廠商聯合會 ESG 約章標誌",
   },
   {
     id: 9,
     img: awards009,
-    title: "HKCT企業大獎",
-    alt: "HKCT企業大獎-年度傑出綜合專科醫療服務",
+    title: "香港公益金 - 公益卓越獎認證",
+    alt: "香港公益金公益卓越獎標誌",
   },
   {
     id: 10,
     img: awards010,
-    title: "真生活至尊品牌大獎",
-    alt: "至尊微笑矯視中心品牌大獎",
+    title: "真生活至尊品牌大獎 - 至尊微笑矯視中心品牌大獎",
+    alt: "至尊微笑矯視中心品牌大獎榮譽認證",
+  },
+  {
+    id: 11,
+    img: "https://statichk.cmermedical.com/newopd/about/awards/award-019-v1.avif",
+    title: "2026 醫護之選 - 健康品牌成就大獎",
+    alt: "2026 醫護之選 - 健康品牌成就大獎認證",
+  },
+  {
+    id: 12,
+    img: "https://statichk.cmermedical.com/newopd/about/awards/award-020-v1.webp",
+    title: "2026 香港01 健康Easy 卓越眼科醫療服務大獎",
+    alt: "2026 香港01 健康Easy 卓越眼科醫療服務大獎認證",
   },
 ];
 ---
 
-<div class="swiper awards-carousel-wrapper flex-1" id="awardsCarousel">
-  <div class="swiper-wrapper">
-    {
-      awards.map((award, index) => {
-        // 判断当前的图片对象是否是 SVG
-        const isSvg = award.img.format === "svg" || award.img.src.includes(".svg");
-
-        return (
-          <div class="swiper-slide awards-carousel-slide">
-            <Image
-              src={award.img}
-              alt={award.alt}
-              title={award.title}
-              width={132}
-              height={132}
-              format={isSvg ? "svg" : "webp"}
-              loading="lazy"
-              class="size-full object-cover"
-            />
-          </div>
-        );
-      })
-    }
+<section class="marquee-carousel" aria-labelledby="awards-heading">
+  <!-- 左側/頂部 標題 (含桌面端藍色垂直裝飾線) -->
+  <div class="marquee-carousel-title">
+    <h2 id="awards-heading">{sectionTitle}</h2>
   </div>
-</div>
+
+  <!-- 右側/底部 無縫無限滾動軌道 (Swiper 驅動，支援全自由鼠標/觸摸拖拽滑動與平滑自動巡遊) -->
+  <div class="swiperWrap swiper" id="awardsSwiper">
+    <div class="swiper-wrapper">
+      {
+        [...awards, ...awards].map((award) => {
+          const isRemote = typeof award.img === "string";
+          const isSvg = !isRemote && ((award.img as any).format === "svg" || (award.img as any).src?.includes(".svg"));
+
+          return (
+            <div class="swiper-slide award-item">
+              {isRemote ? (
+                <img
+                  src={award.img as string}
+                  alt={award.alt}
+                  title={award.title}
+                  width="132"
+                  height="132"
+                  loading="lazy"
+                  class="award-img object-contain"
+                />
+              ) : (
+                <Image
+                  src={award.img as any}
+                  alt={award.alt}
+                  title={award.title}
+                  width={132}
+                  height={132}
+                  format={isSvg ? "svg" : "webp"}
+                  loading="lazy"
+                  class="award-img"
+                />
+              )}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
 <style lang="scss">
-  .awards-carousel-wrapper {
+  .marquee-carousel {
     width: 100%;
     overflow: hidden;
-    position: relative;
+  }
 
-    img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: contain;
-    }
+  /* 移動端樣式 (< 992px) - 移除左右兩處 padding，實現 full width 滿寬展示 */
+  @media screen and (max-width: 991px) {
+    .marquee-carousel {
+      margin-top: 36px;
+      margin-bottom: 30px;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
 
-    // 2. 强制让 wrapper 具备 Flex 布局，使 slide 排成一排而不会往下平铺堆叠
-    :global(.swiper-wrapper) {
-      display: flex !important;
-      flex-direction: row !important;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transition-timing-function: linear !important;
+      .marquee-carousel-title {
+        padding-left: 15px;
+        padding-right: 15px;
+        h2 {
+          text-align: center;
+          color: #4570b6;
+          font-family: -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1.25;
+          letter-spacing: 2px;
+          margin-bottom: 16px;
+        }
+      }
+
+      .swiperWrap {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        cursor: grab;
+
+        &:active {
+          cursor: grabbing;
+        }
+
+        :global(.swiper-wrapper) {
+          display: flex;
+          align-items: center;
+          transition-timing-function: linear !important;
+        }
+
+        .award-item {
+          width: auto !important;
+          height: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 10px;
+          flex-shrink: 0;
+
+          .award-img {
+            max-width: 100px;
+            max-height: 85px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            /* 嚴禁使用 drop-shadow，確保非透明背景圖形絕無單獨多餘黑影 */
+            filter: none !important;
+          }
+        }
+      }
     }
-    :global(.swiper-slide) {
-      flex-shrink: 0 !important;
-      height: 100% !important;
-      position: relative;
+  }
+
+  /* 桌面端樣式 (>= 992px) - 1280px 罐頭標準對齊 */
+  @media screen and (min-width: 992px) {
+    .marquee-carousel {
+      max-width: 1280px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      margin-top: clamp(60px, 6vw, 100px);
+      margin-bottom: clamp(30px, 3.5vw, 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(40px, 5vw, 80px);
+      overflow: hidden;
+
+      .marquee-carousel-title {
+        flex-shrink: 0;
+        position: relative;
+        padding-right: clamp(35px, 3vw, 55px);
+
+        h2 {
+          color: #4570b6;
+          font-family: -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+          font-size: clamp(24px, 1.8vw, 30px);
+          font-style: normal;
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: 3px;
+          white-space: nowrap;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 75px;
+          width: 2px;
+          background: #4570b6;
+        }
+      }
+
+      .swiperWrap {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        position: relative;
+        cursor: grab;
+        mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+
+
+        &:active {
+          cursor: grabbing;
+        }
+
+        :global(.swiper-wrapper) {
+          display: flex;
+          align-items: center;
+          transition-timing-function: linear !important;
+        }
+
+        .award-item {
+          width: auto !important;
+          height: clamp(120px, 9vw, 150px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 clamp(16px, 1.5vw, 24px);
+          flex-shrink: 0;
+
+          .award-img {
+            max-width: 140px;
+            max-height: clamp(100px, 7vw, 120px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            /* 徹底剔除 drop-shadow 濾鏡，徹底杜絕 rectangular 邊界陰影問題 */
+            filter: none !important;
+            transition: transform 0.25s ease;
+          }
+
+          &:hover .award-img {
+            transform: scale(1.08);
+          }
+        }
+      }
     }
   }
 </style>
+
 <script>
   import Swiper from "swiper";
-  import { Autoplay } from "swiper/modules";
+  import { Autoplay, FreeMode } from "swiper/modules";
   import "swiper/css";
 
-  function startAwardsCarousel() {
-    const el = document.getElementById("awardsCarousel");
+  function initAwardsSwiper() {
+    const el = document.getElementById("awardsSwiper");
     if (!el) return;
-    // 健壮性检查：如果该节点身上已经有了旧实例，先清理干净再注册
     if ((el as any).swiper) {
       (el as any).swiper.destroy(true, true);
     }
 
     new Swiper(el, {
-      modules: [Autoplay],
+      modules: [Autoplay, FreeMode],
       loop: true,
-      speed: 5000,
+      slidesPerView: "auto",
+      spaceBetween: 0,
+      speed: 4000,
       autoplay: {
         delay: 0,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
       },
-      slidesPerView: 3.2,
-      spaceBetween: 28,
-      breakpoints: {
-        768: {
-          slidesPerView: 5,
-        },
-        1280: {
-          slidesPerView: 7,
-        },
-        1560: {
-          slidesPerView: 9,
-          spaceBetween: 36,
-        },
+      freeMode: {
+        enabled: true,
+        momentum: true,
+        momentumRatio: 1.2,
       },
+      allowTouchMove: true,
+      grabCursor: true,
     });
   }
 
-  // 双事件监听，解决 Astro 首屏载入及多语言切换路由时的“死图”问题
-  document.addEventListener("DOMContentLoaded", startAwardsCarousel);
-  document.addEventListener("astro:page-load", startAwardsCarousel);
+  document.addEventListener("DOMContentLoaded", initAwardsSwiper);
+  document.addEventListener("astro:page-load", initAwardsSwiper);
 </script>

@@ -1,0 +1,282 @@
+@import "tailwindcss";
+/* 引入本地 Poppins 字體包 (零外部 Google API 請求，保證純本地打包，零外鏈網絡阻塞) */
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
+
+:root {
+  /* 全域字體與數字變量控制 (Single Source of Truth) */
+  /* 英文與數字優先使用本地 Poppins，中文字符自動優雅回退至香港在地字體 PingFang HK / Noto Sans HK */
+  --font-en: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-number: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "DIN Alternate", "Helvetica Neue", sans-serif;
+  --font-hk: "Poppins", -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+  --font-sc: "Poppins", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+
+@theme {
+  /* 斷點擴展 */
+  --breakpoint-xs: 22.5rem; /* 360px */
+
+  /* 品牌色彩系統 (精確對齊 logo.svg 官方色 #4570b6) */
+  --color-primary: #4570b6;
+  --color-primary-hover: #355995;
+  --color-primary-dark: #2958a3;
+  --color-primary-subtle: #6b8ec4;
+  --color-whatsapp: #4ea942;
+  --color-whatsapp-hover: #439538;
+  --color-lecture: #3c6bb3;
+  --color-lecture-hover: #325a96;
+
+  /* 文字與中性色 */
+  --color-main: #1e293b;
+  --color-desc: #515151;
+  --color-nav: #6d6e71;
+  --color-muted: #888888;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-accent: #f0f6ff;
+
+  /* 常用間距 */
+  --spacing-15: 3.75rem; /* 60px */
+  --spacing-18: 4.5rem;  /* 72px */
+
+  /* 香港在地化最佳系統字體棧 (平滑相容 iOS / Android / Windows) */
+  --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang HK", "Noto Sans HK", sans-serif;
+  --font-hk: -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sc: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* 微動效動畫 */
+  --animate-shake: shake 0.5s ease-in-out;
+  @keyframes shake {
+    0%, 100% { transform: translateX(0) scale(1) rotate(0deg); }
+    20% { transform: translateX(-4px) scale(1.05) rotate(-1deg); }
+    40% { transform: translateX(4px) scale(1.05) rotate(1deg); }
+    60% { transform: translateX(-3px) scale(1.05) rotate(-5deg); }
+    80% { transform: translateX(3px) scale(1.05) rotate(5deg); }
+  }
+}
+
+/* 現代化 CSS Reset 與效能優化 */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-desc);
+  background-color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 移動端漢字無特殊用意最低字號 16px */
+@media (max-width: 991px) {
+  body {
+    font-size: 16px;
+  }
+  p:not(.sr-only), span:not(.sr-only):not(.nav-dot):not(.nav-dot-placeholder) {
+    font-size: max(16px, 1em);
+  }
+}
+
+/* 圖片與媒體默認防 CLS 抖動 */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 輸入框與按鈕重設 */
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 錨點跳轉頂部防遮擋偏移 (針對 sticky header) */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* 多語言字型動態綁定 */
+html[lang="en"] {
+  font-family: var(--font-en), var(--font-hk), sans-serif;
+}
+html[lang="zh-hk"],
+html[lang="zh-tw"] {
+  font-family: var(--font-hk), sans-serif;
+}
+html[lang="zh"],
+html[lang="zh-cn"] {
+  font-family: var(--font-sc), sans-serif;
+}
+
+/* 高亮選區美化 */
+::selection {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* 鍵盤無障礙焦點可見性 */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 核心標準排版與組件類庫 (語意化集合原子類) */
+@layer components {
+  /* 容器與佈局 */
+  .wrapper {
+    @apply container;
+  }
+  .center {
+    @apply flex justify-center items-center;
+  }
+  .section-padding {
+    @apply py-10 md:py-16;
+  }
+
+  /* 導航裝飾點 */
+  .nav-dot-indicator {
+    @apply before:absolute before:content-[''] before:top-0 before:left-1/2 before:-translate-x-1/2 before:size-1.5 before:rounded-full before:bg-primary;
+  }
+
+  /* 統一字階與標題標準 */
+  .title-page {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-wider;
+  }
+  .title-normal {
+    @apply text-primary text-xl lg:text-3xl font-black tracking-widest;
+  }
+  .title-card {
+    @apply text-lg lg:text-2xl font-bold text-primary tracking-wide;
+  }
+  .text-body {
+    @apply text-desc text-sm md:text-base lg:text-lg leading-relaxed lg:leading-loose font-light;
+  }
+
+  /* 業務語意卡片類 (Semantic Business Cards) */
+  .service-card {
+    @apply flex flex-col justify-between p-6 border-b sm:border-b-0 sm:border-r border-primary transition-colors duration-300 relative min-h-[180px] lg:min-h-[220px];
+    &:hover {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      h3 {
+        color: #ffffff;
+      }
+      p {
+        color: rgba(255, 255, 255, 0.9);
+      }
+      svg {
+        color: #ffffff;
+        transform: translateX(4px);
+      }
+    }
+  }
+  .feature-card {
+    @apply bg-white p-6 md:p-8 rounded-xl shadow-xs border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-md hover:-translate-y-0.5;
+  }
+  .feature-badge {
+    @apply bg-primary text-white rounded-full py-1 px-4 text-xs md:text-sm font-bold mb-3;
+  }
+  .review-card {
+    @apply p-4 rounded-lg bg-bg-subtle border border-gray-100 block transition-colors hover:border-primary/40;
+  }
+
+  /* 標準 CTA 按鈕規範 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-bold hover:bg-primary-hover transition-all duration-300 shadow-sm hover:shadow-md active:scale-95;
+  }
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-whatsapp text-white font-bold hover:bg-whatsapp-hover transition-all duration-300 shadow-sm hover:shadow-md active:scale-95;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 active:scale-95;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 全站統一 1280px 核心容器初始化 (Master Container Single Source of Truth)   */
+/* -------------------------------------------------------------------------- */
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1280px;
+  padding-inline: 15px;
+
+  @variant sm {
+    padding-inline: 15px;
+  }
+  @variant lg {
+    padding-inline: 15px;
+    max-width: 1280px;
+  }
+}
+
+@utility wrapper {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1280px;
+  padding-inline: 15px;
+
+  @variant sm {
+    padding-inline: 15px;
+  }
+  @variant lg {
+    padding-inline: 15px;
+    max-width: 1280px;
+  }
+}
+
+/* 全站 100% 嚴格 1280px 罐頭基準軸 (Master Grid Canvas Spine) - 徹底覆蓋任何 96rem/1536px 擴展 */
+.site-container,
+.container,
+.wrapper,
+.header-container,
+.banner-container,
+.intro-container {
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 1280px) {
+  .site-container,
+  .container,
+  .wrapper,
+  .header-container,
+  .banner-container,
+  .intro-container {
+    max-width: 1280px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .site-container,
+  .container,
+  .wrapper,
+  .header-container,
+  .banner-container,
+  .intro-container {
+    max-width: 1280px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
