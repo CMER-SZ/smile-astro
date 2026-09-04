@@ -157,5 +157,36 @@
    - 所有多媒體必須宣告明確寬高或 `aspect-ratio`，圖片默認 `max-w-full h-auto`。
    - 錨點標題必須自帶 `scroll-margin-top: 5rem`，防止被頂部固定導航遮擋。
 
+## 10. 舊版代碼甄別與現代化重構準則 (Legacy Code Isolation & Modern UI Quality)
+
+1. **廢棄舊代碼隔離與線上版本確認**：
+   - `smile2024/` 目錄中混雜大量歷史迭代殘留與已廢棄組件（例如多個不同版本的 `Header.vue`, `footers.vue`, 舊版 home 模組）。
+   - **嚴禁盲目拷貝舊 Nuxt 遺留代碼**。在不確定某個舊文件是否為當前線上正式運行的版本時，**必須主動向用戶確認**。
+2. **現代化組件化與語意化重構**：
+   - 杜絕舊代碼中低質量的 `div` 嵌套與硬編碼樣式，必須採用 2026 現代 Web 標準重構（乾淨的 HTML5 語意地標標籤、Tailwind / 現代 CSS 封裝、Astro 組件化、無障礙 ARIA 支持）。
+   - 確保重構後的視覺效果與線上官方標準 100% 精確一致。
+
 ---
-*文檔由 Antigravity Agent 自動維護 | 版本：2026.5*
+
+## 11. 性能與無障礙實戰經驗準則 (PageSpeed, A11y & Third-party Scripts)
+
+在 2026 年首頁重構與 PageSpeed Insights 實測優化中，總結沉澱以下關鍵技術紅線與最佳實踐：
+
+1. **第三方重度腳本 (GTM / 追蹤器) 性能隔離**：
+   - **TBT 核心殺手**：GTM 容器體積超 500KB，且內部捆綁 Google Analytics、Meta Pixel、Microsoft Clarity 錄屏腳本。在移動端 4x CPU 降速測試下會搶佔主線程 1,000ms~2,500ms，直接導致 Performance 評分跌至 50~60 分。
+   - **實施策略**：第三方非核心業務追蹤腳本禁止在 `<head>` 中同步阻塞加載。必須採用「用戶首次手勢互動 (touchstart/scroll/mousemove) 觸發加載」或「延遲 3.5s~5s 兜底加載」，確保首屏 TBT < 100ms，Performance 分數穩居 85~98 分。
+2. **在線客服系統 (商務通 Zoosnet) 防護**：
+   - 外部商務通代碼必須採用延時/互動加載，並在加載前提前注入樣式表（`JS5_2.css`）以防畫面抖動。
+   - 動態注入的商務通彈窗圖片缺少 `alt` 屬性時，必須配合輕量 `MutationObserver` 自動補齊 `alt=""` 與 `aria-hidden="true"`，杜絕 Lighthouse A11y 扣分。
+3. **無障礙 (A11y) 嚴格合規清單**：
+   - **ARIA 屬性合法性**：普通非交互元素（如純 `div`）不得隨意使用 `aria-label`；若需用於表示星級或圖像，必須同時賦予標準角色 `role="img"`（遵循 W3C ARIA 1.2+ 規範）。
+   - **Heading 層級嚴格遞減**：大板塊 `<h2>` 內部子標題必須使用 `<h3>`，嚴禁跳級為 `<h5>` 或 `<h6>`（`heading-order` 審查項）。
+   - **文字色彩對比度 (WCAG 2.1 AA)**：淺色背景上的說明文字/版權聲明/免責條款，字色與背景對比度必須達到 **4.5:1 以上**（例如在淡藍色 `#f4fafc` 背景下，字色應採用 `#595959`，達到 6.6:1，嚴禁使用過淡的 `#88898c`）。
+4. **AI 智能體無障礙樹 (Agentic A11y / llms.txt)**：
+   - 網站根目錄必須提供標準的 [`/llms.txt`](file:///f:/mysite/antigravity/smile2026Revamp/smile2026/public/llms.txt) 文件，符合 [llmstxt.org](https://llmstxt.org/) 規範：包含唯一的 `# 品牌名稱` H1 標題、核心醫療服務引言區塊，以及全站核心頁面 Markdown 超連結清單與門市地址，便利 LLM / AI 智能體抓取。
+5. **圖片資產傳輸與 LCP 優化**：
+   - 首屏輪播圖必須提供獨立針對移動端的適配尺寸（如 `800x800` 或 `382x382` WebP），首圖宣告 `loading="eager"`、`fetchpriority="high"`、`decoding="sync"`，杜絕將 1280px 超大原圖直接分發至移動端。
+
+---
+*文檔由 Antigravity Agent 自動維護 | 版本：2026.7*
+
