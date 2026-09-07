@@ -100,64 +100,64 @@ const awardBadges = [
             </p>
           </div>
 
-          {/* C-M-E-R 核心理念條目 (垂直指示軸) */}
-          <div class="cmer-timeline" role="list">
+          {/* C-M-E-R 核心理念條目 (標準語意化無序列表 ul/li) */}
+          <ul class="cmer-timeline" aria-label="C-M-E-R 核心經營理念">
             {/* C */}
-            <article class="cmer-timeline-item" role="listitem">
+            <li class="cmer-timeline-item">
               <div class="cmer-timeline-letter" aria-hidden="true">C</div>
               <div class="cmer-timeline-body">
                 <h4 class="cmer-timeline-title">{dict.about.group.philosophy.c}</h4>
                 <p class="cmer-timeline-subtitle">Professional Clinical Services</p>
               </div>
-            </article>
+            </li>
 
             {/* M */}
-            <article class="cmer-timeline-item" role="listitem">
+            <li class="cmer-timeline-item">
               <div class="cmer-timeline-letter" aria-hidden="true">M</div>
               <div class="cmer-timeline-body">
                 <h4 class="cmer-timeline-title">{dict.about.group.philosophy.m}</h4>
                 <p class="cmer-timeline-subtitle">Modern Management</p>
               </div>
-            </article>
+            </li>
 
             {/* E */}
-            <article class="cmer-timeline-item" role="listitem">
+            <li class="cmer-timeline-item">
               <div class="cmer-timeline-letter" aria-hidden="true">E</div>
               <div class="cmer-timeline-body">
                 <h4 class="cmer-timeline-title">{dict.about.group.philosophy.e}</h4>
                 <p class="cmer-timeline-subtitle">Quality Education</p>
               </div>
-            </article>
+            </li>
 
             {/* R */}
-            <article class="cmer-timeline-item" role="listitem">
+            <li class="cmer-timeline-item">
               <div class="cmer-timeline-letter" aria-hidden="true">R</div>
               <div class="cmer-timeline-body">
                 <h4 class="cmer-timeline-title">{dict.about.group.philosophy.r}</h4>
                 <p class="cmer-timeline-subtitle">Pioneering Research</p>
               </div>
-            </article>
+            </li>
 
             {/* 豎排「希瑪」理念寓意 */}
-            <article class="cmer-timeline-item cmer-timeline-item-vertical" role="listitem">
+            <li class="cmer-timeline-item cmer-timeline-item-vertical">
               <div class="cmer-vertical-badge" aria-hidden="true">希瑪</div>
               <div class="cmer-timeline-body">
                 <p class="cmer-timeline-quote">
                   {dict.about.group.philosophy.cmer}
                 </p>
               </div>
-            </article>
+            </li>
+          </ul>
 
-            {/* 榮譽殊榮清單 */}
-            <aside class="group-honors" aria-label="希瑪眼科醫療技術與服務榮譽">
-              <h3 class="group-honors-title">{dict.about.group.honor.title}</h3>
-              <ul class="group-honors-list">
-                {dict.about.group.honor.list.map((item: string) => (
-                  <li class="group-honors-item">{item}</li>
-                ))}
-              </ul>
-            </aside>
-          </div>
+          {/* 榮譽殊榮清單 (獨立於理念列表之外) */}
+          <aside class="group-honors" aria-label="希瑪眼科醫療技術與服務榮譽">
+            <h3 class="group-honors-title">{dict.about.group.honor.title}</h3>
+            <ul class="group-honors-list">
+              {dict.about.group.honor.list.map((item: string) => (
+                <li class="group-honors-item">{item}</li>
+              ))}
+            </ul>
+          </aside>
 
           {/* 3 張精選環境與醫療團隊畫廊 (無損 WebP + 嚴格限制最大尺寸 344 × 194 px) */}
           <div class="group-gallery-grid">
