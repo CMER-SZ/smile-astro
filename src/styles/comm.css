@@ -12,6 +12,12 @@
   --font-number: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "DIN Alternate", "Helvetica Neue", sans-serif;
   --font-hk: "Poppins", -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
   --font-sc: "Poppins", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", sans-serif;
+
+  /* 核心品牌色系 (Single Source of Truth) */
+  --color-primary: #4570b6;
+  --color-primary-hover: #355995;
+  --color-primary-dark: #2958a3;
+  --color-primary-subtle: #6b8ec4;
 }
 
 @theme {
@@ -40,10 +46,10 @@
   --spacing-15: 3.75rem; /* 60px */
   --spacing-18: 4.5rem;  /* 72px */
 
-  /* 香港在地化最佳系統字體棧 (平滑相容 iOS / Android / Windows) */
-  --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang HK", "Noto Sans HK", sans-serif;
-  --font-hk: -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-sc: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* 英文與數字優先使用本地 Poppins，中文字符自動優雅回退至在地高清晰字體 (平滑相容 iOS / Android / Windows) */
+  --font-en: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-hk: "Poppins", -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+  --font-sc: "Poppins", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "微软雅黑", sans-serif;
 
   /* 微動效動畫 */
   --animate-shake: shake 0.5s ease-in-out;
@@ -68,6 +74,7 @@ html {
 
 body {
   min-height: 100vh;
+  font-family: inherit;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

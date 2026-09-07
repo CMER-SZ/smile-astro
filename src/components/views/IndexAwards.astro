@@ -6,7 +6,7 @@
  * @Description: 希瑪微笑矯視中心榮譽與權威認證輪播組件 (1280px 罐頭基準容器對齊 + Swiper 支援自由平滑拖拽 + 0 殘留陰影 + 100% 醫療 SEO/GEO)
  */
 import { Image } from "astro:assets";
-import { getLangFromUrl } from "@/i18n/utils";
+import { getLangFromUrl, useI18n } from "@/i18n/utils";
 
 // 靜態導入本地 10 大權威獎牌圖片資產
 import awards001 from "@/assets/images/award/awards-001.png";
@@ -21,8 +21,8 @@ import awards009 from "@/assets/images/award/awards-009.svg";
 import awards010 from "@/assets/images/award/awards-010.svg";
 
 const lang = getLangFromUrl(Astro.url);
-const isCn = lang === "zh-cn";
-const sectionTitle = isCn ? "荣誉奖项" : "榮譽獎項";
+const { dict } = useI18n(Astro.url);
+const sectionTitle = dict.home.awards.title;
 
 // 12 大官方權威認證獎牌資產矩陣 (包含 2026 兩大最新權威醫護/香港01得獎)
 const awards = [
@@ -216,20 +216,21 @@ const awards = [
     }
   }
 
-  /* 桌面端樣式 (>= 992px) - 1280px 罐頭標準對齊 */
+  /* 桌面端樣式 (>= 992px) - 滿屏全寬跑馬燈 (Full bleed) */
   @media screen and (min-width: 992px) {
     .marquee-carousel {
-      max-width: 1280px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      padding-left: 15px !important;
-      padding-right: 15px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: clamp(20px, 4vw, 80px) !important;
+      padding-right: 0 !important;
       margin-top: clamp(60px, 6vw, 100px);
       margin-bottom: clamp(30px, 3.5vw, 60px);
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: clamp(40px, 5vw, 80px);
+      justify-content: flex-start;
+      gap: clamp(40px, 4vw, 70px);
       overflow: hidden;
 
       .marquee-carousel-title {
@@ -297,14 +298,48 @@ const awards = [
             object-fit: contain;
             /* 徹底剔除 drop-shadow 濾鏡，徹底杜絕 rectangular 邊界陰影問題 */
             filter: none !important;
-            transition: transform 0.25s ease;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
           }
 
-          &:hover .award-img {
-            transform: scale(1.08);
+          /* 獎項金牌高光微掃光反射 (Shimmer Light Sweep) */
+          position: relative;
+          overflow: hidden;
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 80%;
+            height: 100%;
+            background: linear-gradient(
+              120deg,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.45) 50%,
+              rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            pointer-events: none;
+          }
+
+          &:hover {
+            .award-img {
+              transform: scale(1.08);
+            }
+            &::after {
+              animation: award-shimmer 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
           }
         }
       }
+    }
+  }
+
+  @keyframes award-shimmer {
+    0% {
+      left: -150%;
+    }
+    100% {
+      left: 180%;
     }
   }
 </style>

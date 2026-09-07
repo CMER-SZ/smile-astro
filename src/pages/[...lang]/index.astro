@@ -26,31 +26,33 @@ const lang = getLangFromUrl(Astro.url);
 const { dict } = useI18n(Astro.url);
 
 
-// 5 大核心服務 (對標線上原版 home.vue 1:1)
+const isCn = lang === "zh-cn";
+
+// 5 大核心服務 (對標線上原版 home.vue 1:1，支援繁簡自適應)
 const serverList = [
   {
     title: "SMILE<br/>PRO 2.0",
-    text: ["適合", "擔心眼睛無法", "對焦太久"],
+    text: isCn ? ["适合", "担心眼睛无法", "对焦太久"] : ["適合", "擔心眼睛無法", "對焦太久"],
     link: "/smilePro",
   },
   {
     title: "SMILE",
-    text: ["適合", "1000度以下近視", "500度以下散光"],
+    text: isCn ? ["适合", "1000度以下近视", "500度以下散光"] : ["適合", "1000度以下近視", "500度以下散光"],
     link: "/vision-correction/relex-smile",
   },
   {
     title: "ICL",
-    text: ["適合", "1800度以下近視", "1000度以下遠視", "600度以下散光"],
+    text: isCn ? ["适合", "1800度以下近视", "1000度以下远视", "600度以下散光"] : ["適合", "1800度以下近視", "1000度以下遠視", "600度以下散光"],
     link: "/vision-correction-icl",
   },
   {
-    title: "老花矯視",
-    text: ["適合", "39歲以上有老花", "同時有近視/遠視/散光問題"],
+    title: isCn ? "老花矫视" : "老花矯視",
+    text: isCn ? ["适合", "39岁以上有老花", "同时有近视/远视/散光问题"] : ["適合", "39歲以上有老花", "同時有近視/遠視/散光問題"],
     link: "/vision-correction-presbyopia",
   },
   {
     title: "LASIK",
-    text: ["適合", "1400度以下近視", "600度以下遠視", "600度以下散光"],
+    text: isCn ? ["适合", "1400度以下近视", "600度以下远视", "600度以下散光"] : ["適合", "1400度以下近視", "600度以下遠視", "600度以下散光"],
     link: "/vision-correction-lasik",
   },
 ];
@@ -76,16 +78,7 @@ const serverList = [
           </h2>
           <p>{dict.home.subtitle}</p>
         </div>
-        <div class="centerIntroBox-bottom">
-          <p>
-            希瑪微笑矯視中心為上市公司「希瑪醫療控股有限公司」旗下的屈光矯視醫療中心。<br class="hidden lg:block" />中心團隊由林順潮教授帶領，加上13名眼科專科醫生、多名註冊視光師及護士組成。<br class="hidden lg:block" />於香港擁有2間微笑矯視中心，均<span>符合FDA激光矯視標準</span>，交通便利，環境舒適。<br class="hidden lg:block" />提供一站式眼科專科醫療及矯視服務，包括：SMILE Pro 2.0微笑激光矯視、<br class="hidden lg:block" />SMILE微笑激光矯視、ICL植入式隱形眼鏡、老花矯視、LASIK激光矯視等。
-          </p>
-          <br />
-          <p>
-            希瑪一直與STAAR Surgical及Zeiss蔡司保持良好的合作關係。於2023年，
-            <span>STAAR <br class="hidden lg:block" />Surgical</span>公司宣佈將希瑪微笑矯視中心設立為<span>首間官方認證EVO ICL國際培訓中心</span>。<br class="hidden lg:block" />同年，本中心亦獲得<span>Zeiss蔡司頒發《全飛秒屈光手術 卓越手術中心》</span>，而且更是首個<br class="hidden lg:block" />香港矯視中心被評為卓越手術中心。
-          </p>
-        </div>
+        <div class="centerIntroBox-bottom" set:html={dict.home.intro} />
       </div>
     </section>
 
@@ -130,14 +123,7 @@ const serverList = [
               title="查看診症須知與術前術後注意事項"
             >
               <span>{dict.home.service.button.info}</span>
-              <img
-                class="centerSevice-btn-arrow"
-                src="/images/icons/arrow-up-right.svg"
-                alt=""
-                width="29"
-                height="29"
-                aria-hidden="true"
-              />
+              <span class="centerSevice-btn-arrow" aria-hidden="true"></span>
             </a>
             <a
               target="_blank"
@@ -148,14 +134,7 @@ const serverList = [
               title="立即透過 WhatsApp 預約術前眼睛檢查及諮詢 (W-15)"
             >
               <span>{dict.home.service.button.appoint}</span>
-              <img
-                class="centerSevice-btn-arrow"
-                src="/images/icons/arrow-up-right.svg"
-                alt=""
-                width="29"
-                height="29"
-                aria-hidden="true"
-              />
+              <span class="centerSevice-btn-arrow" aria-hidden="true"></span>
             </a>
           </div>
         </div>
@@ -200,12 +179,12 @@ const serverList = [
                   stroke-dasharray="1 9"
                 />
               </svg>
-              <span>大特色</span>
+              <span>{lang === "zh-cn" ? "大特色" : "大特色"}</span>
             </div>
           </div>
           <div class="fourFeature-Box-List">
             <div class="fourFeature-Box-List-item">
-              <h3>案例</h3>
+              <h3>{dict.home.feature.case.type}</h3>
               <img
                 src="/images/home/features/icon-cases.svg"
                 alt="35,000宗微笑矯視案例"
@@ -213,11 +192,11 @@ const serverList = [
                 height="114"
                 aria-hidden="true"
               />
-              <p>超過<span class="counter-num" data-target="35000">35,000</span>隻</p>
-              <i>眼睛完成微笑矯視</i>
+              <p>{lang === "zh-cn" ? "超过" : "超過"}<span class="counter-num" data-target="35000">35,000</span>{lang === "zh-cn" ? "只" : "隻"}</p>
+              <i>{dict.home.feature.case.intro}</i>
             </div>
             <div class="fourFeature-Box-List-item">
-              <h3>首間</h3>
+              <h3>{dict.home.feature.first.type}</h3>
               <img
                 src="/images/home/features/icon-training.svg"
                 alt="香港上市眼科中心"
@@ -225,11 +204,11 @@ const serverList = [
                 height="116"
                 aria-hidden="true"
               />
-              <p>第1間</p>
-              <i>香港上市眼科中心</i>
+              <p>第<span class="counter-num" data-target="1">1</span>間</p>
+              <i>{dict.home.feature.first.intro}</i>
             </div>
             <div class="fourFeature-Box-List-item">
-              <h3>醫生</h3>
+              <h3>{dict.home.feature.doctor.type}</h3>
               <img
                 src="/images/home/features/icon-doctors.svg"
                 alt="眼科專科醫生團隊"
@@ -237,11 +216,11 @@ const serverList = [
                 height="107"
                 aria-hidden="true"
               />
-              <p><span class="counter-num" data-target="13">13</span>位</p>
-              <i>眼科專科醫生</i>
+              <p><span class="counter-num" data-target="13">13</span>{lang === "zh-cn" ? "位" : "位"}</p>
+              <i>{dict.home.feature.doctor.intro}</i>
             </div>
             <div class="fourFeature-Box-List-item">
-              <h3>面積</h3>
+              <h3>{dict.home.feature.size.type}</h3>
               <img
                 src="/images/home/features/icon-space.svg"
                 alt="8000尺中心環境"
@@ -249,19 +228,21 @@ const serverList = [
                 height="100"
                 aria-hidden="true"
               />
-              <p>8,000尺</p>
-              <i>寬敞、舒適中心環境</i>
+              <p><span class="counter-num" data-target="8000">8,000</span>{lang === "zh-cn" ? "尺" : "尺"}</p>
+              <i>{dict.home.feature.size.intro}</i>
             </div>
             <svg
-              class="fourFeature-Box-List-svg-top hidden lg:block"
+              class="fourFeature-Box-List-svg-top"
               xmlns="http://www.w3.org/2000/svg"
-              width="4"
-              height="329"
               viewBox="0 0 4 329"
               fill="none"
+              aria-hidden="true"
             >
-              <path
-                d="M2 2L1.99999 327"
+              <line
+                x1="2"
+                y1="2"
+                x2="2"
+                y2="327"
                 stroke="#4570B6"
                 stroke-width="3"
                 stroke-linecap="round"
@@ -269,31 +250,17 @@ const serverList = [
               />
             </svg>
             <svg
-              class="fourFeature-Box-List-svg-top block lg:hidden"
+              class="fourFeature-Box-List-svg-bottom"
               xmlns="http://www.w3.org/2000/svg"
-              width="2"
-              height="184"
-              viewBox="0 0 2 184"
-              fill="none"
-            >
-              <path
-                d="M0.832031 0.783325L0.832023 183"
-                stroke="#4570B6"
-                stroke-width="1.43995"
-                stroke-linecap="round"
-                stroke-dasharray="0.48 4.32"
-              />
-            </svg>
-            <svg
-              class="fourFeature-Box-List-svg-bottom hidden lg:block"
-              xmlns="http://www.w3.org/2000/svg"
-              width="4"
-              height="329"
               viewBox="0 0 4 329"
               fill="none"
+              aria-hidden="true"
             >
-              <path
-                d="M2 2L1.99999 327"
+              <line
+                x1="2"
+                y1="2"
+                x2="2"
+                y2="327"
                 stroke="#4570B6"
                 stroke-width="3"
                 stroke-linecap="round"
@@ -301,51 +268,21 @@ const serverList = [
               />
             </svg>
             <svg
-              class="fourFeature-Box-List-svg-bottom block lg:hidden"
+              class="fourFeature-Box-List-svg-center"
               xmlns="http://www.w3.org/2000/svg"
-              width="2"
-              height="185"
-              viewBox="0 0 2 185"
-              fill="none"
-            >
-              <path
-                d="M0.832031 1.54761L0.832023 183.764"
-                stroke="#4570B6"
-                stroke-width="1.43995"
-                stroke-linecap="round"
-                stroke-dasharray="0.48 4.32"
-              />
-            </svg>
-            <svg
-              class="fourFeature-Box-List-svg-center hidden lg:block"
-              xmlns="http://www.w3.org/2000/svg"
-              width="696"
-              height="4"
               viewBox="0 0 696 4"
               fill="none"
+              aria-hidden="true"
             >
-              <path
-                d="M2 2H694"
+              <line
+                x1="2"
+                y1="2"
+                x2="694"
+                y2="2"
                 stroke="#4570B6"
                 stroke-width="3"
                 stroke-linecap="round"
                 stroke-dasharray="1 9"
-              />
-            </svg>
-            <svg
-              class="fourFeature-Box-List-svg-center block lg:hidden"
-              xmlns="http://www.w3.org/2000/svg"
-              width="390"
-              height="2"
-              viewBox="0 0 390 2"
-              fill="none"
-            >
-              <path
-                d="M1 1H389"
-                stroke="#4570B6"
-                stroke-width="1.43995"
-                stroke-linecap="round"
-                stroke-dasharray="0.48 4.32"
               />
             </svg>
           </div>
@@ -407,9 +344,9 @@ const serverList = [
         const obj = { val: 0 };
         gsap.to(obj, {
           val: target,
-          duration: 2.2,
+          duration: 3.2,
           ease: "power2.out",
-          delay: 0.6, // 等待十字架生長與卡片浮現展開時同步跑數
+          delay: 0.8, // 與十字架生長與卡片展開同步緩慢跑數
           onUpdate: () => {
             counter.textContent = Math.floor(obj.val).toLocaleString();
           },
@@ -436,14 +373,83 @@ const serverList = [
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.25, rootMargin: "0px 0px -50px 0px" }
     );
     observer.observe(el);
+  }
+
+  // 1. GSAP 裝飾圖層滾動微視差 (Multi-plane Parallax)
+  function initParallaxDeco() {
+    const aiming = document.querySelector<HTMLElement>(".centerSevice-svg-top");
+    const lens = document.querySelector<HTMLElement>(".centerSevice-svg-bottom");
+    if (!aiming && !lens) return;
+
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          // 背景瞄準鏡與 EVO ICL 晶體進行差速輕微位移，營造光學透鏡景深感
+          if (aiming) {
+            aiming.style.transform = `translate3d(0, ${scrollY * 0.08}px, 0)`;
+          }
+          if (lens) {
+            lens.style.transform = `translate3d(0, ${-scrollY * 0.05}px, 0)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // 2. 矯視服務卡片「激光聚焦點光微跟隨」 (Laser Spotlight Cursor Follower)
+  function initServiceSpotlight() {
+    const cards = document.querySelectorAll<HTMLElement>(".centerSeviceNewItem");
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      });
+    });
+  }
+
+  // 3. 純色背景美學微動態：當用戶視線聚焦滾入該 div 時觸發漸變至純色
+  function initAmbientMorphObserver() {
+    const targets = document.querySelectorAll<HTMLElement>(
+      ".centerIntro, .UserShare .bg, .UserRatingBox-bottom, .new-Footer-v2"
+    );
+    if (!targets.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach((t) => t.classList.add("is-inview"));
+      return;
+    }
+
+    const morphObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-inview");
+            morphObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    targets.forEach((t) => morphObserver.observe(t));
   }
 
   function initPageInteractions() {
     initReviewsMarquee();
     initFourFeatureObserver();
+    initParallaxDeco();
+    initServiceSpotlight();
+    initAmbientMorphObserver();
   }
 
   document.addEventListener("DOMContentLoaded", initPageInteractions);
