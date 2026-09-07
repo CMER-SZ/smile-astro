@@ -1,6 +1,6 @@
 // ==========================================================================
 // 希瑪微笑矯視中心 - 集團簡介 (Group Profile) 2026 現代化語意樣式表
-// 直接依賴 Tailwind .container 貼邊對齊 + 100% 消除重複造輪子
+// 全寬波浪視覺背景 (Full-bleed Background) + 內嵌 Container 嚴絲合縫貼邊佈局
 // ==========================================================================
 
 // 通用膠囊底線標題
@@ -8,10 +8,10 @@
   color: #4570b6;
   text-align: center;
   font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-  font-size: clamp(22px, 2.5vw, 32px);
-  font-weight: 600;
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 500;
   line-height: 1.3;
-  letter-spacing: 6px;
+  letter-spacing: clamp(3px, 0.6vw, 7.5px);
   padding-bottom: 20px;
   position: relative;
   margin: 0 auto 24px;
@@ -33,10 +33,10 @@
   color: #6d6e71;
   text-align: center;
   font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-  font-size: clamp(15px, 1.3vw, 18px);
+  font-size: clamp(14px, 1.3vw, 20px);
   font-weight: 300;
-  line-height: 1.9;
-  letter-spacing: 2px;
+  line-height: 1.8;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
   max-width: 960px;
   margin: 0 auto;
 }
@@ -44,7 +44,11 @@
 // --------------------------------------------------------------------------
 // 1. 頂部 Hero Banner (高度鎖定最大 300px + 貼邊對齊)
 // --------------------------------------------------------------------------
-.group-banner-card {
+.gp-banner-section {
+  width: 100%;
+}
+
+.gp-banner-card {
   width: 100%;
   box-sizing: border-box;
 
@@ -55,23 +59,27 @@
     width: 100%;
     height: clamp(180px, 22vw, 300px);
     max-height: 300px;
-    border-radius: clamp(16px, 2vw, 32px);
+    border-radius: clamp(20px, 3.5vw, 55px);
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    padding-left: clamp(24px, 5vw, 60px);
+    padding-left: clamp(24px, 5vw, 70px);
     box-sizing: border-box;
     box-shadow: 0 4px 20px rgba(69, 112, 182, 0.06);
+
+    @media (max-width: 767px) {
+      background-image: url("https://statichk.cmermedical.com/imgs/2024/05/eb36818dd076c639.png");
+    }
   }
 
   &__title {
     color: #fff;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(22px, 2.5vw, 32px);
-    font-weight: 700;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 600;
     line-height: 1.4;
-    letter-spacing: 4px;
+    letter-spacing: clamp(2px, 0.6vw, 7.5px);
     margin: 0;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   }
@@ -79,10 +87,10 @@
   &__subtitle {
     color: #fff;
     font-family: "Poppins", "Noto Sans HK", sans-serif;
-    font-size: clamp(13px, 1.2vw, 16px);
+    font-size: clamp(13px, 1.2vw, 15px);
     font-weight: 500;
     line-height: 1.6;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     margin-top: 2px;
     margin-bottom: 0;
     opacity: 0.95;
@@ -91,17 +99,24 @@
 }
 
 // --------------------------------------------------------------------------
-// 2. 集團簡介與 C-M-E-R 理念板塊 (.group-profile-section)
+// 2. 集團簡介與 C-M-E-R 理念板塊 (.gp-philosophy-section)
 // --------------------------------------------------------------------------
-.group-profile-section {
+.gp-philosophy-section {
   width: 100%;
   background: url("https://statichk.cmermedical.com/imgs/2024/05/cd3e81141f6876e8.png") no-repeat;
   background-size: 100%;
   background-position: center bottom;
-  background-color: rgba(255, 255, 255, 0.92);
+  position: relative;
+  z-index: 6;
+  padding-bottom: 20px;
+}
+
+.gp-philosophy-card {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
-  border-radius: clamp(16px, 2.5vw, 36px);
-  padding: clamp(30px, 4vw, 56px) clamp(20px, 4vw, 48px);
+  border-radius: clamp(24px, 5vw, 82px);
+  padding: clamp(30px, 4vw, 56px) clamp(16px, 4vw, 48px) clamp(30px, 4vw, 50px);
   box-sizing: border-box;
   box-shadow: 0 4px 25px rgba(69, 112, 182, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -110,25 +125,25 @@
 // 門市網絡
 .network-info-box {
   text-align: center;
-  margin-top: clamp(24px, 3vw, 36px);
+  margin-top: clamp(20px, 3vw, 36px);
 
   &__title {
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(17px, 1.5vw, 20px);
-    font-weight: 600;
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-weight: 500;
     line-height: 1.5;
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     margin-bottom: 8px;
   }
 
   &__desc {
     color: #6d6e71;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(14px, 1.2vw, 18px);
+    font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
-    line-height: 1.9;
-    letter-spacing: 2px;
+    line-height: 1.8;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     max-width: 960px;
     margin: 0 auto;
   }
@@ -136,10 +151,10 @@
   &__link-row {
     color: #6d6e71;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(14px, 1.2vw, 18px);
+    font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
-    line-height: 1.9;
-    letter-spacing: 2px;
+    line-height: 1.8;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     margin-top: 8px;
 
     span {
@@ -151,8 +166,8 @@
     text-decoration: none;
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 500;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     transition: opacity 0.3s;
 
     &:hover {
@@ -165,25 +180,25 @@
 // 理念導言
 .philosophy-lead-box {
   text-align: center;
-  margin-top: clamp(24px, 3vw, 36px);
+  margin-top: clamp(20px, 3vw, 36px);
 
   &__title {
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(17px, 1.5vw, 20px);
-    font-weight: 600;
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-weight: 500;
     line-height: 1.5;
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     margin-bottom: 8px;
   }
 
   &__desc {
     color: #6d6e71;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(14px, 1.2vw, 18px);
+    font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
-    line-height: 1.9;
-    letter-spacing: 2px;
+    line-height: 1.8;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     max-width: 960px;
     margin: 0 auto;
   }
@@ -191,9 +206,9 @@
 
 // C-M-E-R 時間軸
 .cmer-timeline {
-  margin: clamp(30px, 4vw, 48px) auto 0;
+  margin: clamp(28px, 4vw, 48px) auto 0;
   max-width: 860px;
-  padding-left: clamp(20px, 3vw, 40px);
+  padding-left: clamp(18px, 3vw, 40px);
   position: relative;
   box-sizing: border-box;
 
@@ -220,8 +235,8 @@
       .cmer-timeline__vertical-badge {
         color: #4570b6;
         font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-        font-size: clamp(28px, 3vw, 38px);
-        font-weight: 700;
+        font-size: clamp(26px, 3vw, 38px);
+        font-weight: 600;
         min-width: clamp(48px, 5vw, 70px);
         display: flex;
         justify-content: center;
@@ -229,7 +244,7 @@
         writing-mode: vertical-rl;
         text-orientation: upright;
         white-space: nowrap;
-        letter-spacing: clamp(6px, 1vw, 12px);
+        letter-spacing: clamp(6px, 1vw, 15px);
         flex-shrink: 0;
       }
 
@@ -237,10 +252,10 @@
         color: #4570b6;
         text-align: justify;
         font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-        font-size: clamp(14px, 1.2vw, 18px);
+        font-size: clamp(14px, 1.2vw, 20px);
         font-weight: 400;
-        line-height: 1.9;
-        letter-spacing: 2px;
+        line-height: 1.8;
+        letter-spacing: clamp(1px, 0.4vw, 6px);
         margin: 0;
       }
     }
@@ -250,9 +265,9 @@
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
     font-size: clamp(34px, 4vw, 50px);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1;
-    letter-spacing: 2px;
+    letter-spacing: clamp(2px, 0.4vw, 5px);
     min-width: clamp(48px, 5vw, 70px);
     display: flex;
     justify-content: center;
@@ -267,20 +282,20 @@
   &__title {
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(15px, 1.3vw, 19px);
-    font-weight: 600;
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 400;
     line-height: 1.5;
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     margin: 0;
   }
 
   &__subtitle {
     color: #4570b6;
     font-family: "Poppins", "Noto Sans HK", sans-serif;
-    font-size: clamp(13px, 1.1vw, 15px);
+    font-size: clamp(12px, 1.1vw, 15px);
     font-weight: 400;
     line-height: 1.5;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     margin: 2px 0 0;
     opacity: 0.85;
   }
@@ -288,17 +303,17 @@
 
 // 榮譽列表
 .cmer-honors {
-  margin-top: clamp(24px, 3vw, 36px);
+  margin-top: clamp(24px, 3vw, 38px);
   padding-top: clamp(16px, 2vw, 24px);
   border-top: 1px dashed rgba(69, 112, 182, 0.2);
 
   &__title {
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(15px, 1.3vw, 19px);
-    font-weight: 600;
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 500;
     line-height: 1.6;
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     margin-bottom: 10px;
   }
 
@@ -314,10 +329,10 @@
   &__item {
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(13px, 1.1vw, 17px);
-    font-weight: 400;
+    font-size: clamp(13px, 1.1vw, 20px);
+    font-weight: 300;
     line-height: 1.8;
-    letter-spacing: 2px;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     margin: 0;
     position: relative;
     padding-left: 20px;
@@ -335,7 +350,7 @@
 
 // 畫廊 3 圖
 .gallery-grid {
-  margin-top: clamp(32px, 4vw, 48px);
+  margin-top: clamp(30px, 4vw, 40px);
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: clamp(16px, 2vw, 24px);
@@ -348,7 +363,7 @@
 
   &__figure {
     margin: 0;
-    border-radius: clamp(16px, 2vw, 24px);
+    border-radius: clamp(18px, 2.5vw, 29px);
     overflow: hidden;
     background: #f0f4f8;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -368,33 +383,44 @@
 }
 
 // --------------------------------------------------------------------------
-// 3. 微笑矯視中心簡介 (.center-profile-section)
+// 3. 微笑矯視中心簡介 (.gp-center-section)
+// 100% 全寬波浪藍色背景 + 正圓形懸浮徽章 (Desktop: 307px / Mobile: 171px)
 // --------------------------------------------------------------------------
-.center-profile-section {
+.gp-center-section {
   width: 100%;
-  background: url("https://statichk.cmermedical.com/imgs/2024/05/e804c18e78e3c9c8.png") no-repeat;
-  background-size: 100% 100%;
-  border-radius: clamp(16px, 2.5vw, 36px);
-  padding: clamp(60px, 8vw, 100px) clamp(20px, 4vw, 60px) clamp(30px, 4vw, 60px);
-  box-sizing: border-box;
+  background: url("https://statichk.cmermedical.com/imgs/2024/05/e804c18e78e3c9c8.png") no-repeat center / 100% 100%;
+  padding: 210px 0 100px;
+  margin-top: 150px;
   position: relative;
-  box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
+
+  @media (max-width: 767px) {
+    background-image: url("https://statichk.cmermedical.com/imgs/2024/05/3667677d419ec9a0.png");
+    padding: 120px 0 50px;
+    margin-top: 100px;
+  }
 
   &__badge {
     position: absolute;
-    top: clamp(-40px, -4vw, -55px);
+    top: -150px;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(160px, 18vw, 220px);
-    height: clamp(80px, 9vw, 110px);
-    border-radius: clamp(18px, 2vw, 28px);
+    width: 307px;
+    height: 307px;
+    border-radius: 50%;
     background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 6px 20px rgba(69, 112, 182, 0.1);
-    border: 1px solid rgba(69, 112, 182, 0.1);
+    box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
+
+    @media (max-width: 767px) {
+      width: 171px;
+      height: 171px;
+      top: -85px;
+      padding-top: 10px;
+      box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
+    }
   }
 
   &__logo {
@@ -403,8 +429,8 @@
     align-items: center;
 
     svg {
-      width: clamp(44px, 5vw, 60px);
-      height: clamp(24px, 3vw, 32px);
+      width: clamp(52px, 6vw, 80px);
+      height: auto;
     }
   }
 
@@ -412,26 +438,26 @@
     color: #4570b6;
     text-align: center;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(17px, 1.8vw, 22px);
-    font-weight: 600;
+    font-size: clamp(18px, 2vw, 30px);
+    font-weight: 500;
     line-height: 1.4;
-    letter-spacing: 4px;
-    margin: 4px 0 0;
+    letter-spacing: clamp(2px, 0.6vw, 7.5px);
+    margin: 8px 0 0;
   }
 
   &__content {
-    max-width: 960px;
+    max-width: 980px;
     margin: 0 auto;
 
     p {
-      margin-bottom: 20px;
+      margin-bottom: clamp(16px, 2.5vw, 35px);
       color: #6d6e71;
       text-align: center;
       font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: clamp(14px, 1.2vw, 18px);
+      font-size: clamp(14px, 1.3vw, 20px);
       font-weight: 300;
-      line-height: 1.9;
-      letter-spacing: 2px;
+      line-height: 1.8;
+      letter-spacing: clamp(1px, 0.4vw, 6px);
 
       &:last-child {
         margin-bottom: 0;
@@ -442,20 +468,27 @@
 
 // --------------------------------------------------------------------------
 // 4. 希瑪關懷大使專區 (.cmer-care-card)
+// 與藍色波浪背景向上負外邊距重疊 -mt-10 lg:-mt-24
 // --------------------------------------------------------------------------
+.gp-care-section {
+  width: 100%;
+}
+
 .cmer-care-card {
   width: 100%;
   border: 1px solid #ffffffed;
-  box-shadow: 0 0 0 1px rgba(187, 215, 255, 0.35) inset, 0 4px 20px rgba(69, 112, 182, 0.08);
+  box-shadow: 0 0 0 1px rgba(187, 215, 255, 0.35) inset, 0 1px 1px #d9e8ffe5, 0 10px 30px rgba(69, 112, 182, 0.08);
   background: linear-gradient(
     180deg,
-    rgba(187, 215, 255, 0.85) 0%,
-    rgba(217, 232, 255, 0.75) 30%,
-    rgba(238, 245, 255, 0.75) 60%,
-    rgba(255, 255, 255, 0.85) 100%
+    rgba(187, 215, 255, 0.8) 6.61%,
+    rgba(217, 232, 255, 0.72) 30.85%,
+    rgba(238, 245, 255, 0.72) 52.41%,
+    rgba(250, 252, 255, 0.72) 63.18%,
+    rgba(253, 253, 255, 0.73) 74.18%,
+    rgba(255, 255, 255, 0.74) 100%
   );
-  border-radius: clamp(16px, 2.5vw, 36px);
-  padding: clamp(28px, 4vw, 48px) clamp(20px, 5vw, 64px);
+  border-radius: clamp(24px, 3.5vw, 52px);
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 5vw, 96px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -477,20 +510,20 @@
   &__title {
     color: #4570b6;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(22px, 2.4vw, 28px);
+    font-size: clamp(20px, 2.4vw, 30px);
     font-weight: 700;
     line-height: 1.3;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     margin: 0;
   }
 
   &__desc {
     color: #595959;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(14px, 1.2vw, 18px);
-    font-weight: 400;
+    font-size: clamp(14px, 1.2vw, 20px);
+    font-weight: 300;
     line-height: 1.8;
-    letter-spacing: 1.5px;
+    letter-spacing: clamp(1px, 0.4vw, 4px);
 
     p {
       margin-bottom: 8px;
@@ -532,8 +565,8 @@
 
   &__whatsapp-icon {
     grid-area: icon;
-    width: clamp(44px, 5vw, 58px);
-    height: clamp(44px, 5vw, 58px);
+    width: clamp(48px, 5vw, 64px);
+    height: clamp(48px, 5vw, 64px);
   }
 
   &__whatsapp-texts {
@@ -546,8 +579,8 @@
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
     font-weight: 700;
     letter-spacing: 2px;
-    font-size: clamp(14px, 1.3vw, 18px);
-    line-height: 1.5;
+    font-size: clamp(15px, 1.3vw, 20px);
+    line-height: 1.4;
     margin: 0;
   }
 
@@ -557,7 +590,7 @@
     font-family: "Poppins", "Noto Sans HK", sans-serif;
     font-weight: 700;
     letter-spacing: 1.5px;
-    font-size: clamp(20px, 2vw, 26px);
+    font-size: clamp(20px, 2vw, 28px);
     line-height: 1.3;
     margin: 0;
   }
@@ -567,16 +600,16 @@
   }
 
   &__mascot-img {
-    max-height: clamp(180px, 20vw, 280px);
+    max-height: clamp(180px, 22vw, 352px);
     width: auto;
     object-fit: contain;
   }
 }
 
 // --------------------------------------------------------------------------
-// 5. 中心環境輪播展示 (.center-environment-section)
+// 5. 中心環境輪播展示 (.gp-env-section)
 // --------------------------------------------------------------------------
-.center-environment-section {
+.gp-env-section {
   width: 100%;
   box-sizing: border-box;
 
@@ -596,62 +629,63 @@
     color: #4570b6;
     text-align: center;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(17px, 1.8vw, 22px);
-    font-weight: 600;
+    font-size: clamp(17px, 1.8vw, 25px);
+    font-weight: 500;
     line-height: 1.5;
-    letter-spacing: 3px;
-    margin-bottom: 6px;
+    letter-spacing: clamp(1px, 0.4vw, 7.5px);
+    margin-bottom: 8px;
     margin-top: 0;
   }
 
   &__caption-text {
     color: #6d6e71;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(14px, 1.2vw, 18px);
+    font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
     line-height: 1.8;
-    letter-spacing: 2px;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
     text-align: center;
     margin: 0;
   }
 }
 
 // --------------------------------------------------------------------------
-// 6. 獲得獎項與榮譽 (.group-awards-section)
+// 6. 獲得獎項與權威認證 (.gp-awards-section)
+// 100% 全寬波浪藍色背景 + 正圓形懸浮徽章 (Desktop: 307px / Mobile: 171px)
 // --------------------------------------------------------------------------
-.group-awards-section {
+.gp-awards-section {
   width: 100%;
-  background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat;
-  background-size: 100% 100%;
-  border-radius: clamp(16px, 2.5vw, 36px);
-  padding: clamp(60px, 8vw, 100px) clamp(16px, 3vw, 40px) clamp(30px, 4vw, 60px);
-  box-sizing: border-box;
+  background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat center / 100% 100%;
+  padding: 230px 0 100px;
+  margin-top: 185px;
   position: relative;
-  box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
+
+  @media (max-width: 767px) {
+    background-image: url("https://statichk.cmermedical.com/imgs/2024/05/1306a3173c344666.png");
+    padding: 100px 0 50px;
+    margin-top: 125px;
+  }
 
   &__badge {
     position: absolute;
-    top: clamp(-40px, -4vw, -55px);
+    top: -150px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: clamp(160px, 18vw, 220px);
-    height: clamp(80px, 9vw, 110px);
-    border-radius: clamp(18px, 2vw, 28px);
+    width: 307px;
+    height: 307px;
+    border-radius: 50%;
     background-color: #fff;
-    box-shadow: 0 6px 20px rgba(69, 112, 182, 0.1);
-    border: 1px solid rgba(69, 112, 182, 0.1);
+    box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
 
-    .group-awards-section__title {
-      font-size: clamp(17px, 1.8vw, 22px);
-      letter-spacing: 3px;
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-weight: 600;
-      margin: 4px 0 0;
+    @media (max-width: 767px) {
+      width: 171px;
+      height: 171px;
+      top: -85px;
+      box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
     }
   }
 
@@ -661,36 +695,52 @@
     align-items: center;
 
     svg {
-      width: clamp(32px, 3.5vw, 44px);
-      height: clamp(32px, 3.5vw, 44px);
+      width: clamp(38px, 4vw, 60px);
+      height: clamp(38px, 4vw, 60px);
+    }
+  }
+
+  &__title {
+    color: #4570b6;
+    text-align: center;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(18px, 2vw, 30px);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: clamp(2px, 0.6vw, 7.5px);
+    padding-bottom: clamp(10px, 1.5vw, 24px);
+    position: relative;
+    margin: 8px 0 0;
+
+    &::before {
+      content: "";
+      width: clamp(25px, 3vw, 40px);
+      height: 4px;
+      border-radius: 4px;
+      background: #a6e1d6;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
     }
   }
 
   &__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(12px, 2vw, 20px);
-    max-width: 960px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
-
-    @media (min-width: 640px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(5, 1fr);
-    }
+    flex-wrap: wrap;
+    gap: clamp(8px, 1.5vw, 18px);
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
   &__item {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: clamp(80px, 9vw, 120px);
-    height: clamp(80px, 9vw, 120px);
-    padding: 6px;
+    width: clamp(75px, 9vw, 132px);
+    height: clamp(75px, 9vw, 132px);
     box-sizing: border-box;
     transition: transform 0.3s ease;
 

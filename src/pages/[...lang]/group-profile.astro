@@ -3,7 +3,7 @@
  * @Author: Antigravity AI
  * @Date: 2026-09-07
  * @FilePath: /src/pages/[...lang]/group-profile.astro
- * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (統一全域 container 貼邊佈局 + Banner 最大 300px 高度)
+ * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (全寬波浪背景 + 內嵌 Container 精確約束 + Banner 300px)
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import IndexEnvironment from "@/components/views/IndexEnvironment.astro";
@@ -35,168 +35,175 @@ const awardBadges = [
 ---
 
 <BaseLayout tdkKey="about">
-  {/* 統一全域 Container：與頂部導航/頁尾嚴絲合縫貼邊對齊 */}
-  <main id="main-content" class="container mx-auto px-4 py-6 md:py-10 space-y-8 md:space-y-12">
+  <main id="main-content" class="group-profile-page w-full overflow-hidden">
     
-    {/* 1. 頂部 Hero Banner (高度鎖定最大 300px + 貼邊對齊) */}
-    <header class="group-banner-card" aria-label="集團簡介導言區">
-      <div class="group-banner-card__content">
-        <h1 class="group-banner-card__title">
-          {dict.about.group.intro.title}
-        </h1>
-        <p class="group-banner-card__subtitle">Group Profile</p>
-      </div>
-    </header>
-
-    {/* 2. 集團簡介與 C-M-E-R 經營理念板塊 */}
-    <section class="group-profile-section" aria-labelledby="section-group-heading">
-      {/* 標題與引言 */}
-      <header class="text-center">
-        <h2 id="section-group-heading" class="section-title-pill">
-          {dict.about.group.intro.title}
-        </h2>
-        <p class="section-lead-text">
-          {dict.about.group.intro.desc}
-        </p>
-      </header>
-
-      {/* 門市網絡與官方鏈接 */}
-      <div class="network-info-box">
-        <h3 class="network-info-box__title">
-          {dict.about.group.eye.title}
-        </h3>
-        <p class="network-info-box__desc">
-          {dict.about.group.eye.desc}
-        </p>
-        <div class="network-info-box__link-row">
-          <span>{dict.about.group.eye.more}</span>
-          <a
-            href="https://www.hkcmereye.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="network-info-box__link"
-            aria-label="瀏覽香港希瑪眼科中心官方網站 (在新視窗中開啟)"
-          >
-            www.hkcmereye.com
-          </a>
-        </div>
-      </div>
-
-      {/* 經營理念導言 */}
-      <div class="philosophy-lead-box">
-        <h3 class="philosophy-lead-box__title">
-          {dict.about.group.philosophy.title}
-        </h3>
-        <p class="philosophy-lead-box__desc">
-          {dict.about.group.philosophy.desc}
-        </p>
-      </div>
-
-      {/* C-M-E-R 核心理念條目 (垂直指示軸) */}
-      <div class="cmer-timeline" role="list">
-        {/* C */}
-        <article class="cmer-timeline__item" role="listitem">
-          <div class="cmer-timeline__letter" aria-hidden="true">C</div>
-          <div class="cmer-timeline__body">
-            <h4 class="cmer-timeline__title">{dict.about.group.philosophy.c}</h4>
-            <p class="cmer-timeline__subtitle">Professional Clinical Services</p>
+    {/* 1. 頂部 Hero Banner (Container 寬度約束 + 最大高度 300px) */}
+    <section class="gp-banner-section py-4 md:py-8" aria-label="集團簡介導言區">
+      <div class="container mx-auto px-4">
+        <header class="gp-banner-card">
+          <div class="gp-banner-card__content">
+            <h1 class="gp-banner-card__title">
+              {dict.about.group.intro.title}
+            </h1>
+            <p class="gp-banner-card__subtitle">Group Profile</p>
           </div>
-        </article>
-
-        {/* M */}
-        <article class="cmer-timeline__item" role="listitem">
-          <div class="cmer-timeline__letter" aria-hidden="true">M</div>
-          <div class="cmer-timeline__body">
-            <h4 class="cmer-timeline__title">{dict.about.group.philosophy.m}</h4>
-            <p class="cmer-timeline__subtitle">Modern Management</p>
-          </div>
-        </article>
-
-        {/* E */}
-        <article class="cmer-timeline__item" role="listitem">
-          <div class="cmer-timeline__letter" aria-hidden="true">E</div>
-          <div class="cmer-timeline__body">
-            <h4 class="cmer-timeline__title">{dict.about.group.philosophy.e}</h4>
-            <p class="cmer-timeline__subtitle">Quality Education</p>
-          </div>
-        </article>
-
-        {/* R */}
-        <article class="cmer-timeline__item" role="listitem">
-          <div class="cmer-timeline__letter" aria-hidden="true">R</div>
-          <div class="cmer-timeline__body">
-            <h4 class="cmer-timeline__title">{dict.about.group.philosophy.r}</h4>
-            <p class="cmer-timeline__subtitle">Pioneering Research</p>
-          </div>
-        </article>
-
-        {/* 豎排「希瑪」理念寓意 */}
-        <article class="cmer-timeline__item cmer-timeline__item--vertical" role="listitem">
-          <div class="cmer-timeline__vertical-badge" aria-hidden="true">希瑪</div>
-          <div class="cmer-timeline__body">
-            <p class="cmer-timeline__quote">
-              {dict.about.group.philosophy.cmer}
-            </p>
-          </div>
-        </article>
-
-        {/* 榮譽殊榮清單 */}
-        <aside class="cmer-honors" aria-label="希瑪眼科醫療技術與服務榮譽">
-          <h4 class="cmer-honors__title">{dict.about.group.honor.title}</h4>
-          <ul class="cmer-honors__list">
-            {dict.about.group.honor.list.map((item: string) => (
-              <li class="cmer-honors__item">{item}</li>
-            ))}
-          </ul>
-        </aside>
-      </div>
-
-      {/* 3 張精選環境與醫療團隊畫廊 */}
-      <div class="gallery-grid">
-        <figure class="gallery-grid__figure">
-          <img
-            src="https://statichk.cmermedical.com/imgs/2024/05/a62af78191160bc4.png"
-            alt={isCn ? "香港希玛眼科医疗集团中环眼科中心现代化门市环境" : "香港希瑪眼科醫療集團中環眼科中心現代化門市環境"}
-            loading="lazy"
-            decoding="async"
-            width="600"
-            height="400"
-            class="gallery-grid__img"
-          />
-          <figcaption class="sr-only">中環眼科中心接待處與等候空間</figcaption>
-        </figure>
-        <figure class="gallery-grid__figure">
-          <img
-            src="https://statichk.cmermedical.com/smile/group-profile/4977e6813fbfb150.jpg"
-            alt={isCn ? "香港希玛国际眼科医疗团队与眼科专科医生阵容" : "香港希瑪國際眼科醫療團隊與眼科專科醫生陣容"}
-            loading="lazy"
-            decoding="async"
-            width="600"
-            height="400"
-            class="gallery-grid__img"
-          />
-          <figcaption class="sr-only">林順潮教授領銜之眼科專科醫療團隊</figcaption>
-        </figure>
-        <figure class="gallery-grid__figure">
-          <img
-            src="https://statichk.cmermedical.com/imgs/2024/05/f7473e33c97b076f.png"
-            alt={isCn ? "香港希玛微笑矫视中心无菌手术室与舒适候诊大堂" : "香港希瑪微笑矯視中心無菌手術室與舒適候診大堂"}
-            loading="lazy"
-            decoding="async"
-            width="600"
-            height="400"
-            class="gallery-grid__img"
-          />
-          <figcaption class="sr-only">國際高規格全飛秒激光無菌手術室與諮詢空間</figcaption>
-        </figure>
+        </header>
       </div>
     </section>
 
-    {/* 3. 微笑矯視中心簡介 (波浪背景與 307px 圓形浮動 Badge 標誌) */}
-    <section class="center-profile-section" aria-labelledby="section-center-heading">
-      {/* 懸浮圓形標誌徽章 */}
-      <div class="center-profile-section__badge">
-        <div class="center-profile-section__logo">
+    {/* 2. 集團簡介與 C-M-E-R 經營理念板塊 (全寬波浪紋背景 + 內嵌 Container 卡片) */}
+    <section class="gp-philosophy-section w-full" aria-labelledby="section-group-heading">
+      <div class="container mx-auto px-4">
+        <article class="gp-philosophy-card">
+          {/* 標題與引言 */}
+          <header class="text-center">
+            <h2 id="section-group-heading" class="section-title-pill">
+              {dict.about.group.intro.title}
+            </h2>
+            <p class="section-lead-text">
+              {dict.about.group.intro.desc}
+            </p>
+          </header>
+
+          {/* 門市網絡與官方鏈接 */}
+          <div class="network-info-box">
+            <h3 class="network-info-box__title">
+              {dict.about.group.eye.title}
+            </h3>
+            <p class="network-info-box__desc">
+              {dict.about.group.eye.desc}
+            </p>
+            <div class="network-info-box__link-row">
+              <span>{dict.about.group.eye.more}</span>
+              <a
+                href="https://www.hkcmereye.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="network-info-box__link"
+                aria-label="瀏覽香港希瑪眼科中心官方網站 (在新視窗中開啟)"
+              >
+                www.hkcmereye.com
+              </a>
+            </div>
+          </div>
+
+          {/* 經營理念導言 */}
+          <div class="philosophy-lead-box">
+            <h3 class="philosophy-lead-box__title">
+              {dict.about.group.philosophy.title}
+            </h3>
+            <p class="philosophy-lead-box__desc">
+              {dict.about.group.philosophy.desc}
+            </p>
+          </div>
+
+          {/* C-M-E-R 核心理念條目 (垂直指示軸) */}
+          <div class="cmer-timeline" role="list">
+            {/* C */}
+            <article class="cmer-timeline__item" role="listitem">
+              <div class="cmer-timeline__letter" aria-hidden="true">C</div>
+              <div class="cmer-timeline__body">
+                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.c}</h4>
+                <p class="cmer-timeline__subtitle">Professional Clinical Services</p>
+              </div>
+            </article>
+
+            {/* M */}
+            <article class="cmer-timeline__item" role="listitem">
+              <div class="cmer-timeline__letter" aria-hidden="true">M</div>
+              <div class="cmer-timeline__body">
+                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.m}</h4>
+                <p class="cmer-timeline__subtitle">Modern Management</p>
+              </div>
+            </article>
+
+            {/* E */}
+            <article class="cmer-timeline__item" role="listitem">
+              <div class="cmer-timeline__letter" aria-hidden="true">E</div>
+              <div class="cmer-timeline__body">
+                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.e}</h4>
+                <p class="cmer-timeline__subtitle">Quality Education</p>
+              </div>
+            </article>
+
+            {/* R */}
+            <article class="cmer-timeline__item" role="listitem">
+              <div class="cmer-timeline__letter" aria-hidden="true">R</div>
+              <div class="cmer-timeline__body">
+                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.r}</h4>
+                <p class="cmer-timeline__subtitle">Pioneering Research</p>
+              </div>
+            </article>
+
+            {/* 豎排「希瑪」理念寓意 */}
+            <article class="cmer-timeline__item cmer-timeline__item--vertical" role="listitem">
+              <div class="cmer-timeline__vertical-badge" aria-hidden="true">希瑪</div>
+              <div class="cmer-timeline__body">
+                <p class="cmer-timeline__quote">
+                  {dict.about.group.philosophy.cmer}
+                </p>
+              </div>
+            </article>
+
+            {/* 榮譽殊榮清單 */}
+            <aside class="cmer-honors" aria-label="希瑪眼科醫療技術與服務榮譽">
+              <h4 class="cmer-honors__title">{dict.about.group.honor.title}</h4>
+              <ul class="cmer-honors__list">
+                {dict.about.group.honor.list.map((item: string) => (
+                  <li class="cmer-honors__item">{item}</li>
+                ))}
+              </ul>
+            </aside>
+          </div>
+
+          {/* 3 張精選環境與醫療團隊畫廊 */}
+          <div class="gallery-grid">
+            <figure class="gallery-grid__figure">
+              <img
+                src="https://statichk.cmermedical.com/imgs/2024/05/a62af78191160bc4.png"
+                alt={isCn ? "香港希玛眼科医疗集团中环眼科中心现代化门市环境" : "香港希瑪眼科醫療集團中環眼科中心現代化門市環境"}
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
+                class="gallery-grid__img"
+              />
+              <figcaption class="sr-only">中環眼科中心接待處與等候空間</figcaption>
+            </figure>
+            <figure class="gallery-grid__figure">
+              <img
+                src="https://statichk.cmermedical.com/smile/group-profile/4977e6813fbfb150.jpg"
+                alt={isCn ? "香港希玛国际眼科医疗团队与眼科专科医生阵容" : "香港希瑪國際眼科醫療團隊與眼科專科醫生陣容"}
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
+                class="gallery-grid__img"
+              />
+              <figcaption class="sr-only">林順潮教授領銜之眼科專科醫療團隊</figcaption>
+            </figure>
+            <figure class="gallery-grid__figure">
+              <img
+                src="https://statichk.cmermedical.com/imgs/2024/05/f7473e33c97b076f.png"
+                alt={isCn ? "香港希玛微笑矫视中心无菌手术室与舒适候诊大堂" : "香港希瑪微笑矯視中心無菌手術室與舒適候診大堂"}
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
+                class="gallery-grid__img"
+              />
+              <figcaption class="sr-only">國際高規格全飛秒激光無菌手術室與諮詢空間</figcaption>
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    {/* 3. 微笑矯視中心簡介 (100% 全寬波浪藍色背景 + 懸浮 307px 圓形 Logo 徽章 + 內嵌 Container 約束) */}
+    <section class="gp-center-section w-full" aria-labelledby="section-center-heading">
+      {/* 懸浮圓形標誌徽章 (正圓形居中懸浮) */}
+      <div class="gp-center-section__badge">
+        <div class="gp-center-section__logo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="80"
@@ -235,106 +242,114 @@ const awardBadges = [
             />
           </svg>
         </div>
-        <h2 id="section-center-heading" class="center-profile-section__title">
+        <h2 id="section-center-heading" class="gp-center-section__title">
           {dict.about.group.center.title}
         </h2>
       </div>
 
-      {/* 中心主體描述文案 */}
-      <div class="center-profile-section__content" set:html={dict.about.group.center.desc} />
+      {/* 中心主體描述文案 (Container 寬度約束 + 精緻排版) */}
+      <div class="container mx-auto px-4">
+        <div class="gp-center-section__content" set:html={dict.about.group.center.desc} />
+      </div>
     </section>
 
-    {/* 4. 希瑪關懷大使專區 (漸變通透質感卡片與吉祥物) */}
-    <section class="cmer-care-card" aria-labelledby="section-care-heading">
-      <div class="cmer-care-card__body">
-        <h3 id="section-care-heading" class="cmer-care-card__title">
-          {isCn ? "希玛关怀大使" : "希瑪關懷大使"}
-        </h3>
-        <div class="cmer-care-card__desc">
-          <p>
-            {isCn
-              ? "希玛眼科致力提供优质的医疗服务，更重视客人的就诊体验与感受。如您对我们的服务有任何意见、建议或查询，欢迎联络我们的"
-              : "希瑪眼科致力提供優質的醫療服務，更重視客人的就診體驗與感受。如您對我們的服務有任何意見、建議或查詢，歡迎聯絡我們的"}
-            <strong class="text-highlight">{isCn ? "希玛关怀大使" : "希瑪關懷大使"}</strong>。
-          </p>
-          <p>
-            {isCn
-              ? "关怀大使会竭诚为您跟进，持续提升医疗与服务质素，实践「希・望见美好」的初心。"
-              : "關懷大使會竭誠為您跟進，持續提升醫療與服務質素，實踐「希・望見美好」的初心。"}
-          </p>
-        </div>
+    {/* 4. 希瑪關懷大使專區 (與上方藍色波浪背景向上負外邊距重疊 -mt-10 lg:-mt-24 + 內嵌 Container 約束) */}
+    <section class="gp-care-section relative z-10 -mt-10 lg:-mt-24 mb-16 md:mb-24" aria-labelledby="section-care-heading">
+      <div class="container mx-auto px-4">
+        <article class="cmer-care-card">
+          <div class="cmer-care-card__body">
+            <h3 id="section-care-heading" class="cmer-care-card__title">
+              {isCn ? "希玛关怀大使" : "希瑪關懷大使"}
+            </h3>
+            <div class="cmer-care-card__desc">
+              <p>
+                {isCn
+                  ? "希玛眼科致力提供优质的医疗服务，更重视客人的就诊体验与感受。如您对我们的服务有任何意见、建议或查询，欢迎联络我们的"
+                  : "希瑪眼科致力提供優質的醫療服務，更重視客人的就診體驗與感受。如您對我們的服務有任何意見、建議或查詢，歡迎聯絡我們的"}
+                <strong class="text-highlight">{isCn ? "希玛关怀大使" : "希瑪關懷大使"}</strong>。
+              </p>
+              <p>
+                {isCn
+                  ? "关怀大使会竭诚为您跟进，持续提升医疗与服务质素，实践「希・望见美好」的初心。"
+                  : "關懷大使會竭誠為您跟進，持續提升醫療與服務質素，實踐「希・望見美好」的初心。"}
+              </p>
+            </div>
 
-        {/* 官方 WhatsApp 諮詢按鈕 */}
-        <a
-          href="https://api.whatsapp.com/send/?phone=85296036825&text=Hello%20希瑪關懷大使"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cmer-care-card__whatsapp-btn"
-          data-cta="whatsapp"
-          aria-label={isCn ? "通过 WhatsApp 联络希玛关怀大使 (+852 9603 6825)" : "透過 WhatsApp 聯絡希瑪關懷大使 (+852 9603 6825)"}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="67"
-            height="67"
-            viewBox="0 0 67 67"
-            fill="none"
-            class="cmer-care-card__whatsapp-icon"
-            aria-hidden="true"
-          >
-            <path
-              d="M14.998 61.0916L2.20355 65.1791L6.34324 52.807C-3.56542 39.2226 -1.65199 20.3464 10.5898 8.93616C24.0673 -3.62629 45.175 -2.8312 57.6853 10.6124C70.1878 24.0481 69.4839 45.148 55.9439 57.7183C44.8413 68.0258 27.8811 69.6394 14.998 61.0942V61.0916ZM44.9013 38.1642C43.9002 37.6846 42.954 38.0469 42.37 38.8603C41.5306 40.0308 40.7251 41.1543 39.7814 42.2518C39.26 42.8566 38.3268 42.9817 37.5682 42.6976C31.6298 40.4765 27.477 36.4463 24.1924 31.1023C23.8014 30.4636 23.963 29.7884 24.4479 29.2384C25.2377 28.3416 26.0511 27.4579 26.7732 26.5298C27.3128 25.8338 27.3962 25.083 27.0756 24.3114L23.8561 16.5977C23.4651 15.6618 22.8238 15.2421 21.8071 15.2448C20.5402 15.25 19.1038 15.1509 18.0037 15.9512C15.4516 17.8073 14.1221 20.7765 13.9709 23.8917C13.7858 27.7316 15.6732 31.4125 17.8238 34.4729C19.9745 37.5334 22.4432 40.5964 25.3368 43.2033C27.6413 45.281 30.0448 47.0771 32.8446 48.4431C35.6443 49.8091 38.4545 50.8179 41.4342 51.5791C43.9889 52.2335 46.4706 51.9806 48.7881 50.7606C50.1697 50.0307 51.5227 49.1495 52.3126 47.7575C52.9617 46.6157 54.1348 42.5985 52.7531 41.9364L44.9039 38.1642H44.9013Z"
-              fill="#4CAF51"
-            />
-          </svg>
-          <div class="cmer-care-card__whatsapp-texts">
-            <span class="cmer-care-card__whatsapp-label">
-              {isCn ? "联络我们" : "聯絡我們"}
-            </span>
-            <span class="cmer-care-card__whatsapp-number">
-              WhatsApp 9603 6825
-            </span>
+            {/* 官方 WhatsApp 諮詢按鈕 */}
+            <a
+              href="https://api.whatsapp.com/send/?phone=85296036825&text=Hello%20希瑪關懷大使"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cmer-care-card__whatsapp-btn"
+              data-cta="whatsapp"
+              aria-label={isCn ? "通过 WhatsApp 联络希玛关怀大使 (+852 9603 6825)" : "透過 WhatsApp 聯絡希瑪關懷大使 (+852 9603 6825)"}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="67"
+                height="67"
+                viewBox="0 0 67 67"
+                fill="none"
+                class="cmer-care-card__whatsapp-icon"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14.998 61.0916L2.20355 65.1791L6.34324 52.807C-3.56542 39.2226 -1.65199 20.3464 10.5898 8.93616C24.0673 -3.62629 45.175 -2.8312 57.6853 10.6124C70.1878 24.0481 69.4839 45.148 55.9439 57.7183C44.8413 68.0258 27.8811 69.6394 14.998 61.0942V61.0916ZM44.9013 38.1642C43.9002 37.6846 42.954 38.0469 42.37 38.8603C41.5306 40.0308 40.7251 41.1543 39.7814 42.2518C39.26 42.8566 38.3268 42.9817 37.5682 42.6976C31.6298 40.4765 27.477 36.4463 24.1924 31.1023C23.8014 30.4636 23.963 29.7884 24.4479 29.2384C25.2377 28.3416 26.0511 27.4579 26.7732 26.5298C27.3128 25.8338 27.3962 25.083 27.0756 24.3114L23.8561 16.5977C23.4651 15.6618 22.8238 15.2421 21.8071 15.2448C20.5402 15.25 19.1038 15.1509 18.0037 15.9512C15.4516 17.8073 14.1221 20.7765 13.9709 23.8917C13.7858 27.7316 15.6732 31.4125 17.8238 34.4729C19.9745 37.5334 22.4432 40.5964 25.3368 43.2033C27.6413 45.281 30.0448 47.0771 32.8446 48.4431C35.6443 49.8091 38.4545 50.8179 41.4342 51.5791C43.9889 52.2335 46.4706 51.9806 48.7881 50.7606C50.1697 50.0307 51.5227 49.1495 52.3126 47.7575C52.9617 46.6157 54.1348 42.5985 52.7531 41.9364L44.9039 38.1642H44.9013Z"
+                  fill="#4CAF51"
+                />
+              </svg>
+              <div class="cmer-care-card__whatsapp-texts">
+                <span class="cmer-care-card__whatsapp-label">
+                  {isCn ? "联络我们" : "聯絡我們"}
+                </span>
+                <span class="cmer-care-card__whatsapp-number">
+                  WhatsApp 9603 6825
+                </span>
+              </div>
+            </a>
           </div>
-        </a>
-      </div>
 
-      {/* 關懷大使吉祥物 */}
-      <div class="cmer-care-card__mascot">
-        <img
-          src="https://statichk.cmermedical.com/smile/group-profile/cmer-group-care-ambassador.svg"
-          alt={isCn ? "香港希玛眼科医疗集团关怀大使吉祥物" : "香港希瑪眼科醫療集團關懷大使吉祥物"}
-          loading="lazy"
-          decoding="async"
-          width="320"
-          height="352"
-          class="cmer-care-card__mascot-img"
-        />
+          {/* 關懷大使吉祥物 */}
+          <div class="cmer-care-card__mascot">
+            <img
+              src="https://statichk.cmermedical.com/smile/group-profile/cmer-group-care-ambassador.svg"
+              alt={isCn ? "香港希玛眼科医疗集团关怀大使吉祥物" : "香港希瑪眼科醫療集團關懷大使吉祥物"}
+              loading="lazy"
+              decoding="async"
+              width="320"
+              height="352"
+              class="cmer-care-card__mascot-img"
+            />
+          </div>
+        </article>
       </div>
     </section>
 
     {/* 5. 中心環境輪播展示 (中環中建大廈 / 旺角雅蘭中心) */}
-    <section class="center-environment-section" aria-labelledby="section-env-heading">
-      <h2 id="section-env-heading" class="section-title-pill">
-        {dict.about.group.environment.title}
-      </h2>
-      <div class="center-environment-section__carousel">
-        <IndexEnvironment />
-      </div>
-      <div class="center-environment-section__caption">
-        <h3 class="center-environment-section__caption-title">
-          {isCn ? "希玛微笑矫视中心位于" : "希瑪微笑矯視中心位於"}
-        </h3>
-        <p class="center-environment-section__caption-text">
-          {isCn ? "中环中建大厦、旺角雅兰中心，交通便利易达。" : "中環中建大廈、旺角雅蘭中心，交通便利易達。"}
-        </p>
+    <section class="gp-env-section my-16 md:my-24" aria-labelledby="section-env-heading">
+      <div class="container mx-auto px-4">
+        <h2 id="section-env-heading" class="section-title-pill">
+          {dict.about.group.environment.title}
+        </h2>
+        <div class="gp-env-section__carousel">
+          <IndexEnvironment />
+        </div>
+        <div class="gp-env-section__caption">
+          <h3 class="gp-env-section__caption-title">
+            {isCn ? "希玛微笑矫视中心位于" : "希瑪微笑矯視中心位於"}
+          </h3>
+          <p class="gp-env-section__caption-text">
+            {isCn ? "中环中建大厦、旺角雅兰中心，交通便利易达。" : "中環中建大廈、旺角雅蘭中心，交通便利易達。"}
+          </p>
+        </div>
       </div>
     </section>
 
-    {/* 6. 獲得獎項與權威認證 (波浪背景與 307px 圓形浮動 Trophy 徽章) */}
-    <section class="group-awards-section" aria-labelledby="section-awards-heading">
-      {/* 懸浮圓形 Trophy 標誌徽章 */}
-      <div class="group-awards-section__badge">
-        <div class="group-awards-section__trophy">
+    {/* 6. 獲得獎項與權威認證 (100% 全寬波浪藍色背景 + 懸浮 307px 圓形 Trophy 徽章 + 內嵌 Container 約束) */}
+    <section class="gp-awards-section w-full" aria-labelledby="section-awards-heading">
+      {/* 懸浮圓形 Trophy 標誌徽章 (正圓形居中懸浮) */}
+      <div class="gp-awards-section__badge">
+        <div class="gp-awards-section__trophy">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="60"
@@ -391,26 +406,28 @@ const awardBadges = [
             />
           </svg>
         </div>
-        <h2 id="section-awards-heading" class="group-awards-section__title">
+        <h2 id="section-awards-heading" class="gp-awards-section__title">
           {dict.about.group.award.title}
         </h2>
       </div>
 
-      {/* 獎項徽章矩陣 */}
-      <div class="group-awards-section__grid" role="list">
-        {awardBadges.map((badge) => (
-          <article class="group-awards-section__item" role="listitem">
-            <img
-              src={badge.src}
-              alt={badge.alt}
-              loading="lazy"
-              decoding="async"
-              width="132"
-              height="132"
-              class="group-awards-section__img"
-            />
-          </article>
-        ))}
+      {/* 獎項徽章矩陣 (Container 寬度約束 + 網格對齊) */}
+      <div class="container mx-auto px-4">
+        <div class="gp-awards-section__grid" role="list">
+          {awardBadges.map((badge) => (
+            <article class="gp-awards-section__item" role="listitem">
+              <img
+                src={badge.src}
+                alt={badge.alt}
+                loading="lazy"
+                decoding="async"
+                width="132"
+                height="132"
+                class="gp-awards-section__img"
+              />
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
