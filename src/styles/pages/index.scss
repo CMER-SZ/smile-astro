@@ -185,7 +185,7 @@
           }
         }
 
-        /* 右下角小箭頭 */
+        /* 右下角小箭頭 (預設透明，由 GSAP back.out 物理彈性驅動) */
         svg,
         .centerSeviceNewItem-arrow {
           width: clamp(15px, 1.56vw, 30px);
@@ -194,7 +194,7 @@
           bottom: clamp(12px, 1.25vw, 24px);
           right: clamp(12px, 1.25vw, 24px);
           opacity: 0;
-          transition: opacity 0.3s ease;
+          pointer-events: none;
         }
 
         /* 僅在 PC 端 (>= 992px) 生效的 Hover 交互，嚴禁洩漏至移動端 */
@@ -225,11 +225,6 @@
             .centerSeviceNewItem-text {
               opacity: 1;
               visibility: visible;
-            }
-
-            svg,
-            .centerSeviceNewItem-arrow {
-              opacity: 1;
             }
           }
         }
@@ -1669,20 +1664,20 @@
   .fourFeature-Box-List-svg-top line,
   .fourFeature-Box-List-svg-bottom line {
     stroke-dashoffset: 325;
-    animation: grow-cross-v 7s cubic-bezier(0.7, 0, 0.84, 0) 0.4s forwards;
+    animation: grow-cross-v 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
   }
 
   .fourFeature-Box-List-svg-center line {
     stroke-dashoffset: 692;
-    animation: grow-cross-h 7s cubic-bezier(0.7, 0, 0.84, 0) 0.4s forwards;
+    animation: grow-cross-h 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
   }
 
   .fourFeature-Box-List-item {
-    animation: card-reveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-    &:nth-child(1) { animation-delay: 0.8s; }
-    &:nth-child(2) { animation-delay: 1.6s; }
-    &:nth-child(3) { animation-delay: 2.4s; }
-    &:nth-child(4) { animation-delay: 3.2s; }
+    animation: card-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    &:nth-child(1) { animation-delay: 0.15s; }
+    &:nth-child(2) { animation-delay: 0.20s; }
+    &:nth-child(3) { animation-delay: 0.25s; }
+    &:nth-child(4) { animation-delay: 0.30s; }
   }
 }
 
@@ -1820,7 +1815,10 @@
           display: flex;
           gap: 3.75px;
           max-width: 100vw;
-          overflow-x: scroll;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
 
           &::-webkit-scrollbar {
             height: 3px; /* 设置滚动条的高度（宽度） */
@@ -1835,6 +1833,8 @@
           }
           .UserShareBox-list-item {
             position: relative;
+            scroll-snap-align: start;
+            scroll-snap-stop: normal;
             &::after {
               content: "";
               position: absolute;
@@ -1977,7 +1977,10 @@
           gap: 5px;
           max-width: 1544px;
           width: 1544px;
-          overflow-x: scroll;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
           user-select: none;
           -webkit-user-select: none;
           -webkit-user-drag: none;
@@ -2002,21 +2005,10 @@
             width: 50%;
           }
 
-          // &:hover {
-          //   .UserShareBox-list-item {
-          //     filter: blur(3px);
-          //     opacity: 0.5;
-          //     transform: scale(0.98);
-          //     &:hover {
-          //       transform: scale(1);
-          //       filter: blur(0px);
-          //       opacity: 1;
-          //     }
-          //   }
-          // }
-
           .UserShareBox-list-item {
             position: relative;
+            scroll-snap-align: start;
+            scroll-snap-stop: normal;
             &::after {
               content: "";
               position: absolute;

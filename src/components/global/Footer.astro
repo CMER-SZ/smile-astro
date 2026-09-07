@@ -7,7 +7,7 @@
  */
 import { useI18n, getLocalizedHref } from "@/i18n/utils";
 
-const { dict, lang } = useI18n(Astro.url);
+const { lang } = useI18n(Astro.url);
 const isCn = lang === "zh-cn";
 
 // 導航鏈接配置 (嚴格遵循 AGENTS.md 路由零 404 與駝峰大小寫規則)
@@ -662,10 +662,6 @@ const newsList = [
           flex: 1.15;
         }
 
-        .new-Footer-v2-menu-right {
-          flex: 0.95;
-        }
-
         .new-Footer-v2-menu-left,
         .new-Footer-v2-menu-right {
           min-width: 0;
@@ -709,7 +705,7 @@ const newsList = [
                   white-space: normal;
                   color: #6d6e71;
                   font-family: var(--font-hk);
-                  font-size: clamp(15px, 1.1vw, 19px);
+                  font-size: 22px;
                   font-weight: 400;
                   line-height: 1.4;
                   text-decoration: none;
