@@ -10,26 +10,26 @@ import { getLangFromUrl } from "@/i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const isCn = lang === "zh-cn";
 
-// 5 大中心環境實景輪播圖資產 (蔡司全套設備與旗艦門市)
+// 5 大中心環境實景輪播圖資產 (蔡司全套設備與旗艦門市 - 現代無損 WebP)
 const slides = [
   {
-    src: "https://statichk.cmermedical.com/imgs/2024/06/d7bc3c3602b91d11.jpg",
+    src: "/assets/images/group-profile/env-01.webp",
     alt: isCn ? "香港希玛微笑矫视中心中环中建大厦旗舰店舒适候诊空间" : "香港希瑪微笑矯視中心中環中建大廈旗艦店舒適候診空間",
   },
   {
-    src: "https://statichk.cmermedical.com/imgs/2024/06/225f78a9419e18c9.jpg",
+    src: "/assets/images/group-profile/env-02.webp",
     alt: isCn ? "香港希玛微笑矫视中心旺角雅兰中心旗舰店独立咨询室" : "香港希瑪微笑矯視中心旺角雅蘭中心旗艦店獨立諮詢室",
   },
   {
-    src: "https://statichk.cmermedical.com/imgs/2023/03/11041faf78b0d062.jpg",
+    src: "/assets/images/group-profile/env-03.webp",
     alt: isCn ? "德国蔡司 SMILE Pro 国际高规格层流无菌手术室" : "德國蔡司 SMILE Pro 國際高規格層流無菌手術室",
   },
   {
-    src: "https://statichk.cmermedical.com/imgs/2024/06/5bae94148ed686da.jpg",
+    src: "/assets/images/group-profile/env-04.webp",
     alt: isCn ? "香港希玛微笑矫视中心 VIP 贵宾休息大堂" : "香港希瑪微笑矯視中心 VIP 貴賓休息大堂",
   },
   {
-    src: "https://statichk.cmermedical.com/smile/group-profile/990a811af868c7ed.webp",
+    src: "/assets/images/group-profile/env-05.webp",
     alt: isCn ? "全套德国蔡司屈光专科术前精密检验室" : "全套德國蔡司屈光專科術前精密檢驗室",
   },
 ];

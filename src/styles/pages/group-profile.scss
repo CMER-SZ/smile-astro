@@ -426,13 +426,13 @@
   width: 100%;
   background: url("https://statichk.cmermedical.com/imgs/2024/05/e804c18e78e3c9c8.png") no-repeat center / 100% 100%;
   padding: 130px 0;
-  margin-top: 200px;
+  margin-top: 150px;
   position: relative;
 
   @media (max-width: 767px) {
     background-image: url("https://statichk.cmermedical.com/imgs/2024/05/3667677d419ec9a0.png");
     padding: 90px 0 40px;
-    margin-top: 110px;
+    margin-top: 90px;
   }
 }
 
@@ -485,7 +485,7 @@
 }
 
 .center-intro-content {
-  max-width: 980px;
+  max-width: 1120px;
   margin: 0 auto;
 
   p {
@@ -497,6 +497,11 @@
     font-weight: 400;
     line-height: 1.8;
     letter-spacing: clamp(1px, 0.4vw, 6px);
+
+    strong {
+      color: #3b63a6;
+      font-weight: 700;
+    }
 
     &:last-child {
       margin-bottom: 0;

@@ -427,10 +427,12 @@ const awardBadges = [
 </BaseLayout>
 
 <script>
+  import gsap from "gsap";
   import Swiper from "swiper";
   import { Autoplay, FreeMode } from "swiper/modules";
   import "swiper/css";
 
+  // 1. 榮譽獎項平滑跑馬燈 (平滑無縫滾動)
   function initAwardsMarqueeSwiper() {
     const el = document.getElementById("awardsMarqueeSwiper");
     if (!el) return;
@@ -459,6 +461,90 @@ const awardBadges = [
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initAwardsMarqueeSwiper);
-  document.addEventListener("astro:page-load", initAwardsMarqueeSwiper);
+  // 2. GSAP C-M-E-R 經營理念支柱滾動逐項交錯浮現 (Stagger Reveal)
+  function initPillarsAnimation() {
+    const timeline = document.querySelector(".cmer-timeline");
+    const items = document.querySelectorAll(".cmer-timeline-item");
+    if (!timeline || !items.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      gsap.set(items, { opacity: 1, y: 0 });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              items,
+              { opacity: 0, y: 30 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.65,
+                stagger: 0.12,
+                ease: "power2.out",
+                overwrite: "auto",
+              }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    observer.observe(timeline);
+  }
+
+  // 3. GSAP 希瑪關懷大使吉祥物呼吸微浮動 (Organic Floating)
+  function initMascotFloat() {
+    const mascot = document.querySelector(".care-ambassador-mascot-img");
+    if (!mascot) return;
+
+    gsap.to(mascot, {
+      y: -10,
+      duration: 2.4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+  }
+
+  // 4. GSAP 畫廊 3 圖 (Gallery 3 Cards) 懸停光學微浮動
+  function initGalleryInteractive() {
+    const figures = document.querySelectorAll<HTMLElement>(".group-gallery-figure");
+    figures.forEach((figure) => {
+      figure.addEventListener("mouseenter", () => {
+        gsap.to(figure, {
+          y: -6,
+          scale: 1.02,
+          duration: 0.35,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      });
+
+      figure.addEventListener("mouseleave", () => {
+        gsap.to(figure, {
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.inOut",
+          overwrite: "auto",
+        });
+      });
+    });
+  }
+
+  function initGroupProfileInteractions() {
+    initAwardsMarqueeSwiper();
+    initPillarsAnimation();
+    initMascotFloat();
+    initGalleryInteractive();
+  }
+
+  document.addEventListener("DOMContentLoaded", initGroupProfileInteractions);
+  document.addEventListener("astro:page-load", initGroupProfileInteractions);
 </script>
