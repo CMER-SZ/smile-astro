@@ -645,9 +645,116 @@
 }
 
 // --------------------------------------------------------------------------
-// 6. 獲得獎項與權威認證 (.gp-awards-fullwidth-section)
+// 6. 獲得獎項與權威認證 (.gp-awards-section)
+// 100% 全寬波浪藍色背景 + 307px 懸浮圓形徽章 + 內部跑馬燈輪播 (Marquee Swiper)
 // --------------------------------------------------------------------------
-.gp-awards-fullwidth-section {
+.gp-awards-section {
   width: 100%;
-  box-sizing: border-box;
+  background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat center / 100% 100%;
+  padding: 230px 0 100px;
+  margin-top: 185px;
+  position: relative;
+
+  @media (max-width: 767px) {
+    background-image: url("https://statichk.cmermedical.com/imgs/2024/05/1306a3173c344666.png");
+    padding: 100px 0 50px;
+    margin-top: 125px;
+  }
+
+  &__badge {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 307px;
+    height: 307px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
+
+    @media (max-width: 767px) {
+      width: 171px;
+      height: 171px;
+      top: -85px;
+      box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
+    }
+  }
+
+  &__trophy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: clamp(38px, 4vw, 60px);
+      height: clamp(38px, 4vw, 60px);
+    }
+  }
+
+  &__title {
+    color: #4570b6;
+    text-align: center;
+    font-family: var(--font-hk);
+    font-size: clamp(18px, 2vw, 30px);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: clamp(2px, 0.6vw, 7.5px);
+    padding-bottom: clamp(10px, 1.5vw, 24px);
+    position: relative;
+    margin: 8px 0 0;
+
+    &::before {
+      content: "";
+      width: clamp(25px, 3vw, 40px);
+      height: 4px;
+      border-radius: 4px;
+      background: #a6e1d6;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+    }
+  }
+
+  .gp-awards-swiper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+
+    :global(.swiper-wrapper) {
+      display: flex;
+      align-items: center;
+      transition-timing-function: linear !important;
+    }
+
+    .gp-awards-item {
+      width: auto !important;
+      height: clamp(90px, 10vw, 140px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 clamp(10px, 1.5vw, 20px);
+      flex-shrink: 0;
+
+      .gp-awards-img {
+        max-width: clamp(80px, 9vw, 132px);
+        max-height: clamp(80px, 9vw, 132px);
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
 }

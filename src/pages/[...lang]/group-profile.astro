@@ -3,11 +3,10 @@
  * @Author: Antigravity AI
  * @Date: 2026-09-07
  * @FilePath: /src/pages/[...lang]/group-profile.astro
- * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (WebP山水畫無縫滾動背景 + 雙層環境輪播 + 首頁同款獲得獎項跑馬燈)
+ * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (100% 原版文案精確對齊 + 原版波浪視覺與跑馬燈結合)
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import GroupProfileEnvironment from "@/components/views/GroupProfileEnvironment.astro";
-import IndexAwards from "@/components/views/IndexAwards.astro";
 import { i18nPaths, useI18n, getLangFromUrl } from "@/i18n/utils";
 import "@/styles/pages/group-profile.scss";
 
@@ -19,6 +18,20 @@ export function getStaticPaths() {
 const { dict } = useI18n(Astro.url);
 const lang = getLangFromUrl(Astro.url);
 const isCn = lang === "zh-cn";
+
+// 榮獲權威獎項與國際認證徽章 (10 項)
+const awardBadges = [
+  { src: "https://statichk.cmermedical.com/imgs/2024/08/2dc8e2cd2f95150f.png", alt: "香港希瑪眼科榮譽認證 1 - 權威醫療機構認證" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/05/9fb7b59c6d134014.png", alt: "香港希瑪眼科榮譽認證 2 - 蔡司卓越手術中心" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/05/86e300274d8bc4ef.png", alt: "香港希瑪眼科榮譽認證 3 - 國際眼科品質認證" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/05/788333406bba2c0f.png", alt: "香港希瑪眼科榮譽認證 4 - 港股上市醫療集團殊榮" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/05/29433265c4f65fdf.png", alt: "香港希瑪眼科榮譽認證 5 - 大健康產業創新獎" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/05/402f4a682ca2394a.png", alt: "香港希瑪眼科榮譽認證 6 - 卓越醫療服務大獎" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/05/16b586d7718ac0a6.png", alt: "香港希瑪眼科榮譽認證 7 - STAAR Surgical 認證中心" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/07/8fab0d4a7e7ef4ac.png", alt: "香港希瑪眼科榮譽認證 8 - 傑出眼科醫療專科成就" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/08/a1b0a5b199d5b9a7.png", alt: "香港希瑪眼科榮譽認證 9 - 蔡司官方合作夥伴認證" },
+  { src: "https://statichk.cmermedical.com/imgs/2024/08/64ae764b38e2a2a7.png", alt: "香港希瑪眼科榮譽認證 10 - 國際屈光手術學會認證" },
+];
 ---
 
 <BaseLayout tdkKey="about">
@@ -243,7 +256,7 @@ const isCn = lang === "zh-cn";
       </div>
     </section>
 
-    {/* 4. 希瑪關懷大使專區 (與上方藍色波浪背景向上負外邊距重疊 -mt-10 lg:-mt-24 + 內嵌 Container 約束) */}
+    {/* 4. 希瑪關懷大使專區 (與上方藍色波浪背景向上負外邊距重疊 -mt-10 lg:-mt-24 + 100% 精確官方文案與藍色加粗高亮) */}
     <section class="gp-care-section relative z-10 -mt-10 lg:-mt-24 mb-16 md:mb-24" aria-labelledby="section-care-heading">
       <div class="container mx-auto px-4">
         <article class="cmer-care-card">
@@ -253,13 +266,11 @@ const isCn = lang === "zh-cn";
             </h3>
             <div class="cmer-care-card__desc">
               <p>
-                {isCn
-                  ? "为了让每位矫视者有更安心、放心的体验，希玛特别设立「希玛关怀大使」，提供一对一贴心的术前、术后支援。"
-                  : "為了讓每位矯視者有更安心、放心的體驗，希瑪特別設立「希瑪關懷大使」，提供一對一貼心的術前、術後支援。"}
+                {isCn ? "为了让每位矫视者有" : "為了讓每位矯視者有"}<span class="text-[#4570b6] font-bold">{isCn ? "更安心、放心" : "更安心、放心"}</span>{isCn ? "的体验，希玛特别设立「希玛关怀大使」，提供一对一贴心的" : "的體驗，希瑪特別設立「希瑪關懷大使」，提供一對一貼心的"}<span class="text-[#4570b6] font-bold">{isCn ? "术前、术后支持" : "術前、術後支援"}</span>{isCn ? "。" : "。"}
               </p>
               <p>
                 {isCn
-                  ? "「希玛关怀大使」会向矫视者主动提供矫视相关实用资讯, 解答各项查询, 致力提供最细致、关怀的跟进服务给予矫视者。"
+                  ? "「希玛关怀大使」会向矫视者主动提供矫视相关实用信息，解答各项查询，致力提供最细致、关怀的跟进服务给予矫视者。"
                   : "「希瑪關懷大使」會向矯視者主動提供矯視相關實用資訊, 解答各項查詢, 致力提供最細緻、關懷的跟進服務給予矯視者。"}
               </p>
             </div>
@@ -314,7 +325,7 @@ const isCn = lang === "zh-cn";
       </div>
     </section>
 
-    {/* 5. 中心環境雙層聯動輪播 (主圖 + 縮略圖同步切換 + 雙旗艦門市導航) */}
+    {/* 5. 中心環境雙層聯動輪播 (主圖 + 縮略圖同步切換 + 100% 官方說明文案) */}
     <section class="gp-env-section my-16 md:my-24" aria-labelledby="section-env-heading">
       <div class="container mx-auto px-4">
         <h2 id="section-env-heading" class="section-title-pill">
@@ -324,12 +335,130 @@ const isCn = lang === "zh-cn";
       </div>
     </section>
 
-    {/* 6. 獲得獎項與權威認證 (與首頁 100% 統一的高質感滿寬無縫自動巡遊跑馬燈) */}
-    <section class="gp-awards-fullwidth-section w-full mb-12 md:mb-20" aria-label="希瑪眼科榮譽與權威認證">
+    {/* 6. 獲得獎項與權威認證 (原版波浪背景與 307px 圓形 Trophy 徽章 + 內部獎項無縫跑馬燈 Swiper) */}
+    <section class="gp-awards-section w-full" aria-labelledby="section-awards-heading">
+      {/* 懸浮圓形 Trophy 標誌徽章 (正圓形居中懸浮) */}
+      <div class="gp-awards-section__badge">
+        <div class="gp-awards-section__trophy">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="60"
+            height="60"
+            viewBox="0 0 60 60"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M41.7002 48.5231H18.4277L19.5527 44.5781H40.7252L41.7002 48.5231Z"
+              stroke="#4570B6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M18.9301 26.5781C17.7032 26.4818 16.5578 25.9264 15.7223 25.0228C14.8869 24.1192 14.4229 22.9338 14.4229 21.7031C14.4229 20.4725 14.8869 19.2871 15.7223 18.3834C16.5578 17.4798 17.7032 16.9244 18.9301 16.8281"
+              stroke="#A6E1D6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M41.25 26.5781C42.4769 26.4818 43.6223 25.9264 44.4578 25.0228C45.2933 24.1192 45.7573 22.9338 45.7573 21.7031C45.7573 20.4725 45.2933 19.2871 44.4578 18.3834C43.6223 17.4798 42.4769 16.9244 41.25 16.8281"
+              stroke="#A6E1D6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M35.9103 22.2017C35.9835 22.128 36.0349 22.0354 36.0587 21.9343C36.0825 21.8331 36.0779 21.7274 36.0452 21.6287C36.0126 21.5301 35.9533 21.4424 35.8739 21.3754C35.7945 21.3084 35.6981 21.2647 35.5953 21.2492L32.4078 20.7917C32.3184 20.7775 32.2337 20.7422 32.1607 20.6887C32.0876 20.6352 32.0284 20.5651 31.9878 20.4842L30.5628 17.5967C30.5172 17.5033 30.4463 17.4245 30.3581 17.3694C30.2699 17.3144 30.1681 17.2852 30.0641 17.2852C29.9601 17.2852 29.8582 17.3144 29.7701 17.3694C29.6819 17.4245 29.6109 17.5033 29.5653 17.5967L28.1403 20.4842C28.0991 20.566 28.0386 20.6367 27.9642 20.6903C27.8898 20.7438 27.8036 20.7786 27.7128 20.7917L24.5253 21.2492C24.4217 21.2633 24.3241 21.3063 24.2438 21.3735C24.1635 21.4406 24.1039 21.5291 24.0718 21.6287C24.0396 21.7282 24.0363 21.8349 24.0621 21.9362C24.088 22.0376 24.1419 22.1297 24.2178 22.2017L26.5278 24.4517C26.5914 24.5158 26.6389 24.5941 26.6663 24.6802C26.6936 24.7663 26.7002 24.8576 26.6853 24.9467L26.1378 28.1192C26.12 28.2228 26.1316 28.3293 26.1712 28.4267C26.2109 28.524 26.277 28.6083 26.3621 28.67C26.4472 28.7317 26.5479 28.7683 26.6528 28.7757C26.7576 28.783 26.8624 28.7609 26.9553 28.7117L29.8053 27.2117C29.8855 27.1709 29.9741 27.1496 30.0641 27.1496C30.154 27.1496 30.2427 27.1709 30.3228 27.2117L33.1728 28.7117C33.2652 28.7619 33.37 28.7848 33.4749 28.7778C33.5799 28.7708 33.6806 28.7341 33.7655 28.672C33.8504 28.6099 33.9159 28.525 33.9543 28.4271C33.9928 28.3292 34.0027 28.2225 33.9828 28.1192L33.4428 24.9467C33.428 24.8576 33.4345 24.7663 33.4619 24.6802C33.4893 24.5941 33.5367 24.5158 33.6003 24.4517L35.9103 22.2017ZM31.8903 24.0017L32.3178 26.5142L30.0678 25.3292L27.8178 26.5142L28.2378 24.0017L26.4153 22.2242L28.9353 21.8567L30.0603 19.5692L31.1928 21.8567L33.7128 22.2242L31.8903 24.0017Z"
+              fill="#A6E1D6"
+            />
+            <path
+              d="M29.8949 13.1484H21.1799C20.5971 13.1484 20.0382 13.38 19.6261 13.7921C19.2139 14.2042 18.9824 14.7631 18.9824 15.3459V22.1484C18.9824 32.4384 24.7274 34.1484 26.3549 35.0709C27.9824 35.9934 28.0724 41.2509 24.6299 41.4384C21.1874 41.6259 21.5624 44.5509 21.5624 44.5509H30.9974"
+              stroke="#4570B6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M30.2324 13.1485H38.9399C39.2291 13.1475 39.5157 13.2036 39.7831 13.3136C40.0506 13.4236 40.2937 13.5853 40.4986 13.7894C40.7035 13.9936 40.866 14.2362 40.9769 14.5033C41.0878 14.7704 41.1449 15.0567 41.1449 15.3459V22.1485C41.1449 32.4385 35.3999 34.1485 33.7724 35.071C32.1449 35.9935 32.0474 41.251 35.4974 41.4385C38.9474 41.626 38.5574 44.551 38.5574 44.551H29.1299"
+              stroke="#4570B6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M26.3555 35.0703H33.773"
+              stroke="#4570B6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <h2 id="section-awards-heading" class="gp-awards-section__title">
+          {dict.about.group.award.title}
+        </h2>
+      </div>
+
+      {/* 獎項徽章無縫跑馬燈 Swiper (平滑循環展示) */}
       <div class="container mx-auto px-4">
-        <IndexAwards />
+        <div class="swiper gp-awards-swiper" id="gpAwardsSwiper">
+          <div class="swiper-wrapper">
+            {[...awardBadges, ...awardBadges].map((badge) => (
+              <div class="swiper-slide gp-awards-item">
+                <img
+                  src={badge.src}
+                  alt={badge.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width="132"
+                  height="132"
+                  class="gp-awards-img"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 </BaseLayout>
+
+<script>
+  import Swiper from "swiper";
+  import { Autoplay, FreeMode } from "swiper/modules";
+  import "swiper/css";
+
+  function initGroupAwardsSwiper() {
+    const el = document.getElementById("gpAwardsSwiper");
+    if (!el) return;
+    if ((el as any).swiper) {
+      (el as any).swiper.destroy(true, true);
+    }
+
+    new Swiper(el, {
+      modules: [Autoplay, FreeMode],
+      loop: true,
+      slidesPerView: "auto",
+      spaceBetween: 20,
+      speed: 4000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      freeMode: {
+        enabled: true,
+        momentum: true,
+        momentumRatio: 1.2,
+      },
+      allowTouchMove: true,
+      grabCursor: true,
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initGroupAwardsSwiper);
+  document.addEventListener("astro:page-load", initGroupAwardsSwiper);
+</script>
