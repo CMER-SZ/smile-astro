@@ -9,7 +9,7 @@
   text-align: center;
   font-family: var(--font-hk);
   font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.3;
   letter-spacing: clamp(3px, 0.6vw, 7.5px);
   padding-bottom: 20px;
@@ -44,15 +44,15 @@
 // --------------------------------------------------------------------------
 // 1. 頂部 Hero Banner (高度鎖定最大 300px + 貼邊對齊)
 // --------------------------------------------------------------------------
-.gp-banner-section {
+.group-hero-banner {
   width: 100%;
 }
 
-.gp-banner-card {
+.group-hero-card {
   width: 100%;
   box-sizing: border-box;
 
-  &__content {
+  &-content {
     background: url("https://statichk.cmermedical.com/smile/e90f833293170c68.webp") no-repeat;
     background-size: cover;
     background-position: center;
@@ -72,57 +72,57 @@
       background-image: url("https://statichk.cmermedical.com/imgs/2024/05/eb36818dd076c639.png");
     }
   }
+}
 
-  &__title {
-    color: #fff;
-    font-family: var(--font-hk);
-    font-size: clamp(22px, 2.5vw, 30px);
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: clamp(2px, 0.6vw, 7.5px);
-    margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  }
+.group-hero-title {
+  color: #fff;
+  font-family: var(--font-hk);
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: clamp(2px, 0.6vw, 7.5px);
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
 
-  &__subtitle {
-    color: #fff;
-    font-family: var(--font-en);
-    font-size: clamp(13px, 1.2vw, 15px);
-    font-weight: 600;
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-    margin-top: 2px;
-    margin-bottom: 0;
-    opacity: 0.95;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  }
+.group-hero-subtitle {
+  color: #fff;
+  font-family: var(--font-en);
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  margin-bottom: 0;
+  opacity: 0.95;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 // --------------------------------------------------------------------------
-// 2. 集團簡介與 C-M-E-R 理念板塊 (.gp-philosophy-section)
-// WebP 山水畫 X 軸無縫循環背景動畫 (刪除 background-size: auto 100%，z-index: 3)
+// 2. 集團簡介與 C-M-E-R 理念板塊 (.group-philosophy-section)
+// WebP 山水畫 X 軸無縫循環背景動畫 (z-index: 3)
 // --------------------------------------------------------------------------
-.gp-philosophy-section {
+.group-philosophy-section {
   width: 100%;
   position: relative;
   overflow: hidden;
   padding-bottom: 20px;
   z-index: 3;
+}
 
-  &__landscape-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("/assets/images/group-profile/philosophy-landscape-bg.webp");
-    background-repeat: repeat-x;
-    background-position: 0 bottom;
-    animation: gp-landscape-scroll 60s linear infinite;
-    will-change: background-position;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.95;
-  }
+.group-landscape-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/images/group-profile/philosophy-landscape-bg.webp");
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  animation: gp-landscape-scroll 60s linear infinite;
+  will-change: background-position;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
 }
 
 @keyframes gp-landscape-scroll {
@@ -135,7 +135,7 @@
   }
 }
 
-.gp-philosophy-card {
+.group-philosophy-card {
   width: 100%;
   background: linear-gradient(
     180deg,
@@ -154,85 +154,85 @@
 }
 
 // 門市網絡
-.network-info-box {
+.group-network-info {
   text-align: center;
   margin-top: clamp(20px, 3vw, 36px);
+}
 
-  &__title {
-    color: #4570b6;
-    font-family: var(--font-hk);
-    font-size: clamp(16px, 1.5vw, 20px);
-    font-weight: 600;
-    line-height: 1.5;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    margin-bottom: 8px;
+.group-network-title {
+  color: #4570b6;
+  font-family: var(--font-hk);
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
+  margin-bottom: 8px;
+}
+
+.group-network-desc {
+  color: #6d6e71;
+  font-family: var(--font-hk);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.group-network-link-row {
+  color: #6d6e71;
+  font-family: var(--font-hk);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
+  margin-top: 8px;
+
+  span {
+    margin-right: 6px;
   }
+}
 
-  &__desc {
-    color: #6d6e71;
-    font-family: var(--font-hk);
-    font-size: clamp(14px, 1.2vw, 20px);
-    font-weight: 400;
-    line-height: 1.8;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    max-width: 960px;
-    margin: 0 auto;
-  }
+.group-network-link {
+  text-decoration: none;
+  color: #4570b6;
+  font-family: var(--font-hk);
+  font-weight: 700;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
+  transition: opacity 0.3s;
 
-  &__link-row {
-    color: #6d6e71;
-    font-family: var(--font-hk);
-    font-size: clamp(14px, 1.2vw, 20px);
-    font-weight: 400;
-    line-height: 1.8;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    margin-top: 8px;
-
-    span {
-      margin-right: 6px;
-    }
-  }
-
-  &__link {
-    text-decoration: none;
-    color: #4570b6;
-    font-family: var(--font-hk);
-    font-weight: 600;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    transition: opacity 0.3s;
-
-    &:hover {
-      opacity: 0.8;
-      text-decoration: underline;
-    }
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
   }
 }
 
 // 理念導言
-.philosophy-lead-box {
+.group-philosophy-intro {
   text-align: center;
   margin-top: clamp(20px, 3vw, 36px);
+}
 
-  &__title {
-    color: #4570b6;
-    font-family: var(--font-hk);
-    font-size: clamp(16px, 1.5vw, 20px);
-    font-weight: 600;
-    line-height: 1.5;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    margin-bottom: 8px;
-  }
+.group-philosophy-intro-title {
+  color: #4570b6;
+  font-family: var(--font-hk);
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
+  margin-bottom: 8px;
+}
 
-  &__desc {
-    color: #6d6e71;
-    font-family: var(--font-hk);
-    font-size: clamp(14px, 1.2vw, 20px);
-    font-weight: 400;
-    line-height: 1.8;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    max-width: 960px;
-    margin: 0 auto;
-  }
+.group-philosophy-intro-desc {
+  color: #6d6e71;
+  font-family: var(--font-hk);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: clamp(1px, 0.4vw, 6px);
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 // C-M-E-R 時間軸
@@ -253,21 +253,21 @@
     background: linear-gradient(to bottom, #4570b6, #81dbec);
   }
 
-  &__item {
+  &-item {
     display: flex;
     align-items: center;
     margin-bottom: clamp(16px, 2vw, 24px);
     gap: clamp(12px, 2vw, 24px);
 
-    &--vertical {
+    &-vertical {
       margin-top: clamp(20px, 3vw, 32px);
       margin-bottom: 0;
 
-      .cmer-timeline__vertical-badge {
+      .cmer-vertical-badge {
         color: #4570b6;
         font-family: var(--font-hk);
         font-size: clamp(26px, 3vw, 38px);
-        font-weight: 700;
+        font-weight: 800;
         min-width: clamp(48px, 5vw, 70px);
         display: flex;
         justify-content: center;
@@ -279,12 +279,12 @@
         flex-shrink: 0;
       }
 
-      .cmer-timeline__quote {
+      .cmer-timeline-quote {
         color: #4570b6;
         text-align: justify;
         font-family: var(--font-hk);
         font-size: clamp(14px, 1.2vw, 20px);
-        font-weight: 500;
+        font-weight: 600;
         line-height: 1.8;
         letter-spacing: clamp(1px, 0.4vw, 6px);
         margin: 0;
@@ -292,11 +292,11 @@
     }
   }
 
-  &__letter {
+  &-letter {
     color: #4570b6;
     font-family: var(--font-hk);
     font-size: clamp(34px, 4vw, 50px);
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1;
     letter-spacing: clamp(2px, 0.4vw, 5px);
     min-width: clamp(48px, 5vw, 70px);
@@ -306,25 +306,25 @@
     flex-shrink: 0;
   }
 
-  &__body {
+  &-body {
     flex: 1;
   }
 
-  &__title {
+  &-title {
     color: #4570b6;
     font-family: var(--font-hk);
     font-size: clamp(14px, 1.3vw, 20px);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.5;
     letter-spacing: clamp(1px, 0.4vw, 6px);
     margin: 0;
   }
 
-  &__subtitle {
+  &-subtitle {
     color: #4570b6;
     font-family: var(--font-en);
     font-size: clamp(12px, 1.1vw, 15px);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.5;
     letter-spacing: 0.5px;
     margin: 2px 0 0;
@@ -333,22 +333,22 @@
 }
 
 // 榮譽列表
-.cmer-honors {
+.group-honors {
   margin-top: clamp(24px, 3vw, 38px);
   padding-top: clamp(16px, 2vw, 24px);
   border-top: 1px dashed rgba(69, 112, 182, 0.2);
 
-  &__title {
+  &-title {
     color: #4570b6;
     font-family: var(--font-hk);
     font-size: clamp(14px, 1.3vw, 20px);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.6;
     letter-spacing: clamp(1px, 0.4vw, 6px);
     margin-bottom: 10px;
   }
 
-  &__list {
+  &-list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -357,11 +357,11 @@
     gap: 8px;
   }
 
-  &__item {
+  &-item {
     color: #4570b6;
     font-family: var(--font-hk);
     font-size: clamp(13px, 1.1vw, 20px);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.8;
     letter-spacing: clamp(1px, 0.4vw, 6px);
     margin: 0;
@@ -380,7 +380,7 @@
 }
 
 // 畫廊 3 圖 (嚴格限制原生尺寸 344 × 194 px + 無損 WebP)
-.gallery-grid {
+.group-gallery-grid {
   margin-top: clamp(30px, 4vw, 40px);
   display: flex;
   justify-content: center;
@@ -389,129 +389,130 @@
   gap: clamp(16px, 2vw, 24px);
   width: 100%;
   box-sizing: border-box;
+}
 
-  &__figure {
-    margin: 0;
-    border-radius: clamp(18px, 2.5vw, 29px);
-    overflow: hidden;
-    background: #f0f4f8;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    max-width: 344px;
-    max-height: 194px;
-    aspect-ratio: 344 / 194;
-    flex-shrink: 0;
-  }
+.group-gallery-figure {
+  margin: 0;
+  border-radius: clamp(18px, 2.5vw, 29px);
+  overflow: hidden;
+  background: #f0f4f8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 344px;
+  max-height: 194px;
+  aspect-ratio: 344 / 194;
+  flex-shrink: 0;
+}
 
-  &__img {
-    width: 100%;
-    height: 100%;
-    max-width: 344px;
-    max-height: 194px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
+.group-gallery-img {
+  width: 100%;
+  height: 100%;
+  max-width: 344px;
+  max-height: 194px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 
-    &:hover {
-      transform: scale(1.05);
-    }
+  &:hover {
+    transform: scale(1.05);
   }
 }
 
 // --------------------------------------------------------------------------
-// 3. 微笑矯視中心簡介 (.gp-center-section)
-// 100% 全寬波浪藍色背景 + 正圓形懸浮徽章 (top: -150px, z-index: 1, padding: 180px 0, p fontweight 400)
+// 3. 微笑矯視中心簡介 (.center-intro-section)
+// 100% 全寬波浪藍色背景 + 正圓形懸浮徽章 (top: -200px, z-index: 1, padding: 130px 0, p fontweight 400)
 // --------------------------------------------------------------------------
-.gp-center-section {
+.center-intro-section {
   width: 100%;
   background: url("https://statichk.cmermedical.com/imgs/2024/05/e804c18e78e3c9c8.png") no-repeat center / 100% 100%;
-  padding: 180px 0;
-  margin-top: 150px;
+  padding: 130px 0;
+  margin-top: 200px;
   position: relative;
 
   @media (max-width: 767px) {
     background-image: url("https://statichk.cmermedical.com/imgs/2024/05/3667677d419ec9a0.png");
-    padding: 120px 0 50px;
-    margin-top: 100px;
+    padding: 90px 0 40px;
+    margin-top: 110px;
   }
+}
 
-  &__badge {
-    position: absolute;
-    top: -150px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 307px;
-    height: 307px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
-    z-index: 1;
+.center-intro-badge {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 307px;
+  height: 307px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
+  z-index: 1;
 
-    @media (max-width: 767px) {
-      width: 171px;
-      height: 171px;
-      top: -85px;
-      padding-top: 10px;
-      box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
-    }
+  @media (max-width: 767px) {
+    width: 171px;
+    height: 171px;
+    top: -100px;
+    padding-top: 10px;
+    box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
   }
+}
 
-  &__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.center-intro-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    svg {
-      width: clamp(52px, 6vw, 80px);
-      height: auto;
-    }
+  svg {
+    width: clamp(52px, 6vw, 80px);
+    height: auto;
   }
+}
 
-  &__title {
-    color: #4570b6;
+.center-intro-title {
+  color: #4570b6;
+  text-align: center;
+  font-family: var(--font-hk);
+  font-size: clamp(18px, 2vw, 30px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: clamp(2px, 0.6vw, 7.5px);
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.center-intro-content {
+  max-width: 980px;
+  margin: 0 auto;
+
+  p {
+    margin-bottom: clamp(16px, 2.5vw, 35px);
+    color: #6d6e71;
     text-align: center;
     font-family: var(--font-hk);
-    font-size: clamp(18px, 2vw, 30px);
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: clamp(2px, 0.6vw, 7.5px);
-    margin: 8px 0 0;
-  }
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: clamp(1px, 0.4vw, 6px);
 
-  &__content {
-    max-width: 980px;
-    margin: 0 auto;
-
-    p {
-      margin-bottom: clamp(16px, 2.5vw, 35px);
-      color: #6d6e71;
-      text-align: center;
-      font-family: var(--font-hk);
-      font-size: clamp(14px, 1.3vw, 20px);
-      font-weight: 400;
-      line-height: 1.8;
-      letter-spacing: clamp(1px, 0.4vw, 6px);
-
-      &:last-child {
-        margin-bottom: 0;
-      }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
 
 // --------------------------------------------------------------------------
-// 4. 希瑪關懷大使專區 (.cmer-care-card)
+// 4. 希瑪關懷大使專區 (.care-ambassador-section)
 // 與藍色波浪背景向上負外邊距重疊 -mt-10 lg:-mt-24
 // --------------------------------------------------------------------------
-.gp-care-section {
+.care-ambassador-section {
   width: 100%;
 }
 
-.cmer-care-card {
+.care-ambassador-card {
   width: 100%;
   border: 1px solid #ffffffed;
   box-shadow: 0 0 0 1px rgba(187, 215, 255, 0.35) inset, 0 1px 1px #d9e8ffe5, 0 10px 30px rgba(69, 112, 182, 0.08);
@@ -536,107 +537,102 @@
   @media (min-width: 1024px) {
     flex-direction: row;
   }
+}
 
-  &__body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 2vw, 24px);
-  }
+.care-ambassador-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 24px);
+}
 
-  &__title {
-    color: #4570b6;
-    font-family: var(--font-hk);
-    font-size: clamp(20px, 2.4vw, 30px);
-    font-weight: 800;
-    line-height: 1.3;
-    letter-spacing: 2px;
-    margin: 0;
-  }
+.care-ambassador-title {
+  color: #4570b6;
+  font-family: var(--font-hk);
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: 2px;
+  margin: 0;
+}
 
-  &__desc {
-    color: #595959;
-    font-family: var(--font-hk);
-    font-size: clamp(14px, 1.2vw, 20px);
-    font-weight: 400;
-    line-height: 1.8;
-    letter-spacing: 2px;
+.care-ambassador-desc {
+  color: #595959;
+  font-family: var(--font-hk);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 2px;
 
-    p {
-      margin-bottom: 8px;
+  p {
+    margin-bottom: 8px;
 
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .text-highlight {
-      color: #4570b6;
-      font-weight: 800;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
+}
 
-  &__whatsapp-btn {
-    display: inline-grid;
+.care-ambassador-whatsapp-btn {
+  display: inline-grid;
+  grid-template-areas:
+    "title title"
+    "icon desc";
+  column-gap: 12px;
+  row-gap: 0;
+  align-items: center;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform 0.3s ease;
+
+  @media (min-width: 640px) {
     grid-template-areas:
-      "title title"
+      "icon title"
       "icon desc";
-    column-gap: 12px;
-    row-gap: 0;
-    align-items: center;
-    text-decoration: none;
-    width: fit-content;
-    transition: transform 0.3s ease;
-
-    @media (min-width: 640px) {
-      grid-template-areas:
-        "icon title"
-        "icon desc";
-      column-gap: 16px;
-    }
-
-    &:hover {
-      transform: translateY(-2px);
-    }
+    column-gap: 16px;
   }
 
-  &__whatsapp-icon {
-    grid-area: icon;
-    width: clamp(48px, 5vw, 64px);
-    height: clamp(48px, 5vw, 64px);
+  &:hover {
+    transform: translateY(-2px);
   }
+}
 
-  &__whatsapp-texts {
-    display: contents;
-  }
+.care-ambassador-whatsapp-icon {
+  grid-area: icon;
+  width: clamp(48px, 5vw, 64px);
+  height: clamp(48px, 5vw, 64px);
+}
 
-  &__whatsapp-label {
-    grid-area: title;
-    color: #4caf51;
-    font-family: var(--font-hk);
-    font-weight: 800;
-    letter-spacing: 2px;
-    font-size: clamp(15px, 1.3vw, 20px);
-    line-height: 1.4;
-    margin: 0;
-  }
+.care-ambassador-whatsapp-texts {
+  display: contents;
+}
 
-  &__whatsapp-number {
-    grid-area: desc;
-    color: #4caf51;
-    font-family: var(--font-en);
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    font-size: clamp(20px, 2vw, 28px);
-    line-height: 1.3;
-    margin: 0;
-  }
+.care-ambassador-whatsapp-label {
+  grid-area: title;
+  color: #4caf51;
+  font-family: var(--font-hk);
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: clamp(15px, 1.3vw, 20px);
+  line-height: 1.4;
+  margin: 0;
+}
 
-  &__mascot {
-    flex-shrink: 0;
-  }
+.care-ambassador-whatsapp-number {
+  grid-area: desc;
+  color: #4caf51;
+  font-family: var(--font-en);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.3;
+  margin: 0;
+}
 
-  &__mascot-img {
+.care-ambassador-mascot {
+  flex-shrink: 0;
+
+  &-img {
     max-height: clamp(180px, 22vw, 352px);
     width: auto;
     object-fit: contain;
@@ -644,18 +640,18 @@
 }
 
 // --------------------------------------------------------------------------
-// 5. 中心環境輪播展示 (.gp-env-section)
+// 5. 中心環境輪播展示 (.center-env-section)
 // --------------------------------------------------------------------------
-.gp-env-section {
+.center-env-section {
   width: 100%;
   box-sizing: border-box;
 }
 
 // --------------------------------------------------------------------------
-// 6. 獲得獎項與權威認證 (.gp-awards-section)
+// 6. 獲得獎項與權威認證 (.awards-recognition-section)
 // 100% 全寬波浪藍色背景 + 307px 懸浮圓形徽章 + 內部跑馬燈輪播 (Marquee Swiper)
 // --------------------------------------------------------------------------
-.gp-awards-section {
+.awards-recognition-section {
   width: 100%;
   background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat center / 100% 100%;
   padding: 230px 0 100px;
@@ -667,134 +663,134 @@
     padding: 100px 0 50px;
     margin-top: 125px;
   }
+}
 
-  &__badge {
+.awards-recognition-badge {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 307px;
+  height: 307px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
+
+  @media (max-width: 767px) {
+    width: 171px;
+    height: 171px;
+    top: -85px;
+    box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
+  }
+}
+
+.awards-recognition-trophy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: clamp(38px, 4vw, 60px);
+    height: clamp(38px, 4vw, 60px);
+  }
+}
+
+.awards-recognition-title {
+  color: #4570b6;
+  text-align: center;
+  font-family: var(--font-hk);
+  font-size: clamp(18px, 2vw, 30px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: clamp(2px, 0.6vw, 7.5px);
+  padding-bottom: clamp(10px, 1.5vw, 24px);
+  position: relative;
+  margin: 8px 0 0;
+
+  &::before {
+    content: "";
+    width: clamp(25px, 3vw, 40px);
+    height: 4px;
+    border-radius: 4px;
+    background: #a6e1d6;
     position: absolute;
-    top: -150px;
     left: 50%;
     transform: translateX(-50%);
+    bottom: 0;
+  }
+}
+
+.awards-marquee-swiper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  :global(.swiper-wrapper) {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 307px;
-    height: 307px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
+    transition-timing-function: linear !important;
+  }
+}
 
-    @media (max-width: 767px) {
-      width: 171px;
-      height: 171px;
-      top: -85px;
-      box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
-    }
+.awards-marquee-item {
+  width: auto !important;
+  height: clamp(100px, 9vw, 150px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(14px, 1.5vw, 24px);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+
+  /* 獎項金牌高光微掃光反射 (Shimmer Light Sweep) */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
   }
 
-  &__trophy {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &:hover {
+    .awards-marquee-img {
+      transform: scale(1.08);
+    }
 
-    svg {
-      width: clamp(38px, 4vw, 60px);
-      height: clamp(38px, 4vw, 60px);
+    &::after {
+      animation: gp-award-shimmer 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
   }
+}
 
-  &__title {
-    color: #4570b6;
-    text-align: center;
-    font-family: var(--font-hk);
-    font-size: clamp(18px, 2vw, 30px);
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: clamp(2px, 0.6vw, 7.5px);
-    padding-bottom: clamp(10px, 1.5vw, 24px);
-    position: relative;
-    margin: 8px 0 0;
-
-    &::before {
-      content: "";
-      width: clamp(25px, 3vw, 40px);
-      height: 4px;
-      border-radius: 4px;
-      background: #a6e1d6;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
-    }
-  }
-
-  .gp-awards-swiper {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    cursor: grab;
-    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-
-    &:active {
-      cursor: grabbing;
-    }
-
-    :global(.swiper-wrapper) {
-      display: flex;
-      align-items: center;
-      transition-timing-function: linear !important;
-    }
-
-    .gp-awards-item {
-      width: auto !important;
-      height: clamp(100px, 9vw, 150px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 clamp(14px, 1.5vw, 24px);
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-
-      .gp-awards-img {
-        max-width: 140px;
-        max-height: clamp(90px, 7vw, 120px);
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        filter: none !important;
-        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-
-      /* 獎項金牌高光微掃光反射 (Shimmer Light Sweep) */
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -150%;
-        width: 80%;
-        height: 100%;
-        background: linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0) 0%,
-          rgba(255, 255, 255, 0.45) 50%,
-          rgba(255, 255, 255, 0) 100%
-        );
-        transform: skewX(-25deg);
-        pointer-events: none;
-      }
-
-      &:hover {
-        .gp-awards-img {
-          transform: scale(1.08);
-        }
-
-        &::after {
-          animation: gp-award-shimmer 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-      }
-    }
-  }
+.awards-marquee-img {
+  max-width: 140px;
+  max-height: clamp(90px, 7vw, 120px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: none !important;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @keyframes gp-award-shimmer {

@@ -3,7 +3,7 @@
  * @Author: Antigravity AI
  * @Date: 2026-09-07
  * @FilePath: /src/pages/[...lang]/group-profile.astro
- * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (100% 原版文案精確對齊 + 原版波浪視覺與跑馬燈結合)
+ * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (100% 原版文案精確對齊 + 現代化高語義化結構與跑馬燈結合)
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import GroupProfileEnvironment from "@/components/views/GroupProfileEnvironment.astro";
@@ -38,26 +38,26 @@ const awardBadges = [
   <main id="main-content" class="group-profile-page w-full overflow-hidden">
     
     {/* 1. 頂部 Hero Banner (Container 寬度約束 + 最大高度 300px) */}
-    <section class="gp-banner-section py-4 md:py-8" aria-label="集團簡介導言區">
+    <section class="group-hero-banner py-4 md:py-8" aria-label="集團簡介導言區">
       <div class="container mx-auto px-4">
-        <header class="gp-banner-card">
-          <div class="gp-banner-card__content">
-            <h1 class="gp-banner-card__title">
+        <header class="group-hero-card">
+          <div class="group-hero-card-content">
+            <h1 class="group-hero-title">
               {dict.about.group.intro.title}
             </h1>
-            <p class="gp-banner-card__subtitle">Group Profile</p>
+            <p class="group-hero-subtitle">Group Profile</p>
           </div>
         </header>
       </div>
     </section>
 
     {/* 2. 集團簡介與 C-M-E-R 經營理念板塊 (WebP 山水畫 X 軸無縫循環背景 + 內嵌 Container 卡片) */}
-    <section class="gp-philosophy-section w-full" aria-labelledby="section-group-heading">
+    <section class="group-philosophy-section w-full" aria-labelledby="section-group-heading">
       {/* 獨立的山水畫無縫滾動背景圖層 */}
-      <div class="gp-philosophy-section__landscape-bg" aria-hidden="true"></div>
+      <div class="group-landscape-bg" aria-hidden="true"></div>
 
       <div class="container mx-auto px-4 relative z-10">
-        <article class="gp-philosophy-card">
+        <article class="group-philosophy-card">
           {/* 標題與引言 */}
           <header class="text-center">
             <h2 id="section-group-heading" class="section-title-pill">
@@ -69,20 +69,20 @@ const awardBadges = [
           </header>
 
           {/* 門市網絡與官方鏈接 */}
-          <div class="network-info-box">
-            <h3 class="network-info-box__title">
+          <div class="group-network-info">
+            <h3 class="group-network-title">
               {dict.about.group.eye.title}
             </h3>
-            <p class="network-info-box__desc">
+            <p class="group-network-desc">
               {dict.about.group.eye.desc}
             </p>
-            <div class="network-info-box__link-row">
+            <div class="group-network-link-row">
               <span>{dict.about.group.eye.more}</span>
               <a
                 href="https://www.hkcmereye.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="network-info-box__link"
+                class="group-network-link"
                 aria-label="瀏覽香港希瑪眼科中心官方網站 (在新視窗中開啟)"
               >
                 www.hkcmereye.com
@@ -91,11 +91,11 @@ const awardBadges = [
           </div>
 
           {/* 經營理念導言 */}
-          <div class="philosophy-lead-box">
-            <h3 class="philosophy-lead-box__title">
+          <div class="group-philosophy-intro">
+            <h3 class="group-philosophy-intro-title">
               {dict.about.group.philosophy.title}
             </h3>
-            <p class="philosophy-lead-box__desc">
+            <p class="group-philosophy-intro-desc">
               {dict.about.group.philosophy.desc}
             </p>
           </div>
@@ -103,65 +103,65 @@ const awardBadges = [
           {/* C-M-E-R 核心理念條目 (垂直指示軸) */}
           <div class="cmer-timeline" role="list">
             {/* C */}
-            <article class="cmer-timeline__item" role="listitem">
-              <div class="cmer-timeline__letter" aria-hidden="true">C</div>
-              <div class="cmer-timeline__body">
-                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.c}</h4>
-                <p class="cmer-timeline__subtitle">Professional Clinical Services</p>
+            <article class="cmer-timeline-item" role="listitem">
+              <div class="cmer-timeline-letter" aria-hidden="true">C</div>
+              <div class="cmer-timeline-body">
+                <h4 class="cmer-timeline-title">{dict.about.group.philosophy.c}</h4>
+                <p class="cmer-timeline-subtitle">Professional Clinical Services</p>
               </div>
             </article>
 
             {/* M */}
-            <article class="cmer-timeline__item" role="listitem">
-              <div class="cmer-timeline__letter" aria-hidden="true">M</div>
-              <div class="cmer-timeline__body">
-                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.m}</h4>
-                <p class="cmer-timeline__subtitle">Modern Management</p>
+            <article class="cmer-timeline-item" role="listitem">
+              <div class="cmer-timeline-letter" aria-hidden="true">M</div>
+              <div class="cmer-timeline-body">
+                <h4 class="cmer-timeline-title">{dict.about.group.philosophy.m}</h4>
+                <p class="cmer-timeline-subtitle">Modern Management</p>
               </div>
             </article>
 
             {/* E */}
-            <article class="cmer-timeline__item" role="listitem">
-              <div class="cmer-timeline__letter" aria-hidden="true">E</div>
-              <div class="cmer-timeline__body">
-                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.e}</h4>
-                <p class="cmer-timeline__subtitle">Quality Education</p>
+            <article class="cmer-timeline-item" role="listitem">
+              <div class="cmer-timeline-letter" aria-hidden="true">E</div>
+              <div class="cmer-timeline-body">
+                <h4 class="cmer-timeline-title">{dict.about.group.philosophy.e}</h4>
+                <p class="cmer-timeline-subtitle">Quality Education</p>
               </div>
             </article>
 
             {/* R */}
-            <article class="cmer-timeline__item" role="listitem">
-              <div class="cmer-timeline__letter" aria-hidden="true">R</div>
-              <div class="cmer-timeline__body">
-                <h4 class="cmer-timeline__title">{dict.about.group.philosophy.r}</h4>
-                <p class="cmer-timeline__subtitle">Pioneering Research</p>
+            <article class="cmer-timeline-item" role="listitem">
+              <div class="cmer-timeline-letter" aria-hidden="true">R</div>
+              <div class="cmer-timeline-body">
+                <h4 class="cmer-timeline-title">{dict.about.group.philosophy.r}</h4>
+                <p class="cmer-timeline-subtitle">Pioneering Research</p>
               </div>
             </article>
 
             {/* 豎排「希瑪」理念寓意 */}
-            <article class="cmer-timeline__item cmer-timeline__item--vertical" role="listitem">
-              <div class="cmer-timeline__vertical-badge" aria-hidden="true">希瑪</div>
-              <div class="cmer-timeline__body">
-                <p class="cmer-timeline__quote">
+            <article class="cmer-timeline-item cmer-timeline-item-vertical" role="listitem">
+              <div class="cmer-vertical-badge" aria-hidden="true">希瑪</div>
+              <div class="cmer-timeline-body">
+                <p class="cmer-timeline-quote">
                   {dict.about.group.philosophy.cmer}
                 </p>
               </div>
             </article>
 
             {/* 榮譽殊榮清單 */}
-            <aside class="cmer-honors" aria-label="希瑪眼科醫療技術與服務榮譽">
-              <h4 class="cmer-honors__title">{dict.about.group.honor.title}</h4>
-              <ul class="cmer-honors__list">
+            <aside class="group-honors" aria-label="希瑪眼科醫療技術與服務榮譽">
+              <h3 class="group-honors-title">{dict.about.group.honor.title}</h3>
+              <ul class="group-honors-list">
                 {dict.about.group.honor.list.map((item: string) => (
-                  <li class="cmer-honors__item">{item}</li>
+                  <li class="group-honors-item">{item}</li>
                 ))}
               </ul>
             </aside>
           </div>
 
           {/* 3 張精選環境與醫療團隊畫廊 (無損 WebP + 嚴格限制最大尺寸 344 × 194 px) */}
-          <div class="gallery-grid">
-            <figure class="gallery-grid__figure">
+          <div class="group-gallery-grid">
+            <figure class="group-gallery-figure">
               <img
                 src="/assets/images/group-profile/gallery-01.webp"
                 alt={isCn ? "香港希玛眼科医疗集团中环眼科中心现代化门市环境" : "香港希瑪眼科醫療集團中環眼科中心現代化門市環境"}
@@ -169,11 +169,11 @@ const awardBadges = [
                 decoding="async"
                 width="344"
                 height="194"
-                class="gallery-grid__img"
+                class="group-gallery-img"
               />
               <figcaption class="sr-only">中環眼科中心接待處與等候空間</figcaption>
             </figure>
-            <figure class="gallery-grid__figure">
+            <figure class="group-gallery-figure">
               <img
                 src="/assets/images/group-profile/gallery-02.webp"
                 alt={isCn ? "香港希玛国际眼科医疗团队与眼科专科医生阵容" : "香港希瑪國際眼科醫療團隊與眼科專科醫生陣容"}
@@ -181,11 +181,11 @@ const awardBadges = [
                 decoding="async"
                 width="344"
                 height="194"
-                class="gallery-grid__img"
+                class="group-gallery-img"
               />
               <figcaption class="sr-only">林順潮教授領銜之眼科專科醫療團隊</figcaption>
             </figure>
-            <figure class="gallery-grid__figure">
+            <figure class="group-gallery-figure">
               <img
                 src="/assets/images/group-profile/gallery-03.webp"
                 alt={isCn ? "香港希玛微笑矫视中心无菌手术室与舒适候诊大堂" : "香港希瑪微笑矯視中心無菌手術室與舒適候診大堂"}
@@ -193,7 +193,7 @@ const awardBadges = [
                 decoding="async"
                 width="344"
                 height="194"
-                class="gallery-grid__img"
+                class="group-gallery-img"
               />
               <figcaption class="sr-only">國際高規格全飛秒激光無菌手術室與諮詢空間</figcaption>
             </figure>
@@ -203,10 +203,10 @@ const awardBadges = [
     </section>
 
     {/* 3. 微笑矯視中心簡介 (100% 全寬波浪藍色背景 + 懸浮 307px 圓形 Logo 徽章 + 內嵌 Container 約束) */}
-    <section class="gp-center-section w-full" aria-labelledby="section-center-heading">
-      {/* 懸浮圓形標誌徽章 (正圓形居中懸浮) */}
-      <div class="gp-center-section__badge">
-        <div class="gp-center-section__logo">
+    <section class="center-intro-section w-full" aria-labelledby="section-center-heading">
+      {/* 懸浮圓形標誌徽章 (正圓形居中懸浮，top: -200px) */}
+      <div class="center-intro-badge">
+        <div class="center-intro-logo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="80"
@@ -245,26 +245,26 @@ const awardBadges = [
             />
           </svg>
         </div>
-        <h2 id="section-center-heading" class="gp-center-section__title">
+        <h2 id="section-center-heading" class="center-intro-title">
           {dict.about.group.center.title}
         </h2>
       </div>
 
       {/* 中心主體描述文案 (Container 寬度約束 + 精緻排版) */}
       <div class="container mx-auto px-4">
-        <div class="gp-center-section__content" set:html={dict.about.group.center.desc} />
+        <div class="center-intro-content" set:html={dict.about.group.center.desc} />
       </div>
     </section>
 
     {/* 4. 希瑪關懷大使專區 (與上方藍色波浪背景向上負外邊距重疊 -mt-10 lg:-mt-24 + 100% 精確官方文案與藍色加粗高亮) */}
-    <section class="gp-care-section relative z-10 -mt-10 lg:-mt-24 mb-16 md:mb-24" aria-labelledby="section-care-heading">
+    <section class="care-ambassador-section relative z-10 -mt-10 lg:-mt-24 mb-16 md:mb-24" aria-labelledby="section-care-heading">
       <div class="container mx-auto px-4">
-        <article class="cmer-care-card">
-          <div class="cmer-care-card__body">
-            <h2 id="section-care-heading" class="cmer-care-card__title">
+        <article class="care-ambassador-card">
+          <div class="care-ambassador-body">
+            <h2 id="section-care-heading" class="care-ambassador-title">
               {isCn ? "希玛关怀大使" : "希瑪關懷大使"}
             </h2>
-            <div class="cmer-care-card__desc">
+            <div class="care-ambassador-desc">
               <p>
                 {isCn ? "为了让每位矫视者有" : "為了讓每位矯視者有"}<span class="text-[#4570b6] font-bold">{isCn ? "更安心、放心" : "更安心、放心"}</span>{isCn ? "的体验，希玛特别设立「希玛关怀大使」，提供一对一贴心的" : "的體驗，希瑪特別設立「希瑪關懷大使」，提供一對一貼心的"}<span class="text-[#4570b6] font-bold">{isCn ? "术前、术后支持" : "術前、術後支援"}</span>{isCn ? "。" : "。"}
               </p>
@@ -280,7 +280,7 @@ const awardBadges = [
               href="https://api.whatsapp.com/send/?phone=85296036825&text=Hello%20%E5%B8%8C%E7%91%AA%E9%97%9C%E6%87%B7%E5%A4%A7%E4%BD%BF"
               target="_blank"
               rel="noopener noreferrer"
-              class="cmer-care-card__whatsapp-btn"
+              class="care-ambassador-whatsapp-btn"
               data-cta="whatsapp"
               aria-label={isCn ? "通过 WhatsApp 联络「希玛关怀大使」联系方式 (+852 9603 6825)" : "透過 WhatsApp 聯絡「希瑪關懷大使」聯繫方式 (+852 9603 6825)"}
             >
@@ -290,7 +290,7 @@ const awardBadges = [
                 height="67"
                 viewBox="0 0 67 67"
                 fill="none"
-                class="cmer-care-card__whatsapp-icon"
+                class="care-ambassador-whatsapp-icon"
                 aria-hidden="true"
               >
                 <path
@@ -298,11 +298,11 @@ const awardBadges = [
                   fill="#4CAF51"
                 />
               </svg>
-              <div class="cmer-care-card__whatsapp-texts">
-                <span class="cmer-care-card__whatsapp-label">
+              <div class="care-ambassador-whatsapp-texts">
+                <span class="care-ambassador-whatsapp-label">
                   {isCn ? "「希玛关怀大使」联系方式" : "「希瑪關懷大使」聯繫方式"}
                 </span>
-                <span class="cmer-care-card__whatsapp-number">
+                <span class="care-ambassador-whatsapp-number">
                   WhatsApp 9603 6825
                 </span>
               </div>
@@ -310,7 +310,7 @@ const awardBadges = [
           </div>
 
           {/* 關懷大使吉祥物 */}
-          <div class="cmer-care-card__mascot">
+          <div class="care-ambassador-mascot">
             <img
               src="https://statichk.cmermedical.com/smile/group-profile/cmer-group-care-ambassador.svg"
               alt={isCn ? "香港希玛眼科医疗集团关怀大使吉祥物" : "香港希瑪眼科醫療集團關懷大使吉祥物"}
@@ -318,7 +318,7 @@ const awardBadges = [
               decoding="async"
               width="320"
               height="352"
-              class="cmer-care-card__mascot-img"
+              class="care-ambassador-mascot-img"
             />
           </div>
         </article>
@@ -326,7 +326,7 @@ const awardBadges = [
     </section>
 
     {/* 5. 中心環境雙層聯動輪播 (主圖 + 縮略圖同步切換 + 100% 官方說明文案) */}
-    <section class="gp-env-section my-16 md:my-24" aria-labelledby="section-env-heading">
+    <section class="center-env-section my-16 md:my-24" aria-labelledby="section-env-heading">
       <div class="container mx-auto px-4">
         <h2 id="section-env-heading" class="section-title-pill">
           {dict.about.group.environment.title}
@@ -336,10 +336,10 @@ const awardBadges = [
     </section>
 
     {/* 6. 獲得獎項與權威認證 (原版波浪背景與 307px 圓形 Trophy 徽章 + 內部獎項無縫跑馬燈 Swiper) */}
-    <section class="gp-awards-section w-full" aria-labelledby="section-awards-heading">
+    <section class="awards-recognition-section w-full" aria-labelledby="section-awards-heading">
       {/* 懸浮圓形 Trophy 標誌徽章 (正圓形居中懸浮) */}
-      <div class="gp-awards-section__badge">
-        <div class="gp-awards-section__trophy">
+      <div class="awards-recognition-badge">
+        <div class="awards-recognition-trophy">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="60"
@@ -396,17 +396,17 @@ const awardBadges = [
             />
           </svg>
         </div>
-        <h2 id="section-awards-heading" class="gp-awards-section__title">
+        <h2 id="section-awards-heading" class="awards-recognition-title">
           {dict.about.group.award.title}
         </h2>
       </div>
 
       {/* 獎項徽章無縫跑馬燈 Swiper (平滑循環展示) */}
       <div class="container mx-auto px-4">
-        <div class="swiper gp-awards-swiper" id="gpAwardsSwiper">
+        <div class="swiper awards-marquee-swiper" id="awardsMarqueeSwiper">
           <div class="swiper-wrapper">
             {[...awardBadges, ...awardBadges].map((badge) => (
-              <div class="swiper-slide gp-awards-item">
+              <div class="swiper-slide awards-marquee-item">
                 <img
                   src={badge.src}
                   alt={badge.alt}
@@ -414,7 +414,7 @@ const awardBadges = [
                   decoding="async"
                   width="132"
                   height="132"
-                  class="gp-awards-img"
+                  class="awards-marquee-img"
                 />
               </div>
             ))}
@@ -431,8 +431,8 @@ const awardBadges = [
   import { Autoplay, FreeMode } from "swiper/modules";
   import "swiper/css";
 
-  function initGroupAwardsSwiper() {
-    const el = document.getElementById("gpAwardsSwiper");
+  function initAwardsMarqueeSwiper() {
+    const el = document.getElementById("awardsMarqueeSwiper");
     if (!el) return;
     if ((el as any).swiper) {
       (el as any).swiper.destroy(true, true);
@@ -459,6 +459,6 @@ const awardBadges = [
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initGroupAwardsSwiper);
-  document.addEventListener("astro:page-load", initGroupAwardsSwiper);
+  document.addEventListener("DOMContentLoaded", initAwardsMarqueeSwiper);
+  document.addEventListener("astro:page-load", initAwardsMarqueeSwiper);
 </script>
