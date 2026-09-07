@@ -725,8 +725,12 @@
     overflow: hidden;
     position: relative;
     cursor: grab;
-    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+
+    &:active {
+      cursor: grabbing;
+    }
 
     :global(.swiper-wrapper) {
       display: flex;
@@ -736,25 +740,62 @@
 
     .gp-awards-item {
       width: auto !important;
-      height: clamp(90px, 10vw, 140px);
+      height: clamp(100px, 9vw, 150px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 clamp(10px, 1.5vw, 20px);
+      padding: 0 clamp(14px, 1.5vw, 24px);
       flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
 
       .gp-awards-img {
-        max-width: clamp(80px, 9vw, 132px);
-        max-height: clamp(80px, 9vw, 132px);
+        max-width: 140px;
+        max-height: clamp(90px, 7vw, 120px);
         width: auto;
         height: auto;
         object-fit: contain;
-        transition: transform 0.3s ease;
+        filter: none !important;
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
 
-        &:hover {
-          transform: scale(1.1);
+      /* 獎項金牌高光微掃光反射 (Shimmer Light Sweep) */
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 80%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.45) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: skewX(-25deg);
+        pointer-events: none;
+      }
+
+      &:hover {
+        .gp-awards-img {
+          transform: scale(1.08);
+        }
+
+        &::after {
+          animation: gp-award-shimmer 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
       }
     }
+  }
+}
+
+@keyframes gp-award-shimmer {
+  0% {
+    left: -150%;
+  }
+
+  100% {
+    left: 180%;
   }
 }

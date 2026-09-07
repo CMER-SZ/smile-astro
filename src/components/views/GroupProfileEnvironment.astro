@@ -3,7 +3,7 @@
  * @Author: Antigravity AI
  * @Date: 2026-09-07
  * @FilePath: /src/components/views/GroupProfileEnvironment.astro
- * @Description: 希瑪微笑矯視中心 - 中心環境雙層聯動輪播組件 (100% 官方原始文案與結構)
+ * @Description: 希瑪微笑矯視中心 - 中心環境雙層聯動輪播組件 (100% 官方原始文案、結構與經典原版導航位置)
  */
 import { getLangFromUrl } from "@/i18n/utils";
 
@@ -53,10 +53,6 @@ const slides = [
           </div>
         ))}
       </div>
-
-      {/* 左右導航按鈕 */}
-      <button type="button" class="swiper-button-prev gp-env-nav-btn gp-env-nav-btn--prev" aria-label="上一張環境照片"></button>
-      <button type="button" class="swiper-button-next gp-env-nav-btn gp-env-nav-btn--next" aria-label="下一張環境照片"></button>
     </div>
 
     {/* 2. 縮略圖導航條 */}
@@ -75,16 +71,20 @@ const slides = [
         ))}
       </div>
     </div>
+
+    {/* 原版左右箭頭 (位於輪播兩側，高度精確對齊原版) */}
+    <button type="button" class="swiper-button-prev gp-env-nav-btn gp-env-nav-btn--prev" aria-label="上一張環境照片"></button>
+    <button type="button" class="swiper-button-next gp-env-nav-btn gp-env-nav-btn--next" aria-label="下一張環境照片"></button>
   </div>
 
   {/* 下方官方原始文案 (100% 對齊原頁面，杜絕任何編造內容) */}
   <div class="gp-env-caption-box">
-    <div class="swiper-small-title">
+    <h3 class="swiper-small-title">
       {isCn ? "希玛微笑矫视中心位于" : "希瑪微笑矯視中心位於"}
-    </div>
-    <div class="swiper-small-text">
+    </h3>
+    <p class="swiper-small-text">
       {isCn ? "中环中建大厦、旺角雅兰中心，交通便利易达。" : "中環中建大廈、旺角雅蘭中心，交通便利易達。"}
-    </div>
+    </p>
   </div>
 </div>
 
@@ -124,39 +124,6 @@ const slides = [
     }
   }
 
-  // 導航箭頭
-  .gp-env-nav-btn {
-    width: clamp(36px, 4vw, 48px) !important;
-    height: clamp(36px, 4vw, 48px) !important;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-
-    &::after {
-      font-size: clamp(14px, 1.5vw, 18px) !important;
-      color: #4570b6 !important;
-      font-weight: bold;
-    }
-
-    &:hover {
-      background-color: #4570b6;
-      &::after {
-        color: #fff !important;
-      }
-    }
-
-    &--prev {
-      left: clamp(10px, 2vw, 20px) !important;
-    }
-
-    &--next {
-      right: clamp(10px, 2vw, 20px) !important;
-    }
-  }
-
   // 2. 縮略圖 Swiper
   .gp-env-thumbs-swiper {
     width: 100%;
@@ -190,6 +157,61 @@ const slides = [
     }
   }
 
+  // 原版經典導航箭頭 (兩側懸浮，垂直精確對齊)
+  .gp-env-nav-btn {
+    position: absolute;
+    width: 27px !important;
+    height: 48px !important;
+    top: 40% !important;
+    transform: translateY(-50%);
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    &::after {
+      display: none !important;
+    }
+
+    &:hover {
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    &--prev {
+      left: -55px !important;
+      background-image: url("https://statichk.cmermedical.com/imgs/2023/03/bcc35245d4a0fe42.png") !important;
+    }
+
+    &--next {
+      right: -55px !important;
+      background-image: url("https://statichk.cmermedical.com/imgs/2023/03/c1cc233620b64f31.png") !important;
+    }
+
+    @media (max-width: 1024px) {
+      &--prev {
+        left: -35px !important;
+      }
+      &--next {
+        right: -35px !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+      width: 18px !important;
+      height: 32px !important;
+      &--prev {
+        left: -20px !important;
+      }
+      &--next {
+        right: -20px !important;
+      }
+    }
+  }
+
   // 3. 官方原始說明文字
   .gp-env-caption-box {
     max-width: 860px;
@@ -202,7 +224,7 @@ const slides = [
     text-align: center;
     font-family: var(--font-hk);
     font-size: clamp(16px, 1.8vw, 25px);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.4;
     letter-spacing: clamp(1px, 0.4vw, 7.5px);
     margin-bottom: 10px;
