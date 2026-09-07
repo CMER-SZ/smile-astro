@@ -461,7 +461,7 @@ const awardBadges = [
     });
   }
 
-  // 2. GSAP C-M-E-R 經營理念支柱滾動逐項交錯浮現 (Stagger Reveal)
+  // 2. GSAP C-M-E-R 經營理念支柱滾動逐項交錯浮現 (Stagger Reveal) + 字母懸停微彈性反饋
   function initPillarsAnimation() {
     const timeline = document.querySelector(".cmer-timeline");
     const items = document.querySelectorAll(".cmer-timeline-item");
@@ -469,47 +469,83 @@ const awardBadges = [
 
     if (!("IntersectionObserver" in window)) {
       gsap.set(items, { opacity: 1, y: 0 });
-      return;
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.fromTo(
+                items,
+                { opacity: 0, y: 30 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.65,
+                  stagger: 0.12,
+                  ease: "power2.out",
+                  overwrite: "auto",
+                }
+              );
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      );
+      observer.observe(timeline);
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            gsap.fromTo(
-              items,
-              { opacity: 0, y: 30 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.65,
-                stagger: 0.12,
-                ease: "power2.out",
-                overwrite: "auto",
-              }
-            );
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-    );
+    // 字母標籤懸停微物理回彈
+    items.forEach((item) => {
+      const letter = item.querySelector(".cmer-timeline-letter, .cmer-vertical-badge");
+      if (!letter) return;
 
-    observer.observe(timeline);
+      item.addEventListener("mouseenter", () => {
+        gsap.to(letter, {
+          scale: 1.15,
+          color: "#2e5699",
+          duration: 0.3,
+          ease: "back.out(2)",
+          overwrite: "auto",
+        });
+      });
+
+      item.addEventListener("mouseleave", () => {
+        gsap.to(letter, {
+          scale: 1,
+          color: "#4570b6",
+          duration: 0.25,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      });
+    });
   }
 
-  // 3. GSAP 希瑪關懷大使吉祥物呼吸微浮動 (Organic Floating)
-  function initMascotFloat() {
+  // 3. GSAP 希瑪關懷大使吉祥物呼吸微浮動 + WhatsApp 諮詢按鈕週期性微脈衝
+  function initCareAmbassadorAnimations() {
     const mascot = document.querySelector(".care-ambassador-mascot-img");
-    if (!mascot) return;
+    if (mascot) {
+      gsap.to(mascot, {
+        y: -10,
+        duration: 2.4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }
 
-    gsap.to(mascot, {
-      y: -10,
-      duration: 2.4,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
+    const whatsappBtn = document.querySelector(".care-ambassador-whatsapp-btn");
+    const whatsappIcon = document.querySelector(".care-ambassador-whatsapp-icon");
+    if (whatsappBtn && whatsappIcon) {
+      // 週期性微搖擺動態，吸引視覺轉化焦點
+      const pulseTimeline = gsap.timeline({ repeat: -1, repeatDelay: 3.5 });
+      pulseTimeline
+        .to(whatsappIcon, { rotation: -10, scale: 1.08, duration: 0.15, ease: "power1.inOut" })
+        .to(whatsappIcon, { rotation: 10, scale: 1.08, duration: 0.15, ease: "power1.inOut" })
+        .to(whatsappIcon, { rotation: -6, duration: 0.1, ease: "power1.inOut" })
+        .to(whatsappIcon, { rotation: 0, scale: 1, duration: 0.15, ease: "power1.out" });
+    }
   }
 
   // 4. GSAP 畫廊 3 圖 (Gallery 3 Cards) 懸停光學微浮動
@@ -538,11 +574,47 @@ const awardBadges = [
     });
   }
 
+  // 5. GSAP 兩大核心圓形徽章 (Logo 徽章 & 獎盃徽章) 滾動進場彈性顯現與懸浮呼吸
+  function initFloatingBadgesAnimation() {
+    const badges = document.querySelectorAll(".center-intro-badge, .awards-recognition-badge");
+    if (!badges.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const badgeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+
+              gsap.fromTo(
+                el,
+                { scale: 0.8, opacity: 0.6, y: 30 },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.8,
+                  ease: "back.out(1.5)",
+                  overwrite: "auto",
+                }
+              );
+              badgeObserver.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      badges.forEach((b) => badgeObserver.observe(b));
+    }
+  }
+
   function initGroupProfileInteractions() {
     initAwardsMarqueeSwiper();
     initPillarsAnimation();
-    initMascotFloat();
+    initCareAmbassadorAnimations();
     initGalleryInteractive();
+    initFloatingBadgesAnimation();
   }
 
   document.addEventListener("DOMContentLoaded", initGroupProfileInteractions);

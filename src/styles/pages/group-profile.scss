@@ -588,6 +588,7 @@
   align-items: center;
   text-decoration: none;
   width: fit-content;
+  position: relative;
   transition: transform 0.3s ease;
 
   @media (min-width: 640px) {
