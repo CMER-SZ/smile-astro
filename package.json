@@ -9,10 +9,13 @@
     "dev": "astro dev --port 4001",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
     "check": "astro check",
+    "check:style": "stylelint \"src/**/*.{css,scss,astro,vue}\"",
+    "check:lint": "eslint .",
+    "check:all": "astro check && eslint . && stylelint \"src/**/*.{css,scss,astro,vue}\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:style": "stylelint \"src/**/*.{css,scss,astro,vue}\" --fix",
     "push": "node ./scripts/push.mjs",
     "push:cf": "astro build && wrangler pages deploy dist --project-name 2026smile --branch main --commit-dirty=true",
     "deploy:cf": "astro build && wrangler pages deploy dist --project-name 2026smile --branch main --commit-dirty=true"
@@ -40,6 +43,10 @@
     "eslint": "^10.10.0",
     "eslint-plugin-astro": "^3.1.0",
     "globals": "^17.12.0",
+    "postcss-html": "^2.0.0",
+    "stylelint": "^17.15.0",
+    "stylelint-config-recommended-vue": "^2.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.69.0"
   }
