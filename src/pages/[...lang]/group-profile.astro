@@ -42,10 +42,13 @@ const awardBadges = [
       <div class="container mx-auto px-4">
         <header class="group-hero-card">
           <div class="group-hero-card-content">
-            <h1 class="group-hero-title">
-              {dict.about.group.intro.title}
-            </h1>
-            <p class="group-hero-subtitle">Group Profile</p>
+            <div class="group-hero-card-bg" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <h1 class="group-hero-title">
+                {dict.about.group.intro.title}
+              </h1>
+              <p class="group-hero-subtitle">Group Profile</p>
+            </div>
           </div>
         </header>
       </div>
@@ -609,12 +612,36 @@ const awardBadges = [
     }
   }
 
+  // 6. GSAP 頂部 Hero Banner 視差滾動 (Parallax Scroll)
+  function initHeroBannerParallax() {
+    const bannerBg = document.querySelector<HTMLElement>(".group-hero-card-bg");
+    if (!bannerBg) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY < 400) {
+            // Y 軸視差移動率 0.25，產生優雅深邃的背景後退效果
+            gsap.set(bannerBg, { y: scrollY * 0.25 });
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
+
   function initGroupProfileInteractions() {
     initAwardsMarqueeSwiper();
     initPillarsAnimation();
     initCareAmbassadorAnimations();
     initGalleryInteractive();
     initFloatingBadgesAnimation();
+    initHeroBannerParallax();
   }
 
   document.addEventListener("DOMContentLoaded", initGroupProfileInteractions);
