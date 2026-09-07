@@ -3,7 +3,7 @@
  * @Author: Antigravity AI
  * @Date: 2026-09-07
  * @FilePath: /src/pages/[...lang]/group-profile.astro
- * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (2026 現代化語意架構 + GEO 實體標記 + 100% 官網視覺還原)
+ * @Description: 香港希瑪眼科醫療集團及希瑪微笑矯視中心簡介 (統一 Container 貼邊版型 + Banner 限制 300px 高度 + GEO 實體語意)
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import IndexEnvironment from "@/components/views/IndexEnvironment.astro";
@@ -36,19 +36,18 @@ const awardBadges = [
 
 <BaseLayout tdkKey="about">
   <main id="main-content" class="group-profile-view">
-    {/* 1. 頂部 Banner 模組 (符合 GEO 唯一 H1 標籤標準與防 CLS 卡片) */}
-    <header class="group-hero-banner" aria-label="集團簡介導言區">
-      <div class="group-hero-banner__container">
+    {/* 統一全頁主容器：嚴絲合縫貼邊佈局 */}
+    <div class="group-profile-container">
+      {/* 1. 頂部 Banner 模組 (最大高度 300px + 貼邊對齊) */}
+      <header class="group-hero-banner" aria-label="集團簡介導言區">
         <div class="group-hero-banner__card">
           <h1 class="group-hero-banner__title">
             {dict.about.group.intro.title}
           </h1>
           <p class="group-hero-banner__subtitle">Group Profile</p>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <div class="group-profile-content">
       {/* 2. 集團簡介與 C-M-E-R 經營理念板塊 */}
       <section class="group-philosophy-section" aria-labelledby="section-group-heading">
         <div class="group-philosophy-section__card">
@@ -197,7 +196,7 @@ const awardBadges = [
 
       {/* 3. 微笑矯視中心簡介 (波浪背景與 307px 圓形浮動 Badge 標誌) */}
       <section class="center-intro-showcase" aria-labelledby="section-center-heading">
-        <div class="center-intro-showcase__container">
+        <div class="center-intro-showcase__card">
           {/* 懸浮圓形標誌徽章 */}
           <div class="center-intro-showcase__floating-badge">
             <div class="center-intro-showcase__logo-icon">
@@ -251,164 +250,160 @@ const awardBadges = [
 
       {/* 4. 希瑪關懷大使專區 (漸變通透質感卡片與吉祥物) */}
       <section class="cmer-care-section" aria-labelledby="section-care-heading">
-        <div class="cmer-care-section__container">
-          <div class="cmer-care-card">
-            <div class="cmer-care-card__body">
-              <h3 id="section-care-heading" class="cmer-care-card__title">
-                {isCn ? "希玛关怀大使" : "希瑪關懷大使"}
-              </h3>
-              <div class="cmer-care-card__desc">
-                <p>
-                  {isCn
-                    ? "希玛眼科致力提供优质的医疗服务，更重视客人的就诊体验与感受。如您对我们的服务有任何意见、建议或查询，欢迎联络我们的"
-                    : "希瑪眼科致力提供優質的醫療服務，更重視客人的就診體驗與感受。如您對我們的服務有任何意見、建議或查詢，歡迎聯絡我們的"}
-                  <strong class="text-highlight">{isCn ? "希玛关怀大使" : "希瑪關懷大使"}</strong>。
-                </p>
-                <p>
-                  {isCn
-                    ? "关怀大使会竭诚为您跟进，持续提升医疗与服务质素，实践「希・望见美好」的初心。"
-                    : "關懷大使會竭誠為您跟進，持續提升醫療與服務質素，實踐「希・望見美好」的初心。"}
-                </p>
-              </div>
+        <div class="cmer-care-card">
+          <div class="cmer-care-card__body">
+            <h3 id="section-care-heading" class="cmer-care-card__title">
+              {isCn ? "希玛关怀大使" : "希瑪關懷大使"}
+            </h3>
+            <div class="cmer-care-card__desc">
+              <p>
+                {isCn
+                  ? "希玛眼科致力提供优质的医疗服务，更重视客人的就诊体验与感受。如您对我们的服务有任何意见、建议或查询，欢迎联络我们的"
+                  : "希瑪眼科致力提供優質的醫療服務，更重視客人的就診體驗與感受。如您對我們的服務有任何意見、建議或查詢，歡迎聯絡我們的"}
+                <strong class="text-highlight">{isCn ? "希玛关怀大使" : "希瑪關懷大使"}</strong>。
+              </p>
+              <p>
+                {isCn
+                  ? "关怀大使会竭诚为您跟进，持续提升医疗与服务质素，实践「希・望见美好」的初心。"
+                  : "關懷大使會竭誠為您跟進，持續提升醫療與服務質素，實踐「希・望見美好」的初心。"}
+              </p>
+            </div>
 
-              {/* 官方 WhatsApp 諮詢按鈕 */}
-              <a
-                href="https://api.whatsapp.com/send/?phone=85296036825&text=Hello%20希瑪關懷大使"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="cmer-care-card__whatsapp-btn"
-                data-cta="whatsapp"
-                aria-label={isCn ? "通过 WhatsApp 联络希玛关怀大使 (+852 9603 6825)" : "透過 WhatsApp 聯絡希瑪關懷大使 (+852 9603 6825)"}
+            {/* 官方 WhatsApp 諮詢按鈕 */}
+            <a
+              href="https://api.whatsapp.com/send/?phone=85296036825&text=Hello%20希瑪關懷大使"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cmer-care-card__whatsapp-btn"
+              data-cta="whatsapp"
+              aria-label={isCn ? "通过 WhatsApp 联络希玛关怀大使 (+852 9603 6825)" : "透過 WhatsApp 聯絡希瑪關懷大使 (+852 9603 6825)"}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="67"
+                height="67"
+                viewBox="0 0 67 67"
+                fill="none"
+                class="cmer-care-card__whatsapp-icon"
+                aria-hidden="true"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="67"
-                  height="67"
-                  viewBox="0 0 67 67"
-                  fill="none"
-                  class="cmer-care-card__whatsapp-icon"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M14.998 61.0916L2.20355 65.1791L6.34324 52.807C-3.56542 39.2226 -1.65199 20.3464 10.5898 8.93616C24.0673 -3.62629 45.175 -2.8312 57.6853 10.6124C70.1878 24.0481 69.4839 45.148 55.9439 57.7183C44.8413 68.0258 27.8811 69.6394 14.998 61.0942V61.0916ZM44.9013 38.1642C43.9002 37.6846 42.954 38.0469 42.37 38.8603C41.5306 40.0308 40.7251 41.1543 39.7814 42.2518C39.26 42.8566 38.3268 42.9817 37.5682 42.6976C31.6298 40.4765 27.477 36.4463 24.1924 31.1023C23.8014 30.4636 23.963 29.7884 24.4479 29.2384C25.2377 28.3416 26.0511 27.4579 26.7732 26.5298C27.3128 25.8338 27.3962 25.083 27.0756 24.3114L23.8561 16.5977C23.4651 15.6618 22.8238 15.2421 21.8071 15.2448C20.5402 15.25 19.1038 15.1509 18.0037 15.9512C15.4516 17.8073 14.1221 20.7765 13.9709 23.8917C13.7858 27.7316 15.6732 31.4125 17.8238 34.4729C19.9745 37.5334 22.4432 40.5964 25.3368 43.2033C27.6413 45.281 30.0448 47.0771 32.8446 48.4431C35.6443 49.8091 38.4545 50.8179 41.4342 51.5791C43.9889 52.2335 46.4706 51.9806 48.7881 50.7606C50.1697 50.0307 51.5227 49.1495 52.3126 47.7575C52.9617 46.6157 54.1348 42.5985 52.7531 41.9364L44.9039 38.1642H44.9013Z"
-                    fill="#4CAF51"
-                  />
-                </svg>
-                <div class="cmer-care-card__whatsapp-texts">
-                  <span class="cmer-care-card__whatsapp-label">
-                    {isCn ? "联络我们" : "聯絡我們"}
-                  </span>
-                  <span class="cmer-care-card__whatsapp-number">
-                    WhatsApp 9603 6825
-                  </span>
-                </div>
-              </a>
-            </div>
+                <path
+                  d="M14.998 61.0916L2.20355 65.1791L6.34324 52.807C-3.56542 39.2226 -1.65199 20.3464 10.5898 8.93616C24.0673 -3.62629 45.175 -2.8312 57.6853 10.6124C70.1878 24.0481 69.4839 45.148 55.9439 57.7183C44.8413 68.0258 27.8811 69.6394 14.998 61.0942V61.0916ZM44.9013 38.1642C43.9002 37.6846 42.954 38.0469 42.37 38.8603C41.5306 40.0308 40.7251 41.1543 39.7814 42.2518C39.26 42.8566 38.3268 42.9817 37.5682 42.6976C31.6298 40.4765 27.477 36.4463 24.1924 31.1023C23.8014 30.4636 23.963 29.7884 24.4479 29.2384C25.2377 28.3416 26.0511 27.4579 26.7732 26.5298C27.3128 25.8338 27.3962 25.083 27.0756 24.3114L23.8561 16.5977C23.4651 15.6618 22.8238 15.2421 21.8071 15.2448C20.5402 15.25 19.1038 15.1509 18.0037 15.9512C15.4516 17.8073 14.1221 20.7765 13.9709 23.8917C13.7858 27.7316 15.6732 31.4125 17.8238 34.4729C19.9745 37.5334 22.4432 40.5964 25.3368 43.2033C27.6413 45.281 30.0448 47.0771 32.8446 48.4431C35.6443 49.8091 38.4545 50.8179 41.4342 51.5791C43.9889 52.2335 46.4706 51.9806 48.7881 50.7606C50.1697 50.0307 51.5227 49.1495 52.3126 47.7575C52.9617 46.6157 54.1348 42.5985 52.7531 41.9364L44.9039 38.1642H44.9013Z"
+                  fill="#4CAF51"
+                />
+              </svg>
+              <div class="cmer-care-card__whatsapp-texts">
+                <span class="cmer-care-card__whatsapp-label">
+                  {isCn ? "联络我们" : "聯絡我們"}
+                </span>
+                <span class="cmer-care-card__whatsapp-number">
+                  WhatsApp 9603 6825
+                </span>
+              </div>
+            </a>
+          </div>
 
-            {/* 關懷大使吉祥物 */}
-            <div class="cmer-care-card__mascot">
-              <img
-                src="https://statichk.cmermedical.com/smile/group-profile/cmer-group-care-ambassador.svg"
-                alt={isCn ? "香港希玛眼科医疗集团关怀大使吉祥物" : "香港希瑪眼科醫療集團關懷大使吉祥物"}
-                loading="lazy"
-                decoding="async"
-                width="320"
-                height="352"
-                class="cmer-care-card__mascot-img"
-              />
-            </div>
+          {/* 關懷大使吉祥物 */}
+          <div class="cmer-care-card__mascot">
+            <img
+              src="https://statichk.cmermedical.com/smile/group-profile/cmer-group-care-ambassador.svg"
+              alt={isCn ? "香港希玛眼科医疗集团关怀大使吉祥物" : "香港希瑪眼科醫療集團關懷大使吉祥物"}
+              loading="lazy"
+              decoding="async"
+              width="320"
+              height="352"
+              class="cmer-care-card__mascot-img"
+            />
           </div>
         </div>
       </section>
 
       {/* 5. 中心環境輪播展示 (中環中建大廈 / 旺角雅蘭中心) */}
       <section class="center-environment-showcase" aria-labelledby="section-env-heading">
-        <div class="center-environment-showcase__container">
-          <h2 id="section-env-heading" class="section-title-underlined">
-            {dict.about.group.environment.title}
-          </h2>
-          <div class="center-environment-showcase__carousel">
-            <IndexEnvironment />
-          </div>
-          <div class="center-environment-showcase__caption">
-            <h3 class="center-environment-showcase__caption-title">
-              {isCn ? "希玛微笑矫视中心位于" : "希瑪微笑矯視中心位於"}
-            </h3>
-            <p class="center-environment-showcase__caption-text">
-              {isCn ? "中环中建大厦、旺角雅兰中心，交通便利易达。" : "中環中建大廈、旺角雅蘭中心，交通便利易達。"}
-            </p>
-          </div>
+        <h2 id="section-env-heading" class="section-title-underlined">
+          {dict.about.group.environment.title}
+        </h2>
+        <div class="center-environment-showcase__carousel">
+          <IndexEnvironment />
+        </div>
+        <div class="center-environment-showcase__caption">
+          <h3 class="center-environment-showcase__caption-title">
+            {isCn ? "希玛微笑矫视中心位于" : "希瑪微笑矯視中心位於"}
+          </h3>
+          <p class="center-environment-showcase__caption-text">
+            {isCn ? "中环中建大厦、旺角雅兰中心，交通便利易达。" : "中環中建大廈、旺角雅蘭中心，交通便利易達。"}
+          </p>
         </div>
       </section>
 
       {/* 6. 獲得獎項與權威認證 (波浪背景與 307px 圓形浮動 Trophy 徽章) */}
       <section class="group-awards-showcase" aria-labelledby="section-awards-heading">
-        {/* 懸浮圓形 Trophy 標誌徽章 */}
-        <div class="group-awards-showcase__floating-badge">
-          <div class="group-awards-showcase__trophy-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M41.7002 48.5231H18.4277L19.5527 44.5781H40.7252L41.7002 48.5231Z"
-                stroke="#4570B6"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M18.9301 26.5781C17.7032 26.4818 16.5578 25.9264 15.7223 25.0228C14.8869 24.1192 14.4229 22.9338 14.4229 21.7031C14.4229 20.4725 14.8869 19.2871 15.7223 18.3834C16.5578 17.4798 17.7032 16.9244 18.9301 16.8281"
-                stroke="#A6E1D6"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M41.25 26.5781C42.4769 26.4818 43.6223 25.9264 44.4578 25.0228C45.2933 24.1192 45.7573 22.9338 45.7573 21.7031C45.7573 20.4725 45.2933 19.2871 44.4578 18.3834C43.6223 17.4798 42.4769 16.9244 41.25 16.8281"
-                stroke="#A6E1D6"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M35.9103 22.2017C35.9835 22.128 36.0349 22.0354 36.0587 21.9343C36.0825 21.8331 36.0779 21.7274 36.0452 21.6287C36.0126 21.5301 35.9533 21.4424 35.8739 21.3754C35.7945 21.3084 35.6981 21.2647 35.5953 21.2492L32.4078 20.7917C32.3184 20.7775 32.2337 20.7422 32.1607 20.6887C32.0876 20.6352 32.0284 20.5651 31.9878 20.4842L30.5628 17.5967C30.5172 17.5033 30.4463 17.4245 30.3581 17.3694C30.2699 17.3144 30.1681 17.2852 30.0641 17.2852C29.9601 17.2852 29.8582 17.3144 29.7701 17.3694C29.6819 17.4245 29.6109 17.5033 29.5653 17.5967L28.1403 20.4842C28.0991 20.566 28.0386 20.6367 27.9642 20.6903C27.8898 20.7438 27.8036 20.7786 27.7128 20.7917L24.5253 21.2492C24.4217 21.2633 24.3241 21.3063 24.2438 21.3735C24.1635 21.4406 24.1039 21.5291 24.0718 21.6287C24.0396 21.7282 24.0363 21.8349 24.0621 21.9362C24.088 22.0376 24.1419 22.1297 24.2178 22.2017L26.5278 24.4517C26.5914 24.5158 26.6389 24.5941 26.6663 24.6802C26.6936 24.7663 26.7002 24.8576 26.6853 24.9467L26.1378 28.1192C26.12 28.2228 26.1316 28.3293 26.1712 28.4267C26.2109 28.524 26.277 28.6083 26.3621 28.67C26.4472 28.7317 26.5479 28.7683 26.6528 28.7757C26.7576 28.783 26.8624 28.7609 26.9553 28.7117L29.8053 27.2117C29.8855 27.1709 29.9741 27.1496 30.0641 27.1496C30.154 27.1496 30.2427 27.1709 30.3228 27.2117L33.1728 28.7117C33.2652 28.7619 33.37 28.7848 33.4749 28.7778C33.5799 28.7708 33.6806 28.7341 33.7655 28.672C33.8504 28.6099 33.9159 28.525 33.9543 28.4271C33.9928 28.3292 34.0027 28.2225 33.9828 28.1192L33.4428 24.9467C33.428 24.8576 33.4345 24.7663 33.4619 24.6802C33.4893 24.5941 33.5367 24.5158 33.6003 24.4517L35.9103 22.2017ZM31.8903 24.0017L32.3178 26.5142L30.0678 25.3292L27.8178 26.5142L28.2378 24.0017L26.4153 22.2242L28.9353 21.8567L30.0603 19.5692L31.1928 21.8567L33.7128 22.2242L31.8903 24.0017Z"
-                fill="#A6E1D6"
-              />
-              <path
-                d="M29.8949 13.1484H21.1799C20.5971 13.1484 20.0382 13.38 19.6261 13.7921C19.2139 14.2042 18.9824 14.7631 18.9824 15.3459V22.1484C18.9824 32.4384 24.7274 34.1484 26.3549 35.0709C27.9824 35.9934 28.0724 41.2509 24.6299 41.4384C21.1874 41.6259 21.5624 44.5509 21.5624 44.5509H30.9974"
-                stroke="#4570B6"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M30.2324 13.1485H38.9399C39.2291 13.1475 39.5157 13.2036 39.7831 13.3136C40.0506 13.4236 40.2937 13.5853 40.4986 13.7894C40.7035 13.9936 40.866 14.2362 40.9769 14.5033C41.0878 14.7704 41.1449 15.0567 41.1449 15.3459V22.1485C41.1449 32.4385 35.3999 34.1485 33.7724 35.071C32.1449 35.9935 32.0474 41.251 35.4974 41.4385C38.9474 41.626 38.5574 44.551 38.5574 44.551H29.1299"
-                stroke="#4570B6"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M26.3555 35.0703H33.773"
-                stroke="#4570B6"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+        <div class="group-awards-showcase__card">
+          {/* 懸浮圓形 Trophy 標誌徽章 */}
+          <div class="group-awards-showcase__floating-badge">
+            <div class="group-awards-showcase__trophy-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M41.7002 48.5231H18.4277L19.5527 44.5781H40.7252L41.7002 48.5231Z"
+                  stroke="#4570B6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18.9301 26.5781C17.7032 26.4818 16.5578 25.9264 15.7223 25.0228C14.8869 24.1192 14.4229 22.9338 14.4229 21.7031C14.4229 20.4725 14.8869 19.2871 15.7223 18.3834C16.5578 17.4798 17.7032 16.9244 18.9301 16.8281"
+                  stroke="#A6E1D6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M41.25 26.5781C42.4769 26.4818 43.6223 25.9264 44.4578 25.0228C45.2933 24.1192 45.7573 22.9338 45.7573 21.7031C45.7573 20.4725 45.2933 19.2871 44.4578 18.3834C43.6223 17.4798 42.4769 16.9244 41.25 16.8281"
+                  stroke="#A6E1D6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M35.9103 22.2017C35.9835 22.128 36.0349 22.0354 36.0587 21.9343C36.0825 21.8331 36.0779 21.7274 36.0452 21.6287C36.0126 21.5301 35.9533 21.4424 35.8739 21.3754C35.7945 21.3084 35.6981 21.2647 35.5953 21.2492L32.4078 20.7917C32.3184 20.7775 32.2337 20.7422 32.1607 20.6887C32.0876 20.6352 32.0284 20.5651 31.9878 20.4842L30.5628 17.5967C30.5172 17.5033 30.4463 17.4245 30.3581 17.3694C30.2699 17.3144 30.1681 17.2852 30.0641 17.2852C29.9601 17.2852 29.8582 17.3144 29.7701 17.3694C29.6819 17.4245 29.6109 17.5033 29.5653 17.5967L28.1403 20.4842C28.0991 20.566 28.0386 20.6367 27.9642 20.6903C27.8898 20.7438 27.8036 20.7786 27.7128 20.7917L24.5253 21.2492C24.4217 21.2633 24.3241 21.3063 24.2438 21.3735C24.1635 21.4406 24.1039 21.5291 24.0718 21.6287C24.0396 21.7282 24.0363 21.8349 24.0621 21.9362C24.088 22.0376 24.1419 22.1297 24.2178 22.2017L26.5278 24.4517C26.5914 24.5158 26.6389 24.5941 26.6663 24.6802C26.6936 24.7663 26.7002 24.8576 26.6853 24.9467L26.1378 28.1192C26.12 28.2228 26.1316 28.3293 26.1712 28.4267C26.2109 28.524 26.277 28.6083 26.3621 28.67C26.4472 28.7317 26.5479 28.7683 26.6528 28.7757C26.7576 28.783 26.8624 28.7609 26.9553 28.7117L29.8053 27.2117C29.8855 27.1709 29.9741 27.1496 30.0641 27.1496C30.154 27.1496 30.2427 27.1709 30.3228 27.2117L33.1728 28.7117C33.2652 28.7619 33.37 28.7848 33.4749 28.7778C33.5799 28.7708 33.6806 28.7341 33.7655 28.672C33.8504 28.6099 33.9159 28.525 33.9543 28.4271C33.9928 28.3292 34.0027 28.2225 33.9828 28.1192L33.4428 24.9467C33.428 24.8576 33.4345 24.7663 33.4619 24.6802C33.4893 24.5941 33.5367 24.5158 33.6003 24.4517L35.9103 22.2017ZM31.8903 24.0017L32.3178 26.5142L30.0678 25.3292L27.8178 26.5142L28.2378 24.0017L26.4153 22.2242L28.9353 21.8567L30.0603 19.5692L31.1928 21.8567L33.7128 22.2242L31.8903 24.0017Z"
+                  fill="#A6E1D6"
+                />
+                <path
+                  d="M29.8949 13.1484H21.1799C20.5971 13.1484 20.0382 13.38 19.6261 13.7921C19.2139 14.2042 18.9824 14.7631 18.9824 15.3459V22.1484C18.9824 32.4384 24.7274 34.1484 26.3549 35.0709C27.9824 35.9934 28.0724 41.2509 24.6299 41.4384C21.1874 41.6259 21.5624 44.5509 21.5624 44.5509H30.9974"
+                  stroke="#4570B6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M30.2324 13.1485H38.9399C39.2291 13.1475 39.5157 13.2036 39.7831 13.3136C40.0506 13.4236 40.2937 13.5853 40.4986 13.7894C40.7035 13.9936 40.866 14.2362 40.9769 14.5033C41.0878 14.7704 41.1449 15.0567 41.1449 15.3459V22.1485C41.1449 32.4385 35.3999 34.1485 33.7724 35.071C32.1449 35.9935 32.0474 41.251 35.4974 41.4385C38.9474 41.626 38.5574 44.551 38.5574 44.551H29.1299"
+                  stroke="#4570B6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M26.3555 35.0703H33.773"
+                  stroke="#4570B6"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h2 id="section-awards-heading" class="section-title-underlined">
+              {dict.about.group.award.title}
+            </h2>
           </div>
-          <h2 id="section-awards-heading" class="section-title-underlined">
-            {dict.about.group.award.title}
-          </h2>
-        </div>
 
-        {/* 獎項徽章矩陣 */}
-        <div class="group-awards-showcase__container">
+          {/* 獎項徽章矩陣 */}
           <div class="group-awards-showcase__grid" role="list">
             {awardBadges.map((badge) => (
               <article class="group-awards-showcase__item" role="listitem">
