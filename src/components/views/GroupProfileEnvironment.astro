@@ -1,0 +1,354 @@
+---
+/*
+ * @Author: Antigravity AI
+ * @Date: 2026-09-07
+ * @FilePath: /src/components/views/GroupProfileEnvironment.astro
+ * @Description: 希瑪微笑矯視中心 - 中心環境雙層聯動輪播組件 (主圖 + 縮略圖同步切換 + 雙旗艦門市導航)
+ */
+import { getLangFromUrl } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const isCn = lang === "zh-cn";
+
+// 5 大中心環境實景輪播圖資產
+const slides = [
+  {
+    src: "https://statichk.cmermedical.com/imgs/2024/06/d7bc3c3602b91d11.jpg",
+    alt: isCn ? "香港希玛微笑矫视中心中环中建大厦旗舰店舒适候诊空间" : "香港希瑪微笑矯視中心中環中建大廈旗艦店舒適候診空間",
+    title: isCn ? "中环中建大厦旗舰店接待大堂" : "中環中建大廈旗艦店接待大堂",
+  },
+  {
+    src: "https://statichk.cmermedical.com/imgs/2024/06/225f78a9419e18c9.jpg",
+    alt: isCn ? "香港希玛微笑矫视中心旺角雅兰中心旗舰店独立咨询室" : "香港希瑪微笑矯視中心旺角雅蘭中心旗艦店獨立諮詢室",
+    title: isCn ? "旺角雅兰中心旗舰店独立咨询室" : "旺角雅蘭中心旗艦店獨立諮詢室",
+  },
+  {
+    src: "https://statichk.cmermedical.com/imgs/2023/03/11041faf78b0d062.jpg",
+    alt: isCn ? "德国蔡司 SMILE Pro 国际高规格层流无菌手术室" : "德國蔡司 SMILE Pro 國際高規格層流無菌手術室",
+    title: isCn ? "国际高规格层流无菌手术室" : "國際高規格層流無菌手術室",
+  },
+  {
+    src: "https://statichk.cmermedical.com/imgs/2024/06/5bae94148ed686da.jpg",
+    alt: isCn ? "香港希玛微笑矫视中心 VIP 贵宾休息大堂" : "香港希瑪微笑矯視中心 VIP 貴賓休息大堂",
+    title: isCn ? "舒适 VIP 贵宾休息大堂" : "舒適 VIP 貴賓休息大堂",
+  },
+  {
+    src: "https://statichk.cmermedical.com/smile/group-profile/990a811af868c7ed.webp",
+    alt: isCn ? "全套德国蔡司屈光专科术前精密检验室" : "全套德國蔡司屈光專科術前精密檢驗室",
+    title: isCn ? "屈光专科术前精密检验空间" : "屈光專科術前精密檢驗空間",
+  },
+];
+---
+
+<div class="gp-env-swiper-wrapper">
+  {/* 雙層 Swiper 核心區塊 */}
+  <div class="gp-env-carousel">
+    {/* 1. 主展示大輪播圖 */}
+    <div class="swiper gp-env-main-swiper" id="gpEnvMainSwiper">
+      <div class="swiper-wrapper">
+        {slides.map((slide) => (
+          <div class="swiper-slide gp-env-main-slide">
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              loading="lazy"
+              decoding="async"
+              class="gp-env-main-img"
+            />
+            <div class="gp-env-main-caption">
+              <span>{slide.title}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 左右導航按鈕 */}
+      <button type="button" class="swiper-button-prev gp-env-nav-btn gp-env-nav-btn--prev" aria-label="上一張環境照片"></button>
+      <button type="button" class="swiper-button-next gp-env-nav-btn gp-env-nav-btn--next" aria-label="下一張環境照片"></button>
+    </div>
+
+    {/* 2. 縮略圖導航條 */}
+    <div class="swiper gp-env-thumbs-swiper" id="gpEnvThumbsSwiper">
+      <div class="swiper-wrapper">
+        {slides.map((slide) => (
+          <div class="swiper-slide gp-env-thumb-slide">
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              loading="lazy"
+              decoding="async"
+              class="gp-env-thumb-img"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* 下方環境說明與門市地址 */}
+  <div class="gp-env-info">
+    <h3 class="gp-env-info__title">
+      {isCn ? "中心环境舒适宽敞" : "中心環境舒適寬敞"}
+    </h3>
+    <p class="gp-env-info__desc">
+      {isCn
+        ? "希望为客人提供安心自在的优质矫视服务。我们亦同样着重整体感官体验，中环中建大厦与旺角雅兰中心双旗舰门市配合时尚、宽敞的就诊环境，配备德国蔡司全套先进设备，致力提供最舒适、专业及优质的眼科矫视服务。"
+        : "希望為客人提供安心自在的優質矯視服務。我們亦同樣著重整體感官體驗，中環中建大廈與旺角雅蘭中心雙旗艦門市配合時尚、寬敞的就診環境，配備德國蔡司全套先進設備，致力提供最舒適、專業及優質的眼科矯視服務。"}
+    </p>
+
+    {/* 雙旗艦門市標籤 */}
+    <div class="gp-env-locations">
+      <div class="gp-env-location-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="gp-env-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>{isCn ? "中环中建大厦旗舰店" : "中環中建大廈旗艦店"}</span>
+      </div>
+      <div class="gp-env-location-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="gp-env-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>{isCn ? "旺角雅兰中心旗舰店" : "旺角雅蘭中心旗艦店"}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .gp-env-swiper-wrapper {
+    width: 100%;
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+
+  .gp-env-carousel {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  // 1. 主輪播圖
+  .gp-env-main-swiper {
+    width: 100%;
+    height: clamp(220px, 35vw, 480px);
+    border-radius: clamp(18px, 3vw, 36px);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(69, 112, 182, 0.08);
+
+    .gp-env-main-slide {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gp-env-main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gp-env-main-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: clamp(12px, 2vw, 20px);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+      color: #fff;
+      font-family: var(--font-hk);
+      font-size: clamp(13px, 1.2vw, 16px);
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+  }
+
+  // 導航箭頭
+  .gp-env-nav-btn {
+    width: clamp(36px, 4vw, 48px) !important;
+    height: clamp(36px, 4vw, 48px) !important;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+
+    &::after {
+      font-size: clamp(14px, 1.5vw, 18px) !important;
+      color: #4570b6 !important;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color: #4570b6;
+      &::after {
+        color: #fff !important;
+      }
+    }
+
+    &--prev {
+      left: clamp(10px, 2vw, 20px) !important;
+    }
+
+    &--next {
+      right: clamp(10px, 2vw, 20px) !important;
+    }
+  }
+
+  // 2. 縮略圖 Swiper
+  .gp-env-thumbs-swiper {
+    width: 100%;
+    height: clamp(55px, 8vw, 90px);
+    margin-top: clamp(12px, 1.5vw, 20px);
+    box-sizing: border-box;
+
+    .gp-env-thumb-slide {
+      width: 20%;
+      height: 100%;
+      border-radius: clamp(10px, 1.5vw, 18px);
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      border: 2px solid transparent;
+
+      &.swiper-slide-thumb-active {
+        opacity: 1;
+        border-color: #4570b6;
+        transform: scale(1.02);
+      }
+    }
+
+    .gp-env-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // 3. 環境文字與門市
+  .gp-env-info {
+    max-width: 860px;
+    margin: clamp(24px, 3vw, 40px) auto 0;
+    text-align: center;
+
+    &__title {
+      color: #4570b6;
+      font-family: var(--font-hk);
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: clamp(1px, 0.4vw, 7.5px);
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    &__desc {
+      color: #6d6e71;
+      font-family: var(--font-hk);
+      font-size: clamp(14px, 1.2vw, 18px);
+      font-weight: 300;
+      line-height: 1.9;
+      letter-spacing: clamp(1px, 0.3vw, 4px);
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  .gp-env-locations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(16px, 3vw, 40px);
+    margin-top: clamp(20px, 2.5vw, 32px);
+    flex-wrap: wrap;
+  }
+
+  .gp-env-location-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4570b6;
+    font-family: var(--font-hk);
+    font-size: clamp(14px, 1.2vw, 17px);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    background: #f0f6ff;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    border: 1px solid rgba(69, 112, 182, 0.15);
+
+    .gp-env-location-icon {
+      width: 18px;
+      height: 18px;
+      color: #4570b6;
+      flex-shrink: 0;
+    }
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Thumbs, Autoplay } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/thumbs";
+
+  function initGroupProfileSwiper() {
+    const mainEl = document.getElementById("gpEnvMainSwiper");
+    const thumbsEl = document.getElementById("gpEnvThumbsSwiper");
+    if (!mainEl || !thumbsEl) return;
+
+    if ((mainEl as any).swiper) {
+      (mainEl as any).swiper.destroy(true, true);
+    }
+    if ((thumbsEl as any).swiper) {
+      (thumbsEl as any).swiper.destroy(true, true);
+    }
+
+    const thumbsSwiper = new Swiper(thumbsEl, {
+      modules: [Thumbs],
+      spaceBetween: 12,
+      slidesPerView: 5,
+      freeMode: true,
+      watchSlidesProgress: true,
+      breakpoints: {
+        320: {
+          slidesPerView: 4,
+          spaceBetween: 8,
+        },
+        768: {
+          slidesPerView: 5,
+          spaceBetween: 12,
+        },
+      },
+    });
+
+    new Swiper(mainEl, {
+      modules: [Navigation, Thumbs, Autoplay],
+      spaceBetween: 0,
+      loop: true,
+      autoplay: {
+        delay: 4500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      navigation: {
+        nextEl: ".gp-env-nav-btn--next",
+        prevEl: ".gp-env-nav-btn--prev",
+      },
+      thumbs: {
+        swiper: thumbsSwiper,
+      },
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initGroupProfileSwiper);
+  document.addEventListener("astro:page-load", initGroupProfileSwiper);
+</script>

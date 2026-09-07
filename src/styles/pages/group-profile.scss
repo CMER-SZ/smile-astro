@@ -1,13 +1,13 @@
 // ==========================================================================
 // 希瑪微笑矯視中心 - 集團簡介 (Group Profile) 2026 現代化語意樣式表
-// 全寬波浪視覺背景 (Full-bleed Background) + 內嵌 Container 嚴絲合縫貼邊佈局
+// 全寬山水畫 X 軸無縫循環背景 + 內嵌 Container 嚴絲合縫貼邊佈局 + 全站統一字體
 // ==========================================================================
 
 // 通用膠囊底線標題
 .section-title-pill {
   color: #4570b6;
   text-align: center;
-  font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+  font-family: var(--font-hk);
   font-size: clamp(22px, 2.5vw, 30px);
   font-weight: 500;
   line-height: 1.3;
@@ -32,7 +32,7 @@
 .section-lead-text {
   color: #6d6e71;
   text-align: center;
-  font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+  font-family: var(--font-hk);
   font-size: clamp(14px, 1.3vw, 20px);
   font-weight: 300;
   line-height: 1.8;
@@ -75,7 +75,7 @@
 
   &__title {
     color: #fff;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(22px, 2.5vw, 30px);
     font-weight: 600;
     line-height: 1.4;
@@ -86,7 +86,7 @@
 
   &__subtitle {
     color: #fff;
-    font-family: "Poppins", "Noto Sans HK", sans-serif;
+    font-family: var(--font-en);
     font-size: clamp(13px, 1.2vw, 15px);
     font-weight: 500;
     line-height: 1.6;
@@ -100,20 +100,44 @@
 
 // --------------------------------------------------------------------------
 // 2. 集團簡介與 C-M-E-R 理念板塊 (.gp-philosophy-section)
+// WebP 山水畫 X 軸無縫循環背景動畫 (Seamless Scroll Animation)
 // --------------------------------------------------------------------------
 .gp-philosophy-section {
   width: 100%;
-  background: url("https://statichk.cmermedical.com/imgs/2024/05/cd3e81141f6876e8.png") no-repeat;
-  background-size: 100%;
-  background-position: center bottom;
   position: relative;
-  z-index: 6;
+  overflow: hidden;
   padding-bottom: 20px;
+
+  &__landscape-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/assets/images/group-profile/philosophy-landscape-bg.webp");
+    background-repeat: repeat-x;
+    background-position: 0 bottom;
+    background-size: auto 100%;
+    animation: gp-landscape-scroll 60s linear infinite;
+    will-change: background-position;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.95;
+  }
+}
+
+@keyframes gp-landscape-scroll {
+  0% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: 2048px;
+  }
 }
 
 .gp-philosophy-card {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(10px);
   border-radius: clamp(24px, 5vw, 82px);
   padding: clamp(30px, 4vw, 56px) clamp(16px, 4vw, 48px) clamp(30px, 4vw, 50px);
@@ -129,7 +153,7 @@
 
   &__title {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(16px, 1.5vw, 20px);
     font-weight: 500;
     line-height: 1.5;
@@ -139,7 +163,7 @@
 
   &__desc {
     color: #6d6e71;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
     line-height: 1.8;
@@ -150,7 +174,7 @@
 
   &__link-row {
     color: #6d6e71;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
     line-height: 1.8;
@@ -165,7 +189,7 @@
   &__link {
     text-decoration: none;
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-weight: 500;
     letter-spacing: clamp(1px, 0.4vw, 6px);
     transition: opacity 0.3s;
@@ -184,7 +208,7 @@
 
   &__title {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(16px, 1.5vw, 20px);
     font-weight: 500;
     line-height: 1.5;
@@ -194,7 +218,7 @@
 
   &__desc {
     color: #6d6e71;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
     line-height: 1.8;
@@ -234,7 +258,7 @@
 
       .cmer-timeline__vertical-badge {
         color: #4570b6;
-        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+        font-family: var(--font-hk);
         font-size: clamp(26px, 3vw, 38px);
         font-weight: 600;
         min-width: clamp(48px, 5vw, 70px);
@@ -251,7 +275,7 @@
       .cmer-timeline__quote {
         color: #4570b6;
         text-align: justify;
-        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+        font-family: var(--font-hk);
         font-size: clamp(14px, 1.2vw, 20px);
         font-weight: 400;
         line-height: 1.8;
@@ -263,7 +287,7 @@
 
   &__letter {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(34px, 4vw, 50px);
     font-weight: 600;
     line-height: 1;
@@ -281,7 +305,7 @@
 
   &__title {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(14px, 1.3vw, 20px);
     font-weight: 400;
     line-height: 1.5;
@@ -291,7 +315,7 @@
 
   &__subtitle {
     color: #4570b6;
-    font-family: "Poppins", "Noto Sans HK", sans-serif;
+    font-family: var(--font-en);
     font-size: clamp(12px, 1.1vw, 15px);
     font-weight: 400;
     line-height: 1.5;
@@ -309,7 +333,7 @@
 
   &__title {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(14px, 1.3vw, 20px);
     font-weight: 500;
     line-height: 1.6;
@@ -328,7 +352,7 @@
 
   &__item {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(13px, 1.1vw, 20px);
     font-weight: 300;
     line-height: 1.8;
@@ -348,18 +372,16 @@
   }
 }
 
-// 畫廊 3 圖
+// 畫廊 3 圖 (嚴格限制原生尺寸 344 × 194 px + 無損 WebP)
 .gallery-grid {
   margin-top: clamp(30px, 4vw, 40px);
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   gap: clamp(16px, 2vw, 24px);
   width: 100%;
   box-sizing: border-box;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 
   &__figure {
     margin: 0;
@@ -367,11 +389,18 @@
     overflow: hidden;
     background: #f0f4f8;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 344px;
+    max-height: 194px;
+    aspect-ratio: 344 / 194;
+    flex-shrink: 0;
   }
 
   &__img {
     width: 100%;
-    height: clamp(180px, 20vw, 240px);
+    height: 100%;
+    max-width: 344px;
+    max-height: 194px;
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
@@ -437,7 +466,7 @@
   &__title {
     color: #4570b6;
     text-align: center;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(18px, 2vw, 30px);
     font-weight: 500;
     line-height: 1.4;
@@ -453,7 +482,7 @@
       margin-bottom: clamp(16px, 2.5vw, 35px);
       color: #6d6e71;
       text-align: center;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+      font-family: var(--font-hk);
       font-size: clamp(14px, 1.3vw, 20px);
       font-weight: 300;
       line-height: 1.8;
@@ -509,7 +538,7 @@
 
   &__title {
     color: #4570b6;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(20px, 2.4vw, 30px);
     font-weight: 700;
     line-height: 1.3;
@@ -519,7 +548,7 @@
 
   &__desc {
     color: #595959;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-size: clamp(14px, 1.2vw, 20px);
     font-weight: 300;
     line-height: 1.8;
@@ -576,7 +605,7 @@
   &__whatsapp-label {
     grid-area: title;
     color: #4caf51;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-family: var(--font-hk);
     font-weight: 700;
     letter-spacing: 2px;
     font-size: clamp(15px, 1.3vw, 20px);
@@ -587,7 +616,7 @@
   &__whatsapp-number {
     grid-area: desc;
     color: #4caf51;
-    font-family: "Poppins", "Noto Sans HK", sans-serif;
+    font-family: var(--font-en);
     font-weight: 700;
     letter-spacing: 1.5px;
     font-size: clamp(20px, 2vw, 28px);
@@ -612,146 +641,12 @@
 .gp-env-section {
   width: 100%;
   box-sizing: border-box;
-
-  &__carousel {
-    width: 100%;
-    border-radius: clamp(16px, 2.5vw, 36px);
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(69, 112, 182, 0.06);
-  }
-
-  &__caption {
-    margin-top: clamp(16px, 2vw, 24px);
-    text-align: center;
-  }
-
-  &__caption-title {
-    color: #4570b6;
-    text-align: center;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(17px, 1.8vw, 25px);
-    font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: clamp(1px, 0.4vw, 7.5px);
-    margin-bottom: 8px;
-    margin-top: 0;
-  }
-
-  &__caption-text {
-    color: #6d6e71;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(14px, 1.2vw, 20px);
-    font-weight: 300;
-    line-height: 1.8;
-    letter-spacing: clamp(1px, 0.4vw, 6px);
-    text-align: center;
-    margin: 0;
-  }
 }
 
 // --------------------------------------------------------------------------
-// 6. 獲得獎項與權威認證 (.gp-awards-section)
-// 100% 全寬波浪藍色背景 + 正圓形懸浮徽章 (Desktop: 307px / Mobile: 171px)
+// 6. 獲得獎項與權威認證 (.gp-awards-fullwidth-section)
 // --------------------------------------------------------------------------
-.gp-awards-section {
+.gp-awards-fullwidth-section {
   width: 100%;
-  background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat center / 100% 100%;
-  padding: 230px 0 100px;
-  margin-top: 185px;
-  position: relative;
-
-  @media (max-width: 767px) {
-    background-image: url("https://statichk.cmermedical.com/imgs/2024/05/1306a3173c344666.png");
-    padding: 100px 0 50px;
-    margin-top: 125px;
-  }
-
-  &__badge {
-    position: absolute;
-    top: -150px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 307px;
-    height: 307px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0 4px 25px rgba(69, 112, 182, 0.08);
-
-    @media (max-width: 767px) {
-      width: 171px;
-      height: 171px;
-      top: -85px;
-      box-shadow: 0 4px 15px rgba(69, 112, 182, 0.08);
-    }
-  }
-
-  &__trophy {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    svg {
-      width: clamp(38px, 4vw, 60px);
-      height: clamp(38px, 4vw, 60px);
-    }
-  }
-
-  &__title {
-    color: #4570b6;
-    text-align: center;
-    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: clamp(18px, 2vw, 30px);
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: clamp(2px, 0.6vw, 7.5px);
-    padding-bottom: clamp(10px, 1.5vw, 24px);
-    position: relative;
-    margin: 8px 0 0;
-
-    &::before {
-      content: "";
-      width: clamp(25px, 3vw, 40px);
-      height: 4px;
-      border-radius: 4px;
-      background: #a6e1d6;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
-    }
-  }
-
-  &__grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: clamp(8px, 1.5vw, 18px);
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  &__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(75px, 9vw, 132px);
-    height: clamp(75px, 9vw, 132px);
-    box-sizing: border-box;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-
-  &__img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
+  box-sizing: border-box;
 }
