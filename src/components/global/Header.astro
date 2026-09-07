@@ -814,7 +814,9 @@ const mobileBottomMenus = [menuList[1], menuList[4]].filter(Boolean); // 矯視�
   }
 
   .subnav-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.625rem 1.25rem;
     font-size: 18px;
     font-weight: 500;
@@ -835,7 +837,8 @@ const mobileBottomMenus = [menuList[1], menuList[4]].filter(Boolean); // 矯視�
   }
 
   .subnav-prefix {
-    @apply text-primary/70 font-bold text-xs shrink-0;
+    @apply text-primary/70 font-bold text-xs shrink-0 inline-flex items-center justify-center;
+    line-height: 1;
   }
 
   /* -------------------------------------------------------------------------- */
