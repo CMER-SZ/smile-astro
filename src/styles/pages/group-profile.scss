@@ -1,1067 +1,707 @@
 // ==========================================================================
 // 希瑪微笑矯視中心 - 集團簡介 (Group Profile) 2026 現代化語意樣式表
-// 統一 Container 貼邊嚴絲合縫版型 + Banner 限制 300px 高度
+// 直接依賴 Tailwind .container 貼邊對齊 + 100% 消除重複造輪子
 // ==========================================================================
 
-.group-profile-view {
+// 通用膠囊底線標題
+.section-title-pill {
+  color: #4570b6;
+  text-align: center;
+  font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 6px;
+  padding-bottom: 20px;
+  position: relative;
+  margin: 0 auto 24px;
+
+  &::before {
+    content: "";
+    width: 40px;
+    height: 5px;
+    border-radius: 5px;
+    background: #a6e1d6;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+}
+
+.section-lead-text {
+  color: #6d6e71;
+  text-align: center;
+  font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 2px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+// --------------------------------------------------------------------------
+// 1. 頂部 Hero Banner (高度鎖定最大 300px + 貼邊對齊)
+// --------------------------------------------------------------------------
+.group-banner-card {
   width: 100%;
-  overflow-x: hidden;
-  color: #595959;
-  background-color: #fafcfe;
+  box-sizing: border-box;
 
-  // ------------------------------------------------------------------------
-  // 統一全頁主容器 (Canned Unified Container: 嚴絲合縫貼邊對齊)
-  // ------------------------------------------------------------------------
-  .group-profile-container {
+  &__content {
+    background: url("https://statichk.cmermedical.com/smile/e90f833293170c68.webp") no-repeat;
+    background-size: cover;
+    background-position: center;
     width: 100%;
-    max-width: 1270px;
-    margin: 0 auto;
-    padding: 24px 20px 80px;
-    box-sizing: border-box;
+    height: clamp(180px, 22vw, 300px);
+    max-height: 300px;
+    border-radius: clamp(16px, 2vw, 32px);
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
-    gap: 48px;
+    justify-content: center;
+    padding-left: clamp(24px, 5vw, 60px);
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(69, 112, 182, 0.06);
   }
 
-  // ------------------------------------------------------------------------
-  // 全域通用標題規範 (青色橢圓底線標記)
-  // ------------------------------------------------------------------------
-  .section-title-underlined {
-    color: #4570b6;
-    text-align: center;
+  &__title {
+    color: #fff;
     font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-    font-size: 30px;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 4px;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  &__subtitle {
+    color: #fff;
+    font-family: "Poppins", "Noto Sans HK", sans-serif;
+    font-size: clamp(13px, 1.2vw, 16px);
     font-weight: 500;
-    line-height: 30px;
-    letter-spacing: 7.5px;
-    padding-bottom: 24px;
-    position: relative;
-    margin: 0 auto 24px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    margin-top: 2px;
+    margin-bottom: 0;
+    opacity: 0.95;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+}
 
-    &::before {
-      content: "";
-      width: 40px;
-      height: 5px;
-      border-radius: 5px;
-      background: #a6e1d6;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
+// --------------------------------------------------------------------------
+// 2. 集團簡介與 C-M-E-R 理念板塊 (.group-profile-section)
+// --------------------------------------------------------------------------
+.group-profile-section {
+  width: 100%;
+  background: url("https://statichk.cmermedical.com/imgs/2024/05/cd3e81141f6876e8.png") no-repeat;
+  background-size: 100%;
+  background-position: center bottom;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: clamp(16px, 2.5vw, 36px);
+  padding: clamp(30px, 4vw, 56px) clamp(20px, 4vw, 48px);
+  box-sizing: border-box;
+  box-shadow: 0 4px 25px rgba(69, 112, 182, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+// 門市網絡
+.network-info-box {
+  text-align: center;
+  margin-top: clamp(24px, 3vw, 36px);
+
+  &__title {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(17px, 1.5vw, 20px);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    color: #6d6e71;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 300;
+    line-height: 1.9;
+    letter-spacing: 2px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  &__link-row {
+    color: #6d6e71;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 300;
+    line-height: 1.9;
+    letter-spacing: 2px;
+    margin-top: 8px;
+
+    span {
+      margin-right: 6px;
     }
   }
 
-  // ------------------------------------------------------------------------
-  // 1. 頂部 Banner 區塊 (最大高度 300px 限制 + 貼邊對齊)
-  // ------------------------------------------------------------------------
-  .group-hero-banner {
-    width: 100%;
-    box-sizing: border-box;
-
-    &__card {
-      background: url("https://statichk.cmermedical.com/smile/e90f833293170c68.webp") no-repeat;
-      background-size: cover;
-      background-position: center;
-      width: 100%;
-      height: 300px;
-      max-height: 300px;
-      border-radius: 36px;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 60px;
-      box-sizing: border-box;
-      box-shadow: 0 8px 24px rgba(69, 112, 182, 0.06);
-    }
-
-    &__title {
-      color: #fff;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 48px;
-      letter-spacing: 6px;
-      margin: 0;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    &__subtitle {
-      color: #fff;
-      font-family: "Poppins", "Noto Sans HK", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 32px;
-      letter-spacing: 1px;
-      margin-top: -4px;
-      margin-bottom: 0;
-      opacity: 0.95;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 2. 集團簡介與 C-M-E-R 經營理念 (.group-philosophy-section)
-  // ------------------------------------------------------------------------
-  .group-philosophy-section {
-    width: 100%;
-    background: url("https://statichk.cmermedical.com/imgs/2024/05/cd3e81141f6876e8.png") no-repeat;
-    background-size: 100%;
-    background-position: center bottom;
-    border-radius: 36px;
-    box-sizing: border-box;
-
-    &__card {
-      border-radius: 36px;
-      background: rgba(255, 255, 255, 0.9);
-      width: 100%;
-      padding: 50px 40px 40px;
-      box-sizing: border-box;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-    }
-
-    &__header {
-      text-align: center;
-    }
-
-    &__lead {
-      color: #6d6e71;
-      text-align: center;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 34px;
-      letter-spacing: 3px;
-      max-width: 980px;
-      margin: 0 auto;
-      box-sizing: border-box;
-    }
-  }
-
-  // 門市網絡與官方鏈接
-  .group-network-info {
-    text-align: center;
-    margin-top: 32px;
-
-    &__title {
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 32px;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
-    }
-
-    &__desc {
-      color: #6d6e71;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 32px;
-      letter-spacing: 3px;
-      max-width: 980px;
-      margin: 0 auto;
-      box-sizing: border-box;
-    }
-
-    &__link-row {
-      color: #6d6e71;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 32px;
-      letter-spacing: 3px;
-      margin-top: 8px;
-
-      span {
-        margin-right: 6px;
-      }
-    }
-
-    &__link {
-      text-decoration: none;
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      transition: opacity 0.3s;
-
-      &:hover {
-        opacity: 0.8;
-        text-decoration: underline;
-      }
-    }
-  }
-
-  // 理念導言
-  .cmer-philosophy-intro {
-    text-align: center;
-    margin-top: 36px;
-
-    &__title {
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 32px;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
-    }
-
-    &__desc {
-      color: #6d6e71;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 32px;
-      letter-spacing: 3px;
-      max-width: 980px;
-      margin: 0 auto;
-      box-sizing: border-box;
-    }
-  }
-
-  // C-M-E-R 時間軸/理念條目 (容器內貼邊對齊)
-  .cmer-philosophy-timeline {
-    margin: 40px auto 0;
-    max-width: 900px;
-    padding-left: 40px;
-    position: relative;
-    box-sizing: border-box;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 20px;
-      top: 10px;
-      width: 2px;
-      height: 70%;
-      background: linear-gradient(to bottom, #4570b6, #81dbec);
-    }
-
-    .cmer-timeline-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 24px;
-      gap: 20px;
-
-      &__letter {
-        color: #4570b6;
-        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-        font-size: 48px;
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: 2px;
-        min-width: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-      }
-
-      &__content {
-        flex: 1;
-      }
-
-      &__title {
-        color: #4570b6;
-        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-        font-size: 19px;
-        font-weight: 600;
-        line-height: 28px;
-        letter-spacing: 4px;
-        margin: 0;
-      }
-
-      &__subtitle {
-        color: #4570b6;
-        font-family: "Poppins", "Noto Sans HK", sans-serif;
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 22px;
-        letter-spacing: 2px;
-        margin: 2px 0 0;
-        opacity: 0.85;
-      }
-
-      &--vertical {
-        margin-top: 30px;
-        margin-bottom: 0;
-
-        .cmer-timeline-item__vertical-badge {
-          color: #4570b6;
-          font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-          font-size: 36px;
-          font-weight: 700;
-          min-width: 70px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          writing-mode: vertical-rl;
-          text-orientation: upright;
-          white-space: nowrap;
-          letter-spacing: 12px;
-          flex-shrink: 0;
-        }
-
-        .cmer-timeline-item__quote-text {
-          color: #4570b6;
-          text-align: justify;
-          font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-          font-size: 18px;
-          font-weight: 400;
-          line-height: 32px;
-          letter-spacing: 3px;
-          margin: 0;
-        }
-      }
-    }
-  }
-
-  // 榮譽板塊
-  .cmer-honors-block {
-    margin-top: 36px;
-    padding-top: 24px;
-    border-top: 1px dashed rgba(69, 112, 182, 0.2);
-
-    &__title {
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 19px;
-      font-weight: 600;
-      line-height: 32px;
-      letter-spacing: 4px;
-      margin-bottom: 12px;
-    }
-
-    &__list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    &__item {
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 30px;
-      letter-spacing: 3px;
-      margin: 0;
-      position: relative;
-      padding-left: 20px;
-
-      &::before {
-        content: "•";
-        color: #81dbec;
-        font-size: 24px;
-        position: absolute;
-        left: 0;
-        top: -3px;
-      }
-    }
-  }
-
-  // 3 張照片展示 (容器內貼邊對齊)
-  .group-photos-gallery {
-    margin-top: 48px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    width: 100%;
-    box-sizing: border-box;
-
-    &__figure {
-      margin: 0;
-      border-radius: 24px;
-      overflow: hidden;
-      background: #f0f4f8;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    &__img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 3. 中心簡介板塊 (.center-intro-showcase)
-  // ------------------------------------------------------------------------
-  .center-intro-showcase {
-    width: 100%;
-    box-sizing: border-box;
-
-    &__card {
-      background: url("https://statichk.cmermedical.com/imgs/2024/05/e804c18e78e3c9c8.png") no-repeat;
-      background-size: 100% 100%;
-      border-radius: 36px;
-      padding: 100px 60px 60px;
-      box-sizing: border-box;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
-    }
-
-    &__floating-badge {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 220px;
-      height: 120px;
-      border-radius: 30px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 6px 20px rgba(69, 112, 182, 0.1);
-      border: 1px solid rgba(69, 112, 182, 0.1);
-    }
-
-    &__logo-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        width: 60px;
-        height: 32px;
-      }
-    }
-
-    &__title {
-      color: #4570b6;
-      text-align: center;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 22px;
-      font-weight: 600;
-      line-height: 32px;
-      letter-spacing: 4px;
-      margin: 4px 0 0;
-    }
-
-    &__content {
-      max-width: 980px;
-      margin: 0 auto;
-
-      p {
-        margin-bottom: 24px;
-        color: #6d6e71;
-        text-align: center;
-        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-        font-size: 18px;
-        font-weight: 300;
-        line-height: 34px;
-        letter-spacing: 3px;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 4. 希瑪關懷大使專區 (.cmer-care-section)
-  // ------------------------------------------------------------------------
-  .cmer-care-section {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .cmer-care-card {
-    border: 1px solid #ffffffed;
-    box-shadow: 0 0 0 1px rgba(187, 215, 255, 0.35) inset, 0 4px 20px rgba(69, 112, 182, 0.08);
-    background: linear-gradient(
-      180deg,
-      rgba(187, 215, 255, 0.85) 0%,
-      rgba(217, 232, 255, 0.75) 30%,
-      rgba(238, 245, 255, 0.75) 60%,
-      rgba(255, 255, 255, 0.85) 100%
-    );
-    border-radius: 36px;
-    padding: 48px 64px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    gap: 40px;
-    width: 100%;
-
-    &__body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    &__title {
-      color: #4570b6;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 36px;
-      letter-spacing: 4px;
-      margin: 0;
-    }
-
-    &__desc {
-      color: #595959;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 30px;
-      letter-spacing: 2px;
-
-      p {
-        margin-bottom: 10px;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .text-highlight {
-        color: #4570b6;
-        font-weight: 700;
-      }
-    }
-
-    &__whatsapp-btn {
-      display: inline-grid;
-      grid-template-areas:
-        "icon title"
-        "icon desc";
-      column-gap: 16px;
-      row-gap: 0;
-      align-items: center;
-      text-decoration: none;
-      width: fit-content;
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-      }
-    }
-
-    &__whatsapp-icon {
-      grid-area: icon;
-      width: 58px;
-      height: 58px;
-    }
-
-    &__whatsapp-texts {
-      display: contents;
-    }
-
-    &__whatsapp-label {
-      grid-area: title;
-      color: #4caf51;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      font-size: 18px;
-      line-height: 28px;
-      margin: 0;
-    }
-
-    &__whatsapp-number {
-      grid-area: desc;
-      color: #4caf51;
-      font-family: "Poppins", "Noto Sans HK", sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      font-size: 26px;
-      line-height: 32px;
-      margin: 0;
-    }
-
-    &__mascot {
-      flex-shrink: 0;
-    }
-
-    &__mascot-img {
-      max-height: 280px;
-      width: auto;
-      object-fit: contain;
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 5. 中心環境輪播展示 (.center-environment-showcase)
-  // ------------------------------------------------------------------------
-  .center-environment-showcase {
-    width: 100%;
-    box-sizing: border-box;
-
-    &__carousel {
-      width: 100%;
-      border-radius: 36px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(69, 112, 182, 0.06);
-    }
-
-    &__caption {
-      margin-top: 24px;
-      text-align: center;
-    }
-
-    &__caption-title {
-      color: #4570b6;
-      text-align: center;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 22px;
-      font-weight: 600;
-      line-height: 32px;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
-      margin-top: 0;
-    }
-
-    &__caption-text {
-      color: #6d6e71;
-      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 30px;
-      letter-spacing: 3px;
-      text-align: center;
-      margin: 0;
-    }
-  }
-
-  // ------------------------------------------------------------------------
-  // 6. 獲得獎項與榮譽 (.group-awards-showcase)
-  // ------------------------------------------------------------------------
-  .group-awards-showcase {
-    width: 100%;
-    box-sizing: border-box;
-
-    &__card {
-      background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat;
-      background-size: 100% 100%;
-      border-radius: 36px;
-      padding: 100px 40px 60px;
-      box-sizing: border-box;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
-    }
-
-    &__floating-badge {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 220px;
-      height: 120px;
-      border-radius: 30px;
-      background-color: #fff;
-      box-shadow: 0 6px 20px rgba(69, 112, 182, 0.1);
-      border: 1px solid rgba(69, 112, 182, 0.1);
-
-      .section-title-underlined {
-        font-size: 22px;
-        letter-spacing: 4px;
-        padding-bottom: 0;
-        margin: 4px 0 0;
-
-        &::before {
-          display: none;
-        }
-      }
-    }
-
-    &__trophy-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        width: 44px;
-        height: 44px;
-      }
-    }
-
-    &__grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      align-items: center;
-      justify-items: center;
-    }
-
-    &__item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 120px;
-      height: 120px;
-      padding: 8px;
-      box-sizing: border-box;
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-
-    &__img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+  &__link {
+    text-decoration: none;
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
     }
   }
 }
 
-// ==========================================================================
-// 響應式佈局適配 (Mobile & Tablet 統一貼邊)
-// ==========================================================================
+// 理念導言
+.philosophy-lead-box {
+  text-align: center;
+  margin-top: clamp(24px, 3vw, 36px);
 
-@media screen and (max-width: 767px) {
-  .group-profile-view {
-    .group-profile-container {
-      padding: 16px 12px 60px;
-      gap: 32px;
+  &__title {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(17px, 1.5vw, 20px);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    color: #6d6e71;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 300;
+    line-height: 1.9;
+    letter-spacing: 2px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+// C-M-E-R 時間軸
+.cmer-timeline {
+  margin: clamp(30px, 4vw, 48px) auto 0;
+  max-width: 860px;
+  padding-left: clamp(20px, 3vw, 40px);
+  position: relative;
+  box-sizing: border-box;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: clamp(8px, 1.5vw, 18px);
+    top: 10px;
+    width: 2px;
+    height: 70%;
+    background: linear-gradient(to bottom, #4570b6, #81dbec);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(16px, 2vw, 24px);
+    gap: clamp(12px, 2vw, 24px);
+
+    &--vertical {
+      margin-top: clamp(20px, 3vw, 32px);
+      margin-bottom: 0;
+
+      .cmer-timeline__vertical-badge {
+        color: #4570b6;
+        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+        font-size: clamp(28px, 3vw, 38px);
+        font-weight: 700;
+        min-width: clamp(48px, 5vw, 70px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        white-space: nowrap;
+        letter-spacing: clamp(6px, 1vw, 12px);
+        flex-shrink: 0;
+      }
+
+      .cmer-timeline__quote {
+        color: #4570b6;
+        text-align: justify;
+        font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+        font-size: clamp(14px, 1.2vw, 18px);
+        font-weight: 400;
+        line-height: 1.9;
+        letter-spacing: 2px;
+        margin: 0;
+      }
     }
+  }
 
-    .section-title-underlined {
+  &__letter {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(34px, 4vw, 50px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 2px;
+    min-width: clamp(48px, 5vw, 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    flex: 1;
+  }
+
+  &__title {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(15px, 1.3vw, 19px);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 3px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    color: #4570b6;
+    font-family: "Poppins", "Noto Sans HK", sans-serif;
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    margin: 2px 0 0;
+    opacity: 0.85;
+  }
+}
+
+// 榮譽列表
+.cmer-honors {
+  margin-top: clamp(24px, 3vw, 36px);
+  padding-top: clamp(16px, 2vw, 24px);
+  border-top: 1px dashed rgba(69, 112, 182, 0.2);
+
+  &__title {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(15px, 1.3vw, 19px);
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__item {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(13px, 1.1vw, 17px);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 2px;
+    margin: 0;
+    position: relative;
+    padding-left: 20px;
+
+    &::before {
+      content: "•";
+      color: #81dbec;
       font-size: 22px;
-      line-height: 26px;
+      position: absolute;
+      left: 0;
+      top: -4px;
+    }
+  }
+}
+
+// 畫廊 3 圖
+.gallery-grid {
+  margin-top: clamp(32px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__figure {
+    margin: 0;
+    border-radius: clamp(16px, 2vw, 24px);
+    overflow: hidden;
+    background: #f0f4f8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  &__img {
+    width: 100%;
+    height: clamp(180px, 20vw, 240px);
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// 3. 微笑矯視中心簡介 (.center-profile-section)
+// --------------------------------------------------------------------------
+.center-profile-section {
+  width: 100%;
+  background: url("https://statichk.cmermedical.com/imgs/2024/05/e804c18e78e3c9c8.png") no-repeat;
+  background-size: 100% 100%;
+  border-radius: clamp(16px, 2.5vw, 36px);
+  padding: clamp(60px, 8vw, 100px) clamp(20px, 4vw, 60px) clamp(30px, 4vw, 60px);
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
+
+  &__badge {
+    position: absolute;
+    top: clamp(-40px, -4vw, -55px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(160px, 18vw, 220px);
+    height: clamp(80px, 9vw, 110px);
+    border-radius: clamp(18px, 2vw, 28px);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(69, 112, 182, 0.1);
+    border: 1px solid rgba(69, 112, 182, 0.1);
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: clamp(44px, 5vw, 60px);
+      height: clamp(24px, 3vw, 32px);
+    }
+  }
+
+  &__title {
+    color: #4570b6;
+    text-align: center;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(17px, 1.8vw, 22px);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 4px;
+    margin: 4px 0 0;
+  }
+
+  &__content {
+    max-width: 960px;
+    margin: 0 auto;
+
+    p {
+      margin-bottom: 20px;
+      color: #6d6e71;
+      text-align: center;
+      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+      font-size: clamp(14px, 1.2vw, 18px);
+      font-weight: 300;
+      line-height: 1.9;
       letter-spacing: 2px;
-      padding-bottom: 12px;
-      margin-bottom: 16px;
 
-      &::before {
-        width: 30px;
-        height: 4px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// 4. 希瑪關懷大使專區 (.cmer-care-card)
+// --------------------------------------------------------------------------
+.cmer-care-card {
+  width: 100%;
+  border: 1px solid #ffffffed;
+  box-shadow: 0 0 0 1px rgba(187, 215, 255, 0.35) inset, 0 4px 20px rgba(69, 112, 182, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(187, 215, 255, 0.85) 0%,
+    rgba(217, 232, 255, 0.75) 30%,
+    rgba(238, 245, 255, 0.75) 60%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  border-radius: clamp(16px, 2.5vw, 36px);
+  padding: clamp(28px, 4vw, 48px) clamp(20px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  gap: clamp(24px, 3vw, 40px);
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  &__title {
+    color: #4570b6;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 3px;
+    margin: 0;
+  }
+
+  &__desc {
+    color: #595959;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 1.5px;
+
+    p {
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
 
-    .group-hero-banner {
-      &__card {
-        background: url("https://statichk.cmermedical.com/imgs/2024/05/eb36818dd076c639.png") no-repeat;
-        background-size: 100% 100%;
-        height: 200px;
-        max-height: 200px;
-        border-radius: 24px;
-        padding-left: 24px;
-      }
+    .text-highlight {
+      color: #4570b6;
+      font-weight: 700;
+    }
+  }
 
-      &__title {
-        font-size: 22px;
-        line-height: 32px;
-        letter-spacing: 2px;
-      }
+  &__whatsapp-btn {
+    display: inline-grid;
+    grid-template-areas:
+      "title title"
+      "icon desc";
+    column-gap: 12px;
+    row-gap: 0;
+    align-items: center;
+    text-decoration: none;
+    width: fit-content;
+    transition: transform 0.3s ease;
 
-      &__subtitle {
-        font-size: 14px;
-        line-height: 22px;
-        margin-top: 0;
-      }
+    @media (min-width: 640px) {
+      grid-template-areas:
+        "icon title"
+        "icon desc";
+      column-gap: 16px;
     }
 
-    .group-philosophy-section {
-      border-radius: 24px;
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
 
-      &__card {
-        border-radius: 24px;
-        padding: 32px 16px 24px;
-      }
+  &__whatsapp-icon {
+    grid-area: icon;
+    width: clamp(44px, 5vw, 58px);
+    height: clamp(44px, 5vw, 58px);
+  }
 
-      &__lead {
-        font-size: 14px;
-        line-height: 26px;
-        letter-spacing: 1px;
-      }
+  &__whatsapp-texts {
+    display: contents;
+  }
+
+  &__whatsapp-label {
+    grid-area: title;
+    color: #4caf51;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: clamp(14px, 1.3vw, 18px);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  &__whatsapp-number {
+    grid-area: desc;
+    color: #4caf51;
+    font-family: "Poppins", "Noto Sans HK", sans-serif;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  &__mascot {
+    flex-shrink: 0;
+  }
+
+  &__mascot-img {
+    max-height: clamp(180px, 20vw, 280px);
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 5. 中心環境輪播展示 (.center-environment-section)
+// --------------------------------------------------------------------------
+.center-environment-section {
+  width: 100%;
+  box-sizing: border-box;
+
+  &__carousel {
+    width: 100%;
+    border-radius: clamp(16px, 2.5vw, 36px);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(69, 112, 182, 0.06);
+  }
+
+  &__caption {
+    margin-top: clamp(16px, 2vw, 24px);
+    text-align: center;
+  }
+
+  &__caption-title {
+    color: #4570b6;
+    text-align: center;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(17px, 1.8vw, 22px);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+    margin-top: 0;
+  }
+
+  &__caption-text {
+    color: #6d6e71;
+    font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 6. 獲得獎項與榮譽 (.group-awards-section)
+// --------------------------------------------------------------------------
+.group-awards-section {
+  width: 100%;
+  background: url("https://statichk.cmermedical.com/imgs/2024/05/93c994737098887c.png") no-repeat;
+  background-size: 100% 100%;
+  border-radius: clamp(16px, 2.5vw, 36px);
+  padding: clamp(60px, 8vw, 100px) clamp(16px, 3vw, 40px) clamp(30px, 4vw, 60px);
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(69, 112, 182, 0.05);
+
+  &__badge {
+    position: absolute;
+    top: clamp(-40px, -4vw, -55px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: clamp(160px, 18vw, 220px);
+    height: clamp(80px, 9vw, 110px);
+    border-radius: clamp(18px, 2vw, 28px);
+    background-color: #fff;
+    box-shadow: 0 6px 20px rgba(69, 112, 182, 0.1);
+    border: 1px solid rgba(69, 112, 182, 0.1);
+
+    .group-awards-section__title {
+      font-size: clamp(17px, 1.8vw, 22px);
+      letter-spacing: 3px;
+      color: #4570b6;
+      font-family: "Noto Sans HK", "Noto Sans TC", sans-serif;
+      font-weight: 600;
+      margin: 4px 0 0;
+    }
+  }
+
+  &__trophy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: clamp(32px, 3.5vw, 44px);
+      height: clamp(32px, 3.5vw, 44px);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(12px, 2vw, 20px);
+    max-width: 960px;
+    margin: 0 auto;
+    align-items: center;
+    justify-items: center;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    .group-network-info {
-      margin-top: 24px;
-
-      &__title {
-        font-size: 17px;
-        line-height: 26px;
-        letter-spacing: 2px;
-      }
-
-      &__desc {
-        font-size: 14px;
-        line-height: 26px;
-        letter-spacing: 1px;
-      }
-
-      &__link-row {
-        font-size: 14px;
-        line-height: 26px;
-        letter-spacing: 1px;
-      }
-
-      &__link {
-        font-size: 14px;
-      }
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(5, 1fr);
     }
+  }
 
-    .cmer-philosophy-intro {
-      margin-top: 24px;
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(80px, 9vw, 120px);
+    height: clamp(80px, 9vw, 120px);
+    padding: 6px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
 
-      &__title {
-        font-size: 17px;
-        line-height: 26px;
-        letter-spacing: 2px;
-      }
-
-      &__desc {
-        font-size: 14px;
-        line-height: 26px;
-        letter-spacing: 1px;
-      }
+    &:hover {
+      transform: scale(1.1);
     }
+  }
 
-    .cmer-philosophy-timeline {
-      padding-left: 24px;
-      margin-top: 24px;
-
-      &::before {
-        left: 10px;
-        height: 75%;
-      }
-
-      .cmer-timeline-item {
-        margin-bottom: 16px;
-        gap: 12px;
-
-        &__letter {
-          font-size: 34px;
-          min-width: 44px;
-        }
-
-        &__title {
-          font-size: 15px;
-          line-height: 22px;
-          letter-spacing: 1px;
-        }
-
-        &__subtitle {
-          font-size: 13px;
-          line-height: 18px;
-          letter-spacing: 1px;
-        }
-
-        &--vertical {
-          margin-top: 20px;
-
-          .cmer-timeline-item__vertical-badge {
-            font-size: 26px;
-            min-width: 44px;
-            letter-spacing: 6px;
-          }
-
-          .cmer-timeline-item__quote-text {
-            font-size: 14px;
-            line-height: 24px;
-            letter-spacing: 1px;
-          }
-        }
-      }
-
-      .cmer-honors-block {
-        margin-top: 24px;
-        padding-top: 16px;
-
-        &__title {
-          font-size: 16px;
-          line-height: 24px;
-          letter-spacing: 1px;
-        }
-
-        &__item {
-          font-size: 13px;
-          line-height: 22px;
-          letter-spacing: 1px;
-        }
-      }
-    }
-
-    .group-photos-gallery {
-      grid-template-columns: 1fr;
-      margin-top: 32px;
-      gap: 16px;
-
-      &__figure {
-        border-radius: 16px;
-      }
-
-      &__img {
-        height: 200px;
-      }
-    }
-
-    .center-intro-showcase {
-      &__card {
-        border-radius: 24px;
-        padding: 70px 16px 24px;
-        background: url("https://statichk.cmermedical.com/imgs/2024/05/3667677d419ec9a0.png") no-repeat;
-        background-size: 100% 100%;
-      }
-
-      &__floating-badge {
-        top: -40px;
-        width: 170px;
-        height: 80px;
-        border-radius: 20px;
-
-        svg {
-          width: 44px;
-          height: 24px;
-        }
-      }
-
-      &__title {
-        font-size: 17px;
-        line-height: 24px;
-        letter-spacing: 2px;
-      }
-
-      &__content {
-        p {
-          font-size: 14px;
-          line-height: 26px;
-          letter-spacing: 1px;
-          margin-bottom: 16px;
-        }
-      }
-    }
-
-    .cmer-care-card {
-      border-radius: 24px;
-      padding: 28px 16px;
-      flex-direction: column;
-      gap: 20px;
-
-      &__body {
-        gap: 16px;
-      }
-
-      &__title {
-        font-size: 20px;
-        line-height: 28px;
-        letter-spacing: 2px;
-      }
-
-      &__desc {
-        font-size: 14px;
-        line-height: 24px;
-        letter-spacing: 1px;
-      }
-
-      &__whatsapp-btn {
-        grid-template-areas:
-          "title title"
-          "icon desc";
-        column-gap: 10px;
-        margin: 0 auto;
-      }
-
-      &__whatsapp-icon {
-        width: 44px;
-        height: 44px;
-      }
-
-      &__whatsapp-label {
-        font-size: 14px;
-        line-height: 22px;
-      }
-
-      &__whatsapp-number {
-        font-size: 20px;
-        line-height: 26px;
-      }
-
-      &__mascot-img {
-        max-height: 180px;
-      }
-    }
-
-    .center-environment-showcase {
-      &__carousel {
-        border-radius: 24px;
-      }
-
-      &__caption {
-        margin-top: 16px;
-      }
-
-      &__caption-title {
-        font-size: 17px;
-        line-height: 26px;
-        letter-spacing: 2px;
-      }
-
-      &__caption-text {
-        font-size: 14px;
-        line-height: 24px;
-        letter-spacing: 1px;
-      }
-    }
-
-    .group-awards-showcase {
-      &__card {
-        border-radius: 24px;
-        padding: 70px 16px 24px;
-        background: url("https://statichk.cmermedical.com/imgs/2024/05/1306a3173c344666.png") no-repeat;
-        background-size: 100% 100%;
-      }
-
-      &__floating-badge {
-        top: -40px;
-        width: 170px;
-        height: 80px;
-        border-radius: 20px;
-
-        .section-title-underlined {
-          font-size: 17px;
-          line-height: 24px;
-          letter-spacing: 2px;
-        }
-      }
-
-      &__trophy-icon {
-        svg {
-          width: 32px;
-          height: 32px;
-        }
-      }
-
-      &__grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-      }
-
-      &__item {
-        width: 80px;
-        height: 80px;
-      }
-    }
+  &__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 }
